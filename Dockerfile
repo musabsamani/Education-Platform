@@ -1,8 +1,7 @@
-FROM node:12
+FROM node:latest
 WORKDIR /app
-COPY package*.json ./
-RUN npm instaall
-COPY . .
-ENV PORT=3000
+COPY package.json /app
+RUN npm install
+COPY . /app
+CMD npm start
 EXPOSE 3000
-CMD ["npm","start"]
