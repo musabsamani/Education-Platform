@@ -6,6 +6,6 @@
   
 2 Build the Docker image and create Docker container
 
-3 Run the Docker container
+3 Run the Docker container 
 
 4 Open http://localhost:3000"
