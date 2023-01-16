@@ -2,13 +2,13 @@ function addUser() {
   alert("User Added Successfully !!!");
 }
 $("#updateUser").on("submit", (e) => {
-  // alert("User Added Successfully !!!");
-  e.preventDedault();
+  e.preventDefault();
   var unindexd_array = $(this).serializeArray();
   var data = {};
   $.map(unindexd_array, function (n, i) {
     data[n["name"]] = n["value"];
   });
+  console.log(data)
   var request = {
     "url": `http://localhost:3000/api/users/${data.id}`,
     "method": "PUT",
