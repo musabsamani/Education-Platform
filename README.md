@@ -10,6 +10,6 @@
 
 4 - Create Docker container by the command "docker run -t -ip 3000:3000 [image name or ID]"
 
-- the flag "-ip" and "3000:3000" for specifying the port for the container
+- The flag "-ip" and "3000:3000" for specifying the port for the container
 
 5 - Open http://localhost:3000"
