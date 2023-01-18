@@ -8,7 +8,7 @@
   
 3 - Build the Docker image by the command "docker build -t [image name EXAMPLE: crud] [path EXAMPLE: . ]"
 
-4 - Create Docker container by the command "docker build -t -ip 3000:3000 [image name or ID]"
+4 - Create Docker container by the command "docker run -t -ip 3000:3000 [image name or ID]"
 
 - the flag "-ip" and "3000:3000" for specifying the port for the container
 
