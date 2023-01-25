@@ -1,7 +1,7 @@
 function addUser() {
   alert("User Added Successfully !!!");
 }
-$("#updateUser").on("submit", (e) => {
+$("#updateUser").on("submit", function (e) {
   e.preventDefault();
   var unindexd_array = $(this).serializeArray();
   var data = {};
