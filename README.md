@@ -1,6 +1,20 @@
 # CRUD
+
 0 - clone this repository to your working directory 
   - by the command "git clone https://github.com/musabobada/CRUD-App.git"
+
+## Two method for running this file
+### First : npm
+
+1 -  Open the terminal to the the path of the root of this repository "/CRUD-App"
+  
+2 - RUN the command "npm install"
+  
+3 - RUN the command "npm start"
+
+4 - Open http://localhost:3000"
+
+### Second : Docker
 
 1 - Start the Docker app (Docker Desktop app should be installed) 
   
