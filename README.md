@@ -12,7 +12,7 @@
   
 3 - RUN the command "npm start"
 
-4 - Open http://localhost:3000"
+4 - Open http://localhost:5000"
 
 ### Second : Docker
 
@@ -22,8 +22,8 @@
   
 3 - Build the Docker image by the command "docker build -t [image name EXAMPLE: crud] [path EXAMPLE: . ]"
 
-4 - Create Docker container by the command "docker run -t -ip 3000:3000 [image name or ID]"
+4 - Create Docker container by the command "docker run -t -ip 5000:5000 [image name or ID]"
 
-- The flag "-ip" and "3000:3000" for specifying the port for the container
+- The flag "-ip" and "5000:5000" for specifying the port for the container
 
-5 - Open http://localhost:3000"
+5 - Open http://localhost:5000"
