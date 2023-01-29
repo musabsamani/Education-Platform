@@ -10,7 +10,7 @@ $("#updateUser").on("submit", function (e) {
   });
   console.log(data)
   var request = {
-    "url": `http://localhost:3000/api/users/${data.id}`,
+    "url": `http://localhost:5000/api/users/${data.id}`,
     "method": "PUT",
     "data": data,
   };
@@ -21,7 +21,7 @@ $("#updateUser").on("submit", function (e) {
 $(".remove").on("click", function () {
   var id = $(this).attr("data-id");
   var request = {
-    url: `http://localhost:3000/api/users/${id}`,
+    url: `http://localhost:5000/api/users/${id}`,
     method: "DELETE",
   };
   if (confirm("DO you really want to delete user?")) {

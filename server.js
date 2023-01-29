@@ -16,6 +16,8 @@ const app = express();
 dotenv.config({ path: "config.env" });
 const port = process.env.PORT || 8080;
 
+var cors = require('cors');
+app.use(cors());
 // log request in console
 app.use(morgan("tiny"));
 
@@ -35,6 +37,6 @@ app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
 // load router
 app.use("/", require("./server/routes/router"));
-app.listen(port, () => {
+app.listen(5000, () => {
   console.log(`Express server is running on : http://localhost:${port}`);
 });
