@@ -16,7 +16,7 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="/addUser" onClick={() => this.props.emptyPerson}>
+              <NavLink className="nav-link" to="/addUser">
                 Add User
               </NavLink>
             </li>

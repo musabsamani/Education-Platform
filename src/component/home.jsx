@@ -30,9 +30,9 @@ class Home extends Component {
                   <td>{user.address}</td>
                   <td>{user.phone}</td>
                   <td>
-                    <button className="btn btn-info btn-sm" onClick={() => this.props.onUpdate(user)}>
-                      <Link to={`/editUser?id=${user._id}`}>Update</Link>
-                    </button>
+                    <Link to={`/editUser?id=${user._id}`} onClick={() => this.props.onUpdate(user)}>
+                      <button className="btn btn-info btn-sm">Update</button>
+                    </Link>
 
                     <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(user._id)}>
                       Delete

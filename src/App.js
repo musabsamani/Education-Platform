@@ -12,6 +12,12 @@ class App extends Component {
     users: [],
     person: {}
   }
+  // =================================
+  // =================================
+  // =====  HELPERS FUNCTION  ========
+  // =================================
+  // =================================
+  // this react function is fired up when page load initially
   async componentDidMount() {
     try {
       const { data: users } = await axios.get(http.apiEndpoint)
@@ -20,31 +26,11 @@ class App extends Component {
       console.log("error fetching users")
     }
   }
-
+  // this function is used by input fields to change person value while typing
   handleChange = (e) => {
     const person = { ...this.state.person };
     person[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ person })
-  }
-  // this method is used by addUser.jsx for creating new user when form is submited
-  // by sendind request to the server
-  createUser = (e) => {
-    e.preventDefault();
-    var unindexd_array = $("#addUser").serializeArray();
-    var user = {};
-    $.map(unindexd_array, function (n, i) {
-      user[n["name"]] = n["value"];
-    });
-    var request = {
-      "url": `http://localhost:5000/api/users`,
-      "method": "POST",
-      "data": user,
-    };
-    const users = [...this.state.users, user]
-    this.setState({ users });
-    $.ajax(request).done((response) => {
-      alert("User Added Successfully !!!");
-    })
   }
   // this method is used by Home.jsx update button to store the value of that
   // user and pass it to this.state.person
@@ -60,12 +46,43 @@ class App extends Component {
     }
     this.setState({ person })
   }
+  // this function is used to set person empty because
+  //  when we create ne person we want fields to be empy
   setEmptyPerson = () => {
-    const person = {}
+    const person = { id: '', name: '', age: '', address: '', phone: '' }
     this.setState({ person })
+    return person
+  }
+  // =================================
+  // =================================
+  // ======   CRUD FUNCTION   ========
+  // =================================
+  // =================================
+  // this method is used by addUser.jsx for creating new user when form is submited
+  // by sendind request to the server
+  // =======  CREAT  ========
+  createUser = (e) => {
+    e.preventDefault();
+    var unindexd_array = $("#addUser").serializeArray();
+    var user = {};
+    $.map(unindexd_array, function (n, i) {
+      user[n["name"]] = n["value"];
+    });
+    var request = {
+      "url": `http://localhost:5000/api/users`,
+      "method": "POST",
+      "data": user,
+    };
+    $.ajax(request).done((response) => {
+      const users = [...this.state.users, user]
+      this.setState({ users });
+      this.setEmptyPerson()
+      alert("User Added Successfully !!!");
+    })
   }
   // this method is used by addUser.jsx for creating new user when form is submited
   // by sendind request to the server
+  // =======  UPDATE  ========
   updateUser = (e) => {
     e.preventDefault();
     var unindexd_array = $("#editUser").serializeArray();
@@ -85,13 +102,13 @@ class App extends Component {
           Object.assign(person, user)
         }
       })
-      console.log(users)
+      this.setEmptyPerson()
       this.setState({ users });
-      console.log(this.state.users)
       alert("User Updated Successfully !!!");
     })
   }
   // this method is used by home.jsx component by Delete Button
+  // =======  DELETE  ========
   handleDelete = async id => {
     const users = this.state.users.filter(p => p._id !== id);
     this.setState({ users });
@@ -102,7 +119,6 @@ class App extends Component {
   render() {
     return (
       <>
-        {/* <Navbar emptyPerson={this.setEmptyPerson} /> */}
         <Navbar />
         <main className='container'>
           <Routes>
