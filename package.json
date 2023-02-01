@@ -28,7 +28,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "dev": "nodemon servers.js"
+    "dev": "nodemon server.js"
   },
   "author": "",
   "license": "ISC",
