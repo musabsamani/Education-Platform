@@ -2,20 +2,21 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 // import { getuser } from '../Server/mtserveces';
 
-class Home extends Component {
+class Classes extends Component {
   state = {
     person: {},
   };
   render() {
     return (
-      <React.Fragment>
+      <>
         <div className="container mt-5 ">
           <table className="table caption-top mt-5">
             <thead>
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Age</th>
+                <th scope="col">Specializaiton</th>
+                <th scope="col">Subject</th>
                 <th scope="col">Address</th>
                 <th scope="col">Phone</th>
                 <th scope="col">Action</th>
@@ -26,7 +27,8 @@ class Home extends Component {
                 <tr key={user._id}>
                   <td>{i + 1}</td>
                   <td>{user.name}</td>
-                  <td>{user.age}</td>
+                  <td>{user.specializaiton}</td>
+                  <td>{user.subject}</td>
                   <td>{user.address}</td>
                   <td>{user.phone}</td>
                   <td>
@@ -43,9 +45,9 @@ class Home extends Component {
             </tbody>
           </table>
         </div>
-      </React.Fragment>
+      </>
     );
   }
 }
 
-export default Home;
+export default Classes;

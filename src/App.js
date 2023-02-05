@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Navbar from './component/navbar';
-import Home from './component/home';
-import AddUser from './component/addUser';
+import Classes from './component/classes';
+import AddVoulunteer from './component/addvoulunteer';
 import EditUser from './component/editUser';
 import axios from 'axios';
 import http from "./Server/httpserver.json";
@@ -39,7 +39,8 @@ class App extends Component {
   setPerson = (user) => {
     const person = {
       name: user.name,
-      age: user.age,
+      specialization: user.specialization,
+      subject:user.subject,
       address: user.address,
       phone: user.phone,
       id: user._id,
@@ -49,7 +50,7 @@ class App extends Component {
   // this function is used to set person empty because
   //  when we create ne person we want fields to be empy
   setEmptyPerson = () => {
-    const person = { id: '', name: '', age: '', address: '', phone: '' }
+    const person = { id: '', name: '', specialization: '',subject:'', address: '', phone: '' }
     this.setState({ person })
     return person
   }
@@ -123,14 +124,14 @@ class App extends Component {
         <main className='container'>
           <Routes>
             <Route path='/'
-              element={<Home
+              element={<Classes
                 users={this.state.users}
                 person={this.state.person}
                 onDelete={this.handleDelete}
                 onUpdate={this.setPerson}
               />} />
-            <Route path='/addUser'
-              element={<AddUser
+            <Route path='/addvoulunteer'
+              element={<AddVoulunteer
                 person={this.state.person}
                 onChange={this.handleChange}
                 createUser={this.createUser}
