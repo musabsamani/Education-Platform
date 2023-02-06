@@ -1,80 +1,81 @@
-var { Userdb, Volunteerdb, Tabledb } = require("../model/model");
-// create and save new user
+var { Volunteerdb } = require("../model/model");
+// create and save new volunteer
 exports.create = (req, res) => {
   if (!req.body) {
     res.status(400).send({ message: "request body can't be empty" });
     return;
   }
-  const user = new Userdb({
+  const volunteer = new Volunteerdb({
     name: req.body.name,
-    age: req.body.age,
+    email: req.body.email,
     address: req.body.address,
     phone: req.body.phone,
+    subject: req.body.subject,
   });
-  user
-    .save(user)
+  volunteer
+    .save(volunteer)
     .then((data) => {
-      res.redirect("/add_user");
+      res.send("Volunteer Added successfully");
     })
     .catch((err) => {
       res.status(500).send({ message: err.message || "Some error occured while performing a create operation" });
     });
 };
-// return all users / single user
+// return all volunteers / single volunteer
 exports.find = (req, res) => {
   if (req.query.id) {
     const id = req.query.id;
-    Userdb.findById(id)
+    Volunteerdb.findById(id)
       .then((data) => {
         if (!data) {
-          res.status(404).send({ message: `Error user with id ${id} Not found` });
+          res.status(404).send({ message: `Error volunteer with id ${id} Not found` });
         } else {
           res.send(data);
         }
       })
       .catch((err) => {
-        res.status(500).send({ message: `Error occured while rettriving user with id ${id}` });
+        res.status(500).send({ message: `Error occured while rettriving volunteer with id ${id}` });
       });
   } else {
-    Userdb.find()
-      .then((user) => {
-        res.send(user);
+    Volunteerdb.find()
+      .then((volunteer) => {
+        res.send(volunteer);
       })
       .catch((err) => {
-        res.status(500).send({ message: err.message || "Error occured while retriving user information" });
+        res.status(500).send({ message: err.message || "Error occured while retriving volunteer information" });
       });
   }
 };
-// update user wih specified id
+// update volunteer wih specified id
 exports.update = (req, res) => {
   if (!req.body) {
     return res.status(400).send({ message: "Data to update can not be empty" });
   }
   const id = req.params.id;
-  Userdb.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
+  Volunteerdb.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
     .then((data) => {
       if (!data) {
-        res.status(404).send({ message: `Can't update user with id ${id}, maybe user doesn't exist` });
+        res.status(404).send({ message: `Can't update volunteer with id ${id}, maybe volunteer doesn't exist` });
       } else {
         res.send(data);
       }
     })
     .catch((err) => {
-      res.status(500).send({ message: "Error update user information" });
+      res.status(500).send({ message: "Error update volunteer information" });
     });
 };
-// delete user wih specified id
+// delete volunteer wih specified id
 exports.delete = (req, res) => {
   const id = req.params.id;
-  Userdb.findByIdAndDelete(id)
+  Volunteerdb.findByIdAndDelete(id)
     .then((data) => {
       if (!data) {
-        res.status(404).send({ message: `Can't delete user with id ${id}. Maybe user doesn't exist` });
+        res.status(404).send({ message: `Can't delete volunteer with id ${id}. Maybe volunteer doesn't exist` });
       } else {
-        res.send({ message: "User Deleted successfully" });
+        res.send({ message: "Volunteer Deleted successfully" });
       }
     })
     .catch((err) => {
-      res.status(500).send({ message: "Couldn't delete user with id " + id });
+      res.status(500).send({ message: "Couldn't delete volunteer with id " + id });
     });
 };

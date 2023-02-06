@@ -14,7 +14,8 @@ exports.create = (req, res) => {
   student
     .save(student)
     .then((data) => {
-      res.redirect("/add_student");
+      res.send("student Added successfully")
+      // res.redirect("/students/new");
     })
     .catch((err) => {
       res.status(500).send({ message: err.message || "Some error occured while performing a create operation" });
