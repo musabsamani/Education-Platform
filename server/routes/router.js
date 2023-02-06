@@ -32,8 +32,8 @@ route.put("/api/table/:id", tableController.update);
 route.delete("/api/table/:id", tableController.delete);
 // ?=============== subject router ==================
 // API
-route.post("/api/subject", subjectController.create);
-route.get("/api/subject", subjectController.find);
-route.put("/api/subject/:id", subjectController.update);
-route.delete("/api/subject/:id", subjectController.delete);
+route.post("/api/subjects", subjectController.create);
+route.get("/api/subjects", subjectController.find);
+route.put("/api/subjects/:id", subjectController.update);
+route.delete("/api/subjects/:id", subjectController.delete);
 module.exports = route;
