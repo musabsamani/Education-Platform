@@ -34,7 +34,7 @@ class App extends Component {
   // this react function is fired up when page load initially
   async componentDidMount() {
     try {
-      const { data: students } = await axios.get(studentAPI)
+      const { data: students } = await axios.get(studentAPI) 
       this.setState({ students })
       const { data: volunteers } = await axios.get(volunteerAPI)
       this.setState({ volunteers })
