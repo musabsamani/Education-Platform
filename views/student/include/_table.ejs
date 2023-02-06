@@ -1,0 +1,34 @@
+<div class="table_container">
+  <a href="/add_student">
+    <h2>Add New User</h2>
+  </a>
+  <table>
+    <thead>
+      <tr>
+        <td>Order</td>
+        <td>Name</td>
+        <td>Age</td>
+        <td>Live In</td>
+        <td>Phone</td>
+        <td>Action</td>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% if(students.length==0){%>
+        <td colspan="6" style="text-align: center;">Database Is Empty</td>
+        <% }else{for(var i=0;i< students.length;i++){%>
+        <td><%= i+1%></td>
+        <td><%= students[i].name%></td>
+        <td><%= students[i].age%></td>
+        <td><%= students[i].address%></td>
+        <td><%= students[i].phone%></td>
+        <td>
+          <a href="/update_student?id=<%=students[i]._id %>">Edit</a>
+          <a href="/" data-id=<%=students[i]._id %> id="remove">Remove</a>
+        </td>
+      </tr>
+      <%}}%>
+    </tbody>
+  </table>
+</div>
