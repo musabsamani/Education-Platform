@@ -1,22 +1,25 @@
 const axios = require("axios");
+// ========================
+// ========================
+// ===== Student Services
 exports.homeRoutes = (req, res) => {
   axios
-    .get("http://localhost:5000/api/users")
+    .get("http://localhost:5000/api/students")
     .then((respond) => {
-      res.render("index", { users: respond.data });
+      res.render("student/index", { students: respond.data });
     })
     .catch((err) => res.send(err.message));
-};
-exports.updateUser = (req, res) => {
+}
+exports.updateStudent = (req, res) => {
   axios
-    .get("http://localhost:5000/api/users", { params: { id: req.query.id } })
-    .then(function (userData) {
-      res.render("update_user", { user: userData.data });
+    .get("http://localhost:5000/api/students", { params: { id: req.query.id } })
+    .then(function (studentData) {
+      res.render("student/update_student", { student: studentData.data });
     })
     .catch((err) => {
       res.send(err.message);
     });
 };
-exports.addUser = (req, res) => {
-  res.render("add_user");
+exports.addStudent = (req, res) => {
+  res.render("student/add_student");
 };

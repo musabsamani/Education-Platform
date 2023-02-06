@@ -8,9 +8,8 @@ $("#updateUser").on("submit", function (e) {
   $.map(unindexd_array, function (n, i) {
     data[n["name"]] = n["value"];
   });
-  console.log(data)
   var request = {
-    "url": `http://localhost:5000/api/users/${data.id}`,
+    "url": `http://localhost:5000/api/students/${data.id}`,
     "method": "PUT",
     "data": data,
   };
@@ -18,13 +17,13 @@ $("#updateUser").on("submit", function (e) {
     alert("User Updated Successfully");
   });
 });
-$(".remove").on("click", function () {
+$("#remove").on("click", function () {
   var id = $(this).attr("data-id");
   var request = {
-    url: `http://localhost:5000/api/users/${id}`,
+    url: `http://localhost:5000/api/students/${id}`,
     method: "DELETE",
   };
-  if (confirm("DO you really want to delete user?")) {
+  if (confirm("DO you really want to delete student?")) {
     $.ajax(request).done(function (response) {
       alert("User Deleted Successfully");
       location.reload();

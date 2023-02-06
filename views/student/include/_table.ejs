@@ -1,5 +1,5 @@
 <div class="table_container">
-  <a href="/add_user">
+  <a href="/add_student">
     <h2>Add New User</h2>
   </a>
   <table>
@@ -15,17 +15,17 @@
     </thead>
     <tbody>
       <tr>
-        <% if(users.length==0){%>
+        <% if(students.length==0){%>
         <td colspan="6" style="text-align: center;">Database Is Empty</td>
-        <% }else{for(var i=0;i< users.length;i++){%>
+        <% }else{for(var i=0;i< students.length;i++){%>
         <td><%= i+1%></td>
-        <td><%= users[i].name%></td>
-        <td><%= users[i].age%></td>
-        <td><%= users[i].address%></td>
-        <td><%= users[i].phone%></td>
+        <td><%= students[i].name%></td>
+        <td><%= students[i].age%></td>
+        <td><%= students[i].address%></td>
+        <td><%= students[i].phone%></td>
         <td>
-          <a href="/update_user?id=<%=users[i]._id %>">Edit</a>
-          <a href="/" data-id=<%=users[i]._id %> class="remove">Remove</a>
+          <a href="/update_student?id=<%=students[i]._id %>">Edit</a>
+          <a href="/" data-id=<%=students[i]._id %> id="remove">Remove</a>
         </td>
       </tr>
       <%}}%>

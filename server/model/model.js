@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-var user = new mongoose.Schema({
+var student = new mongoose.Schema({
   name: String,
   age: String,
   address: String,
@@ -20,6 +20,7 @@ var table = new mongoose.Schema({
   address: String,
   phone: String,
 });
-const Userdb = mongoose.model("userdb", user);
+const Studentdb = mongoose.model("studentdb", student);
 const Volunteerdb = mongoose.model("volunteerdb", volunteer);
 const Tabledb = mongoose.model("tabledb", table);
+module.exports = { Studentdb, Volunteerdb, Tabledb }
