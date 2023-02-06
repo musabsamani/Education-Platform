@@ -5,6 +5,7 @@ import Classes from './component/TableShow/classesTable';
 import AddSubject from './component/Addition/addsubject'
 import AddVolunteer from './component/Addition/addvolunteer';
 import AddStudent from './component/Addition/addstudent';
+import StudentTable from './component/TableShow/studentTable';
 import EditUser from './component/editUser';
 import Show from './component/TableShow/show';
 import Home from './component/home';
