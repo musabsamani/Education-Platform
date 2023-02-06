@@ -14,9 +14,11 @@ import $ from "jquery"
 import { Route, Routes } from 'react-router-dom';
 class App extends Component {
   state = {
-    users: [],
+    students: [],
+    volunteers:[],
+    subjects:[],
     person: {},
-    subject:{}
+    hsubject: {}
     
   }
   
@@ -26,12 +28,31 @@ class App extends Component {
   // =================================
   // =================================
   // this react function is fired up when page load initially
+  // get volunteers from DB **********************************
   async componentDidMount() {
     try {
-      const { data: users } = await axios.get(http.apiEndpoint)
-      this.setState({ users })
+      const { data: volunteers } = await axios.get(http.apiEndpoint)
+      this.setState({ volunteers })
     } catch {
-      console.log("error fetching users")
+      console.log("error fetching voulunteers")
+    }
+  }
+  // get sudents from DB **********************************
+  async componentDidMount() {
+    try {
+      const { data: students } = await axios.get(http.apiEndpoint)
+      this.setState({ students })
+    } catch {
+      console.log("error fetching students")
+    }
+    //get subject from DB********************************* 
+  }
+  async componentDidMount() {
+    try {
+      const { data: subjects } = await axios.get(http.apiEndpoint)
+      this.setState({ students })
+    } catch {
+      console.log("error fetching students")
     }
   }
   // this function is used by input fields to change person value while typing
@@ -40,10 +61,10 @@ class App extends Component {
     person[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ person })
   }
-  handleChangeClass = (e) => {
-    const subject = { ...this.state.subject};
-    subject[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ subject })
+  handleChangeSubject = (e) => {
+    const hsubject = { ...this.state.hsubject};
+    hsubject[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ hsubject })
   }
   // this method is used by Home.jsx update button to store the value of that
   // user and pass it to this.state.person
@@ -54,7 +75,6 @@ class App extends Component {
       name: user.name,
       age:user.age,
       specialization: user.specialization,
-      subject:user.subject,
       address: user.address,
       phone: user.phone,
       id: user._id,
@@ -83,35 +103,74 @@ class App extends Component {
   // this method is used by addUser.jsx for creating new user when form is submited
   // by sendind request to the server
   // =======  CREAT  ========
-  createUser = (e) => {
+
+/* ################################################################
+                            Creat A Volunteer 
+  ###############################################################
+ */
+  createVolunteer = (e) => {
     e.preventDefault();
-    var unindexd_array = $("#addUser").serializeArray();
-    var user = {};
+    var unindexd_array = $("#addvolunteer").serializeArray();
+    var volunteer = {};
+    $.map(unindexd_array, function (n, i) {
+      volunteer[n["name"]] = n["value"];
+    });
+    var request = {
+      "url": `http://localhost:5000/api/volunteers`,
+      "method": "POST",
+      "data": volunteer,
+    };
+    $.ajax(request).done((response) => {
+      const volunteers = [...this.state.volunteers, volunteer]
+      this.setState({ volunteers });
+      this.setEmptyPerson()
+      alert("Volunteer Added Successfully !!!");
+    })
+  }
+  /* ################################################################
+                          End Creat A Volunteer 
+  ###############################################################
+ */
+  
+
+  /* ################################################################
+                            Creat A Student   
+    ###############################################################
+  */
+  createStudent = (e) => {
+    e.preventDefault();
+    var unindexd_array = $("#addstudent").serializeArray();
+    var student = {};
     $.map(unindexd_array, function (n, i) {
       user[n["name"]] = n["value"];
     });
     var request = {
-      "url": `http://localhost:5000/api/users`,
+      "url": `http://localhost:5000/api/students`,
       "method": "POST",
-      "data": user,
+      "data": student,
     };
     $.ajax(request).done((response) => {
-      const users = [...this.state.users, user]
-      this.setState({ users });
+      const users = [...this.state.students, student]
+      this.setState({ students });
       this.setEmptyPerson()
-      alert("User Added Successfully !!!");
+      alert("Student Added Successfully !!!");
     })
   }
-  /* ################################
-              Creat A Class    
-    #################################
+    /* ################################################################
+                          End Creat A Student   
+    ###################################################################
+
+
+  /* ##################################################################
+                            Creat A Subject    
+    ###################################################################
   */
   createSubject = (e) => {
     e.preventDefault();
     var unindexd_array = $("#addsubject").serializeArray();
-    var subj = {};
+    var subject = {};
     $.map(unindexd_array, function (n, i) {
-      subj[n["name"]] = n["value"];
+      subject[n["name"]] = n["value"];
     });
     var request = {
       "url": `http://localhost:5000/api/users`,
@@ -119,16 +178,15 @@ class App extends Component {
       "data": subject,
     };
     $.ajax(request).done((response) => {
-      const subject = [...this.state.subject, subj]
-      this.setState({ subject });
+      const subjects = [...this.state.subjects, subject]
+      this.setState({ subjects });
       this.setEmptyPerson()
       alert("Subject Added Successfully !!!");
     })
   }
-
-  /* #############                             #################
-    ###############                          #####################
-  ################### End of Creation Subject #######################
+  /* ##################################################################
+                        End Creat A Subject    
+    ###################################################################
   */
   
   // this method is used by addUser.jsx for creating new user when form is submited
@@ -166,7 +224,7 @@ class App extends Component {
     await axios.delete(http.apiEndpoint + '/' + id);
     alert('User Deleted Successfuly')
   }
-
+  
   render() {
     return (
       <>
@@ -175,35 +233,41 @@ class App extends Component {
           <Routes>
           <Route path='/'
               element={<Home/>} />
+          <Route path='/addvolunteer'
+            element={<AddVolunteer
+              person={this.state.person}
+              onChange={this.handleChange}
+              createVolunteer={this.createVolunteer}
+            />} />
+                    <Route path='/addStudent'
+                      element={<AddStudent
+                        person={this.state.person}
+                        onChange={this.handleChange}
+                        createStudent={this.createStudent}
+                        // soption={this.state.options} // ## select option  ******************************
+                      />} />
                 <Route path='/addsubject'
                   element={<AddSubject
-                    subject={this.state.subject}
-                    onChange={this.handleChangeClass}
+                    hsubject={this.state.hsubject}
+                    onChangeSubject={this.handleChangeSubject}
                     createSubject={this.createSubject}
                   />} />
             <Route path='/classesTable'
               element={<Classes
-                users={this.state.users}
+                volunteers={this.state.volunteers}
+                person={this.state.person}
+                onDelete={this.handleDelete}
+                onUpdate={this.setPerson}
+                />} />
+            <Route path='/studentTable'
+              element={<StudentTable
+                students={this.state.students}
                 person={this.state.person}
                 onDelete={this.handleDelete}
                 onUpdate={this.setPerson}
                 />} />
                 <Route path='/show'
                   element={<Show/>} />
-            <Route path='/addvolunteer'
-              element={<AddVolunteer
-                person={this.state.person}
-                onChange={this.handleChange}
-                createUser={this.createUser}
-                // soption={this.state.options} // ## select option  ******************************
-              />} />
-            <Route path='/addStudent'
-              element={<AddStudent
-                person={this.state.person}
-                onChange={this.handleChange}
-                createUser={this.createUser}
-                // soption={this.state.options} // ## select option  ******************************
-              />} />
             <Route path='/editUser'
               element={<EditUser
                 user={this.state.person}

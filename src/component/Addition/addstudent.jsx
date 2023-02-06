@@ -12,7 +12,7 @@ class AddStudent extends Component {
           <h2>Sign as Student</h2>
           <form className="col g-3 d-flex-column justify-content-center" id="addUser" method="POST" onSubmit={(e) => this.props.createUser(e)}>
             <Input onChange={this.props.onChange} type="text" name="name" label="Name" value={this.props.person.name} />
-            <Input onChange={this.props.onChange} type="text" name="Age" label="Age" value={this.props.person.age} />
+            <Input onChange={this.props.onChange} type="text" name="age" label="Age" value={this.props.person.age} />
             <Input onChange={this.props.onChange} type="text" name="address" label="Address" value={this.props.person.address} />
             <Input onChange={this.props.onChange} type="text" name="phone" label="Phone" value={this.props.person.phone} />
             <div className="s col mt-2">

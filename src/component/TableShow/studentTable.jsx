@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 
-class Classes extends Component {
+class StudentTable extends Component {
   state = {
     person: {},
   };
@@ -24,9 +24,10 @@ class Classes extends Component {
               {this.props.student.map((student, i) => (
                 <tr key={student._id}>
                   <td>{i + 1}</td>
-                  <Link to="/show"><td onClick={()=>Show(student)}>{student.name}</td></Link>
-                  <td>{student.subject}</td>
-                  <td>{student.date}</td>
+                  <td onClick={()=>Show(student)}>{student.name}</td>
+                  <td>{student.age}</td>
+                  <td>{student.address}</td>
+                  <td>{student.phone}</td>
                   <td>
                     <Link to={`/editStudent?id=${student._id}`} onClick={() => this.props.onUpdate(student)}>
                       <button className="btn btn-info btn-sm">Update</button>
@@ -46,4 +47,4 @@ class Classes extends Component {
   }
 }
 
-export default Classes;
+export default StudentTable;
