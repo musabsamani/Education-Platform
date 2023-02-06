@@ -11,7 +11,7 @@ import EditUser from './component/editUser';
 import Show from './component/TableShow/show';
 import Home from './component/home';
 import axios from 'axios';
-import { studentAPI, volunteerAPI, tableAPI, subjectAPI } from "./server/apiEndPoints"
+import { studentAPI, volunteerAPI, tableAPI, subjectAPI } from "./server/apiEndpoints"
 import $ from "jquery"
 import { Route, Routes } from 'react-router-dom';
 
