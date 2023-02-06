@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import Input from "./_input";
+import '../addv.css'
 
 class AddVolunteer extends Component {
   render() {
@@ -39,6 +40,7 @@ class AddVolunteer extends Component {
               (<option value={option.value}>{option.label}</option>
               ))}
             </select>
+            <Input onChange={this.props.onChange} type="date" name="date" label="Date" value={this.props.person.phone} />
             <div className="s col mt-2">
               <button onClick={() => this.props.handleUpdate} className="btn btn-primary m-1" type="submit">
                 Submit
