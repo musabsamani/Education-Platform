@@ -15,7 +15,19 @@ const Navbar = () => {
               <NavLink className="nav-link" to="/addvolunteer">Sign as Volunteer</NavLink>
             </li>
             <li className="nav-item">
-              <NavLink className="nav-link" to="classes">Classes</NavLink>
+              <NavLink className="nav-link" to="/addstudent">Sign as Student</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/studentTable">Student Table</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/classes">Classes</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/addsubject">Add Subject</NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/subjectTable">Subject Table</NavLink>
             </li>
           </ul>
         </div>
