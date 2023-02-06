@@ -21,7 +21,7 @@ class StudentTable extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.student.map((student, i) => (
+              {this.props.students.map((student, i) => (
                 <tr key={student._id}>
                   <td>{i + 1}</td>
                   <td onClick={()=>Show(student)}>{student.name}</td>

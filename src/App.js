@@ -10,7 +10,6 @@ import EditUser from './component/editUser';
 import Show from './component/TableShow/show';
 import Home from './component/home';
 import axios from 'axios';
-import http from "./Server/httpserver.json";
 import $ from "jquery"
 import { Route, Routes } from 'react-router-dom';
 class App extends Component {
