@@ -4,6 +4,6 @@ select{
     border-radius: 10px;
 
 }
-select:target{
+select:targets{
     border-color: aqua;
 }

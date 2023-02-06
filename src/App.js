@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import './App.css'
 import Navbar from './component/navbar';
-import Classes from './component/classes';
-import AddVolunteer from './component/addvolunteer';
+import Classes from './component/TableShow/classes';
+import AddVolunteer from './component/Addition/addvolunteer';
+import AddStudent from './component/Addition/addstudent';
 import EditUser from './component/editUser';
-import Show from './component/show';
+import Show from './component/TableShow/show';
 import Home from './component/home';
 import axios from 'axios';
 import http from "./Server/httpserver.json";
@@ -139,6 +140,13 @@ class App extends Component {
               />} />
             <Route path='/addvolunteer'
               element={<AddVolunteer
+                person={this.state.person}
+                onChange={this.handleChange}
+                createUser={this.createUser}
+                // soption={this.state.options} // ## select option  ******************************
+              />} />
+            <Route path='/addStudent'
+              element={<AddStudent
                 person={this.state.person}
                 onChange={this.handleChange}
                 createUser={this.createUser}
