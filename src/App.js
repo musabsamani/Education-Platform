@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import './App.css'
 import Navbar from './component/navbar';
-import Classes from './component/TableShow/classes';
+import Classes from './component/TableShow/classesTable';
 import AddVolunteer from './component/Addition/addvolunteer';
 import AddStudent from './component/Addition/addstudent';
 import EditUser from './component/editUser';
@@ -15,6 +15,7 @@ class App extends Component {
   state = {
     users: [],
     person: {},
+    _class:{}
     
   }
   
@@ -38,6 +39,11 @@ class App extends Component {
     person[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ person })
   }
+  handleChangeClass = (e) => {
+    const _class = { ...this.state._class};
+    _class[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ _class })
+  }
   // this method is used by Home.jsx update button to store the value of that
   // user and pass it to this.state.person
   // note that argument of this function "user" is the object we need to view its
@@ -45,6 +51,7 @@ class App extends Component {
   setPerson = (user) => {
     const person = {
       name: user.name,
+      age:user.age,
       specialization: user.specialization,
       subject:user.subject,
       address: user.address,
@@ -53,10 +60,17 @@ class App extends Component {
     }
     this.setState({ person })
   }
+  set_class = (user) => {
+    const _class = {
+      subject:user.subject,
+      id: user._id,
+    }
+    this.setState({ _class })
+  }
   // this function is used to set person empty because
   //  when we create ne person we want fields to be empy
   setEmptyPerson = () => {
-    const person = { id: '', name: '', specialization: '',subject:'', address: '', phone: '' }
+    const person = { id: '', name: '', age: '', specialization: '', subject: '', address: '', date: '', phone: '' }
     this.setState({ person })
     return person
   }
@@ -87,6 +101,35 @@ class App extends Component {
       alert("User Added Successfully !!!");
     })
   }
+  /* ################################
+              Creat A Class    
+    #################################
+  */
+  createClass = (e) => {
+    e.preventDefault();
+    var unindexd_array = $("#addclass").serializeArray();
+    var clas = {};
+    $.map(unindexd_array, function (n, i) {
+      clas[n["name"]] = n["value"];
+    });
+    var request = {
+      "url": `http://localhost:5000/api/users`,
+      "method": "POST",
+      "data": subject,
+    };
+    $.ajax(request).done((response) => {
+      const _class = [...this.state._class, clas]
+      this.setState({ _class });
+      this.setEmptyPerson()
+      alert("Class Added Successfully !!!");
+    })
+  }
+
+  /* #############                             #################
+    ###############                          #####################
+  ################### End of Creation Class #######################
+  */
+  
   // this method is used by addUser.jsx for creating new user when form is submited
   // by sendind request to the server
   // =======  UPDATE  ========
@@ -131,13 +174,21 @@ class App extends Component {
           <Routes>
           <Route path='/'
               element={<Home/>} />
-            <Route path='/classes'
+                <Route path='/addclass'
+                  element={<AddClass
+                    _class={this.state._class}
+                    onChange={this.handleChangeClass}
+                    createclass={this.createClass}
+                  />} />
+            <Route path='/classesTable'
               element={<Classes
                 users={this.state.users}
                 person={this.state.person}
                 onDelete={this.handleDelete}
                 onUpdate={this.setPerson}
-              />} />
+                />} />
+                <Route path='/show'
+                  element={<Show/>} />
             <Route path='/addvolunteer'
               element={<AddVolunteer
                 person={this.state.person}
@@ -158,8 +209,6 @@ class App extends Component {
                 onChange={this.handleChange}
                 onUpdate={this.updateUser}
               />} />
-            <Route path='/show'
-              element={<Show/>} />
           </Routes>
         </main>
       </>

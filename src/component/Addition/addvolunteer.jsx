@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Input from "../_input";
-import '../addv.css'
+import './addv.css'
 
 class AddVolunteer extends Component {
   render() {
