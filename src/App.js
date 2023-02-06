@@ -34,7 +34,7 @@ class App extends Component {
   // this react function is fired up when page load initially
   async componentDidMount() {
     try {
-      const { data: students } = await axios.get(studentAPI) 
+      const { data: students } = await axios.get(studentAPI)
       this.setState({ students })
       const { data: volunteers } = await axios.get(volunteerAPI)
       this.setState({ volunteers })
@@ -42,7 +42,7 @@ class App extends Component {
       this.setState({ table })
       const { data: subjects } = await axios.get(subjectAPI)
       this.setState({ subjects })
-      console.log(this.state)
+      // console.log(this.state)
 
     } catch {
       console.log("error fetching data from the server")
