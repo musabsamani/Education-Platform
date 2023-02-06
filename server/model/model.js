@@ -15,12 +15,15 @@ var volunteer = new mongoose.Schema({
   subject: String
 });
 var table = new mongoose.Schema({
+  subject: String,
+  volunteer: String,
+  date: String,
+});
+var subject = new mongoose.Schema({
   name: String,
-  age: String,
-  address: String,
-  phone: String,
 });
 const Studentdb = mongoose.model("studentdb", student);
 const Volunteerdb = mongoose.model("volunteerdb", volunteer);
 const Tabledb = mongoose.model("tabledb", table);
-module.exports = { Studentdb, Volunteerdb, Tabledb }
+const Subjectdb = mongoose.model("subjectdb", subject);
+module.exports = { Studentdb, Volunteerdb, Tabledb, Subjectdb }
