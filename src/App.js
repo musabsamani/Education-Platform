@@ -11,8 +11,10 @@ import EditUser from './component/editUser';
 import Show from './component/TableShow/show';
 import Home from './component/home';
 import axios from 'axios';
+import { studentAPI, volunteerAPI, tableAPI, subjectAPI } from "./server/apiEndPoints"
 import $ from "jquery"
 import { Route, Routes } from 'react-router-dom';
+
 class App extends Component {
   state = {
     students: [],
@@ -29,50 +31,23 @@ class App extends Component {
   // =================================
   // =================================
   // this react function is fired up when page load initially
-  // get volunteers from DB **********************************
-  // async componentDidMount() {
-  //   }
-  // }
-  // !==========================================
-  // !==========================================
-
-  // module.exports = { studentAPI, volunteerAPI, tableAPI, subjectAPI }
-  // async componentDidMount() {
-  //   try {
-  //     const { data: students } = await axios.get(studentAPI)
-  //     this.setState({ students })
-  //     const { data: volunteers } = await axios.get(volunteerAPI)
-  //     this.setState({ volunteers })
-  //     const { data: table } = await axios.get(tableAPI)
-  //     this.setState({ table })
-  //     const { data: subjects } = await axios.get(subjectAPI)
-  //     this.setState({ subjects })
-
-  //   } catch {
-  //     console.log("error fetching data from the server")
-  //   }
-  // }
-  // !==========================================
-  // !==========================================
-  // get sudents from DB **********************************
   async componentDidMount() {
     try {
-      const { data: students } = await axios.get(http.apiEndpoint)
+      const { data: students } = await axios.get(studentAPI)
       this.setState({ students })
+      const { data: volunteers } = await axios.get(volunteerAPI)
+      this.setState({ volunteers })
+      const { data: table } = await axios.get(tableAPI)
+      this.setState({ table })
+      const { data: subjects } = await axios.get(subjectAPI)
+      this.setState({ subjects })
+      // console.log(this.state)
+      console.log("this.state")
+
     } catch {
-      console.log("error fetching students")
-    }
-    //get subject from DB********************************* 
-  }
-  async componentDidMount() {
-    try {
-      const { data: subjects } = await axios.get(http.apiEndpoint)
-      this.setState({ students })
-    } catch {
-      console.log("error fetching students")
+      console.log("error fetching data from the server")
     }
   }
-  // this function is used by input fields to change person value while typing
   handleChange = (e) => {
     const person = { ...this.state.person };
     person[e.currentTarget.name] = e.currentTarget.value;

@@ -1,6 +1,0 @@
-{
-    "apiEndpoint":"http://localhost:5000/api/students",
-    "volunteerApi":"http://localhost:5000/api/voluneers",
-    "tableApi":"http://localhost:5000/api/table",
-    "subjectApi":"http://localhost:5000/api/subject"
-}
