@@ -42,11 +42,7 @@ class App extends Component {
       this.setState({ table })
       const { data: subjects } = await axios.get(subjectAPI)
       this.setState({ subjects })
-      console.log(studentAPI)
-      console.log(volunteerAPI)
-      console.log(tableAPI)
-      console.log(subjectAPI)
-      // console.log("this.state")
+      console.log(this.state)
 
     } catch {
       console.log("error fetching data from the server")
