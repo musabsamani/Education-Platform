@@ -14,24 +14,7 @@ class App extends Component {
   state = {
     users: [],
     person: {},
-    options :[
-      {
-        label: "Math",
-        value: "math",
-      },
-      {
-        label: "Arabic",
-        value: "arabic",
-      },
-      {
-        label: "Islamya",
-        value: "islamya",
-      },
-      {
-        label: "Attitute",
-        value: "attitute",
-      },
-    ]
+    
   }
   
   // =================================
@@ -159,7 +142,7 @@ class App extends Component {
                 person={this.state.person}
                 onChange={this.handleChange}
                 createUser={this.createUser}
-                soption={this.state.options} // ## select option  ******************************
+                // soption={this.state.options} // ## select option  ******************************
               />} />
             <Route path='/editUser'
               element={<EditUser

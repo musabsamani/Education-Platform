@@ -16,6 +16,7 @@ class Classes extends Component {
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
                 <th scope="col">Subject</th>
+                <th scope="col">Date</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -25,6 +26,7 @@ class Classes extends Component {
                   <td>{i + 1}</td>
                   <Link to="/show"><td onClick={()=>Show(user)}>{user.name}</td></Link>
                   <td>{user.subject}</td>
+                  <td>{user.date}</td>
                   <td>
                     <Link to={`/editUser?id=${user._id}`} onClick={() => this.props.onUpdate(user)}>
                       <button className="btn btn-info btn-sm">Update</button>
