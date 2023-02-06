@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css'
 import Navbar from './component/navbar';
 import Classes from './component/TableShow/classesTable';
+import AddSubject from './component/Addition/addsubject'
 import AddVolunteer from './component/Addition/addvolunteer';
 import AddStudent from './component/Addition/addstudent';
 import EditUser from './component/editUser';
@@ -15,7 +16,7 @@ class App extends Component {
   state = {
     users: [],
     person: {},
-    _class:{}
+    subject:{}
     
   }
   
@@ -40,9 +41,9 @@ class App extends Component {
     this.setState({ person })
   }
   handleChangeClass = (e) => {
-    const _class = { ...this.state._class};
-    _class[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ _class })
+    const subject = { ...this.state.subject};
+    subject[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ subject })
   }
   // this method is used by Home.jsx update button to store the value of that
   // user and pass it to this.state.person
@@ -60,12 +61,12 @@ class App extends Component {
     }
     this.setState({ person })
   }
-  set_class = (user) => {
-    const _class = {
+  setsubject = (user) => {
+    const subject = {
       subject:user.subject,
       id: user._id,
     }
-    this.setState({ _class })
+    this.setState({ subject })
   }
   // this function is used to set person empty because
   //  when we create ne person we want fields to be empy
@@ -105,12 +106,12 @@ class App extends Component {
               Creat A Class    
     #################################
   */
-  createClass = (e) => {
+  createSubject = (e) => {
     e.preventDefault();
-    var unindexd_array = $("#addclass").serializeArray();
-    var clas = {};
+    var unindexd_array = $("#addsubject").serializeArray();
+    var subj = {};
     $.map(unindexd_array, function (n, i) {
-      clas[n["name"]] = n["value"];
+      subj[n["name"]] = n["value"];
     });
     var request = {
       "url": `http://localhost:5000/api/users`,
@@ -118,16 +119,16 @@ class App extends Component {
       "data": subject,
     };
     $.ajax(request).done((response) => {
-      const _class = [...this.state._class, clas]
-      this.setState({ _class });
+      const subject = [...this.state.subject, subj]
+      this.setState({ subject });
       this.setEmptyPerson()
-      alert("Class Added Successfully !!!");
+      alert("Subject Added Successfully !!!");
     })
   }
 
   /* #############                             #################
     ###############                          #####################
-  ################### End of Creation Class #######################
+  ################### End of Creation Subject #######################
   */
   
   // this method is used by addUser.jsx for creating new user when form is submited
@@ -174,11 +175,11 @@ class App extends Component {
           <Routes>
           <Route path='/'
               element={<Home/>} />
-                <Route path='/addclass'
-                  element={<AddClass
-                    _class={this.state._class}
+                <Route path='/addsubject'
+                  element={<AddSubject
+                    subject={this.state.subject}
                     onChange={this.handleChangeClass}
-                    createclass={this.createClass}
+                    createSubject={this.createSubject}
                   />} />
             <Route path='/classesTable'
               element={<Classes
