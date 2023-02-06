@@ -16,13 +16,13 @@ import { Route, Routes } from 'react-router-dom';
 class App extends Component {
   state = {
     students: [],
-    volunteers:[],
-    subjects:[],
+    volunteers: [],
+    subjects: [],
     person: {},
     hsubject: {}
-    
+
   }
-  
+
   // =================================
   // =================================
   // =====  HELPERS FUNCTION  ========
@@ -30,14 +30,30 @@ class App extends Component {
   // =================================
   // this react function is fired up when page load initially
   // get volunteers from DB **********************************
-  async componentDidMount() {
-    try {
-      const { data: volunteers } = await axios.get(http.apiEndpoint)
-      this.setState({ volunteers })
-    } catch {
-      console.log("error fetching voulunteers")
-    }
-  }
+  // async componentDidMount() {
+  //   }
+  // }
+  // !==========================================
+  // !==========================================
+
+  // module.exports = { studentAPI, volunteerAPI, tableAPI, subjectAPI }
+  // async componentDidMount() {
+  //   try {
+  //     const { data: students } = await axios.get(studentAPI)
+  //     this.setState({ students })
+  //     const { data: volunteers } = await axios.get(volunteerAPI)
+  //     this.setState({ volunteers })
+  //     const { data: table } = await axios.get(tableAPI)
+  //     this.setState({ table })
+  //     const { data: subjects } = await axios.get(subjectAPI)
+  //     this.setState({ subjects })
+
+  //   } catch {
+  //     console.log("error fetching data from the server")
+  //   }
+  // }
+  // !==========================================
+  // !==========================================
   // get sudents from DB **********************************
   async componentDidMount() {
     try {
@@ -63,7 +79,7 @@ class App extends Component {
     this.setState({ person })
   }
   handleChangeSubject = (e) => {
-    const hsubject = { ...this.state.hsubject};
+    const hsubject = { ...this.state.hsubject };
     hsubject[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ hsubject })
   }
@@ -74,7 +90,7 @@ class App extends Component {
   setPerson = (user) => {
     const person = {
       name: user.name,
-      age:user.age,
+      age: user.age,
       specialization: user.specialization,
       address: user.address,
       phone: user.phone,
@@ -84,7 +100,7 @@ class App extends Component {
   }
   setsubject = (user) => {
     const subject = {
-      subject:user.subject,
+      subject: user.subject,
       id: user._id,
     }
     this.setState({ subject })
@@ -105,10 +121,10 @@ class App extends Component {
   // by sendind request to the server
   // =======  CREAT  ========
 
-/* ################################################################
-                            Creat A Volunteer 
-  ###############################################################
- */
+  /* ################################################################
+                              Creat A Volunteer 
+    ###############################################################
+   */
   createVolunteer = (e) => {
     e.preventDefault();
     var unindexd_array = $("#addvolunteer").serializeArray();
@@ -131,8 +147,8 @@ class App extends Component {
   /* ################################################################
                           End Creat A Volunteer 
   ###############################################################
- */
-  
+  */
+
 
   /* ################################################################
                             Creat A Student   
@@ -157,14 +173,14 @@ class App extends Component {
       alert("Student Added Successfully !!!");
     })
   }
-    /* ################################################################
-                          End Creat A Student   
-    ###################################################################
-
-
+  /* ################################################################
+                        End Creat A Student   
+  ###################################################################
+  
+  
   /* ##################################################################
-                            Creat A Subject    
-    ###################################################################
+                          Creat A Subject    
+  ###################################################################
   */
   createSubject = (e) => {
     e.preventDefault();
@@ -189,7 +205,7 @@ class App extends Component {
                         End Creat A Subject    
     ###################################################################
   */
-  
+
   // this method is used by addUser.jsx for creating new user when form is submited
   // by sendind request to the server
   // =======  UPDATE  ========
@@ -225,50 +241,50 @@ class App extends Component {
     await axios.delete(http.apiEndpoint + '/' + id);
     alert('User Deleted Successfuly')
   }
-  
+
   render() {
     return (
       <>
         <Navbar />
         <main className='container-fluid'>
           <Routes>
-          <Route path='/'
-              element={<Home/>} />
-          <Route path='/addvolunteer'
-            element={<AddVolunteer
-              person={this.state.person}
-              onChange={this.handleChange}
-              createVolunteer={this.createVolunteer}
-            />} />
-                    <Route path='/addStudent'
-                      element={<AddStudent
-                        person={this.state.person}
-                        onChange={this.handleChange}
-                        createStudent={this.createStudent}
-                        // soption={this.state.options} // ## select option  ******************************
-                      />} />
-                <Route path='/addsubject'
-                  element={<AddSubject
-                    hsubject={this.state.hsubject}
-                    onChangeSubject={this.handleChangeSubject}
-                    createSubject={this.createSubject}
-                  />} />
+            <Route path='/'
+              element={<Home />} />
+            <Route path='/addvolunteer'
+              element={<AddVolunteer
+                person={this.state.person}
+                onChange={this.handleChange}
+                createVolunteer={this.createVolunteer}
+              />} />
+            <Route path='/addStudent'
+              element={<AddStudent
+                person={this.state.person}
+                onChange={this.handleChange}
+                createStudent={this.createStudent}
+              // soption={this.state.options} // ## select option  ******************************
+              />} />
+            <Route path='/addsubject'
+              element={<AddSubject
+                hsubject={this.state.hsubject}
+                onChangeSubject={this.handleChangeSubject}
+                createSubject={this.createSubject}
+              />} />
             <Route path='/classesTable'
               element={<Classes
                 volunteers={this.state.volunteers}
                 person={this.state.person}
                 onDelete={this.handleDelete}
                 onUpdate={this.setPerson}
-                />} />
+              />} />
             <Route path='/studentTable'
               element={<StudentTable
                 students={this.state.students}
                 person={this.state.person}
                 onDelete={this.handleDelete}
                 onUpdate={this.setPerson}
-                />} />
-                <Route path='/show'
-                  element={<Show/>} />
+              />} />
+            <Route path='/show'
+              element={<Show />} />
             <Route path='/editUser'
               element={<EditUser
                 user={this.state.person}
