@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
+import './App.css'
 import Navbar from './component/navbar';
 import Classes from './component/classes';
-import AddVoulunteer from './component/addvoulunteer';
+import AddVolunteer from './component/addvolunteer';
 import EditUser from './component/editUser';
+import Show from './component/show';
+import Home from './component/home';
 import axios from 'axios';
 import http from "./Server/httpserver.json";
 import $ from "jquery"
@@ -10,8 +13,27 @@ import { Route, Routes } from 'react-router-dom';
 class App extends Component {
   state = {
     users: [],
-    person: {}
+    person: {},
+    options :[
+      {
+        label: "Math",
+        value: "math",
+      },
+      {
+        label: "Arabic",
+        value: "arabic",
+      },
+      {
+        label: "Islamya",
+        value: "islamya",
+      },
+      {
+        label: "Attitute",
+        value: "attitute",
+      },
+    ]
   }
+  
   // =================================
   // =================================
   // =====  HELPERS FUNCTION  ========
@@ -121,20 +143,23 @@ class App extends Component {
     return (
       <>
         <Navbar />
-        <main className='container'>
+        <main className='container-fluid'>
           <Routes>
-            <Route path='/'
+          <Route path='/'
+              element={<Home/>} />
+            <Route path='/classes'
               element={<Classes
                 users={this.state.users}
                 person={this.state.person}
                 onDelete={this.handleDelete}
                 onUpdate={this.setPerson}
               />} />
-            <Route path='/addvoulunteer'
-              element={<AddVoulunteer
+            <Route path='/addvolunteer'
+              element={<AddVolunteer
                 person={this.state.person}
                 onChange={this.handleChange}
                 createUser={this.createUser}
+                soption={this.state.options} // ## select option  ******************************
               />} />
             <Route path='/editUser'
               element={<EditUser
@@ -142,6 +167,8 @@ class App extends Component {
                 onChange={this.handleChange}
                 onUpdate={this.updateUser}
               />} />
+            <Route path='/show'
+              element={<Show/>} />
           </Routes>
         </main>
       </>

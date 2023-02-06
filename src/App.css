@@ -1,0 +1,9 @@
+main{
+    height: 100vh;
+}
+main div.b{
+    height: 90vh;
+}
+main div.s{
+    width: 50%;
+}

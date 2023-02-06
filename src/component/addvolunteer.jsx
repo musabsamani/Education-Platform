@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Input from "./_input";
 
-class AddVoulunteer extends Component {
+class AddVolunteer extends Component {
   render() {
 
     const options = [
@@ -27,19 +27,19 @@ class AddVoulunteer extends Component {
       <>
         <div className="container mt-5 ">
           <h2>Sign as Voulunteer</h2>
-          <form className="col g-3" id="addUser" method="POST" onSubmit={(e) => this.props.createUser(e)}>
+          <form className="col g-3 d-flex-column justify-content-center" id="addUser" method="POST" onSubmit={(e) => this.props.createUser(e)}>
             <Input onChange={this.props.onChange} type="text" name="name" label="Name" value={this.props.person.name} />
             <Input onChange={this.props.onChange} type="text" name="specializaiton" label="Pro-Specialization" value={this.props.person.specializaiton} />
-            <label htmlFor="subject">Subject</label>
-            <select className="form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+            <Input onChange={this.props.onChange} type="email" name="email" label="Email" value={this.props.person.email} />
+            <Input onChange={this.props.onChange} type="text" name="address" label="Address" value={this.props.person.address} />
+            <Input onChange={this.props.onChange} type="text" name="phone" label="Phone" value={this.props.person.phone} />
+            <select className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
               <option selected>Choose a Subject from this menu</option>
               {options.map((option) =>
               (<option value={option.value}>{option.label}</option>
               ))}
             </select>
-            <Input onChange={this.props.onChange} type="text" name="address" label="Address" value={this.props.person.address} />
-            <Input onChange={this.props.onChange} type="text" name="phone" label="Phone" value={this.props.person.phone} />
-            <div className="col mt-2">
+            <div className="s col mt-2">
               <button onClick={() => this.props.handleUpdate} className="btn btn-primary m-1" type="submit">
                 Submit
               </button>
@@ -51,4 +51,4 @@ class AddVoulunteer extends Component {
   }
 }
 
-export default AddVoulunteer;
+export default AddVolunteer;

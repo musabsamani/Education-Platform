@@ -5,8 +5,11 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url("/public/pexels-pixabay-509922.jpg");
   background-size: cover;
+  height: 100vh;
 }
-
+.rootz{
+  height: 100vh;
+}
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, "Courier New", monospace;
 }

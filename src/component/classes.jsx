@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import { getuser } from '../Server/mtserveces';
+import Show from "./show";
 
 class Classes extends Component {
   state = {
@@ -15,10 +15,7 @@ class Classes extends Component {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
-                <th scope="col">Specializaiton</th>
                 <th scope="col">Subject</th>
-                <th scope="col">Address</th>
-                <th scope="col">Phone</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -26,11 +23,8 @@ class Classes extends Component {
               {this.props.users.map((user, i) => (
                 <tr key={user._id}>
                   <td>{i + 1}</td>
-                  <td>{user.name}</td>
-                  <td>{user.specializaiton}</td>
+                  <Link to="/show"><td onClick={()=>Show(user)}>{user.name}</td></Link>
                   <td>{user.subject}</td>
-                  <td>{user.address}</td>
-                  <td>{user.phone}</td>
                   <td>
                     <Link to={`/editUser?id=${user._id}`} onClick={() => this.props.onUpdate(user)}>
                       <button className="btn btn-info btn-sm">Update</button>

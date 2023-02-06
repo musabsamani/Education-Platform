@@ -10,7 +10,8 @@ class editUser extends Component {
           <form className="col g-3" id="editUser" onSubmit={(e) => this.props.onUpdate(e)}>
             <Input type="hidden" name="id" label="Id" value={this.props.user.id} />
             <Input onChange={this.props.onChange} type="text" name="name" label="Name" value={this.props.user.name} />
-            <Input onChange={this.props.onChange} type="text" name="age" label="Age" value={this.props.user.age} />
+            <Input onChange={this.props.onChange} type="text" name="specializaiton" label="Pro-Specializaiton" value={this.props.user.specializaiton} />
+            <Input onChange={this.props.onChange} type="text" name="email" label="Email" value={this.props.user.email} />
             <Input onChange={this.props.onChange} type="text" name="address" label="Address" value={this.props.user.address} />
             <Input onChange={this.props.onChange} type="text" name="phone" label="Phone" value={this.props.user.phone} />
             <div className="col mt-2">
