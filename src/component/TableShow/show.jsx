@@ -1,27 +1,25 @@
-import React,{ Component } from "react";
+import React from "react";
 import { Link } from "react-router-dom";
 
-class Show extends Component {
-
-    render() {
-                
-        return (
-            <>
+const Show=(table)=> {
+    console.log("here", table);
+    // const u = user;
+    return (
+        <>
                 <div className="container mt-5 ">
-                    <h2>Voulunteer Information</h2>
-                    
-                    <h2>{this.props.vol.name}</h2>
-                    <h2>{this.props.vol.age}</h2>
-                    <h2>{this.props.vol.email}</h2>
-                    <h2>{this.props.vol.address}</h2>
-                    <h2>{this.props.vol.phone}</h2>
-
+                        <h2>Voulunteer Information</h2>
+                            
+                        <h2>{table.name}</h2>
+                        <h2>{table.age}</h2>
+                        <h2>{table.email}</h2>
+                        <h2>{table.address}</h2>
+                        <h2>{table.phone}</h2>
+                        
                     <div className="col mt-2">
                         <Link to="/classes"><button className="btn btn-success m-1">Back</button></Link>
                     </div>
-                </div>
-            </>
-        );
-    }
+              </div>
+        </>
+    );
 }
 export default Show;
