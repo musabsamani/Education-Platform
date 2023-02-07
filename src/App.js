@@ -25,7 +25,7 @@ class App extends Component {
     table: [],
     subjects: [],
     person: {},
-    show:{}
+    show: {}
 
   }
 
@@ -64,7 +64,7 @@ class App extends Component {
     console.log(user)
     const person = { ...user }
     console.log(this.state.show)
-    this.setState({ show:person })
+    this.setState({ show: person })
     console.log(this.state.show)
   }
   setsubject = (user) => {
@@ -77,7 +77,7 @@ class App extends Component {
   // this function is used to set person empty because
   //  when we create ne person we want fields to be empy
   setEmptyPerson = () => {
-    const person = { id: '', name: '', age: '', address: '', phone: '', email: '', subject: '',volunteer:'',date:'' }
+    const person = { id: '', name: '', age: '', address: '', phone: '', email: '', subject: '', volunteer: '', date: '' }
     this.setState({ person })
     return person
   }
@@ -88,12 +88,14 @@ class App extends Component {
   // =================================
   // this method is used by addUser.jsx for creating new user when form is submited
   // by sendind request to the server
-  // =======  CREAT  ========
 
   /* ################################################################
                               Creat 
     ###############################################################
-   */
+   *//* ################################################################
+                  Creat 
+###############################################################
+*/
   createElement = (event, id, apiResource) => {
     event.preventDefault();
     var unindexd_array = $(`#${id}`).serializeArray();
@@ -101,8 +103,6 @@ class App extends Component {
     $.map(unindexd_array, function (n, i) {
       data[n["name"]] = n["value"];
     });
-    console.log(unindexd_array)
-    console.log(data)
     var request = {
       "url": `http://localhost:5000/api/${apiResource}`,
       "method": `POST`,
@@ -119,37 +119,38 @@ class App extends Component {
   // this method is used by addUser.jsx for creating new user when form is submited
   // by sendind request to the server
   // =======  UPDATE  ========
-  updateUser = (e) => {
-    e.preventDefault();
-    var unindexd_array = $("#editUser").serializeArray();
-    var user = {};
+  updateElement = (event, id, apiResource) => {
+    event.preventDefault();
+    var unindexd_array = $(`#${id}`).serializeArray();
+    var data = {};
     $.map(unindexd_array, function (n, i) {
-      user[n["name"]] = n["value"];
+      data[n["name"]] = n["value"];
     });
     var request = {
-      "url": `http://localhost:5000/api/users/${user.id}`,
-      "method": "PUT",
-      "data": user,
+      "url": `http://localhost:5000/api/${apiResource}`,
+      "method": `PUT`,
+      "data": data,
     };
     $.ajax(request).done((response) => {
-      const users = [...this.state.users]
-      users.forEach(person => {
-        if (person._id === user.id) {
-          Object.assign(person, user)
-        }
-      })
+      const element = [...this.state[apiResource], data]
+      this.setState({ [apiResource]: element });
       this.setEmptyPerson()
-      this.setState({ users });
-      alert("User Updated Successfully !!!");
+      alert(`${apiResource} Updated Successfully !!!`);
     })
   }
   // this method is used by home.jsx component by Delete Button
   // =======  DELETE  ========
-  handleDelete = async id => {
-    const users = this.state.users.filter(p => p._id !== id);
-    this.setState({ users });
-    await axios.delete(http.apiEndpoint + '/' + id);
-    alert('User Deleted Successfuly')
+  deleteElement = async (id, apiResource) => {
+    try {
+      const data = this.state[apiResource].filter(element => element._id !== id);
+      this.setState({ [apiResource]: data });
+      console.log(data)
+      await axios.delete(`http://localhost:5000/api/${apiResource}/${id}`);
+      alert(`${apiResource} Deleted Successfuly`)
+    }
+    catch {
+      console.error(`Error Deleting ${apiResource}`)
+    }
   }
 
   render() {
@@ -162,7 +163,7 @@ class App extends Component {
               element={<Home />} />
             /*
             ##################################
-                      volunteer Info
+            volunteer Info
             ##################################
             */
             <Route path='/addvolunteer'
@@ -175,10 +176,11 @@ class App extends Component {
             <Route path='/volunteerTable'
               element={<VolunteerTable
                 volunteers={this.state.volunteers}
+                onDelete={this.deleteElement}
               />} />
             /*
             ##################################
-                      Student Info
+            Student Info
             ##################################
             */
             <Route path='/addStudent'
@@ -186,33 +188,33 @@ class App extends Component {
                 person={this.state.person}
                 onChange={this.handleChange}
                 createStudent={this.createElement}
-              // soption={this.state.options} // ## select option  ******************************
               />} />
             <Route path='/studentTable'
               element={<StudentTable
                 students={this.state.students}
                 person={this.state.person}
-                onDelete={this.handleDelete}
+                onDelete={this.deleteElement}
                 onUpdate={this.setPerson}
               />} />
             /*
             ##################################
-                  Subject Info
+            Subject Info
             ##################################
             */
-                <Route path='/addsubject'
-                  element={<AddSubject
-                    hsubject={this.state.person}
-                    onChangeSubject={this.handleChange}
-                    createSubject={this.createElement}
-                  />} />
-                <Route path='/subjectTable'
-                  element={<SubjectTable
-                    subjects={this.state.subjects}
+            <Route path='/addsubject'
+              element={<AddSubject
+                hsubject={this.state.person}
+                onChangeSubject={this.handleChange}
+                createSubject={this.createElement}
+              />} />
+            <Route path='/subjectTable'
+              element={<SubjectTable
+                subjects={this.state.subjects}
+                onDelete={this.deleteElement}
               />} />
             /*
             ##################################
-                  Classes Info
+            Classes Info
             ##################################
             */
 
@@ -220,17 +222,16 @@ class App extends Component {
               element={<Lesson
                 subjects={this.state.subjects}
                 volunteers={this.state.volunteers}
-                onChange={this.handleChange}
                 person={this.state.person}
-                createlesson={this.state.createElement}
-                onDelete={this.handleDelete}
+                onChange={this.handleChange}
+                onDelete={this.deleteElement}
                 onUpdate={this.setPerson}
               />} />
             <Route path='/classesTable'
               element={<Classes
                 Table={this.state.table}
                 person={this.state.person}
-                onDelete={this.handleDelete}
+                onDelete={this.deleteElement}
                 setPerson={this.setPerson}
               />} />
             <Route path='/show'
@@ -238,12 +239,7 @@ class App extends Component {
                 vol={this.state.person}
               />} />
             /* ##########################3 */
-            <Route path='/editUser'
-              element={<EditUser
-                user={this.state.person}
-                onChange={this.handleChange}
-                onUpdate={this.updateUser}
-              />} />
+
           </Routes>
         </main>
       </>
