@@ -97,32 +97,30 @@ class App extends Component {
   // =======  CREAT  ========
 
   /* ################################################################
-                              Creat A Volunteer 
+                              Creat 
     ###############################################################
    */
-  createVolunteer = (e) => {
-    e.preventDefault();
-    var unindexd_array = $("#addvolunteer").serializeArray();
-    var volunteer = {};
+  createElement = function (event, element) {
+    event.preventDefault();
+    var unindexd_array = $(this).serializeArray();
+    var data = {};
+    var elementName = {}
+    elementName["name"] = element
     $.map(unindexd_array, function (n, i) {
-      volunteer[n["name"]] = n["value"];
+      data[n["name"]] = n["value"];
     });
     var request = {
-      "url": `http://localhost:5000/api/volunteers`,
-      "method": "POST",
-      "data": volunteer,
+      "url": `http://localhost:5000/api/${element}`,
+      "method": `POST`,
+      "data": data,
     };
     $.ajax(request).done((response) => {
-      const volunteers = [...this.state.volunteers, volunteer]
-      this.setState({ volunteers });
+      const [element] = [...this.state[element], [element]]
+      this.setState({ element });
       this.setEmptyPerson()
-      alert("Volunteer Added Successfully !!!");
+      alert(`${element} Added Successfully !!!`);
     })
   }
-  /* ################################################################
-                          End Creat A Volunteer 
-  ###############################################################
-  */
 
 
   /* ################################################################
@@ -148,38 +146,6 @@ class App extends Component {
       alert("Student Added Successfully !!!");
     })
   }
-  /* ################################################################
-                        End Creat A Student   
-  ###################################################################
-  
-  
-  /* ##################################################################
-                          Creat A Subject    
-  ###################################################################
-  */
-  createSubject = (e) => {
-    e.preventDefault();
-    var unindexd_array = $("#addsubject").serializeArray();
-    var subject = {};
-    $.map(unindexd_array, function (n, i) {
-      subject[n["name"]] = n["value"];
-    });
-    var request = {
-      "url": `http://localhost:5000/api/users`,
-      "method": "POST",
-      "data": subject,
-    };
-    $.ajax(request).done((response) => {
-      const subjects = [...this.state.subjects, subject]
-      this.setState({ subjects });
-      this.setEmptyPerson()
-      alert("Subject Added Successfully !!!");
-    })
-  }
-  /* ##################################################################
-                        End Creat A Subject    
-    ###################################################################
-  */
 
   // this method is used by addUser.jsx for creating new user when form is submited
   // by sendind request to the server
