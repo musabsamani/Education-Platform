@@ -23,7 +23,7 @@ const Home = () => {
         <Link to="/addsubject">
           <button className="btn btn-outline-primary m-3 ">Add Subject</button>
         </Link>
-        <Link to="/oursubject">
+        <Link to="/subjectTable">
           <button className="btn btn-outline-secondary m-3 ">Our Subject</button>
         </Link>
         <Link to="/classes">

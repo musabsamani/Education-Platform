@@ -3,7 +3,9 @@ import './App.css'
 import Navbar from './component/navbar';
 import Classes from './component/TableShow/classesTable';
 import AddSubject from './component/Addition/addsubject'
+import SubjectTable from './component/TableShow/subjectTable';
 import AddVolunteer from './component/Addition/addvolunteer';
+import VolunteerTable from './component/TableShow/volunteerTable';
 import AddStudent from './component/Addition/addstudent';
 import StudentTable from './component/TableShow/studentTable';
 import EditUser from './component/editUser';
@@ -14,12 +16,13 @@ import { studentAPI, volunteerAPI, tableAPI, subjectAPI } from "./server/apiEndp
 import $ from "jquery"
 import { Route, Routes } from 'react-router-dom';
 
+
 class App extends Component {
   state = {
     students: [],
     volunteers: [],
     table: [],
-    subjects: {},
+    subjects: [],
     person: {},
 
   }
@@ -163,6 +166,15 @@ class App extends Component {
                 onChange={this.handleChange}
                 createVolunteer={this.createElement}
               />} />
+            <Route path='/volunteerTable'
+              element={<VolunteerTable
+                volunteers={this.state.volunteers}
+              />} />
+            /*
+            ##################################
+                      Student Info
+            ##################################
+            */
             <Route path='/addStudent'
               element={<AddStudent
                 person={this.state.person}
@@ -170,22 +182,36 @@ class App extends Component {
                 createStudent={this.createElement}
               // soption={this.state.options} // ## select option  ******************************
               />} />
-            <Route path='/addsubject'
-              element={<AddSubject
-                hsubject={this.state.person}
-                onChangeSubject={this.handleChange}
-                createSubject={this.createElement}
-              />} />
-            <Route path='/classesTable'
-              element={<Classes
-                volunteers={this.state.volunteers}
+            <Route path='/studentTable'
+              element={<StudentTable
+                students={this.state.students}
                 person={this.state.person}
                 onDelete={this.handleDelete}
                 onUpdate={this.setPerson}
               />} />
-            <Route path='/studentTable'
-              element={<StudentTable
-                students={this.state.students}
+            /*
+            ##################################
+                  Subject Info
+            ##################################
+            */
+                <Route path='/addsubject'
+                  element={<AddSubject
+                    hsubject={this.state.person}
+                    onChangeSubject={this.handleChange}
+                    createSubject={this.createElement}
+                  />} />
+                <Route path='/subjectTable'
+                  element={<SubjectTable
+                    subjects={this.state.subjects}
+              />} />
+            /*
+            ##################################
+                  Classes Info
+            ##################################
+            */
+            <Route path='/classesTable'
+              element={<Classes
+                volunteers={this.state.volunteers}
                 person={this.state.person}
                 onDelete={this.handleDelete}
                 onUpdate={this.setPerson}

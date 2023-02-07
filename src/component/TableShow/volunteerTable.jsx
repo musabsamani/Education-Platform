@@ -3,9 +3,7 @@ import { Link } from "react-router-dom";
 import Show from "./show";
 
 class VolunteerTable extends Component {
-  state = {
-    person: {},
-  };
+  
   render() {
     return (
       <>

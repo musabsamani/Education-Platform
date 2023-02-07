@@ -21,18 +21,18 @@ class Classes extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.volunteers.map((volunteer, i) => (
-                <tr key={volunteer._id}>
+              {this.props.Table.map((table, i) => (
+                <tr key={table._id}>
                   <td>{i + 1}</td>
-                  <Link to="/show"><td onClick={()=>Show(volunteer)}>{volunteer.name}</td></Link>
-                  <td>{volunteer.subject}</td>
-                  <td>{volunteer.date}</td>
+                  <Link to="/show"><td onClick={()=>Show(table)}>{table.name}</td></Link>
+                  <td>{table.subject}</td>
+                  <td>{table.date}</td>
                   <td>
-                    <Link to={`/editUser?id=${volunteer._id}`} onClick={() => this.props.onUpdate(volunteer)}>
+                    <Link to={`/editUser?id=${table._id}`} onClick={() => this.props.onUpdate(table)}>
                       <button className="btn btn-info btn-sm">Update</button>
                     </Link>
 
-                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(volunteer._id)}>
+                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(table._id)}>
                       Delete
                     </button>
                   </td>

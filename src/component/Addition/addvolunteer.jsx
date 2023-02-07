@@ -4,24 +4,6 @@ import "./addv.css";
 
 class AddVolunteer extends Component {
   render() {
-    const options = [
-      {
-        label: "Math",
-        value: "math",
-      },
-      {
-        label: "Arabic",
-        value: "arabic",
-      },
-      {
-        label: "Islamya",
-        value: "islamya",
-      },
-      {
-        label: "Attitute",
-        value: "attitute",
-      },
-    ];
 
     return (
       <>
@@ -35,7 +17,7 @@ class AddVolunteer extends Component {
             <Input onChange={this.props.onChange} type="text" name="phone" label="Phone" value={this.props.person.phone} />
             <select name="subject" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
               <option selected>Choose a Subject from this menu</option>
-              {options.map((option) => (
+              {this.props.subjects.map((option) => (
                 <option value={option.value}>{option.label}</option>
               ))}
             </select>
