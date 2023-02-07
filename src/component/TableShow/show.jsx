@@ -1,27 +1,27 @@
-import React from "react";
+import React,{ Component } from "react";
 import { Link } from "react-router-dom";
 
-const Show=(user)=> {
-    console.log("here", user);
-    // const u = user;
-    return (
-        <>
+class Show extends Component {
+
+    render() {
+                
+        return (
+            <>
                 <div className="container mt-5 ">
-                <h2>Voulunteer Information</h2>
-                <form className="col g-3">
-                    <Input type="text" name="name" label="Name" value={user.name} />
-                    <Input type="text" name="specializaiton" label="Pro-Specialization" value={user.specializaiton} />
-                    <Input type="text" name="subject" label="Subject" value={user.subject} />
-                    <Input type="email" name="email" label="Email" value={user.email} />
-                    <Input type="text" name="address" label="Address" value={user.address} />
-                    <Input type="text" name="phone" label="Phone" value={user.phone} />
+                    <h2>Voulunteer Information</h2>
                     
-                        <div className="col mt-2">
-                            <Link to="/classes"><button className="btn btn-success m-1">Back</button></Link>
-                        </div>
-                </form>
-              </div>
-        </>
-    );
+                    <h2>{this.props.vol.name}</h2>
+                    <h2>{this.props.vol.age}</h2>
+                    <h2>{this.props.vol.email}</h2>
+                    <h2>{this.props.vol.address}</h2>
+                    <h2>{this.props.vol.phone}</h2>
+
+                    <div className="col mt-2">
+                        <Link to="/classes"><button className="btn btn-success m-1">Back</button></Link>
+                    </div>
+                </div>
+            </>
+        );
+    }
 }
 export default Show;

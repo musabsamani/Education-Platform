@@ -24,7 +24,7 @@ class Classes extends Component {
               {this.props.Table.map((table, i) => (
                 <tr key={table._id}>
                   <td>{i + 1}</td>
-                  <Link to="/show"><td onClick={()=>Show(table)}>{table.name}</td></Link>
+                  <Link to="/show"><td onClick={()=>this.props.setPerson(table)}>{table.volunteer}</td></Link>
                   <td>{table.subject}</td>
                   <td>{table.date}</td>
                   <td>

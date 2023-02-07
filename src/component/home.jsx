@@ -25,6 +25,9 @@ const Home = () => {
         </Link>
         <Link to="/subjectTable">
           <button className="btn btn-outline-secondary m-3 ">Our Subject</button>
+          </Link>
+        <Link to="/addlesson">
+          <button className="btn btn-outline-primary m-3 ">Add Lesson</button>
         </Link>
         <Link to="/classes">
           <button className="btn btn-outline-success m-3 ">Classes Table</button>

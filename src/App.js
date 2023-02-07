@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css'
 import Navbar from './component/navbar';
+import Lesson from './component/Addition/addlesson';
 import Classes from './component/TableShow/classesTable';
 import AddSubject from './component/Addition/addsubject'
 import SubjectTable from './component/TableShow/subjectTable';
@@ -24,6 +25,7 @@ class App extends Component {
     table: [],
     subjects: [],
     person: {},
+    show:{}
 
   }
 
@@ -59,14 +61,11 @@ class App extends Component {
   // note that argument of this function "user" is the object we need to view its
   // value in input filds in editUser.jsx
   setPerson = (user) => {
-    const person = {
-      name: user.name,
-      age: user.age,
-      address: user.address,
-      phone: user.phone,
-      id: user._id,
-    }
-    this.setState({ person })
+    console.log(user)
+    const person = { ...user }
+    console.log(this.state.show)
+    this.setState({ show:person })
+    console.log(this.state.show)
   }
   setsubject = (user) => {
     const subject = {
@@ -78,7 +77,7 @@ class App extends Component {
   // this function is used to set person empty because
   //  when we create ne person we want fields to be empy
   setEmptyPerson = () => {
-    const person = { id: '', name: '', age: '', address: '', phone: '', email: '', subject: '' }
+    const person = { id: '', name: '', age: '', address: '', phone: '', email: '', subject: '',volunteer:'',date:'' }
     this.setState({ person })
     return person
   }
@@ -102,6 +101,7 @@ class App extends Component {
     $.map(unindexd_array, function (n, i) {
       data[n["name"]] = n["value"];
     });
+    console.log(unindexd_array)
     console.log(data)
     var request = {
       "url": `http://localhost:5000/api/${apiResource}`,
@@ -160,9 +160,15 @@ class App extends Component {
           <Routes>
             <Route path='/'
               element={<Home />} />
+            /*
+            ##################################
+                      volunteer Info
+            ##################################
+            */
             <Route path='/addvolunteer'
               element={<AddVolunteer
                 person={this.state.person}
+                subjects={this.state.subjects}
                 onChange={this.handleChange}
                 createVolunteer={this.createElement}
               />} />
@@ -209,15 +215,29 @@ class App extends Component {
                   Classes Info
             ##################################
             */
-            <Route path='/classesTable'
-              element={<Classes
+
+            <Route path='/addlesson'
+              element={<Lesson
+                subjects={this.state.subjects}
                 volunteers={this.state.volunteers}
+                onChange={this.handleChange}
                 person={this.state.person}
+                createlesson={this.state.createElement}
                 onDelete={this.handleDelete}
                 onUpdate={this.setPerson}
               />} />
+            <Route path='/classesTable'
+              element={<Classes
+                Table={this.state.table}
+                person={this.state.person}
+                onDelete={this.handleDelete}
+                setPerson={this.setPerson}
+              />} />
             <Route path='/show'
-              element={<Show />} />
+              element={<Show
+                vol={this.state.person}
+              />} />
+            /* ##########################3 */
             <Route path='/editUser'
               element={<EditUser
                 user={this.state.person}
