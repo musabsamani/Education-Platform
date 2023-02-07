@@ -19,8 +19,8 @@ class App extends Component {
   state = {
     students: [],
     volunteers: [],
-    subjects: [],
-    table: {},
+    table: [],
+    subjects: {},
     person: {},
     hsubject: {}
 
@@ -100,25 +100,23 @@ class App extends Component {
                               Creat 
     ###############################################################
    */
-  createElement = function (event, element) {
+  createElement = (event, id, apiResource) => {
     event.preventDefault();
-    var unindexd_array = $(this).serializeArray();
+    var unindexd_array = $(id).serializeArray();
     var data = {};
-    var elementName = {}
-    elementName["name"] = element
     $.map(unindexd_array, function (n, i) {
       data[n["name"]] = n["value"];
     });
     var request = {
-      "url": `http://localhost:5000/api/${element}`,
+      "url": `http://localhost:5000/api/${apiResource}`,
       "method": `POST`,
       "data": data,
     };
     $.ajax(request).done((response) => {
-      const [element] = [...this.state[element], [element]]
-      this.setState({ element });
+      const element = [...this.state[apiResource], data]
+      this.setState({ [apiResource]: element });
       this.setEmptyPerson()
-      alert(`${element} Added Successfully !!!`);
+      alert(`${apiResource} Added Successfully !!!`);
     })
   }
 
@@ -132,15 +130,16 @@ class App extends Component {
     var unindexd_array = $("#addstudent").serializeArray();
     var student = {};
     $.map(unindexd_array, function (n, i) {
-      user[n["name"]] = n["value"];
+      student[n["name"]] = n["value"];
     });
+    console.log(student)
     var request = {
       "url": `http://localhost:5000/api/students`,
       "method": "POST",
       "data": student,
     };
     $.ajax(request).done((response) => {
-      const users = [...this.state.students, student]
+      const students = [...this.state.students, student]
       this.setState({ students });
       this.setEmptyPerson()
       alert("Student Added Successfully !!!");
@@ -195,20 +194,20 @@ class App extends Component {
               element={<AddVolunteer
                 person={this.state.person}
                 onChange={this.handleChange}
-                createVolunteer={this.createVolunteer}
+                createVolunteer={this.createElement}
               />} />
             <Route path='/addStudent'
               element={<AddStudent
                 person={this.state.person}
                 onChange={this.handleChange}
-                createStudent={this.createStudent}
+                createStudent={this.createElement}
               // soption={this.state.options} // ## select option  ******************************
               />} />
             <Route path='/addsubject'
               element={<AddSubject
                 hsubject={this.state.hsubject}
                 onChangeSubject={this.handleChangeSubject}
-                createSubject={this.createSubject}
+                createSubject={this.createElement}
               />} />
             <Route path='/classesTable'
               element={<Classes
