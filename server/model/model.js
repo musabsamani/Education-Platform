@@ -8,7 +8,6 @@ var student = new mongoose.Schema({
 var volunteer = new mongoose.Schema({
   name: String,
   age: String,
-  specialization: String,
   email: String,
   address: String,
   phone: String,

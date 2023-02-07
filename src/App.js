@@ -22,7 +22,6 @@ class App extends Component {
     table: [],
     subjects: {},
     person: {},
-    hsubject: {}
 
   }
 
@@ -53,11 +52,6 @@ class App extends Component {
     person[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ person })
   }
-  handleChangeSubject = (e) => {
-    const hsubject = { ...this.state.hsubject };
-    hsubject[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ hsubject })
-  }
   // this method is used by Home.jsx update button to store the value of that
   // user and pass it to this.state.person
   // note that argument of this function "user" is the object we need to view its
@@ -66,7 +60,6 @@ class App extends Component {
     const person = {
       name: user.name,
       age: user.age,
-      specialization: user.specialization,
       address: user.address,
       phone: user.phone,
       id: user._id,
@@ -83,7 +76,7 @@ class App extends Component {
   // this function is used to set person empty because
   //  when we create ne person we want fields to be empy
   setEmptyPerson = () => {
-    const person = { id: '', name: '', age: '', specialization: '', subject: '', address: '', date: '', phone: '' }
+    const person = { id: '', name: '', age: '', address: '', phone: '', email: '', subject: '' }
     this.setState({ person })
     return person
   }
@@ -102,11 +95,12 @@ class App extends Component {
    */
   createElement = (event, id, apiResource) => {
     event.preventDefault();
-    var unindexd_array = $(id).serializeArray();
+    var unindexd_array = $(`#${id}`).serializeArray();
     var data = {};
     $.map(unindexd_array, function (n, i) {
       data[n["name"]] = n["value"];
     });
+    console.log(data)
     var request = {
       "url": `http://localhost:5000/api/${apiResource}`,
       "method": `POST`,
@@ -117,32 +111,6 @@ class App extends Component {
       this.setState({ [apiResource]: element });
       this.setEmptyPerson()
       alert(`${apiResource} Added Successfully !!!`);
-    })
-  }
-
-
-  /* ################################################################
-                            Creat A Student   
-    ###############################################################
-  */
-  createStudent = (e) => {
-    e.preventDefault();
-    var unindexd_array = $("#addstudent").serializeArray();
-    var student = {};
-    $.map(unindexd_array, function (n, i) {
-      student[n["name"]] = n["value"];
-    });
-    console.log(student)
-    var request = {
-      "url": `http://localhost:5000/api/students`,
-      "method": "POST",
-      "data": student,
-    };
-    $.ajax(request).done((response) => {
-      const students = [...this.state.students, student]
-      this.setState({ students });
-      this.setEmptyPerson()
-      alert("Student Added Successfully !!!");
     })
   }
 
@@ -205,8 +173,8 @@ class App extends Component {
               />} />
             <Route path='/addsubject'
               element={<AddSubject
-                hsubject={this.state.hsubject}
-                onChangeSubject={this.handleChangeSubject}
+                hsubject={this.state.person}
+                onChangeSubject={this.handleChange}
                 createSubject={this.createElement}
               />} />
             <Route path='/classesTable'
