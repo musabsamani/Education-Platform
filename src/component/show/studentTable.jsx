@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import { studentAPI } from "../../server/apiEndpoints";
+import profile from "./profile";
 
 class StudentTable extends Component {
   state = {
@@ -28,7 +28,11 @@ class StudentTable extends Component {
               {this.props.students.map((student, i) => (
                 <tr key={student._id}>
                   <td>{i + 1}</td>
-                  <td onClick={() => Show(student)}>{student.name}</td>
+                  <td>
+                    <Link to={"/profile"} onClick={() => profile(student)}>
+                      {student.name}
+                    </Link>
+                  </td>
                   <td>{student.age}</td>
                   <td>{student.address}</td>
                   <td>{student.phone}</td>
@@ -37,7 +41,7 @@ class StudentTable extends Component {
                       <button className="btn btn-info btn-sm">Update</button>
                     </Link>
 
-                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(student._id, studentAPI)}>
+                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(student._id, "students")}>
                       Delete
                     </button>
                   </td>

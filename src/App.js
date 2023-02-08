@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import './App.css'
 import Navbar from './component/navbar';
-import Lesson from './component/addition/addlesson';
-import Classes from './component/tableShow/lessonTable';
-import AddSubject from './component/addition/addsubject'
-import SubjectTable from './component/tableShow/subjectTable';
-import AddVolunteer from './component/addition/addvolunteer';
-import VolunteerTable from './component/tableShow/volunteerTable';
-import AddStudent from './component/addition/addstudent';
-import StudentTable from './component/tableShow/studentTable';
-import EditUser from './component/editUser';
-import Show from './component/tableShow/show';
+import Addlesson from './component/add/addlesson';
+import LessonTable from './component/show/lessonTable';
+import AddSubject from './component/add/addsubject'
+import SubjectTable from './component/show/subjectTable';
+import AddVolunteer from './component/add/addvolunteer';
+import VolunteerTable from './component/show/volunteerTable';
+import AddStudent from './component/add/addstudent';
+import StudentTable from './component/show/studentTable';
+import Profile from './component/show/profile';
 import Home from './component/home';
 import axios from 'axios';
-import { studentAPI, volunteerAPI, tableAPI, subjectAPI } from "./server/apiEndpoints"
+import { studentAPI, volunteerAPI, tableAPI, subjectAPI, baseAPI } from "./helpers/apiEndpoints"
 import $ from "jquery"
 import { Route, Routes } from 'react-router-dom';
 
@@ -28,6 +27,7 @@ class App extends Component {
     show: {}
 
   }
+  baseAPI = baseAPI
 
   // =================================
   // =================================
@@ -60,12 +60,8 @@ class App extends Component {
   // user and pass it to this.state.person
   // note that argument of this function "user" is the object we need to view its
   // value in input filds in editUser.jsx
-  setPerson = (user) => {
-    console.log(user)
-    const person = { ...user }
-    console.log(this.state.show)
-    this.setState({ show: person })
-    console.log(this.state.show)
+  setPerson = (element,) => {
+    this.setState({ person: element })
   }
   setsubject = (user) => {
     const subject = {
@@ -77,9 +73,7 @@ class App extends Component {
   // this function is used to set person empty because
   //  when we create ne person we want fields to be empy
   setEmptyPerson = () => {
-    const person = { id: '', name: '', age: '', address: '', phone: '', email: '', subject: '', volunteer: '', date: '' }
-    this.setState({ person })
-    return person
+    this.setState({ person: {} })
   }
   // =================================
   // =================================
@@ -93,63 +87,65 @@ class App extends Component {
                               Creat 
     ###############################################################
    *//* ################################################################
-               Creat 
+Creat 
 ###############################################################
 */
-  createElement = (event, id, apiResource) => {
+  createElement = (event, id, resource) => {
     event.preventDefault();
     var unindexd_array = $(`#${id}`).serializeArray();
     var data = {};
+    const uri = `${this.baseAPI}/${resource}`
     $.map(unindexd_array, function (n, i) {
       data[n["name"]] = n["value"];
     });
     var request = {
-      "url": `${apiResource}`,
+      "url": `${uri}`,
       "method": `POST`,
       "data": data,
     };
     $.ajax(request).done((response) => {
-      const element = [...this.state[apiResource], data]
-      this.setState({ [apiResource]: element });
+      const element = [...this.state[resource], data]
+      this.setState({ [resource]: element });
       this.setEmptyPerson()
-      alert(`${apiResource} Added Successfully !!!`);
+      alert(`${resource} Added Successfully !!!`);
     })
   }
 
   // this method is used by addUser.jsx for creating new user when form is submited
   // by sendind request to the server
   // =======  UPDATE  ========
-  updateElement = (event, id, apiResource) => {
+  updateElement = (event, id, resource) => {
     event.preventDefault();
     var unindexd_array = $(`#${id}`).serializeArray();
     var data = {};
+    const uri = `${this.baseAPI}/${resource}`
     $.map(unindexd_array, function (n, i) {
       data[n["name"]] = n["value"];
     });
     var request = {
-      "url": `${apiResource}`,
+      "url": `${uri}`,
       "method": `PUT`,
       "data": data,
     };
     $.ajax(request).done((response) => {
-      const element = [...this.state[apiResource], data]
-      this.setState({ [apiResource]: element });
+      const element = [...this.state[resource], data]
+      this.setState({ [resource]: element });
       this.setEmptyPerson()
-      alert(`${apiResource} Updated Successfully !!!`);
+      alert(`${resource} Updated Successfully !!!`);
     })
   }
   // this method is used by home.jsx component by Delete Button
   // =======  DELETE  ========
-  deleteElement = async (id, apiResource) => {
+  deleteElement = async (id, resource) => {
     try {
-      const data = this.state[apiResource].filter(element => element._id !== id);
-      this.setState({ [apiResource]: data });
-      console.log(data)
-      await axios.delete(`${apiResource}/${id}`);
-      alert(`${apiResource} Deleted Successfuly`)
+      const uri = `${this.baseAPI}/${resource}`
+      const data = this.state[resource].filter(element => element._id !== id);
+      this.setState({ [resource]: data });
+      await axios.delete(`${uri}/${id}`);
+      // alert(`${resource} Deleted Successfuly`)
     }
     catch {
-      console.error(`Error Deleting ${apiResource}`)
+      console.error(`Error Deleting ${resource}`)
     }
   }
 
@@ -160,12 +156,51 @@ class App extends Component {
         <main className='container-fluid'>
           <Routes>
             <Route path='/'
-              element={<Home />} />
-            /*
-            ##################################
-            volunteer Info
-            ##################################
-            */
+              element={<Home setEmptyPerson={this.setEmptyPerson} />} />
+            <Route path='/volunteerTable'
+              element={<VolunteerTable
+                volunteers={this.state.volunteers}
+                onDelete={this.deleteElement}
+                person={this.state.person}
+                setPerson={this.setPerson}
+                setEmptyPerson={this.setEmptyPerson}
+              />} />
+            <Route path='/studentTable'
+              element={<StudentTable
+                students={this.state.students}
+                onDelete={this.deleteElement}
+                person={this.state.person}
+                setPerson={this.setPerson}
+                setEmptyPerson={this.setEmptyPerson}
+              />} />
+            <Route path='/subjectTable'
+              element={<SubjectTable
+                subjects={this.state.subjects}
+                onDelete={this.deleteElement}
+                person={this.state.person}
+                setPerson={this.setPerson}
+                setEmptyPerson={this.setEmptyPerson}
+              />} />
+            <Route path='/lessonTable'
+              element={<LessonTable
+                Table={this.state.table}
+                onDelete={this.deleteElement}
+                person={this.state.person}
+                setPerson={this.setPerson}
+                setEmptyPerson={this.setEmptyPerson}
+              />} />
+            <Route path='/profile'
+              element={<Profile
+                person={this.state.person}
+              />} />
+
+            <Route path='/addStudent'
+              element={<AddStudent
+                person={this.state.person}
+                onChange={this.handleChange}
+                createStudent={this.createElement}
+              />} />
+
             <Route path='/addvolunteer'
               element={<AddVolunteer
                 person={this.state.person}
@@ -173,72 +208,20 @@ class App extends Component {
                 onChange={this.handleChange}
                 createVolunteer={this.createElement}
               />} />
-            <Route path='/volunteerTable'
-              element={<VolunteerTable
-                volunteers={this.state.volunteers}
-                onDelete={this.deleteElement}
-              />} />
-            /*
-            ##################################
-            Student Info
-            ##################################
-            */
-            <Route path='/addStudent'
-              element={<AddStudent
-                person={this.state.person}
-                onChange={this.handleChange}
-                createStudent={this.createElement}
-              />} />
-            <Route path='/studentTable'
-              element={<StudentTable
-                students={this.state.students}
-                person={this.state.person}
-                onDelete={this.deleteElement}
-                onUpdate={this.setPerson}
-              />} />
-            /*
-            ##################################
-            Subject Info
-            ##################################
-            */
             <Route path='/addsubject'
               element={<AddSubject
                 hsubject={this.state.person}
                 onChangeSubject={this.handleChange}
                 createSubject={this.createElement}
               />} />
-            <Route path='/subjectTable'
-              element={<SubjectTable
-                subjects={this.state.subjects}
-                onDelete={this.deleteElement}
-              />} />
-            /*
-            ##################################
-            Classes Info
-            ##################################
-            */
-
             <Route path='/addlesson'
-              element={<Lesson
+              element={<Addlesson
                 subjects={this.state.subjects}
                 volunteers={this.state.volunteers}
                 person={this.state.person}
                 onChange={this.handleChange}
-                onDelete={this.deleteElement}
-                onUpdate={this.setPerson}
+                createlesson={this.createElement}
               />} />
-            <Route path='/classesTable'
-              element={<Classes
-                Table={this.state.table}
-                person={this.state.person}
-                onDelete={this.deleteElement}
-                setPerson={this.setPerson}
-              />} />
-            <Route path='/show'
-              element={<Show
-                vol={this.state.person}
-              />} />
-            /* ##########################3 */
 
           </Routes>
         </main>

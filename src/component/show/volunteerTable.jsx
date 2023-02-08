@@ -1,14 +1,12 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Show from "./show";
-import { subjectAPI } from "../../server/apiEndpoints";
-class SubjectTable extends Component {
+class VolunteerTable extends Component {
   render() {
     return (
       <>
         <div className="container mt-5 ">
-          <Link to="/addsubject">
-            <button className="btn btn-outline-primary m-3 ">Add Subject</button>
+          <Link to="/addvolunteer">
+            <button className="btn btn-outline-primary m-3">Add Volunteer</button>
           </Link>
           <table className="table caption-top mt-5">
             <thead>
@@ -19,16 +17,20 @@ class SubjectTable extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.subjects.map((subject, i) => (
-                <tr key={subject._id}>
+              {this.props.volunteers.map((volunteer, i) => (
+                <tr key={volunteer._id}>
                   <td>{i + 1}</td>
-                  <td onClick={() => Show(subject)}>{subject.name}</td>
                   <td>
-                    <Link to={`/editUser?id=${subject._id}`} onClick={() => this.props.onUpdate(subject)}>
+                    <Link to="/profile" onClick={() => this.props.setPerson(volunteer)}>
+                      {volunteer.name}
+                    </Link>
+                  </td>
+                  <td>
+                    <Link to={`/editUser?id=${volunteer._id}`} onClick={() => this.props.setPerson(volunteer)}>
                       <button className="btn btn-info btn-sm">Update</button>
                     </Link>
 
-                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(subject._id, subjectAPI)}>
+                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(volunteer._id, "volunteers")}>
                       Delete
                     </button>
                   </td>
@@ -42,4 +44,4 @@ class SubjectTable extends Component {
   }
 }
 
-export default SubjectTable;
+export default VolunteerTable;

@@ -1,9 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import Show from "./show";
-import { tableAPI } from "../../server/apiEndpoints";
-
-class Classes extends Component {
+import profile from "./profile";
+class Lessontaable extends Component {
   state = {
     person: {},
   };
@@ -28,9 +26,11 @@ class Classes extends Component {
               {this.props.Table.map((table, i) => (
                 <tr key={table._id}>
                   <td>{i + 1}</td>
-                  <Link to="/show">
-                    <td onClick={() => Show(table)}>{table.volunteer}</td>
-                  </Link>
+                  <td>
+                    <Link to="/profile" onClick={() => profile(table)}>
+                      {table.volunteer}
+                    </Link>
+                  </td>
                   <td>{table.subject}</td>
                   <td>{table.date}</td>
                   <td>
@@ -38,7 +38,7 @@ class Classes extends Component {
                       <button className="btn btn-info btn-sm">Update</button>
                     </Link>
 
-                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(table._id, tableAPI)}>
+                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(table._id, "table")}>
                       Delete
                     </button>
                   </td>
@@ -52,4 +52,4 @@ class Classes extends Component {
   }
 }
 
-export default Classes;
+export default Lessontaable;

@@ -1,12 +1,11 @@
 import React, { Component } from "react";
-import Input from "../_input";
-
+import Input from "../include/_input";
 class AddSubject extends Component {
   render() {
     return (
       <>
         <div className="container mt-5 ">
-          <h2>Sign as Student</h2>
+          <h2>New Subject</h2>
           <form className="col g-3 d-flex-column justify-content-center" id="addSubject" method="POST" onSubmit={(e) => this.props.createSubject(e, "addSubject", "subjects")}>
             <Input onChange={this.props.onChangeSubject} type="text" name="name" label="Subject Name" value={this.props.hsubject.name} />
             <div className="s col mt-2">

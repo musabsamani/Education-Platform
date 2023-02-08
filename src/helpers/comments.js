@@ -9,7 +9,12 @@
 // ? =============================
 // ? =====  BACK-END COMMENTS HERE
 // ? =============================
-// var x = "student"
-// var obj = {}
-// obj[x] = "ali"
-// console.log(obj)
+const person = {
+    name: "John Doe",
+    age: 30,
+    occupation: "Developer"
+};
+
+for (const prop in person) {
+    console.log(`${prop}: ${person[prop]}`);
+}
