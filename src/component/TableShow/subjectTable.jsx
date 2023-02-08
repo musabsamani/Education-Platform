@@ -1,13 +1,15 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Show from "./show";
-
+import { subjectAPI } from "../../server/apiEndpoints";
 class SubjectTable extends Component {
-  
   render() {
     return (
       <>
         <div className="container mt-5 ">
+          <Link to="/addsubject">
+            <button className="btn btn-outline-primary m-3 ">Add Subject</button>
+          </Link>
           <table className="table caption-top mt-5">
             <thead>
               <tr>
@@ -20,13 +22,13 @@ class SubjectTable extends Component {
               {this.props.subjects.map((subject, i) => (
                 <tr key={subject._id}>
                   <td>{i + 1}</td>
-                  <td onClick={()=>Show(subject)}>{subject.name}</td>
+                  <td onClick={() => Show(subject)}>{subject.name}</td>
                   <td>
                     <Link to={`/editUser?id=${subject._id}`} onClick={() => this.props.onUpdate(subject)}>
                       <button className="btn btn-info btn-sm">Update</button>
                     </Link>
 
-                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(subject._id)}>
+                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(subject._id, subjectAPI)}>
                       Delete
                     </button>
                   </td>

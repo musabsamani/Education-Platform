@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import { studentAPI } from "../../server/apiEndpoints";
 
 class StudentTable extends Component {
   state = {
@@ -9,6 +10,9 @@ class StudentTable extends Component {
     return (
       <>
         <div className="container mt-5 ">
+          <Link to="/addstudent">
+            <button className="btn btn-outline-primary m-3">Add Student</button>
+          </Link>
           <table className="table caption-top mt-5">
             <thead>
               <tr>
@@ -24,7 +28,7 @@ class StudentTable extends Component {
               {this.props.students.map((student, i) => (
                 <tr key={student._id}>
                   <td>{i + 1}</td>
-                  <td onClick={()=>Show(student)}>{student.name}</td>
+                  <td onClick={() => Show(student)}>{student.name}</td>
                   <td>{student.age}</td>
                   <td>{student.address}</td>
                   <td>{student.phone}</td>
@@ -33,7 +37,7 @@ class StudentTable extends Component {
                       <button className="btn btn-info btn-sm">Update</button>
                     </Link>
 
-                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(student._id)}>
+                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(student._id, studentAPI)}>
                       Delete
                     </button>
                   </td>

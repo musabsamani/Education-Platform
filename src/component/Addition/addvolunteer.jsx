@@ -4,11 +4,10 @@ import "./addv.css";
 
 class AddVolunteer extends Component {
   render() {
-
     return (
       <>
         <div className="container mt-5 ">
-          <h2>Sign as Voulunteer</h2>
+          <h2>Add Voulunteer</h2>
           <form className="col g-3 d-flex-column justify-content-center" id="addVolunteer" method="POST" onSubmit={(e) => this.props.createVolunteer(e, "addVolunteer", "volunteers")}>
             <Input onChange={this.props.onChange} type="text" name="name" label="Name" value={this.props.person.name} />
             <Input onChange={this.props.onChange} type="text" name="age" label="Age" value={this.props.person.age} />

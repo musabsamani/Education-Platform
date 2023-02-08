@@ -1,16 +1,16 @@
 import React, { Component } from 'react';
 import './App.css'
 import Navbar from './component/navbar';
-import Lesson from './component/Addition/addlesson';
-import Classes from './component/TableShow/classesTable';
-import AddSubject from './component/Addition/addsubject'
-import SubjectTable from './component/TableShow/subjectTable';
-import AddVolunteer from './component/Addition/addvolunteer';
-import VolunteerTable from './component/TableShow/volunteerTable';
-import AddStudent from './component/Addition/addstudent';
-import StudentTable from './component/TableShow/studentTable';
+import Lesson from './component/addition/addlesson';
+import Classes from './component/tableShow/lessonTable';
+import AddSubject from './component/addition/addsubject'
+import SubjectTable from './component/tableShow/subjectTable';
+import AddVolunteer from './component/addition/addvolunteer';
+import VolunteerTable from './component/tableShow/volunteerTable';
+import AddStudent from './component/addition/addstudent';
+import StudentTable from './component/tableShow/studentTable';
 import EditUser from './component/editUser';
-import Show from './component/TableShow/show';
+import Show from './component/tableShow/show';
 import Home from './component/home';
 import axios from 'axios';
 import { studentAPI, volunteerAPI, tableAPI, subjectAPI } from "./server/apiEndpoints"
@@ -93,7 +93,7 @@ class App extends Component {
                               Creat 
     ###############################################################
    *//* ################################################################
-                  Creat 
+               Creat 
 ###############################################################
 */
   createElement = (event, id, apiResource) => {
@@ -104,7 +104,7 @@ class App extends Component {
       data[n["name"]] = n["value"];
     });
     var request = {
-      "url": `http://localhost:5000/api/${apiResource}`,
+      "url": `${apiResource}`,
       "method": `POST`,
       "data": data,
     };
@@ -127,7 +127,7 @@ class App extends Component {
       data[n["name"]] = n["value"];
     });
     var request = {
-      "url": `http://localhost:5000/api/${apiResource}`,
+      "url": `${apiResource}`,
       "method": `PUT`,
       "data": data,
     };
@@ -145,7 +145,7 @@ class App extends Component {
       const data = this.state[apiResource].filter(element => element._id !== id);
       this.setState({ [apiResource]: data });
       console.log(data)
-      await axios.delete(`http://localhost:5000/api/${apiResource}/${id}`);
+      await axios.delete(`${apiResource}/${id}`);
       alert(`${apiResource} Deleted Successfuly`)
     }
     catch {

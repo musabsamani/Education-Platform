@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Show from "./show";
+import { tableAPI } from "../../server/apiEndpoints";
 
 class Classes extends Component {
   state = {
@@ -10,6 +11,9 @@ class Classes extends Component {
     return (
       <>
         <div className="container mt-5 ">
+          <Link to="/addlesson">
+            <button className="btn btn-outline-primary m-3 ">Add Lesson</button>
+          </Link>
           <table className="table caption-top mt-5">
             <thead>
               <tr>
@@ -24,7 +28,9 @@ class Classes extends Component {
               {this.props.Table.map((table, i) => (
                 <tr key={table._id}>
                   <td>{i + 1}</td>
-                  <Link to="/show"><td onClick={()=>Show(table)}>{table.volunteer}</td></Link>
+                  <Link to="/show">
+                    <td onClick={() => Show(table)}>{table.volunteer}</td>
+                  </Link>
                   <td>{table.subject}</td>
                   <td>{table.date}</td>
                   <td>
@@ -32,7 +38,7 @@ class Classes extends Component {
                       <button className="btn btn-info btn-sm">Update</button>
                     </Link>
 
-                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(table._id)}>
+                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(table._id, tableAPI)}>
                       Delete
                     </button>
                   </td>
