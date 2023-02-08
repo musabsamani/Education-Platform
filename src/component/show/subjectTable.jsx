@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import profile from "./profile";
 class SubjectTable extends Component {
   render() {
     return (
       <>
         <div className="container mt-5 ">
           <Link to="/addsubject">
-            <button className="btn btn-outline-primary m-3 ">Add Subject</button>
+            <button className="btn btn-outline-primary m-3 " onClick={() => this.props.setEmptyPerson()}>
+              Add Subject
+            </button>
           </Link>
           <table className="table caption-top mt-5">
             <thead>
@@ -21,11 +22,7 @@ class SubjectTable extends Component {
               {this.props.subjects.map((subject, i) => (
                 <tr key={subject._id}>
                   <td>{i + 1}</td>
-                  <td>
-                    <Link to={"/profile"} onClick={() => profile(subject)}>
-                      {subject.name}
-                    </Link>
-                  </td>
+                  <td>{subject.name}</td>
                   <td>
                     <Link to={`/editUser?id=${subject._id}`} onClick={() => this.props.onUpdate(subject)}>
                       <button className="btn btn-info btn-sm">Update</button>

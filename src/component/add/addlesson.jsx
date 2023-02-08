@@ -8,17 +8,29 @@ class Lesson extends Component {
           <h2>New Lesson</h2>
           <form className="col g-3 d-flex-column justify-content-center" id="addlesson" onSubmit={(e) => this.props.createlesson(e, "addlesson", "table")}>
             <select name="subject" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-              <option selected>Choose a Subject from this menu</option>
-              {this.props.subjects.map((subject) => (
-                <option value={subject.value}>{subject.name}</option>
-              ))}
+              {this.props.subjects ? (
+                this.props.subjects.map((subject) => (
+                  <option key={Math.random()} value={subject.value}>
+                    {subject.name}
+                  </option>
+                ))
+              ) : (
+                <option disabled>Empty Database is Empty</option>
+              )}
             </select>
-            <select name="volunteer" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-              <option selected>Choose a Voulunteer from this menu</option>
-              {this.props.volunteers.map((volunteer) => (
-                <option value={volunteer.value}>{volunteer.name}</option>
-              ))}
-            </select>
+            {this.props.volunteers.length > 0 ? (
+              <select name="volunteer" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                {this.props.volunteers.map((volunteer) => (
+                  <option key={Math.random()} value={volunteer.value}>
+                    {volunteer.name}
+                  </option>
+                ))}
+              </select>
+            ) : (
+              <select disabled className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <option>Empty Database is Empty</option>
+              </select>
+            )}
             <Input type="text" name="date" label="Date" onChange={this.props.onChange} value={this.props.person.date} />
             <div className="s col mt-2">
               <button className="btn btn-primary m-1" type="submit">

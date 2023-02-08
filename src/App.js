@@ -91,58 +91,61 @@ class App extends Component {
 Creat 
 ###############################################################
 */
-  createElement = (event, id, resource) => {
-    event.preventDefault();
-    var unindexd_array = $(`#${id}`).serializeArray();
-    var data = {};
-    const uri = `${this.baseAPI}/${resource}`
-    $.map(unindexd_array, function (n, i) {
-      data[n["name"]] = n["value"];
-    });
-    var request = {
-      "url": `${uri}`,
-      "method": `POST`,
-      "data": data,
-    };
-    $.ajax(request).done((response) => {
-      const element = [...this.state[resource], data]
-      this.setState({ [resource]: element });
-      this.setEmptyPerson()
-      alert(`${resource} Added Successfully !!!`);
-    })
+  createElement = async (event, id, resource) => {
+    try {
+      event.preventDefault();
+      var unindexed_array = $(`#${id}`).serializeArray();
+      var data = {};
+      const uri = `${this.baseAPI}/${resource}`
+      unindexed_array.forEach(function (n, i) {
+        data[n["name"]] = n["value"];
+      });
+      data._id = `${Math.floor(Math.pow(10, 15) * Math.random())}`
+      await axios.post(`${uri}`, data).then(() => {
+        const element = [...this.state[resource], data]
+        this.setState({ [resource]: element });
+        this.setEmptyPerson()
+        alert(`${resource} Created Successfully !!!`);
+      })
+    }
+    catch {
+      console.error(`Error Creating ${resource}`)
+    }
   }
 
   // this method is used by addUser.jsx for creating new user when form is submited
   // by sendind request to the server
   // =======  UPDATE  ========
-  updateElement = (event, id, resource) => {
-    event.preventDefault();
-    var unindexd_array = $(`#${id}`).serializeArray();
-    var data = {};
-    const uri = `${this.baseAPI}/${resource}`
-    $.map(unindexd_array, function (n, i) {
-      data[n["name"]] = n["value"];
-    });
-    var request = {
-      "url": `${uri}`,
-      "method": `PUT`,
-      "data": data,
-    };
-    $.ajax(request).done((response) => {
-      const element = [...this.state[resource], data]
-      this.setState({ [resource]: element });
-      this.setEmptyPerson()
-      alert(`${resource} Updated Successfully !!!`);
-    })
+  updateElement = async (event, id, resource) => {
+    try {
+      event.preventDefault();
+      var unindexed_array = $(`#${id}`).serializeArray();
+      var data = {};
+      const uri = `${this.baseAPI}/${resource}`
+      unindexed_array.forEach(function (n, i) {
+        data[n["name"]] = n["value"];
+      });
+      data._id = `${Math.floor(Math.pow(10, 15) * Math.random())}`
+      await axios.put(`${uri}`, data).then(() => {
+        const element = [...this.state[resource], data]
+        this.setState({ [resource]: element });
+        this.setEmptyPerson()
+        alert(`${resource} Updated Successfully !!!`);
+      })
+    }
+    catch {
+      console.error(`Error Updating ${resource}`)
+    }
   }
   // this method is used by home.jsx component by Delete Button
   // =======  DELETE  ========
   deleteElement = async (id, resource) => {
     try {
       const uri = `${this.baseAPI}/${resource}`
-      const data = this.state[resource].filter(element => element._id !== id);
-      this.setState({ [resource]: data });
-      await axios.delete(`${uri}/${id}`);
+      await axios.delete(`${uri}/${id}`).then(() => {
+        const data = this.state[resource].filter(element => element._id !== id);
+        this.setState({ [resource]: data });
+      })
       // alert(`${resource} Deleted Successfuly`)
     }
     catch {
@@ -157,12 +160,14 @@ Creat
         <main className='container-fluid'>
           <Routes>
             <Route path='/'
-              element={<Home setEmptyPerson={this.setEmptyPerson} />} />
+              element={<Home
+                setEmptyPerson={this.setEmptyPerson}
+              />} />
             <Route path='/volunteerTable'
               element={<VolunteerTable
                 volunteers={this.state.volunteers}
-                onDelete={this.deleteElement}
                 person={this.state.person}
+                onDelete={this.deleteElement}
                 setPerson={this.setPerson}
                 setEmptyPerson={this.setEmptyPerson}
               />} />
@@ -192,7 +197,8 @@ Creat
               />} />
             <Route path='/profile'
               element={<Profile
-                person={this.state.person}
+                data={this.state.person}
+                setPerson={this.setPerson}
               />} />
 
             <Route path='/addStudent'
@@ -211,8 +217,8 @@ Creat
               />} />
             <Route path='/addsubject'
               element={<AddSubject
-                hsubject={this.state.person}
-                onChangeSubject={this.handleChange}
+                subject={this.state.person}
+                onChange={this.handleChange}
                 createSubject={this.createElement}
               />} />
             <Route path='/addlesson'

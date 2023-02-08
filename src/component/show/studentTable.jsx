@@ -1,6 +1,5 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import profile from "./profile";
 
 class StudentTable extends Component {
   state = {
@@ -11,7 +10,9 @@ class StudentTable extends Component {
       <>
         <div className="container mt-5 ">
           <Link to="/addstudent">
-            <button className="btn btn-outline-primary m-3">Add Student</button>
+            <button className="btn btn-outline-primary m-3" onClick={() => this.props.setEmptyPerson()}>
+              Add Student
+            </button>
           </Link>
           <table className="table caption-top mt-5">
             <thead>
@@ -28,11 +29,7 @@ class StudentTable extends Component {
               {this.props.students.map((student, i) => (
                 <tr key={student._id}>
                   <td>{i + 1}</td>
-                  <td>
-                    <Link to={"/profile"} onClick={() => profile(student)}>
-                      {student.name}
-                    </Link>
-                  </td>
+                  <td>{student.name}</td>
                   <td>{student.age}</td>
                   <td>{student.address}</td>
                   <td>{student.phone}</td>

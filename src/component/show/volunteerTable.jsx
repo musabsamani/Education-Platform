@@ -6,7 +6,9 @@ class VolunteerTable extends Component {
       <>
         <div className="container mt-5 ">
           <Link to="/addvolunteer">
-            <button className="btn btn-outline-primary m-3">Add Volunteer</button>
+            <button className="btn btn-outline-primary m-3" onClick={() => this.props.setEmptyPerson()}>
+              Add Volunteer
+            </button>
           </Link>
           <table className="table caption-top mt-5">
             <thead>

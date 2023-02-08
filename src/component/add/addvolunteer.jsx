@@ -15,9 +15,10 @@ class AddVolunteer extends Component {
             <Input onChange={this.props.onChange} type="text" name="address" label="Address" value={this.props.person.address} />
             <Input onChange={this.props.onChange} type="text" name="phone" label="Phone" value={this.props.person.phone} />
             <select name="subject" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-              <option selected>Choose a Subject from this menu</option>
               {this.props.subjects.map((subject) => (
-                <option value={subject.value}>{subject.name}</option>
+                <option key={subject.name} value={subject.value}>
+                  {subject.name}
+                </option>
               ))}
             </select>
             <div className="s col mt-2">
