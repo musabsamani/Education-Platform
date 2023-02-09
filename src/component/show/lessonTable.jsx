@@ -24,23 +24,29 @@ class Lessontaable extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.Table.map((table, i) => (
-                <tr key={table._id}>
-                  <td>{i + 1}</td>
-                  <td>{table.volunteer}</td>
-                  <td>{table.subject}</td>
-                  <td>{table.date}</td>
-                  <td>
-                    <Link to={`/editUser?id=${table._id}`} onClick={() => this.props.onUpdate(table)}>
-                      <button className="btn btn-info btn-sm">Update</button>
-                    </Link>
+              {this.props.Table.length > 0 ? (
+                this.props.Table.map((table, i) => (
+                  <tr key={table._id}>
+                    <td>{i + 1}</td>
+                    <td>{table.volunteer}</td>
+                    <td>{table.subject}</td>
+                    <td>{table.date}</td>
+                    <td>
+                      <Link to={`/editUser?id=${table._id}`} onClick={() => this.props.onUpdate(table)}>
+                        <button className="btn btn-info btn-sm">Update</button>
+                      </Link>
 
-                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(table._id, "table")}>
-                      Delete
-                    </button>
-                  </td>
+                      <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(table._id, "table")}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td>Databse is Empty</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

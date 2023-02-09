@@ -19,25 +19,31 @@ class VolunteerTable extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.volunteers.map((volunteer, i) => (
-                <tr key={volunteer._id}>
-                  <td>{i + 1}</td>
-                  <td>
-                    <Link to="/profile" onClick={() => this.props.setPerson(volunteer)}>
-                      {volunteer.name}
-                    </Link>
-                  </td>
-                  <td>
-                    <Link to={`/editUser?id=${volunteer._id}`} onClick={() => this.props.setPerson(volunteer)}>
-                      <button className="btn btn-info btn-sm">Update</button>
-                    </Link>
+              {this.props.volunteers.length > 0 ? (
+                this.props.volunteers.map((volunteer, i) => (
+                  <tr key={volunteer._id}>
+                    <td>{i + 1}</td>
+                    <td>
+                      <Link to="/profile" onClick={() => this.props.setPerson(volunteer)}>
+                        {volunteer.name}
+                      </Link>
+                    </td>
+                    <td>
+                      <Link to={`/editUser?id=${volunteer._id}`} onClick={() => this.props.setPerson(volunteer)}>
+                        <button className="btn btn-info btn-sm">Update</button>
+                      </Link>
 
-                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(volunteer._id, "volunteers")}>
-                      Delete
-                    </button>
-                  </td>
+                      <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(volunteer._id, "volunteers")}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td>Databse is Empty</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

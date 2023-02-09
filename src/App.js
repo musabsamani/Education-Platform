@@ -100,8 +100,9 @@ Creat
       unindexed_array.forEach(function (n, i) {
         data[n["name"]] = n["value"];
       });
-      data._id = `${Math.floor(Math.pow(10, 15) * Math.random())}`
+      console.log(data)
       await axios.post(`${uri}`, data).then(() => {
+        data._id = `${Math.floor(Math.pow(10, 15) * Math.random())}`
         const element = [...this.state[resource], data]
         this.setState({ [resource]: element });
         this.setEmptyPerson()

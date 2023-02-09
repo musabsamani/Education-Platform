@@ -26,24 +26,30 @@ class StudentTable extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.students.map((student, i) => (
-                <tr key={student._id}>
-                  <td>{i + 1}</td>
-                  <td>{student.name}</td>
-                  <td>{student.age}</td>
-                  <td>{student.address}</td>
-                  <td>{student.phone}</td>
-                  <td>
-                    <Link to={`/editStudent?id=${student._id}`} onClick={() => this.props.onUpdate(student)}>
-                      <button className="btn btn-info btn-sm">Update</button>
-                    </Link>
+              {this.props.students.length > 0 ? (
+                this.props.students.map((student, i) => (
+                  <tr key={student._id}>
+                    <td>{i + 1}</td>
+                    <td>{student.name}</td>
+                    <td>{student.age}</td>
+                    <td>{student.address}</td>
+                    <td>{student.phone}</td>
+                    <td>
+                      <Link to={`/editStudent?id=${student._id}`} onClick={() => this.props.onUpdate(student)}>
+                        <button className="btn btn-info btn-sm">Update</button>
+                      </Link>
 
-                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(student._id, "students")}>
-                      Delete
-                    </button>
-                  </td>
+                      <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(student._id, "students")}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td>Databse is Empty</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>

@@ -19,21 +19,29 @@ class SubjectTable extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.subjects.map((subject, i) => (
-                <tr key={subject._id}>
-                  <td>{i + 1}</td>
-                  <td>{subject.name}</td>
-                  <td>
-                    <Link to={`/editUser?id=${subject._id}`} onClick={() => this.props.onUpdate(subject)}>
-                      <button className="btn btn-info btn-sm">Update</button>
-                    </Link>
+              {this.props.subjects.length > 0 ? (
+                this.props.subjects.map((subject, i) => (
+                  <tr key={subject._id}>
+                    <td>{i + 1}</td>
+                    <td>{subject.name}</td>
+                    <td>
+                      <Link to={`/editUser?id=${subject._id}`}>
+                        <button className="btn btn-info btn-sm" onClick={() => this.props.sePerson(subject)}>
+                          Update
+                        </button>
+                      </Link>
 
-                    <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(subject._id, "subjects")}>
-                      Delete
-                    </button>
-                  </td>
+                      <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(subject._id, "subjects")}>
+                        Delete
+                      </button>
+                    </td>
+                  </tr>
+                ))
+              ) : (
+                <tr>
+                  <td>Databse is Empty</td>
                 </tr>
-              ))}
+              )}
             </tbody>
           </table>
         </div>
