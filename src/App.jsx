@@ -65,10 +65,10 @@ class App extends Component {
       event.preventDefault();
       var unindexed_array = $(`#${formId}`).serializeArray();
       var data = {};
-      const uri = `${baseAPI}/${resource}`;
       unindexed_array.forEach((n, i) => {
         data[n["name"]] = n["value"];
       });
+      const uri = `${baseAPI}/${resource}`;
       await axios.post(`${uri}`, data).then((res) => {
         data._id = `${Math.floor(Math.pow(10, 15) * Math.random())}`;
         const element = [...this.state[resource], data];
@@ -89,7 +89,6 @@ class App extends Component {
         data[n["name"]] = n["value"];
       });
       const uri = `${baseAPI}/${resource}/${data._id}`
-      console.log(uri)
       await axios.put(`${uri}`, data).then(() => {
         const element = [...this.state[resource]]
         element.forEach((element) => { element._id === data._id ? Object.assign(element, data) : element })
