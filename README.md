@@ -1,4 +1,4 @@
-# CRUD
+# Education Platform 
 
 0 - clone this repository to your working directory 
   - by the command "git clone https://github.com/musabobada/CRUD-App.git"
