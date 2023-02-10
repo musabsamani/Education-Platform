@@ -6,7 +6,7 @@ class AddStudent extends Component {
       <>
         <div className="container mt-5 ">
           <h2>New Student</h2>
-          <form className="col g-3 d-flex-column justify-content-center" id="addstudent" onSubmit={(e) => this.props.createStudent(e, "addstudent", "students")}>
+          <form className="col g-3 d-flex-column justify-content-center" id="addstudent" onSubmit={(e) => this.props.create(e, "addstudent", "students")}>
             <Input onChange={this.props.onChange} type="text" name="name" label="Name" value={this.props.temporary.name} />
             <Input onChange={this.props.onChange} type="text" name="age" label="Age" value={this.props.temporary.age} />
             <Input onChange={this.props.onChange} type="text" name="address" label="Address" value={this.props.temporary.address} />

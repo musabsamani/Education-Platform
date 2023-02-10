@@ -30,7 +30,7 @@ class Home extends Component {
             </Link>
             <Link to="/addLesson">
               {/* <button className="btn btn-outline-success m-3 ">الجدول الدراسي</button> */}
-              <button className="btn btn-outline-success m-3 " onClick={() => this.props.setEmptyPerson()}>
+              <button className="btn btn-outline-success m-3 " onClick={() => this.props.setTemporaryEmpty()}>
                 add Lesson
               </button>
             </Link>

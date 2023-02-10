@@ -8,7 +8,7 @@ class AddVolunteer extends Component {
       <>
         <div className="container mt-5 ">
           <h2>New Voulunteer</h2>
-          <form className="col g-3 d-flex-column justify-content-center" id="addVolunteer" method="POST" onSubmit={(e) => this.props.createVolunteer(e, "addVolunteer", "volunteers")}>
+          <form className="col g-3 d-flex-column justify-content-center" id="addVolunteer" method="POST" onSubmit={(e) => this.props.create(e, "addVolunteer", "volunteers")}>
             <Input onChange={this.props.onChange} type="text" name="name" label="Name" value={this.props.temporary.name} />
             <Input onChange={this.props.onChange} type="text" name="age" label="Age" value={this.props.temporary.age} />
             <Input onChange={this.props.onChange} type="email" name="email" label="Email" value={this.props.temporary.email} />
