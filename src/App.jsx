@@ -7,7 +7,7 @@ import $ from "jquery";
 import "./App.css";
 
 // ====== APIEndPoints/
-import apiEndPoints from "./helpers/apiEndpoints";
+import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, baseAPI } from "./helpers/apiEndpoints";
 // ###################### React Components ######################
 // ====== components/
 import Home from "./component/home";
@@ -33,6 +33,7 @@ import Profile from "./component/show/profile";
 // =============== this is for axios for POST and PUT methods
 // ?? its so important
 axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+axios.defaults.headers.put["Content-Type"] = "application/x-www-form-urlencoded";
 
 class App extends Component {
   state = {
@@ -42,11 +43,7 @@ class App extends Component {
     subjects: [],
     temporary: {},
   };
-  studentAPI = apiEndPoints.studentAPI;
-  volunteerAPI = apiEndPoints.volunteerAPI;
-  lessonAPI = apiEndPoints.lessonAPI;
-  subjectAPI = apiEndPoints.subjectAPI;
-  baseAPI = apiEndPoints.baseAPI;
+  baseAPI;
   // this react function is fired up when page load initially
   async componentDidMount() {
     try {
@@ -68,12 +65,11 @@ class App extends Component {
       event.preventDefault();
       var unindexed_array = $(`#${formId}`).serializeArray();
       var data = {};
-      const uri = `${this.baseAPI}/${resource}`;
+      const uri = `${baseAPI}/${resource}`;
       unindexed_array.forEach((n, i) => {
         data[n["name"]] = n["value"];
       });
       await axios.post(`${uri}`, data).then((res) => {
-        console.log(data);
         data._id = `${Math.floor(Math.pow(10, 15) * Math.random())}`;
         const element = [...this.state[resource], data];
         this.setState({ [resource]: element });
@@ -85,21 +81,20 @@ class App extends Component {
   };
   // =======  UPDATE  ========
   updateElement = async (event, id, resource) => {
-    alert();
     try {
       event.preventDefault();
       var unindexed_array = $(`#${id}`).serializeArray();
       var data = {};
-      const uri = `${this.baseAPI}/${resource}`;
       unindexed_array.forEach((n, i) => {
         data[n["name"]] = n["value"];
       });
-      console.log(data);
+      const uri = `${baseAPI}/${resource}/${data._id}`
+      console.log(uri)
       await axios.put(`${uri}`, data).then(() => {
-        // const element = [...this.state[resource]]
-        // element.forEach((element)=>{element._id===data._id?Object.assign(element,data):})
-        // this.setState({ [resource]: element });
-        // this.setTemporaryEmpty()
+        const element = [...this.state[resource]]
+        element.forEach((element) => { element._id === data._id ? Object.assign(element, data) : element })
+        this.setState({ [resource]: element });
+        this.setTemporaryEmpty()
       });
     } catch {
       console.error(`Error Updating ${resource}`);
@@ -108,8 +103,7 @@ class App extends Component {
   // =======  DELETE  ========
   deleteElement = async (id, resource) => {
     try {
-      const uri = `${this.baseAPI}/${resource}`;
-      console.log(id, uri);
+      const uri = `${baseAPI}/${resource}`;
       await axios.delete(`${uri}/${id}`).then(() => {
         const data = this.state[resource].filter((element) => element._id !== id);
         this.setState({ [resource]: data });
@@ -139,7 +133,11 @@ class App extends Component {
         <Navbar />
         <main className="container-fluid">
           <Routes>
-            <Route path="/" element={<Home setTemporaryEmpty={this.setTemporaryEmpty} />} />
+            <Route path="/"
+              element={<Home
+                setTemporaryEmpty={this.setTemporaryEmpty}
+              />}
+            />
             {/* ########### show ########### */}
             <Route
               path="/studentTable"
@@ -180,28 +178,87 @@ class App extends Component {
             <Route
               path="/lessonTable"
               element={
-                <LessonTable lessons={this.state.lessons} temporary={this.state.temporary} onDelete={this.deleteElement} setTemporary={this.setTemporary} setTemporaryEmpty={this.setTemporaryEmpty} />
+                <LessonTable
+                  lessons={this.state.lessons}
+                  temporary={this.state.temporary}
+                  onDelete={this.deleteElement}
+                  setTemporary={this.setTemporary}
+                  setTemporaryEmpty={this.setTemporaryEmpty}
+                />
               }
             />
-            <Route path="/profile" element={<Profile temporary={this.state.temporary} setTemporary={this.setTemporary} />} />
+            <Route path="/profile"
+              element={<Profile
+                temporary={this.state.temporary}
+                setTemporary={this.setTemporary}
+              />}
+            />
 
             {/* ########### add ########### */}
-            <Route path="/addStudent" element={<AddStudent temporary={this.state.temporary} onChange={this.handleChange} create={this.createElement} />} />
-            <Route path="/addVolunteer" element={<AddVolunteer temporary={this.state.temporary} subjects={this.state.subjects} onChange={this.handleChange} create={this.createElement} />} />
-            <Route path="/addSubject" element={<AddSubject subject={this.state.temporary} onChange={this.handleChange} create={this.createElement} />} />
+            <Route path="/addStudent"
+              element={<AddStudent
+                temporary={this.state.temporary}
+                onChange={this.handleChange}
+                create={this.createElement}
+              />}
+            />
+            <Route path="/addVolunteer"
+              element={<AddVolunteer
+                temporary={this.state.temporary}
+                subjects={this.state.subjects}
+                onChange={this.handleChange}
+                create={this.createElement}
+              />}
+            />
+            <Route path="/addSubject"
+              element={<AddSubject
+                subject={this.state.temporary}
+                onChange={this.handleChange}
+                create={this.createElement}
+              />}
+            />
             <Route
               path="/addLesson"
-              element={<Addlesson subjects={this.state.subjects} volunteers={this.state.volunteers} temporary={this.state.temporary} onChange={this.handleChange} create={this.createElement} />}
+              element={<Addlesson
+                subjects={this.state.subjects}
+                volunteers={this.state.volunteers}
+                temporary={this.state.temporary}
+                onChange={this.handleChange}
+                create={this.createElement}
+              />}
             />
             {/* ########### update ########### */}
-
-            <Route path="/updateStudent" element={<UpdateStudent temporary={this.state.temporary} onChange={this.handleChange} update={this.updateElement} />} />
-
-            <Route path="/updateVolunteer" element={<UpdateVolunteer temporary={this.state.temporary} subjects={this.state.subjects} onChange={this.handleChange} update={this.updateElement} />} />
-            <Route path="/updateSubject" element={<UpdateSubject subject={this.state.temporary} onChange={this.handleChange} update={this.updateElement} />} />
+            <Route path="/updateStudent"
+              element={<UpdateStudent
+                temporary={this.state.temporary}
+                onChange={this.handleChange}
+                update={this.updateElement}
+              />}
+            />
+            <Route path="/updateVolunteer"
+              element={<UpdateVolunteer
+                temporary={this.state.temporary}
+                subjects={this.state.subjects}
+                onChange={this.handleChange}
+                update={this.updateElement}
+              />}
+            />
+            <Route path="/updateSubject"
+              element={<UpdateSubject
+                subject={this.state.temporary}
+                onChange={this.handleChange}
+                update={this.updateElement}
+              />}
+            />
             <Route
               path="/updateLesson"
-              element={<Updatelesson subjects={this.state.subjects} volunteers={this.state.volunteers} temporary={this.state.temporary} onChange={this.handleChange} update={this.updateElement} />}
+              element={<Updatelesson
+                subjects={this.state.subjects}
+                volunteers={this.state.volunteers}
+                temporary={this.state.temporary}
+                onChange={this.handleChange}
+                update={this.updateElement}
+              />}
             />
           </Routes>
         </main>

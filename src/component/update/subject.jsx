@@ -6,10 +6,11 @@ class AddSubject extends Component {
       <>
         <div className="container mt-5 ">
           <h2>Edit Subject</h2>
-          <form className="col g-3 d-flex-column justify-content-center" id="addSubject" method="POST" onSubmit={(e) => this.props.updateSubject(e, "addSubject", "subjects")}>
+          <form className="col g-3 d-flex-column justify-content-center" id="addSubject" method="POST" onSubmit={(e) => this.props.update(e, "addSubject", "subjects")}>
             <Input onChange={this.props.onChange} type="text" name="name" label="Subject Name" value={this.props.subject.name} />
+            <Input type="hidden" name="_id" value={this.props.subject._id} />
             <div className="s col mt-2">
-              <button onClick={() => this.props.createSubject} className="btn btn-primary m-1" type="submit">
+              <button className="btn btn-primary m-1" type="submit">
                 Save
               </button>
             </div>

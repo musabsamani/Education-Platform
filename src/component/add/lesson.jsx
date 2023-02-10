@@ -17,7 +17,7 @@ class Lesson extends Component {
               </select>
             ) : (
               <select disabled className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                <option>Volunteer Database is Empty Database is Empty</option>
+                <option>Subjects Database is Empty</option>
               </select>
             )}
             {this.props.volunteers.length > 0 ? (

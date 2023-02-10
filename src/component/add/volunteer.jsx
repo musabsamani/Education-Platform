@@ -24,7 +24,7 @@ class AddVolunteer extends Component {
               </select>
             ) : (
               <select disabled className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
-                <option>Empty Database is Empty</option>
+                <option>Subjects Database is Empty</option>
               </select>
             )}
             <div className="s col mt-2">

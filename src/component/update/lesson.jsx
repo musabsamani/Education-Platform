@@ -6,7 +6,7 @@ class Lesson extends Component {
       <>
         <div className="container mt-5 ">
           <h2>Edit Lesson</h2>
-          <form className="col g-3 d-flex-column justify-content-center" id="addlesson" onSubmit={(e) => this.props.updatelesson(e, "addlesson", "lessons")}>
+          <form className="col g-3 d-flex-column justify-content-center" id="addlesson" onSubmit={(e) => this.props.update(e, "addlesson", "lessons")}>
             {this.props.subjects.length > 0 ? (
               <select name="subject" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                 {this.props.subjects.map((subject) => (
@@ -34,6 +34,7 @@ class Lesson extends Component {
               </select>
             )}
             <Input type="text" name="date" label="Date" onChange={this.props.onChange} value={this.props.temporary.date} />
+            <Input type="hidden" name="_id" value={this.props.temporary._id} />
             <div className="s col mt-2">
               <button className="btn btn-primary m-1" type="submit">
                 Save
