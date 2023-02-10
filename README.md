@@ -16,7 +16,7 @@
 4 - RUN the command "npm start" to launch React (Front-End),
   - and see the console to check on which port is running. 
 
-5 - http://localhost:[port number] 
+5 - http://localhost: [port number] 
   - replace [port number] with port typed in console after running Front-End (npm start).
 
 <!--
