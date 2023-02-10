@@ -7,7 +7,7 @@
 -->
 ### First : npm
 
-1 -  Open the terminal to the the path of the root of this repository "/CRUD-App"
+1 -  Open the terminal to the the path of the root of this repository "/Education-Platform"
   
 2 - RUN the command "npm install"
   
