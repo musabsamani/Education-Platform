@@ -12,25 +12,25 @@ class Home extends Component {
           <div>
             <Link to="/addVolunteer">
               {/* <button className="btn btn-outline-secondary m-3">المتطوعون</button> */}
-              <button className="btn btn-outline-secondary m-3" onClick={() => this.props.setEmptyPerson}>
+              <button className="btn btn-outline-secondary m-3" onClick={() => this.props.setTemporaryEmpty()}>
                 Add Volunteers
               </button>
             </Link>
             <Link to="/addStudent">
               {/* <button className="btn btn-outline-secondary m-3 ">الطلاب</button> */}
-              <button className="btn btn-outline-secondary m-3 " onClick={() => this.props.setEmptyPerson}>
+              <button className="btn btn-outline-secondary m-3 " onClick={() => this.props.setTemporaryEmpty()}>
                 Add Student
               </button>
             </Link>
             <Link to="/addSubject">
               {/* <button className="btn btn-outline-secondary m-3 ">المواد</button> */}
-              <button className="btn btn-outline-secondary m-3 " onClick={() => this.props.setEmptyPerson}>
+              <button className="btn btn-outline-secondary m-3 " onClick={() => this.props.setTemporaryEmpty()}>
                 Add Subject
               </button>
             </Link>
             <Link to="/addLesson">
               {/* <button className="btn btn-outline-success m-3 ">الجدول الدراسي</button> */}
-              <button className="btn btn-outline-success m-3 " onClick={() => this.props.setEmptyPerson}>
+              <button className="btn btn-outline-success m-3 " onClick={() => this.props.setEmptyPerson()}>
                 add Lesson
               </button>
             </Link>

@@ -13,7 +13,7 @@ var volunteer = new mongoose.Schema({
   phone: String,
   subject: String
 });
-var table = new mongoose.Schema({
+var lesson = new mongoose.Schema({
   subject: String,
   volunteer: String,
   date: String,
@@ -23,6 +23,6 @@ var subject = new mongoose.Schema({
 });
 const Studentdb = mongoose.model("studentdb", student);
 const Volunteerdb = mongoose.model("volunteerdb", volunteer);
-const Tabledb = mongoose.model("tabledb", table);
+const Lessondb = mongoose.model("lessonsdb", lesson);
 const Subjectdb = mongoose.model("subjectdb", subject);
-module.exports = { Studentdb, Volunteerdb, Tabledb, Subjectdb }
+module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb }

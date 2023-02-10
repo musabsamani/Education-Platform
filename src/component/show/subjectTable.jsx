@@ -6,7 +6,7 @@ class SubjectTable extends Component {
       <>
         <div className="container mt-5 ">
           <Link to="/addsubject">
-            <button className="btn btn-outline-primary m-3 " onClick={() => this.props.setEmptyPerson()}>
+            <button className="btn btn-outline-primary m-3 " onClick={() => this.props.setTemporaryEmpty()}>
               Add Subject
             </button>
           </Link>
@@ -25,8 +25,8 @@ class SubjectTable extends Component {
                     <td>{i + 1}</td>
                     <td>{subject.name}</td>
                     <td>
-                      <Link to={`/editUser?id=${subject._id}`}>
-                        <button className="btn btn-info btn-sm" onClick={() => this.props.sePerson(subject)}>
+                      <Link to={`/updateSubject?id=${subject._id}`}>
+                        <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(subject)}>
                           Update
                         </button>
                       </Link>

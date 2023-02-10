@@ -25,7 +25,7 @@ app.use(morgan("tiny"));
 connectDB();
 
 // parse request to body-parser
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 // set HTML engine
 app.set("view engine", "ejs");
 // set HTML to not default path

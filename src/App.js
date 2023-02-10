@@ -1,40 +1,45 @@
-// kdkdmkmcknj
+// ###################### Libraries ######################
 import React, { Component } from 'react';
-import './App.css'
-import Navbar from './component/navbar';
-import Addlesson from './component/add/addlesson';
-import LessonTable from './component/show/lessonTable';
-import AddSubject from './component/add/addsubject'
-import SubjectTable from './component/show/subjectTable';
-import AddVolunteer from './component/add/addvolunteer';
-import VolunteerTable from './component/show/volunteerTable';
-import AddStudent from './component/add/addstudent';
-import StudentTable from './component/show/studentTable';
-import Profile from './component/show/profile';
-import Home from './component/home';
-import axios from 'axios';
-import { studentAPI, volunteerAPI, tableAPI, subjectAPI, baseAPI } from "./helpers/apiEndpoints"
-import $ from "jquery"
 import { Route, Routes } from 'react-router-dom';
-
+import axios from 'axios';
+import $ from "jquery"
+import './App.css'
+// ====== APIEndPoints/
+import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, baseAPI } from "./helpers/apiEndpoints"
+// ###################### React Components ######################
+// ====== components/
+import Home from './component/home';
+import Navbar from './component/navbar';
+// ====== components/add/
+import AddStudent from './component/add/student';
+import AddVolunteer from './component/add/volunteer';
+import AddSubject from './component/add/subject'
+import Addlesson from './component/add/lesson';
+// ====== components/add/
+import UpdateStudent from './component/update/student';
+import UpdateVolunteer from './component/update/volunteer';
+import UpdateSubject from './component/update/subject'
+import Updatelesson from './component/update/lesson';
+// ====== components/show/
+import StudentTable from './component/show/studentTable';
+import VolunteerTable from './component/show/volunteerTable';
+import LessonTable from './component/show/lessonTable';
+import SubjectTable from './component/show/subjectTable';
+// ====== components/show/profile
+import Profile from './component/show/profile';
+// import comments from './helpers/comments';
+// =============== this is for axios for POST and PUT methods
+axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 class App extends Component {
   state = {
     students: [],
     volunteers: [],
-    table: [],
+    lessons: [],
     subjects: [],
-    person: {},
-    show: {}
-
+    temporary: {}
   }
   baseAPI = baseAPI
-
-  // =================================
-  // =================================
-  // =====  HELPERS FUNCTION  ========
-  // =================================
-  // =================================
   // this react function is fired up when page load initially
   async componentDidMount() {
     try {
@@ -42,8 +47,8 @@ class App extends Component {
       this.setState({ students })
       const { data: volunteers } = await axios.get(volunteerAPI)
       this.setState({ volunteers })
-      const { data: table } = await axios.get(tableAPI)
-      this.setState({ table })
+      const { data: lessons } = await axios.get(lessonAPI)
+      this.setState({ lessons })
       const { data: subjects } = await axios.get(subjectAPI)
       this.setState({ subjects })
       // console.log(this.state)
@@ -52,108 +57,80 @@ class App extends Component {
       console.log("error fetching data from the server")
     }
   }
-  handleChange = (e) => {
-    const person = { ...this.state.person };
-    person[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ person })
-  }
-  // this method is used by Home.jsx update button to store the value of that
-  // user and pass it to this.state.person
-  // note that argument of this function "user" is the object we need to view its
-  // value in input filds in editUser.jsx
-  setPerson = (element,) => {
-    this.setState({ person: element })
-  }
-  setsubject = (user) => {
-    const subject = {
-      subject: user.subject,
-      id: user._id,
-    }
-    this.setState({ subject })
-  }
-  // this function is used to set person empty because
-  //  when we create ne person we want fields to be empy
-  setEmptyPerson = () => {
-    this.setState({ person: {} })
-  }
-  // =================================
-  // =================================
-  // ======   CRUD FUNCTION   ========
-  // =================================
-  // =================================
-  // this method is used by addUser.jsx for creating new user when form is submited
-  // by sendind request to the server
-
-  /* ################################################################
-                              Creat 
-    ###############################################################
-   *//* ################################################################
-Creat 
-###############################################################
-*/
-  createElement = async (event, id, resource) => {
+  // =======  CREAT  ========
+  createElement = async (event, formId, resource) => {
     try {
       event.preventDefault();
-      var unindexed_array = $(`#${id}`).serializeArray();
+      var unindexed_array = $(`#${formId}`).serializeArray();
       var data = {};
       const uri = `${this.baseAPI}/${resource}`
-      unindexed_array.forEach(function (n, i) {
+      unindexed_array.forEach((n, i) => {
         data[n["name"]] = n["value"];
       });
-      console.log(data)
-      await axios.post(`${uri}`, data).then(() => {
+      await axios.post(`${uri}`, data).then((res) => {
+        console.log(data)
         data._id = `${Math.floor(Math.pow(10, 15) * Math.random())}`
         const element = [...this.state[resource], data]
         this.setState({ [resource]: element });
-        this.setEmptyPerson()
-        alert(`${resource} Created Successfully !!!`);
+        this.setTemporaryEmpty()
       })
     }
     catch {
       console.error(`Error Creating ${resource}`)
     }
   }
-
-  // this method is used by addUser.jsx for creating new user when form is submited
-  // by sendind request to the server
   // =======  UPDATE  ========
   updateElement = async (event, id, resource) => {
+    alert()
     try {
       event.preventDefault();
       var unindexed_array = $(`#${id}`).serializeArray();
       var data = {};
       const uri = `${this.baseAPI}/${resource}`
-      unindexed_array.forEach(function (n, i) {
+      unindexed_array.forEach((n, i) => {
         data[n["name"]] = n["value"];
       });
-      data._id = `${Math.floor(Math.pow(10, 15) * Math.random())}`
+      console.log(data)
       await axios.put(`${uri}`, data).then(() => {
-        const element = [...this.state[resource], data]
-        this.setState({ [resource]: element });
-        this.setEmptyPerson()
-        alert(`${resource} Updated Successfully !!!`);
+        // const element = [...this.state[resource]]
+        // element.forEach((element)=>{element._id===data._id?Object.assign(element,data):})
+        // this.setState({ [resource]: element });
+        // this.setTemporaryEmpty()
       })
     }
     catch {
       console.error(`Error Updating ${resource}`)
     }
   }
-  // this method is used by home.jsx component by Delete Button
   // =======  DELETE  ========
   deleteElement = async (id, resource) => {
     try {
       const uri = `${this.baseAPI}/${resource}`
+      console.log(id, uri)
       await axios.delete(`${uri}/${id}`).then(() => {
         const data = this.state[resource].filter(element => element._id !== id);
         this.setState({ [resource]: data });
       })
-      // alert(`${resource} Deleted Successfuly`)
     }
     catch {
       console.error(`Error Deleting ${resource}`)
     }
   }
 
+  // =======  setting this.state.temporary while typing in the input fields  ========
+  handleChange = (e) => {
+    const temporary = { ...this.state.temporary };
+    temporary[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ temporary })
+  }
+  // =======  store value in this.state.temporary  ========
+  setTemporary = (element) => {
+    this.setState({ temporary: element })
+  }
+  // =======  setting this.state.temporary to empty value  ========
+  setTemporaryEmpty = () => {
+    this.setState({ temporary: {} })
+  }
   render() {
     return (
       <>
@@ -162,73 +139,104 @@ Creat
           <Routes>
             <Route path='/'
               element={<Home
-                setEmptyPerson={this.setEmptyPerson}
+                setTemporaryEmpty={this.setTemporaryEmpty}
               />} />
-            <Route path='/volunteerTable'
-              element={<VolunteerTable
-                volunteers={this.state.volunteers}
-                person={this.state.person}
-                onDelete={this.deleteElement}
-                setPerson={this.setPerson}
-                setEmptyPerson={this.setEmptyPerson}
-              />} />
+            {/* ########### show ########### */}
             <Route path='/studentTable'
               element={<StudentTable
                 students={this.state.students}
                 onDelete={this.deleteElement}
-                person={this.state.person}
-                setPerson={this.setPerson}
-                setEmptyPerson={this.setEmptyPerson}
+                temporary={this.state.temporary}
+                setTemporary={this.setTemporaryson}
+                setTemporaryEmpty={this.setTemporaryEmpty}
+              />} />
+            <Route path='/volunteerTable'
+              element={<VolunteerTable
+                volunteers={this.state.volunteers}
+                temporary={this.state.temporary}
+                onDelete={this.deleteElement}
+                setTemporary={this.setTemporary}
+                setTemporaryEmpty={this.setTemporaryEmpty}
               />} />
             <Route path='/subjectTable'
               element={<SubjectTable
                 subjects={this.state.subjects}
+                temporary={this.state.temporary}
                 onDelete={this.deleteElement}
-                person={this.state.person}
-                setPerson={this.setPerson}
-                setEmptyPerson={this.setEmptyPerson}
+                setTemporary={this.setTemporary}
+                setTemporaryEmpty={this.setTemporaryEmpty}
               />} />
             <Route path='/lessonTable'
               element={<LessonTable
-                Table={this.state.table}
+                lessons={this.state.lessons}
                 onDelete={this.deleteElement}
-                person={this.state.person}
-                setPerson={this.setPerson}
-                setEmptyPerson={this.setEmptyPerson}
+                temporary={this.state.temporary}
+                setTemporary={this.setTemporaryson}
+                setTemporaryEmpty={this.setTemporaryEmpty}
               />} />
             <Route path='/profile'
               element={<Profile
-                data={this.state.person}
-                setPerson={this.setPerson}
+                data={this.state.temporary}
+                setTemporary={this.setTemporary}
               />} />
 
+            {/* ########### add ########### */}
             <Route path='/addStudent'
               element={<AddStudent
-                person={this.state.person}
+                temporary={this.state.temporary}
                 onChange={this.handleChange}
                 createStudent={this.createElement}
               />} />
-
-            <Route path='/addvolunteer'
+            <Route path='/addVolunteer'
               element={<AddVolunteer
-                person={this.state.person}
+                temporary={this.state.temporary}
                 subjects={this.state.subjects}
                 onChange={this.handleChange}
                 createVolunteer={this.createElement}
               />} />
-            <Route path='/addsubject'
+            <Route path='/addSubject'
               element={<AddSubject
-                subject={this.state.person}
+                subject={this.state.temporary}
                 onChange={this.handleChange}
                 createSubject={this.createElement}
               />} />
-            <Route path='/addlesson'
+            <Route path='/addLesson'
               element={<Addlesson
                 subjects={this.state.subjects}
                 volunteers={this.state.volunteers}
-                person={this.state.person}
+                temporary={this.state.temporary}
                 onChange={this.handleChange}
                 createlesson={this.createElement}
+              />} />
+            {/* ########### update ########### */}
+
+            <Route path='/updateStudent'
+              element={<UpdateStudent
+                temporary={this.state.temporary}
+                onChange={this.handleChange}
+                updateStudent={this.updateElement}
+              />} />
+
+            <Route path='/updateVolunteer'
+              element={<UpdateVolunteer
+                temporary={this.state.temporary}
+                subjects={this.state.subjects}
+                onChange={this.handleChange}
+                updateVolunteer={this.updateElement}
+              />} />
+            <Route path='/updateSubject'
+              element={<UpdateSubject
+                subject={this.state.temporary}
+                onChange={this.handleChange}
+                updateSubject={this.updateElement}
+              />} />
+            <Route path='/updateLesson'
+              element={<Updatelesson
+                subjects={this.state.subjects}
+                volunteers={this.state.volunteers}
+                temporary={this.state.temporary}
+                onChange={this.handleChange}
+                updatelesson={this.updateElement}
               />} />
 
           </Routes>

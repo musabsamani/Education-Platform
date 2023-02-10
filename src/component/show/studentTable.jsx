@@ -3,14 +3,14 @@ import { Link } from "react-router-dom";
 
 class StudentTable extends Component {
   state = {
-    person: {},
+    temporary: {},
   };
   render() {
     return (
       <>
         <div className="container mt-5 ">
           <Link to="/addstudent">
-            <button className="btn btn-outline-primary m-3" onClick={() => this.props.setEmptyPerson()}>
+            <button className="btn btn-outline-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
               Add Student
             </button>
           </Link>
@@ -35,8 +35,10 @@ class StudentTable extends Component {
                     <td>{student.address}</td>
                     <td>{student.phone}</td>
                     <td>
-                      <Link to={`/editStudent?id=${student._id}`} onClick={() => this.props.onUpdate(student)}>
-                        <button className="btn btn-info btn-sm">Update</button>
+                      <Link to={`/updateStudent?id=${student._id}`}>
+                        <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(student)}>
+                          Update
+                        </button>
                       </Link>
 
                       <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(student._id, "students")}>

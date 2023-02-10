@@ -6,7 +6,7 @@ class VolunteerTable extends Component {
       <>
         <div className="container mt-5 ">
           <Link to="/addvolunteer">
-            <button className="btn btn-outline-primary m-3" onClick={() => this.props.setEmptyPerson()}>
+            <button className="btn btn-outline-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
               Add Volunteer
             </button>
           </Link>
@@ -15,6 +15,11 @@ class VolunteerTable extends Component {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Name</th>
+                <th scope="col">Age</th>
+                <th scope="col">Subject</th>
+                <th scope="col">Address</th>
+                <th scope="col">Phone</th>
+                <th scope="col">Email</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -23,16 +28,20 @@ class VolunteerTable extends Component {
                 this.props.volunteers.map((volunteer, i) => (
                   <tr key={volunteer._id}>
                     <td>{i + 1}</td>
-                    <td>
-                      <Link to="/profile" onClick={() => this.props.setPerson(volunteer)}>
-                        {volunteer.name}
-                      </Link>
+                    <td onClick={() => this.props.setTemporary(volunteer)}>
+                      <Link to="/profile">{volunteer.name}</Link>
                     </td>
+                    <td>{volunteer.age}</td>
+                    <td>{volunteer.subject}</td>
+                    <td>{volunteer.address}</td>
+                    <td>{volunteer.phone}</td>
+                    <td>{volunteer.email}</td>
                     <td>
-                      <Link to={`/editUser?id=${volunteer._id}`} onClick={() => this.props.setPerson(volunteer)}>
-                        <button className="btn btn-info btn-sm">Update</button>
+                      <Link to={`/updateVolunteer?id=${volunteer._id}`}>
+                        <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(volunteer)}>
+                          Update
+                        </button>
                       </Link>
-
                       <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(volunteer._id, "volunteers")}>
                         Delete
                       </button>

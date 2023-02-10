@@ -2,14 +2,14 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 class Lessontaable extends Component {
   state = {
-    person: {},
+    temporary: {},
   };
   render() {
     return (
       <>
         <div className="container mt-5 ">
           <Link to="/addlesson">
-            <button className="btn btn-outline-primary m-3 " onClick={() => this.props.setEmptyPerson()}>
+            <button className="btn btn-outline-primary m-3 " onClick={() => this.props.setTemporaryEmpty()}>
               Add Lesson
             </button>
           </Link>
@@ -24,19 +24,21 @@ class Lessontaable extends Component {
               </tr>
             </thead>
             <tbody>
-              {this.props.Table.length > 0 ? (
-                this.props.Table.map((table, i) => (
-                  <tr key={table._id}>
+              {this.props.lessons.length > 0 ? (
+                this.props.lessons.map((lesson, i) => (
+                  <tr key={lesson._id}>
                     <td>{i + 1}</td>
-                    <td>{table.volunteer}</td>
-                    <td>{table.subject}</td>
-                    <td>{table.date}</td>
+                    <td>{lesson.volunteer}</td>
+                    <td>{lesson.subject}</td>
+                    <td>{lesson.date}</td>
                     <td>
-                      <Link to={`/editUser?id=${table._id}`} onClick={() => this.props.onUpdate(table)}>
-                        <button className="btn btn-info btn-sm">Update</button>
+                      <Link to={`/updateLesson?id=${lesson._id}`}>
+                        <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(lesson)}>
+                          Update
+                        </button>
                       </Link>
 
-                      <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(table._id, "table")}>
+                      <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(lesson._id, "lessons")}>
                         Delete
                       </button>
                     </td>
