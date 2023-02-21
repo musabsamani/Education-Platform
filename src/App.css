@@ -7,3 +7,11 @@ main div.b{
 main div.s{
     width: 50%;
 }
+div.ca{
+    width: 25vw;
+    min-width: 350px;
+    height: 20vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}

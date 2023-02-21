@@ -29,7 +29,7 @@ import LessonTable from "./component/show/lessonTable";
 import SubjectTable from "./component/show/subjectTable";
 // ====== components/show/profile
 import Profile from "./component/show/profile";
-import CAlendar_ from "./component/calendar";
+import CAlendar from "./component/calendar";
 // import comments from './helpers/comments';
 // =============== this is for axios for POST and PUT methods
 // ?? its so important
