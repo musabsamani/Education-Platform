@@ -32,6 +32,11 @@ const Navbar = () => {
                 Lesson Table
               </NavLink>
             </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/calendar">
+                Calendar
+              </NavLink>
+            </li>
           </ul>
         </div>
       </div>

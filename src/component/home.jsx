@@ -34,6 +34,12 @@ class Home extends Component {
                 add Lesson
               </button>
             </Link>
+            <Link to="/calendar">
+              {/* <button className="btn btn-outline-success m-3 ">الجدول الدراسي</button> */}
+              <button className="btn btn-outline-primary m-3 " onClick={() => this.props.setTemporaryEmpty()}>
+                Calendar
+              </button>
+            </Link>
           </div>
         </div>
       </>

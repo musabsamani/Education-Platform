@@ -29,6 +29,7 @@ import LessonTable from "./component/show/lessonTable";
 import SubjectTable from "./component/show/subjectTable";
 // ====== components/show/profile
 import Profile from "./component/show/profile";
+import CAlendar_ from "./component/calendar";
 // import comments from './helpers/comments';
 // =============== this is for axios for POST and PUT methods
 // ?? its so important
@@ -138,6 +139,7 @@ class App extends Component {
               />}
             />
             {/* ########### show ########### */}
+            <>
             <Route
               path="/studentTable"
               element={
@@ -192,8 +194,9 @@ class App extends Component {
                 setTemporary={this.setTemporary}
               />}
             />
-
+            </>
             {/* ########### add ########### */}
+            <>
             <Route path="/addStudent"
               element={<AddStudent
                 temporary={this.state.temporary}
@@ -225,8 +228,10 @@ class App extends Component {
                 onChange={this.handleChange}
                 create={this.createElement}
               />}
-            />
+              />
+            </>
             {/* ########### update ########### */}
+            <>
             <Route path="/updateStudent"
               element={<UpdateStudent
                 temporary={this.state.temporary}
@@ -258,7 +263,14 @@ class App extends Component {
                 onChange={this.handleChange}
                 update={this.updateElement}
               />}
-            />
+              />
+            </>
+            {/* ########### calendar ############*/}
+            <>
+              <Route path="/calendar"
+                element={<CAlendar/>}
+                />
+            </>
           </Routes>
         </main>
       </>
