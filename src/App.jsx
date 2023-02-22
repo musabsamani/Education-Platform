@@ -8,7 +8,7 @@ import "./App.css";
 
 // ====== helpers files/
 import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI, baseAPI } from "./helpers/apiEndpoints";
-import { generateId } from "./helpers/helpersFunctions";
+import { generateId, dateFormaterForInput } from "./helpers/helpersFunctions";
 // ###################### React Components ######################
 // ====== components/
 import Home from "./component/home";
@@ -49,7 +49,6 @@ class App extends Component {
     events: [],
     temporary: {},
   };
-  baseAPI;
   // this react function is fired up when page load initially
   async componentDidMount() {
     try {
@@ -245,6 +244,7 @@ class App extends Component {
               <Route path="/addEvent"
                 element={<AddEvent
                   temporary={this.state.temporary}
+                  formater={dateFormaterForInput}
                   onChange={this.handleChange}
                   create={this.createElement}
                 />}
@@ -255,6 +255,7 @@ class App extends Component {
                   subjects={this.state.subjects}
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
+                  formater={dateFormaterForInput}
                   onChange={this.handleChange}
                   create={this.createElement}
                 />}
@@ -281,12 +282,14 @@ class App extends Component {
                 element={<UpdateSubject
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
+                  dateFormater={this.dateFormater}
                   update={this.updateElement}
                 />}
               />
               <Route path="/updateEvent"
                 element={<UpdateEvent
                   temporary={this.state.temporary}
+                  formater={dateFormaterForInput}
                   onChange={this.handleChange}
                   update={this.updateElement}
                 />}
@@ -297,6 +300,7 @@ class App extends Component {
                   subjects={this.state.subjects}
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
+                  formater={dateFormaterForInput}
                   onChange={this.handleChange}
                   update={this.updateElement}
                 />}

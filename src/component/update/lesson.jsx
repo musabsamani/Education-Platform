@@ -33,7 +33,7 @@ class UpdateLesson extends Component {
                 <option>Volunteers Database is Empty</option>
               </select>
             )}
-            <Input type="text" name="date" label="Date" onChange={this.props.onChange} value={this.props.temporary.date} />
+            <Input type="date" name="date" label="Date" onChange={this.props.onChange} value={this.props.formater(this.props.temporary.date)} />
             <Input type="hidden" name="_id" value={this.props.temporary._id} />
             <div className="s col mt-2">
               <button className="btn btn-primary m-1" type="submit">

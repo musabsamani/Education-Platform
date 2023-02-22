@@ -11,7 +11,7 @@ const eventController = require("../controllers/event");
  * @method GET /
  */
 
-route.get("/", (req, res) => { res.render("index") });
+route.get("/", (req, res) => { res.send("server is running !!!") });
 // ================ student router ===================;
 // API
 route.get("/api/students", studentController.find);

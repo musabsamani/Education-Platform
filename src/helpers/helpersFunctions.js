@@ -7,4 +7,18 @@ function generateId() {
     }
     return hex;
 }
-export { generateId }
+function dateFormaterForInput(date) {
+    if (!date) {
+        return '';
+    }
+    if (typeof date === 'object') {
+
+        const year = date.getFullYear();
+        const month = ('0' + (date.getMonth() + 1)).slice(-2);
+        const day = ('0' + date.getDate()).slice(-2);
+        return `${year}-${month}-${day}`;
+    }
+    else return date
+}
+// console.log(dateFormaterForInput("2023"))
+export { generateId, dateFormaterForInput }
