@@ -17,7 +17,7 @@ const ImgUpload =({
 class AddVolunteer extends Component {
   state = {
     file: '',
-    imagePreviewUrl:'https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_960_720.png',
+    image:'https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_960_720.png',
   }
   photoUpload = e =>{
     e.preventDefault();
@@ -26,13 +26,13 @@ class AddVolunteer extends Component {
     reader.onloadend = () => {
       this.setState({
         file: file,
-        imagePreviewUrl: reader.result
+        image: reader.result
       });
     }
     reader.readAsDataURL(file);
   }
   render() {
-    const { imagePreviewUrl } = this.state;
+    const { image } = this.state;
     const { onChange, temporary, subjects } = this.props;
     return (
       <>
@@ -40,7 +40,7 @@ class AddVolunteer extends Component {
           <h2>New Voulunteer</h2>
           <form className="" id="addVolunteer" method="POST" onSubmit={(e) => this.props.create(e, "addVolunteer", "volunteers")}>
             <div>
-            <ImgUpload onChange={this.photoUpload} src={imagePreviewUrl}/>
+            <ImgUpload onChange={this.photoUpload} src={image}/>
             </div>
               <Input onChange={onChange} type="text" name="name" label="Name" value={temporary.name} />
               <Input onChange={onChange} type="text" name="age" label="Age" value={temporary.age} />

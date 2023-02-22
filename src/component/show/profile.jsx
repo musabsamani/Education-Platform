@@ -13,18 +13,18 @@ const ImgUpload =({
   </label>
 class Profile extends Component {
   state = {
-    imagePreviewUrl:'https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_960_720.png',
+    image:'https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_960_720.png',
     file:'',
   }
   render() {
-    const { imagePreviewUrl } = this.state;
+    const { image } = this.state;
     const {temporary}=this.props
     return (
       <>
         <div className="profile container mt-5 ">
           <h2>Voulunteer Information</h2>
           <div className="aligning">
-          <ImgUpload src={imagePreviewUrl}/>
+          <ImgUpload  src={image}/>
           <div className="">
           <h5>name : {temporary.name}</h5>
           <h5>phone : {temporary.phone}</h5>
