@@ -8,7 +8,8 @@ exports.create = (req, res) => {
   const lesson = new Lessondb({
     subject: req.body.subject,
     volunteer: req.body.volunteer,
-    date: req.body.date
+    date: req.body.date,
+    time: req.body.time //! #ed1
   });
   lesson
     .save(lesson)

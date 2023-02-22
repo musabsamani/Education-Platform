@@ -2,8 +2,20 @@ select{
     border: none;
     padding: 10px 20px;
     border-radius: 10px;
-
+}
+select.sel{
+    max-width: 10vw;
+    min-width: 250px;
 }
 select:targets{
     border-color: aqua;
+}
+.image{
+    width: 200px;
+    border-radius: 100px;
+    object-fit: cover;
+    border-radius: 50%;
+}
+.image:hover{
+    border-color:skyblue ;
 }

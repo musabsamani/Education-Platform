@@ -28,7 +28,9 @@ class Lessontaable extends Component {
                 this.props.lessons.map((lesson, i) => (
                   <tr key={lesson._id}>
                     <td>{i + 1}</td>
-                    <td>{lesson.volunteer}</td>
+                    <td onClick={() => this.props.setTemporary(i)}>
+                      <Link to="/profile">{lesson.volunteer}</Link>
+                    </td>
                     <td>{lesson.subject}</td>
                     <td>{lesson.date}</td>
                     <td>

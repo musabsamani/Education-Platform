@@ -121,6 +121,7 @@ class App extends Component {
   };
   // =======  store value in this.state.temporary  ========
   setTemporary = (element) => {
+    console.log(element)
     this.setState({ temporary: element });
   };
   // =======  setting this.state.temporary to empty value  ========
@@ -153,29 +154,29 @@ class App extends Component {
               }
             />
             <Route
-              path="/volunteerTable"
-              element={
-                <VolunteerTable
-                  volunteers={this.state.volunteers}
-                  temporary={this.state.temporary}
-                  onDelete={this.deleteElement}
-                  setTemporary={this.setTemporary}
-                  setTemporaryEmpty={this.setTemporaryEmpty}
-                />
-              }
-            />
-            <Route
               path="/subjectTable"
               element={
                 <SubjectTable
-                  subjects={this.state.subjects}
-                  temporary={this.state.temporary}
-                  onDelete={this.deleteElement}
-                  setTemporary={this.setTemporary}
-                  setTemporaryEmpty={this.setTemporaryEmpty}
+                subjects={this.state.subjects}
+                temporary={this.state.temporary}
+                onDelete={this.deleteElement}
+                setTemporary={this.setTemporary}
+                setTemporaryEmpty={this.setTemporaryEmpty}
                 />
               }
             />
+              <Route
+                path="/volunteerTable"
+                element={
+                  <VolunteerTable
+                    volunteers={this.state.volunteers}
+                    temporary={this.state.temporary}
+                    onDelete={this.deleteElement}
+                    setTemporary={this.setTemporary}
+                    setTemporaryEmpty={this.setTemporaryEmpty}
+                  />
+                }
+              />
             <Route
               path="/lessonTable"
               element={

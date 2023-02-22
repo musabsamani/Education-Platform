@@ -1,0 +1,23 @@
+.profile{
+    width: 70vw;
+    height: inherit;
+    display: flex;
+    flex-direction: column;
+}
+.aligning{
+    height: 40vh;
+    display: flex;
+    margin: 50px 0;
+}
+.img{
+    margin-right: 50px;
+}
+img{
+    height: 70%;
+    width: 100%; 
+    clip-path: circle(50% at 50% 50%);  
+}
+img:hover{
+    cursor: crosshair;
+    
+}
