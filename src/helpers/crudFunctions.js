@@ -1,3 +1,13 @@
+import { generateId } from "./helpersFunctions";
+import { baseAPI } from "./apiEndpoints";
+import $ from "jquery";
+import axios from "axios";
+// import comments from './helpers/comments';
+// =============== this is for axios for POST and PUT methods
+// ?? its so important
+axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
+axios.defaults.headers.put["Content-Type"] = "application/x-www-form-urlencoded";
+
 // =======  CREAT  ========
 async function createElement(event, formId, resource) {
     try {
@@ -51,19 +61,4 @@ async function deleteElement(id, resource) {
     }
 };
 
-// =======  setting this.state.temporary while typing in the input fields  ========
-function handleChange(e) {
-    const temporary = { ...this.state.temporary };
-    temporary[e.currentTarget.name] = e.currentTarget.value;
-    this.setState({ temporary });
-};
-// =======  store value in this.state.temporary  ========
-function setTemporary(element) {
-    this.setState({ temporary: element });
-};
-// =======  setting this.state.temporary to empty value  ========
-function setTemporaryEmpty() {
-    this.setState({ temporary: {} });
-};
-
-export { createElement, updateElement, deleteElement, handleChange, setTemporary, setTemporaryEmpty }
+export { createElement, updateElement, deleteElement }

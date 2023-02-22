@@ -3,13 +3,12 @@ import "bootstrap/dist/css/bootstrap.css";
 import React, { Component } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-import $ from "jquery";
 import "./App.css";
 
 // ====== helpers files/
-import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI, baseAPI } from "./helpers/apiEndpoints";
-import { generateId, dateFormaterForInput } from "./helpers/helpersFunctions";
-import { createElement, updateElement, deleteElement, handleChange, setTemporary, setTemporaryEmpty } from "./helpers/crudFunctions";
+import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI } from "./helpers/apiEndpoints";
+import { handleChange, setTemporary, setTemporaryEmpty, dateFormaterForInput } from "./helpers/helpersFunctions";
+import { createElement, updateElement, deleteElement } from "./helpers/crudFunctions";
 // ###################### React Components ######################
 // ====== components/
 import Home from "./component/home";
@@ -42,6 +41,15 @@ axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded
 axios.defaults.headers.put["Content-Type"] = "application/x-www-form-urlencoded";
 
 class App extends Component {
+  constructor(props) {
+    super(props);
+    this.createElement = createElement.bind(this);
+    this.updateElement = updateElement.bind(this);
+    this.deleteElement = deleteElement.bind(this);
+    this.handleChange = handleChange.bind(this);
+    this.setTemporary = setTemporary.bind(this);
+    this.setTemporaryEmpty = setTemporaryEmpty.bind(this);
+  }
   state = {
     students: [],
     volunteers: [],
@@ -75,7 +83,7 @@ class App extends Component {
           <Routes>
             <Route path="/"
               element={<Home
-                setTemporaryEmpty={setTemporaryEmpty}
+                setTemporaryEmpty={this.setTemporaryEmpty}
               />}
             />
             {/* ########### show ########### */}
@@ -86,9 +94,9 @@ class App extends Component {
                   <StudentTable
                     students={this.state.students}
                     temporary={this.state.temporary}
-                    onDelete={deleteElement}
-                    setTemporary={setTemporary}
-                    setTemporaryEmpty={setTemporaryEmpty}
+                    onDelete={this.deleteElement}
+                    setTemporary={this.setTemporary}
+                    setTemporaryEmpty={this.setTemporaryEmpty}
                   />
                 }
               />
@@ -98,9 +106,9 @@ class App extends Component {
                   <SubjectTable
                     subjects={this.state.subjects}
                     temporary={this.state.temporary}
-                    onDelete={deleteElement}
-                    setTemporary={setTemporary}
-                    setTemporaryEmpty={setTemporaryEmpty}
+                    onDelete={this.deleteElement}
+                    setTemporary={this.setTemporary}
+                    setTemporaryEmpty={this.setTemporaryEmpty}
                   />
                 }
               />
@@ -110,9 +118,9 @@ class App extends Component {
                   <EventTable
                     events={this.state.events}
                     temporary={this.state.temporary}
-                    onDelete={deleteElement}
-                    setTemporary={setTemporary}
-                    setTemporaryEmpty={setTemporaryEmpty}
+                    onDelete={this.deleteElement}
+                    setTemporary={this.setTemporary}
+                    setTemporaryEmpty={this.setTemporaryEmpty}
                   />
                 }
               />
@@ -122,9 +130,9 @@ class App extends Component {
                   <VolunteerTable
                     volunteers={this.state.volunteers}
                     temporary={this.state.temporary}
-                    onDelete={deleteElement}
-                    setTemporary={setTemporary}
-                    setTemporaryEmpty={setTemporaryEmpty}
+                    onDelete={this.deleteElement}
+                    setTemporary={this.setTemporary}
+                    setTemporaryEmpty={this.setTemporaryEmpty}
                   />
                 }
               />
@@ -134,16 +142,16 @@ class App extends Component {
                   <LessonTable
                     lessons={this.state.lessons}
                     temporary={this.state.temporary}
-                    onDelete={deleteElement}
-                    setTemporary={setTemporary}
-                    setTemporaryEmpty={setTemporaryEmpty}
+                    onDelete={this.deleteElement}
+                    setTemporary={this.setTemporary}
+                    setTemporaryEmpty={this.setTemporaryEmpty}
                   />
                 }
               />
               <Route path="/profile"
                 element={<Profile
                   temporary={this.state.temporary}
-                  setTemporary={setTemporary}
+                  setTemporary={this.setTemporary}
                 />}
               />
             </>
@@ -152,31 +160,31 @@ class App extends Component {
               <Route path="/addStudent"
                 element={<AddStudent
                   temporary={this.state.temporary}
-                  onChange={handleChange}
-                  create={createElement}
+                  onChange={this.handleChange}
+                  create={this.createElement}
                 />}
               />
               <Route path="/addVolunteer"
                 element={<AddVolunteer
                   temporary={this.state.temporary}
                   subjects={this.state.subjects}
-                  onChange={handleChange}
-                  create={createElement}
+                  onChange={this.handleChange}
+                  create={this.createElement}
                 />}
               />
               <Route path="/addSubject"
                 element={<AddSubject
                   temporary={this.state.temporary}
-                  onChange={handleChange}
-                  create={createElement}
+                  onChange={this.handleChange}
+                  create={this.createElement}
                 />}
               />
               <Route path="/addEvent"
                 element={<AddEvent
                   temporary={this.state.temporary}
                   formater={dateFormaterForInput}
-                  onChange={handleChange}
-                  create={createElement}
+                  onChange={this.handleChange}
+                  create={this.createElement}
                 />}
               />
               <Route
@@ -186,8 +194,8 @@ class App extends Component {
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
                   formater={dateFormaterForInput}
-                  onChange={handleChange}
-                  create={createElement}
+                  onChange={this.handleChange}
+                  create={this.createElement}
                 />}
               />
             </>
@@ -196,31 +204,32 @@ class App extends Component {
               <Route path="/updateStudent"
                 element={<UpdateStudent
                   temporary={this.state.temporary}
-                  onChange={handleChange}
-                  update={updateElement}
+                  onChange={this.handleChange}
+                  update={this.updateElement}
                 />}
               />
               <Route path="/updateVolunteer"
                 element={<UpdateVolunteer
                   temporary={this.state.temporary}
                   subjects={this.state.subjects}
-                  onChange={handleChange}
-                  update={updateElement}
+                  onChange={this.handleChange}
+                  update={this.updateElement}
                 />}
               />
               <Route path="/updateSubject"
                 element={<UpdateSubject
                   temporary={this.state.temporary}
-                  onChange={handleChange}
-                  update={updateElement}
+                  onChange={this.handleChange}
+                  dateFormater={this.dateFormater}
+                  update={this.updateElement}
                 />}
               />
               <Route path="/updateEvent"
                 element={<UpdateEvent
                   temporary={this.state.temporary}
                   formater={dateFormaterForInput}
-                  onChange={handleChange}
-                  update={updateElement}
+                  onChange={this.handleChange}
+                  update={this.updateElement}
                 />}
               />
               <Route
@@ -230,8 +239,8 @@ class App extends Component {
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
                   formater={dateFormaterForInput}
-                  onChange={handleChange}
-                  update={updateElement}
+                  onChange={this.handleChange}
+                  update={this.updateElement}
                 />}
               />
             </>

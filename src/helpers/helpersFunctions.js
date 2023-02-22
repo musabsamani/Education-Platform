@@ -1,3 +1,17 @@
+// =======  setting this.state.temporary while typing in the input fields  ========
+function handleChange(e) {
+    const temporary = { ...this.state.temporary };
+    temporary[e.currentTarget.name] = e.currentTarget.value;
+    this.setState({ temporary });
+};
+// =======  store value in this.state.temporary  ========
+function setTemporary(element) {
+    this.setState({ temporary: element });
+};
+// =======  setting this.state.temporary to empty value  ========
+function setTemporaryEmpty() {
+    this.setState({ temporary: {} });
+};
 function generateId() {
     const chars = '0123456789abcdef';
     let hex = '';
@@ -20,5 +34,9 @@ function dateFormaterForInput(date) {
     }
     else return date
 }
+const ali = "dmkrfkn"
+function hh() {
+    console.log(ali)
+}
 // console.log(new Date("2023-02-01"))
-export { generateId, dateFormaterForInput }
+export { handleChange, setTemporary, setTemporaryEmpty, generateId, dateFormaterForInput, hh }
