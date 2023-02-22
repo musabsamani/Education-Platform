@@ -1,39 +1,53 @@
 import React, { Component } from "react";
 import Input from "../include/_input";
 import "./addv.css";
-import profile_img from "../show/download.png";
+// import profile_img from "../show/download.png";
 
+const ImgUpload =({
+  onChange,
+  src
+})=>
+  <label htmlFor="photo-upload" className="custom-file-upload fas">
+    <div className="img-wrap img-upload" >
+      <img className="image"for="photo-upload" src={src}/>
+    </div>
+    <input id="photo-upload" type="file" onChange={onChange}/> 
+  </label>
 
 class AddVolunteer extends Component {
   state = {
-    onChange:'',
-    src:'',
-    file:''
+    file: '',
+    imagePreviewUrl:'https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_960_720.png',
   }
-  handleChange = (e) => {
-    console.log(e);  
-    this.setState({src:e})
+  photoUpload = e =>{
+    e.preventDefault();
+    const reader = new FileReader();
+    const file = e.target.files[0];
+    reader.onloadend = () => {
+      this.setState({
+        file: file,
+        imagePreviewUrl: reader.result
+      });
+    }
+    reader.readAsDataURL(file);
   }
   render() {
+    const { imagePreviewUrl } = this.state;
+    const { onChange, temporary, subjects } = this.props;
     return (
       <>
         <div className="container mt-5 ">
           <h2>New Voulunteer</h2>
           <form className="" id="addVolunteer" method="POST" onSubmit={(e) => this.props.create(e, "addVolunteer", "volunteers")}>
-              <div className="App">
-              <img src={profile_img}
-                alt="upload image"
-                className="image"
-                onClick={this.handleChange}
-                
-              />
-              </div>
-              <Input onChange={this.props.onChange} type="text" name="name" label="Name" value={this.props.temporary.name} />
-              <Input onChange={this.props.onChange} type="text" name="age" label="Age" value={this.props.temporary.age} />
-              <Input onChange={this.props.onChange} type="email" name="email" label="Email" value={this.props.temporary.email} />
-              <Input onChange={this.props.onChange} type="text" name="address" label="Address" value={this.props.temporary.address} />
-              <Input onChange={this.props.onChange} type="text" name="phone" label="Phone" value={this.props.temporary.phone} />
-              {this.props.subjects.length > 0 ? (
+            <div>
+            <ImgUpload onChange={this.photoUpload} src={imagePreviewUrl}/>
+            </div>
+              <Input onChange={onChange} type="text" name="name" label="Name" value={temporary.name} />
+              <Input onChange={onChange} type="text" name="age" label="Age" value={temporary.age} />
+              <Input onChange={onChange} type="email" name="email" label="Email" value={temporary.email} />
+              <Input onChange={onChange} type="text" name="address" label="Address" value={temporary.address} />
+              <Input onChange={onChange} type="text" name="phone" label="Phone" value={temporary.phone} />
+              {subjects.length > 0 ? (
                 <select name="subject" className=" sel ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                   {this.props.subjects.map((subject) => (
                     <option key={Math.random()} value={subject.value}>

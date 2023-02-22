@@ -12,12 +12,3 @@
 .img{
     margin-right: 50px;
 }
-img{
-    height: 70%;
-    width: 100%; 
-    clip-path: circle(50% at 50% 50%);  
-}
-img:hover{
-    cursor: crosshair;
-    
-}

@@ -12,10 +12,6 @@ select:targets{
 }
 .image{
     width: 200px;
-    border-radius: 100px;
-    object-fit: cover;
-    border-radius: 50%;
-}
-.image:hover{
-    border-color:skyblue ;
+    height: 200px;
+    clip-path: circle(50% at 50% 50%);
 }
