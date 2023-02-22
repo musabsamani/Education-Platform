@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Input from "../include/_input";
-class AddStudent extends Component {
+class AddEvent extends Component {
   render() {
     return (
       <>
@@ -22,4 +22,4 @@ class AddStudent extends Component {
   }
 }
 
-export default AddStudent;
+export default AddEvent;

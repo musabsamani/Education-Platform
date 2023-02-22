@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import Input from "../include/_input";
 import "./addv.css";
 
-class AddVolunteer extends Component {
+class UpdateVolunteer extends Component {
   render() {
     return (
       <>
@@ -40,4 +40,4 @@ class AddVolunteer extends Component {
   }
 }
 
-export default AddVolunteer;
+export default UpdateVolunteer;
