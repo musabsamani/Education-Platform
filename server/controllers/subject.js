@@ -6,6 +6,7 @@ exports.create = (req, res) => {
     return;
   }
   const subject = new Subjectdb({
+    _id: req.body._id,
     name: req.body.name,
   });
   subject

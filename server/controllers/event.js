@@ -6,6 +6,7 @@ exports.create = (req, res) => {
     return;
   }
   const event = new Eventdb({
+    _id: req.body._id,
     title: req.body.title,
     allDay: req.body.allDay,
     start: req.body.start,

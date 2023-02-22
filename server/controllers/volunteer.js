@@ -6,9 +6,9 @@ exports.create = (req, res) => {
     return;
   }
   const volunteer = new Volunteerdb({
+    _id: req.body._id,
     name: req.body.name,
     age: req.body.age,
-    specialization: req.body.specialization,
     email: req.body.email,
     address: req.body.address,
     phone: req.body.phone,

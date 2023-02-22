@@ -6,10 +6,10 @@ exports.create = (req, res) => {
     return;
   }
   const lesson = new Lessondb({
+    _id: req.body._id,
     subject: req.body.subject,
     volunteer: req.body.volunteer,
-    date: req.body.date,
-    time: req.body.time //! #ed1
+    date: req.body.date
   });
   lesson
     .save(lesson)
