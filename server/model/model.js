@@ -28,7 +28,6 @@ var subject = new mongoose.Schema({
 var event = new mongoose.Schema({
   _id: String,
   title: String,
-  allDay: Boolean,
   start: Date,
   end: Date,
 });
