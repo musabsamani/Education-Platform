@@ -5,7 +5,7 @@ class VolunteerTable extends Component {
     return (
       <>
         <div className="container mt-5 ">
-          <Link to="/addvolunteer">
+          <Link to="/addVolunteer">
             <button className="btn btn-outline-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
               Add Volunteer
             </button>

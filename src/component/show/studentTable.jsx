@@ -6,7 +6,7 @@ class StudentTable extends Component {
     return (
       <>
         <div className="container mt-5 ">
-          <Link to="/addstudent">
+          <Link to="/addStudent">
             <button className="btn btn-outline-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
               Add Student
             </button>

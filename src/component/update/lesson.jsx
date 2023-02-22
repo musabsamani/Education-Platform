@@ -6,7 +6,7 @@ class Lesson extends Component {
       <>
         <div className="container mt-5 ">
           <h2>Edit Lesson</h2>
-          <form className="col g-3 d-flex-column justify-content-center" id="addlesson" onSubmit={(e) => this.props.update(e, "addlesson", "lessons")}>
+          <form className="col g-3 d-flex-column justify-content-center" id="updateLesson" onSubmit={(e) => this.props.update(e, "updateLesson", "lessons")}>
             {this.props.subjects.length > 0 ? (
               <select name="subject" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                 {this.props.subjects.map((subject) => (

@@ -17,25 +17,26 @@ class Home extends Component {
               </button>
             </Link>
             <Link to="/addStudent">
-              {/* <button className="btn btn-outline-secondary m-3 ">الطلاب</button> */}
               <button className="btn btn-outline-secondary m-3 " onClick={() => this.props.setTemporaryEmpty()}>
                 Add Student
               </button>
             </Link>
             <Link to="/addSubject">
-              {/* <button className="btn btn-outline-secondary m-3 ">المواد</button> */}
               <button className="btn btn-outline-secondary m-3 " onClick={() => this.props.setTemporaryEmpty()}>
                 Add Subject
               </button>
             </Link>
+            <Link to="/addEvent">
+              <button className="btn btn-outline-secondary m-3 " onClick={() => this.props.setTemporaryEmpty()}>
+                Add Event
+              </button>
+            </Link>
             <Link to="/addLesson">
-              {/* <button className="btn btn-outline-success m-3 ">الجدول الدراسي</button> */}
               <button className="btn btn-outline-success m-3 " onClick={() => this.props.setTemporaryEmpty()}>
                 add Lesson
               </button>
             </Link>
             <Link to="/calendar">
-              {/* <button className="btn btn-outline-success m-3 ">الجدول الدراسي</button> */}
               <button className="btn btn-outline-primary m-3 " onClick={() => this.props.setTemporaryEmpty()}>
                 Calendar
               </button>

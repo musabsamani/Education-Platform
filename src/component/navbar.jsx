@@ -28,6 +28,11 @@ const Navbar = () => {
               </NavLink>
             </li>
             <li className="nav-item">
+              <NavLink className="nav-link" to="/EventTable">
+                Event Table
+              </NavLink>
+            </li>
+            <li className="nav-item">
               <NavLink className="nav-link" to="/lessonTable">
                 Lesson Table
               </NavLink>

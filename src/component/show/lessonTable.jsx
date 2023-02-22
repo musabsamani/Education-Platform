@@ -8,7 +8,7 @@ class Lessontaable extends Component {
     return (
       <>
         <div className="container mt-5 ">
-          <Link to="/addlesson">
+          <Link to="/addLesson">
             <button className="btn btn-outline-primary m-3 " onClick={() => this.props.setTemporaryEmpty()}>
               Add Lesson
             </button>

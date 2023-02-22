@@ -17,20 +17,23 @@ import Navbar from "./component/navbar";
 import AddStudent from "./component/add/student";
 import AddVolunteer from "./component/add/volunteer";
 import AddSubject from "./component/add/subject";
-import Addlesson from "./component/add/lesson";
+import AddEvent from "./component/add/event";
+import AddLesson from "./component/add/lesson";
 // ====== components/add/
 import UpdateStudent from "./component/update/student";
 import UpdateVolunteer from "./component/update/volunteer";
 import UpdateSubject from "./component/update/subject";
-import Updatelesson from "./component/update/lesson";
+import UpdateEvent from "./component/update/event";
+import UpdateLesson from "./component/update/lesson";
 // ====== components/show/
 import StudentTable from "./component/show/studentTable";
 import VolunteerTable from "./component/show/volunteerTable";
 import LessonTable from "./component/show/lessonTable";
 import SubjectTable from "./component/show/subjectTable";
+import EventTable from "./component/show/eventTable";
 // ====== components/show/profile
 import Profile from "./component/show/profile";
-import CAlendar from "./component/calendar";
+import Calendar from "./component/calendar";
 // import comments from './helpers/comments';
 // =============== this is for axios for POST and PUT methods
 // ?? its so important
@@ -85,15 +88,18 @@ class App extends Component {
     }
   };
   // =======  UPDATE  ========
-  updateElement = async (event, id, resource) => {
+  updateElement = async (event, formId, resource) => {
     try {
       event.preventDefault();
-      var unindexed_array = $(`#${id}`).serializeArray();
+      var unindexed_array = $(`#${formId}`).serializeArray();
       var data = {};
       unindexed_array.forEach((n, i) => {
         data[n["name"]] = n["value"];
       });
+      console.log(formId, resource)
+      console.log(data)
       const uri = `${baseAPI}/${resource}/${data._id}`
+      console.log(uri)
       await axios.put(`${uri}`, data).then(() => {
         const element = [...this.state[resource]]
         element.forEach((element) => { element._id === data._id ? Object.assign(element, data) : element })
@@ -170,6 +176,18 @@ class App extends Component {
                 }
               />
               <Route
+                path="/eventTable"
+                element={
+                  <EventTable
+                    events={this.state.events}
+                    temporary={this.state.temporary}
+                    onDelete={this.deleteElement}
+                    setTemporary={this.setTemporary}
+                    setTemporaryEmpty={this.setTemporaryEmpty}
+                  />
+                }
+              />
+              <Route
                 path="/volunteerTable"
                 element={
                   <VolunteerTable
@@ -219,14 +237,21 @@ class App extends Component {
               />
               <Route path="/addSubject"
                 element={<AddSubject
-                  subject={this.state.temporary}
+                  temporary={this.state.temporary}
+                  onChange={this.handleChange}
+                  create={this.createElement}
+                />}
+              />
+              <Route path="/addEvent"
+                element={<AddEvent
+                  temporary={this.state.temporary}
                   onChange={this.handleChange}
                   create={this.createElement}
                 />}
               />
               <Route
                 path="/addLesson"
-                element={<Addlesson
+                element={<AddLesson
                   subjects={this.state.subjects}
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
@@ -254,14 +279,21 @@ class App extends Component {
               />
               <Route path="/updateSubject"
                 element={<UpdateSubject
-                  subject={this.state.temporary}
+                  temporary={this.state.temporary}
+                  onChange={this.handleChange}
+                  update={this.updateElement}
+                />}
+              />
+              <Route path="/updateEvent"
+                element={<UpdateEvent
+                  temporary={this.state.temporary}
                   onChange={this.handleChange}
                   update={this.updateElement}
                 />}
               />
               <Route
                 path="/updateLesson"
-                element={<Updatelesson
+                element={<UpdateLesson
                   subjects={this.state.subjects}
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
@@ -273,7 +305,7 @@ class App extends Component {
             {/* ########### calendar ############*/}
             <>
               <Route path="/calendar"
-                element={<CAlendar
+                element={<Calendar
                 />}
               />
             </>
