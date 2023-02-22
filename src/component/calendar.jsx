@@ -39,9 +39,12 @@ const events = [
 ]
 
 function CAlendar(props) {
+    // ! ##### HERE  prop.events is passed here
+    console.log(props.events)
     props.events.forEach(event => {
         let temp = {
             title: event.title,
+            // event date is in for of string in form YYYY-MM-DD
             start: new Date(event.start),
             end: new Date(event.end)
         }
@@ -49,6 +52,7 @@ function CAlendar(props) {
             events.append(temp)
         }
     })
+    // 
     const [newEvent, setNewEvent] = useState({ title: '', time: '' })
     const [allEvents, setAllEvents] = useState(events)
 
