@@ -34,9 +34,4 @@ function dateFormaterForInput(date) {
     }
     else return date
 }
-const ali = "dmkrfkn"
-function hh() {
-    console.log(ali)
-}
-// console.log(new Date("2023-02-01"))
-export { handleChange, setTemporary, setTemporaryEmpty, generateId, dateFormaterForInput, hh }
+export { handleChange, setTemporary, setTemporaryEmpty, generateId, dateFormaterForInput }
