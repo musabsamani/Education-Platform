@@ -3,5 +3,6 @@ const studentAPI = `${baseAPI}/students`
 const volunteerAPI = `${baseAPI}/volunteers`
 const lessonAPI = `${baseAPI}/lessons`
 const subjectAPI = `${baseAPI}/subjects`
+const eventAPI = `${baseAPI}/events`
 
-export { studentAPI, volunteerAPI, lessonAPI, subjectAPI, baseAPI }
+export { baseAPI, studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI }

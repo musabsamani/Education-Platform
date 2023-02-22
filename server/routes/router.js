@@ -4,6 +4,7 @@ const studentController = require("../controllers/students");
 const volunteerController = require("../controllers/volunteer");
 const lessonsController = require("../controllers/lesson");
 const subjectController = require("../controllers/subject");
+const eventController = require("../controllers/event");
 
 /**
  * @description Root Route
@@ -36,4 +37,10 @@ route.post("/api/subjects", subjectController.create);
 route.get("/api/subjects", subjectController.find);
 route.put("/api/subjects/:id", subjectController.update);
 route.delete("/api/subjects/:id", subjectController.delete);
+// =============== subject router ==================
+// API
+route.post("/api/events", eventController.create);
+route.get("/api/events", eventController.find);
+route.put("/api/events/:id", eventController.update);
+route.delete("/api/events/:id", eventController.delete);
 module.exports = route;

@@ -21,8 +21,15 @@ var lesson = new mongoose.Schema({
 var subject = new mongoose.Schema({
   name: String,
 });
+var event = new mongoose.Schema({
+  title: String,
+  allDay: Boolean,
+  start: Date,
+  end: Date,
+});
 const Studentdb = mongoose.model("studentdb", student);
 const Volunteerdb = mongoose.model("volunteerdb", volunteer);
 const Lessondb = mongoose.model("lessonsdb", lesson);
 const Subjectdb = mongoose.model("subjectdb", subject);
-module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb }
+const Eventdb = mongoose.model("enentdb", event);
+module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb, Eventdb }
