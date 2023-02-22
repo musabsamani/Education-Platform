@@ -8,7 +8,7 @@ class UpdateLesson extends Component {
           <h2>Edit Lesson</h2>
           <form className="col g-3 d-flex-column justify-content-center" id="updateLesson" onSubmit={(e) => this.props.update(e, "updateLesson", "lessons")}>
             {this.props.subjects.length > 0 ? (
-              <select name="subject" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+              <select onChange={this.props.onChange} value={this.props.temporary.subject} name="subject" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                 {this.props.subjects.map((subject) => (
                   <option key={Math.random()} value={subject.value}>
                     {subject.name}
@@ -21,7 +21,7 @@ class UpdateLesson extends Component {
               </select>
             )}
             {this.props.volunteers.length > 0 ? (
-              <select name="volunteer" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+              <select onChange={this.props.onChange} value={this.props.temporary.volunteer} name="volunteer" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                 {this.props.volunteers.map((volunteer) => (
                   <option key={Math.random()} value={volunteer.value}>
                     {volunteer.name}

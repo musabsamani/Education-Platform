@@ -9,7 +9,7 @@ import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { enUS, fr } from 'date-fns/esm/locale'
 
-const locales = {en:enUS,fr:fr}
+const locales = { en: enUS, fr: fr }
 
 const localizer = dateFnsLocalizer({
     format,
@@ -23,28 +23,37 @@ const events = [
     {
         title: "Big Meeting",
         allDay: true,
-        start: new Date(2023,1,25),
-        end: new Date(2023,1,25),    
+        start: new Date(2023, 1, 25),
+        end: new Date(2023, 1, 25),
     },
     {
         title: "Vacation",
-        start: new Date(2023, 2 , 21),
-        end: new Date(2023, 2 , 21),    
+        start: new Date(2023, 2, 21),
+        end: new Date(2023, 2, 21),
     },
     {
         title: "Conference",
-        start: new Date(2023, 2 , 22),
-        end: new Date(2023, 2 , 22),    
+        start: new Date(2023, 2, 22),
+        end: new Date(2023, 2, 22),
     },
 ]
 
-function CAlendar() {
-
-    const [ newEvent, setNewEvent] = useState({title:'',time:''})
+function CAlendar(props) {
+    props.events.forEach(event => {
+        let temp = {
+            title: event.title,
+            start: new Date(event.start),
+            end: new Date(event.end)
+        }
+        if (!isNaN(temp.date)) {
+            events.append(temp)
+        }
+    })
+    const [newEvent, setNewEvent] = useState({ title: '', time: '' })
     const [allEvents, setAllEvents] = useState(events)
-    
-    const addeventhandler= () => {
-        setAllEvents([...allEvents,newEvent])
+
+    const addeventhandler = () => {
+        setAllEvents([...allEvents, newEvent])
         console.log(setAllEvents)
         console.log(newEvent)
 
@@ -52,8 +61,8 @@ function CAlendar() {
     const isWeekday = (date) => {
         const day = getDay(date);
         return day !== 0 && day !== 6;
-      };
-    
+    };
+
     return (
         <>
             <div className="calendar text-center">
@@ -67,7 +76,7 @@ function CAlendar() {
                         minDate={new Date()}
                         placeholderText="The Date"
                         selected={newEvent.time}
-                        onChange={(time) => setNewEvent({ ...newEvent,time })}
+                        onChange={(time) => setNewEvent({ ...newEvent, time })}
                         filterDate={isWeekday}
                         timeInputLabel="Time:"
                         dateFormat="dd/MM/yyyy h:mm aa"
@@ -76,8 +85,8 @@ function CAlendar() {
                         showMonthDropdown
                         required
                         form='submitDate'
-                        />
-                        <button id='submitDate' className="btn btn-success" onClick={(e) => addeventhandler(e)}>Add Event</button>
+                    />
+                    <button id='submitDate' className="btn btn-success" onClick={(e) => addeventhandler(e)}>Add Event</button>
                 </div>
                 <Calendar
                     className="calendarTable"
@@ -85,7 +94,7 @@ function CAlendar() {
                     events={events}
                     startAccessor="start"
                     endAccessor="end"
-                    style={{height:500,margin:"20px"}} />
+                    style={{ height: 500, margin: "20px" }} />
             </div>
         </>
     );

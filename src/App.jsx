@@ -95,10 +95,7 @@ class App extends Component {
       unindexed_array.forEach((n, i) => {
         data[n["name"]] = n["value"];
       });
-      console.log(formId, resource)
-      console.log(data)
       const uri = `${baseAPI}/${resource}/${data._id}`
-      console.log(uri)
       await axios.put(`${uri}`, data).then(() => {
         const element = [...this.state[resource]]
         element.forEach((element) => { element._id === data._id ? Object.assign(element, data) : element })
@@ -130,7 +127,6 @@ class App extends Component {
   };
   // =======  store value in this.state.temporary  ========
   setTemporary = (element) => {
-    console.log(element)
     this.setState({ temporary: element });
   };
   // =======  setting this.state.temporary to empty value  ========
@@ -310,6 +306,7 @@ class App extends Component {
             <>
               <Route path="/calendar"
                 element={<Calendar
+                  events={this.state.events}
                 />}
               />
             </>

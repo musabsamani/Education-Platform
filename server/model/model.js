@@ -28,8 +28,8 @@ var subject = new mongoose.Schema({
 var event = new mongoose.Schema({
   _id: String,
   title: String,
-  start: Date,
-  end: Date,
+  start: String,
+  end: String,
 });
 const Studentdb = mongoose.model("studentdb", student);
 const Volunteerdb = mongoose.model("volunteerdb", volunteer);

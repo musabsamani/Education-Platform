@@ -20,5 +20,5 @@ function dateFormaterForInput(date) {
     }
     else return date
 }
-// console.log(dateFormaterForInput("2023"))
+// console.log(new Date("2023-02-01"))
 export { generateId, dateFormaterForInput }

@@ -40,7 +40,7 @@ class AddVolunteer extends Component {
           <h2>New Voulunteer</h2>
           <form className="" id="addVolunteer" method="POST" onSubmit={(e) => this.props.create(e, "addVolunteer", "volunteers")}>
             <div>
-            <ImgUpload onChange={this.photoUpload} src={image}/>
+            {/* <ImgUpload onChange={this.photoUpload} src={image}/> */}
             </div>
               <Input onChange={onChange} type="text" name="name" label="Name" value={temporary.name} />
               <Input onChange={onChange} type="text" name="age" label="Age" value={temporary.age} />
