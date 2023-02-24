@@ -14,7 +14,17 @@
 
     III - Also install nice vscode extension named "Material Icon Theme" by Philipp and has 16,389,162 download
     its support various type of icon to display on the Explorer window in vscode
+
+    IV -
 */
 // ! =====  Emergent !!!!
 
-//  ##### just open calender component and see line 42
+//  ##### calender component works fine and all events are displayed in in the calendar
+//  ##### just open calender component and see line 24
+//  ##### we should use useState hooks instead on array.push() method see lines 32, 34-40
+// ? i merged add and update component in on component inside folder named form
+// ? and i used property i call "name" inside each element in App.jsx to denote whether it is add or update
+// ? EXAMPLE : element={<StudentForm name="update" setTemporary=this.setTemporary ......}
+// ? in each component i used condetional rendering using ternary operator (condition?if_true:if_false)
+// ? condition is (this.props.name==="add")
+// ! DELETE ALL COMMENTS YOU HAVE READ

@@ -1,9 +1,0 @@
-select{
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
-
-}
-select:targets{
-    border-color: aqua;
-}

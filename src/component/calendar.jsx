@@ -19,28 +19,9 @@ const localizer = dateFnsLocalizer({
     locales
 })
 
-const events = [
-    {
-        title: "Big Meeting",
-        allDay: true,
-        start: new Date(2023, 1, 25),
-        end: new Date(2023, 1, 25),
-    },
-    {
-        title: "Vacation",
-        start: new Date(2023, 2, 21),
-        end: new Date(2023, 2, 21),
-    },
-    {
-        title: "Conference",
-        start: new Date(2023, 2, 22),
-        end: new Date(2023, 2, 22),
-    },
-]
 
 function CAlendar(props) {
-    // ! ##### HERE  prop.events is passed here
-    console.log(props.events)
+    const events = []
     props.events.forEach(event => {
         let temp = {
             title: event.title,
@@ -48,11 +29,8 @@ function CAlendar(props) {
             start: new Date(event.start),
             end: new Date(event.end)
         }
-        if (!isNaN(temp.date)) {
-            events.append(temp)
-        }
+        events.push(temp)
     })
-    // 
     const [newEvent, setNewEvent] = useState({ title: '', time: '' })
     const [allEvents, setAllEvents] = useState(events)
 

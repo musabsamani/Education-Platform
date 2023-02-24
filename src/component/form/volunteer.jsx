@@ -37,8 +37,8 @@ class AddVolunteer extends Component {
     return (
       <>
         <div className="container mt-5 ">
-          <h2>New Voulunteer</h2>
-          <form className="" id="addVolunteer" method="POST" onSubmit={(e) => this.props.create(e, "addVolunteer", "volunteers")}>
+          <h2>{this.props.name === "add" ? "New Voulunteer" : "Edit Voulunteer"}</h2>
+          <form className="col g-3 d-flex-column justify-content-center" id={`${this.props.name}Volunteer`} onSubmit={this.props.name === "add" ? (e) => this.props.create(e, "addVolunteer", "volunteers") : (e) => this.props.updae(e, "updateVolunteer", "volunteers")}>
             <div>
             {/* <ImgUpload onChange={this.photoUpload} src={image}/> */}
             </div>
@@ -64,7 +64,7 @@ class AddVolunteer extends Component {
               </div>
               <div className="s col mt-2">
                 <button className="btn btn-primary m-1" type="submit">
-                  Submit
+                {this.props.name == "add" ? "Submit" : "Save"}
                 </button>
               </div> 
           </form>

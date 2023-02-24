@@ -13,18 +13,12 @@ import { createElement, updateElement, deleteElement } from "./helpers/crudFunct
 // ====== components/
 import Home from "./component/home";
 import Navbar from "./component/navbar";
-// ====== components/add/
-import AddStudent from "./component/add/student";
-import AddVolunteer from "./component/add/volunteer";
-import AddSubject from "./component/add/subject";
-import AddEvent from "./component/add/event";
-import AddLesson from "./component/add/lesson";
-// ====== components/add/
-import UpdateStudent from "./component/update/student";
-import UpdateVolunteer from "./component/update/volunteer";
-import UpdateSubject from "./component/update/subject";
-import UpdateEvent from "./component/update/event";
-import UpdateLesson from "./component/update/lesson";
+// ====== components/Form/
+import StudentForm from "./component/form/student";
+import VolunteerForm from "./component/form/volunteer";
+import SubjectForm from "./component/form/subject";
+import EventForm from "./component/form/event";
+import LessonForm from "./component/form/lesson";
 // ====== components/show/
 import StudentTable from "./component/show/studentTable";
 import VolunteerTable from "./component/show/volunteerTable";
@@ -158,14 +152,16 @@ class App extends Component {
             {/* ########### add ########### */}
             <>
               <Route path="/addStudent"
-                element={<AddStudent
+                element={<StudentForm
+                  name="add"
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
                   create={this.createElement}
                 />}
               />
               <Route path="/addVolunteer"
-                element={<AddVolunteer
+                element={<VolunteerForm
+                  name="add"
                   temporary={this.state.temporary}
                   subjects={this.state.subjects}
                   onChange={this.handleChange}
@@ -173,14 +169,16 @@ class App extends Component {
                 />}
               />
               <Route path="/addSubject"
-                element={<AddSubject
+                element={<SubjectForm
+                  name="add"
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
                   create={this.createElement}
                 />}
               />
               <Route path="/addEvent"
-                element={<AddEvent
+                element={<EventForm
+                  name="add"
                   temporary={this.state.temporary}
                   formater={dateFormaterForInput}
                   onChange={this.handleChange}
@@ -189,7 +187,8 @@ class App extends Component {
               />
               <Route
                 path="/addLesson"
-                element={<AddLesson
+                element={<LessonForm
+                  name="add"
                   subjects={this.state.subjects}
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
@@ -202,14 +201,16 @@ class App extends Component {
             {/* ########### update ########### */}
             <>
               <Route path="/updateStudent"
-                element={<UpdateStudent
+                element={<StudentForm
+                  name="update"
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
                   update={this.updateElement}
                 />}
               />
               <Route path="/updateVolunteer"
-                element={<UpdateVolunteer
+                element={<VolunteerForm
+                  name="update"
                   temporary={this.state.temporary}
                   subjects={this.state.subjects}
                   onChange={this.handleChange}
@@ -217,7 +218,8 @@ class App extends Component {
                 />}
               />
               <Route path="/updateSubject"
-                element={<UpdateSubject
+                element={<SubjectForm
+                  name="update"
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
                   dateFormater={this.dateFormater}
@@ -225,7 +227,8 @@ class App extends Component {
                 />}
               />
               <Route path="/updateEvent"
-                element={<UpdateEvent
+                element={<EventForm
+                  name="update"
                   temporary={this.state.temporary}
                   formater={dateFormaterForInput}
                   onChange={this.handleChange}
@@ -234,7 +237,8 @@ class App extends Component {
               />
               <Route
                 path="/updateLesson"
-                element={<UpdateLesson
+                element={<LessonForm
+                  name="update"
                   subjects={this.state.subjects}
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
