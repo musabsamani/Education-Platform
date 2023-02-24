@@ -11,6 +11,7 @@ class AddStudent extends Component {
             <Input onChange={this.props.onChange} type="text" name="age" label="Age" value={this.props.temporary.age} />
             <Input onChange={this.props.onChange} type="text" name="address" label="Address" value={this.props.temporary.address} />
             <Input onChange={this.props.onChange} type="text" name="phone" label="Phone" value={this.props.temporary.phone} />
+            {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
             <div className="s col mt-2">
               <button className="btn btn-primary m-1" type="submit">
                 {this.props.name == "add" ? "Submit" : "Save"}

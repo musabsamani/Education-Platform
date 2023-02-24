@@ -37,6 +37,7 @@ class Lesson extends Component {
                 </select>
               )}
             </div>
+            {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
             <Input type="date" name="date" label="Date" onChange={this.props.onChange} value={this.props.formater(this.props.temporary.date)} />
             <div className="s col mt-2">
               <button className="btn btn-primary m-1" type="submit">

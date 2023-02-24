@@ -38,7 +38,7 @@ class AddVolunteer extends Component {
       <>
         <div className="container mt-5 ">
           <h2>{this.props.name === "add" ? "New Voulunteer" : "Edit Voulunteer"}</h2>
-          <form className="col g-3 d-flex-column justify-content-center" id={`${this.props.name}Volunteer`} onSubmit={this.props.name === "add" ? (e) => this.props.create(e, "addVolunteer", "volunteers") : (e) => this.props.updae(e, "updateVolunteer", "volunteers")}>
+          <form className="col g-3 d-flex-column justify-content-center" id={`${this.props.name}Volunteer`} onSubmit={this.props.name === "add" ? (e) => this.props.create(e, "addVolunteer", "volunteers") : (e) => this.props.update(e, "updateVolunteer", "volunteers")}>
             <div>
             {/* <ImgUpload onChange={this.photoUpload} src={image}/> */}
             </div>
@@ -47,6 +47,7 @@ class AddVolunteer extends Component {
               <Input onChange={onChange} type="email" name="email" label="Email" value={temporary.email} />
               <Input onChange={onChange} type="text" name="address" label="Address" value={temporary.address} />
               <Input onChange={onChange} type="text" name="phone" label="Phone" value={temporary.phone} />
+            {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
             <div className="col-md-5">
               {subjects.length > 0 ? (
                 <select name="subject" className=" sel ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
