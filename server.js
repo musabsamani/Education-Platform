@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 // require path
 const path = require("path");
 // require mongoDB connection file
-const connectDB = require("./server/database/connection");
+const connectDB = require("./server/model/connection");
 // use express server as constant named app
 const app = express();
 // config file path for environment and credentials

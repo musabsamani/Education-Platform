@@ -47,6 +47,7 @@ class AddVolunteer extends Component {
               <Input onChange={onChange} type="email" name="email" label="Email" value={temporary.email} />
               <Input onChange={onChange} type="text" name="address" label="Address" value={temporary.address} />
               <Input onChange={onChange} type="text" name="phone" label="Phone" value={temporary.phone} />
+            <div className="col-md-5">
               {subjects.length > 0 ? (
                 <select name="subject" className=" sel ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                   {this.props.subjects.map((subject) => (
@@ -59,7 +60,8 @@ class AddVolunteer extends Component {
                 <select disabled className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                   <option>Subjects Database is Empty</option>
                 </select>
-              )}
+              )}              
+              </div>
               <div className="s col mt-2">
                 <button className="btn btn-primary m-1" type="submit">
                   Submit
