@@ -72,7 +72,7 @@ class App extends Component {
       const { data: events } = await axios.get(eventAPI);
       this.setState({ events });
     } catch {
-      console.log("error fetching data from the server");
+      console.log("error fetching data from the server on componentDidMount");
     }
   }
   render() {
