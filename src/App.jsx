@@ -142,10 +142,19 @@ class App extends Component {
                   />
                 }
               />
+              {/* ########### profile ############*/}
               <Route path="/profile"
                 element={<Profile
                   temporary={this.state.temporary}
                   setTemporary={this.setTemporary}
+                />}
+              />
+            </>
+            {/* ########### calendar ############*/}
+            <>
+              <Route path="/calendar"
+                element={<Calendar
+                  events={this.state.events}
                 />}
               />
             </>
@@ -245,14 +254,6 @@ class App extends Component {
                   formater={dateFormaterForInput}
                   onChange={this.handleChange}
                   update={this.updateElement}
-                />}
-              />
-            </>
-            {/* ########### calendar ############*/}
-            <>
-              <Route path="/calendar"
-                element={<Calendar
-                  events={this.state.events}
                 />}
               />
             </>
