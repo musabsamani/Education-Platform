@@ -1,17 +1,18 @@
-// =======  setting this.state.temporary while typing in the input fields  ========
+// ===============  setting this.state.temporary while typing in the input fields  
 function handleChange(e) {
     const temporary = { ...this.state.temporary };
     temporary[e.currentTarget.name] = e.currentTarget.value;
     this.setState({ temporary });
 };
-// =======  store value in this.state.temporary  ========
+// ===============  store value in this.state.temporary  
 function setTemporary(element) {
     this.setState({ temporary: element });
 };
-// =======  setting this.state.temporary to empty value  ========
+// ===============  setting this.state.temporary to empty value
 function setTemporaryEmpty() {
     this.setState({ temporary: {} });
 };
+// ===============  setting this.state.temporary to empty value
 function generateId() {
     const chars = '0123456789abcdef';
     let hex = '';
@@ -21,6 +22,7 @@ function generateId() {
     }
     return hex;
 }
+// ===============  convert date object to string to use it to fill the input Date when using onChange
 function dateFormaterForInput(date) {
     if (!date) {
         return '';
@@ -34,4 +36,21 @@ function dateFormaterForInput(date) {
     }
     else return date
 }
-export { handleChange, setTemporary, setTemporaryEmpty, generateId, dateFormaterForInput }
+// ===============  check if the date is valid 
+// 1 start date is before end 
+// 2 not overlaping with any other dates
+function isValidDate(newObject, oldObject) {
+    const newObjectStart = new Date(newObject.start).getTime()
+    const newObjectEnd = new Date(newObject.end).getTime()
+    const oldObjectStart = new Date(oldObject.start).getTime()
+    const oldObjectEnd = new Date(oldObject.end).getTime()
+    const newObjectOccurFirst = newObjectEnd <= oldObjectStart
+    const newObjectOccurAfter = newObjectStart >= oldObjectEnd
+    const noOvelap = newObjectOccurFirst || newObjectOccurAfter
+    if (!noOvelap) {
+        return false
+    }
+    return noOvelap
+}
+
+export { handleChange, setTemporary, setTemporaryEmpty, generateId, dateFormaterForInput, isValidDate }

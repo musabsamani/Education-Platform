@@ -23,6 +23,7 @@ async function createElement(event, formId, resource) {
             const element = [...this.state[resource], data];
             this.setState({ [resource]: element });
             this.setTemporaryEmpty();
+            console.log(`${resource} Created Successfully`)
         });
     } catch {
         console.error(`Error Creating ${resource}`);
@@ -43,6 +44,7 @@ async function updateElement(event, formId, resource) {
             element.forEach((element) => { element._id === data._id ? Object.assign(element, data) : element })
             this.setState({ [resource]: element });
             this.setTemporaryEmpty()
+            console.log(`${resource} Updated Successfully`)
         });
     } catch {
         console.error(`Error Updating ${resource}`);
@@ -52,9 +54,10 @@ async function updateElement(event, formId, resource) {
 async function deleteElement(id, resource) {
     try {
         const uri = `${baseAPI}/${resource}`;
-        await axios.delete(`${uri}/${id}`).then(() => {
+        await axios.delete(`${uri}/${id}`).then((res) => {
             const data = this.state[resource].filter((element) => element._id !== id);
             this.setState({ [resource]: data });
+            console.log(`${resource} Deleted Successfully`)
         });
     } catch {
         console.error(`Error Deleting ${resource}`);

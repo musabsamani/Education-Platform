@@ -188,6 +188,7 @@ class App extends Component {
               <Route path="/addEvent"
                 element={<EventForm
                   name="add"
+                  events={this.state.events}
                   temporary={this.state.temporary}
                   formater={dateFormaterForInput}
                   onChange={this.handleChange}
@@ -238,6 +239,7 @@ class App extends Component {
               <Route path="/updateEvent"
                 element={<EventForm
                   name="update"
+                  events={this.state.events}
                   temporary={this.state.temporary}
                   formater={dateFormaterForInput}
                   onChange={this.handleChange}
