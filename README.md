@@ -1,4 +1,4 @@
-# Education Platform 
+# Education Platform
 
 0 - clone this repository to your working directory 
   - by the command "git clone https://github.com/musabobada/Education-Platform.git"
@@ -20,7 +20,7 @@
   - replace [port number] with port typed in console after running Front-End (npm start).
 
 <!--
-### Second : Docker
+### Second : Docker.
 
 1 - Start the Docker app (Docker Desktop app should be installed) 
   
