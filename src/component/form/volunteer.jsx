@@ -36,7 +36,7 @@ const ImgUpload =({
 class AddVolunteer extends Component {
   state = {
     file: '',
-    image:'../../assets/img/uploadCover.webp',
+    image:'src/assets/img/uploadCover.webp',
   }
   photoUpload = e =>{
     e.preventDefault();
