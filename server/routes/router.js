@@ -5,6 +5,8 @@ const volunteerController = require("../controllers/volunteer");
 const lessonsController = require("../controllers/lesson");
 const subjectController = require("../controllers/subject");
 const eventController = require("../controllers/event");
+const profileCoverController = require("../controllers/profileCover");
+const profileUpload = require("../middleware/multer/profileCover");
 
 /**
  * @description Root Route
@@ -43,4 +45,10 @@ route.post("/api/events", eventController.create);
 route.get("/api/events", eventController.find);
 route.put("/api/events/:id", eventController.update);
 route.delete("/api/events/:id", eventController.delete);
+// =============== profile router ==================
+// API
+route.post('/api/upload', profileUpload.single('profileCover'), profileCoverController.upload)
+route.get('/api/upload', profileCoverController.find)
+route.delete('/api/upload/:id', profileCoverController.delete)
+route.get('/upload', (req, res) => { res.render("upload") })
 module.exports = route;

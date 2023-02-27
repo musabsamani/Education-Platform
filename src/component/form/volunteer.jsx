@@ -13,11 +13,30 @@ const ImgUpload =({
     </div>
     <input id="photo-upload" type="file" onChange={onChange}/> 
   </label>
+// const [file, setFile] = useState()
+//     const send = event => {
+//         event.preventDefault()
+//         const data = new FormData()
+//         data.append("profileCover", file)
+//         const uri = "http://localhost:5000/api/upload"
+//         axios.post(uri, data).then(res => console.log(res)).catch(err => console.log(err))
+//     }
+//     const handleChange=e=>{const file = e.target.files[0];
+//                         setFile(file)}
 
+//     return (
+//         <form onSubmit={e => send(e)}>     
+//         <input type="file" name="profileCover"
+//                 onChange={e => handleChange(e)}
+//             />
+//             <button className="btn btn-primary" type="submit">Upload</button>
+//             <img src=""/>
+//         </form>
+//     )
 class AddVolunteer extends Component {
   state = {
     file: '',
-    image:'https://cdn.pixabay.com/photo/2016/01/03/00/43/upload-1118929_960_720.png',
+    image:'../../assets/img/uploadCover.webp',
   }
   photoUpload = e =>{
     e.preventDefault();
@@ -31,16 +50,17 @@ class AddVolunteer extends Component {
     }
     reader.readAsDataURL(file);
   }
-  render() {
+
+  render(){
     const { image } = this.state;
     const { onChange, temporary, subjects } = this.props;
-    return (
+      return (
       <>
         <div className="container mt-5 ">
           <h2>{this.props.name === "add" ? "New Voulunteer" : "Edit Voulunteer"}</h2>
           <form className="col g-3 d-flex-column justify-content-center" id={`${this.props.name}Volunteer`} onSubmit={this.props.name === "add" ? (e) => this.props.create(e, "addVolunteer", "volunteers") : (e) => this.props.update(e, "updateVolunteer", "volunteers")}>
             <div>
-            {/* <ImgUpload onChange={this.photoUpload} src={image}/> */}
+            <ImgUpload onChange={this.photoUpload} src={image}/>
             </div>
               <Input onChange={onChange} type="text" name="name" label="Name" value={temporary.name} />
               <Input onChange={onChange} type="text" name="age" label="Age" value={temporary.age} />
@@ -71,10 +91,9 @@ class AddVolunteer extends Component {
           </form>
         </div>
       </>
-    );
-  }
+    )
 }
-
+}
 export default AddVolunteer;
 
 // const ImgUpload =({

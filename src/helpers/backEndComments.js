@@ -12,7 +12,7 @@
     Also to work properly i added constructor function to the App.jsx and bind `this` keyword to work correctly
     ? see App.jsx line 44
 
-    III - Also install nice vscode extension named "Material Icon Theme" by Philipp and has 16,389,162 download
+    III - Also install nice vscode extension named "vscode-icons" by "VsCode Icons team" and has 13,347,630 download
     its support various type of icon to display on the Explorer window in vscode
 
     IV -

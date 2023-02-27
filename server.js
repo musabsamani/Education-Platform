@@ -15,15 +15,12 @@ const app = express();
 // config file path for environment and credentials
 dotenv.config({ path: "config.env" });
 const port = process.env.PORT || 8080;
-
 var cors = require('cors');
 app.use(cors());
 // log request in console
 app.use(morgan("tiny"));
-
 // mongoDB connction
 connectDB();
-
 // parse request to body-parser
 app.use(bodyParser.urlencoded({ extended: false }));
 // set HTML engine
@@ -37,6 +34,6 @@ app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
 // load router
 app.use("/", require("./server/routes/router"));
-app.listen(5000, () => {
+app.listen(port, () => {
   console.log(`Express server is running on : http://localhost:${port}`);
 });

@@ -25,6 +25,8 @@ import VolunteerTable from "./component/show/volunteerTable";
 import LessonTable from "./component/show/lessonTable";
 import SubjectTable from "./component/show/subjectTable";
 import EventTable from "./component/show/eventTable";
+import ImageUpload from "./component/upload";
+import ImageById from "./component/display";
 // ====== components/show/profile
 import Profile from "./component/show/profile";
 import Calendar from "./component/calendar";
@@ -75,6 +77,14 @@ class App extends Component {
         <Navbar />
         <main className="container-fluid">
           <Routes>
+            <Route path="/upload"
+              element={<ImageUpload
+              />}
+            />
+            <Route path="/display"
+              element={< ImageById imageId="63fa2e711f0d02dc63bdb2b8"
+              />}
+            />
             <Route path="/"
               element={<Home
                 setTemporaryEmpty={this.setTemporaryEmpty}
