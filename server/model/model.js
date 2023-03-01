@@ -1,58 +1,52 @@
 const mongoose = require("mongoose");
-const path = require("path")
-const student = new mongoose.Schema({
+const studentSchema = new mongoose.Schema({
   _id: String,
   name: String,
   age: String,
   address: String,
   phone: String,
 });
-const volunteer = new mongoose.Schema({
+const volunteerSchema = new mongoose.Schema({
   _id: String,
   name: String,
   age: String,
   email: String,
   address: String,
   phone: String,
-  subject: String
+  subject: String,
+  profileCoverName: String,
 });
-const lesson = new mongoose.Schema({
+const lessonSchema = new mongoose.Schema({
   _id: String,
   subject: String,
-  volunteer: String,
   date: String,
+  volunteer: String
 });
-const subject = new mongoose.Schema({
+const subjectSchema = new mongoose.Schema({
   _id: String,
   name: String,
 });
-const event = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({
   _id: String,
   title: String,
   start: String,
   end: String,
 });
-const profile = new mongoose.Schema({
-  // _id: String,
-  profileCovername: String,
-  // data: Buffer,
-  // contentType: String
-});
-profile.virtual("profileCoverPath").get(function () {
-  if (this.profileCovername != null) {
-    return path.join("/", uploadBasePath, profileCoverBasePath, this.profileCovername)
-  }
-})
-const Studentdb = mongoose.model("studentdb", student);
-const Volunteerdb = mongoose.model("volunteerdb", volunteer);
-const Lessondb = mongoose.model("lessonsdb", lesson);
-const Subjectdb = mongoose.model("subjectdb", subject);
-const Eventdb = mongoose.model("enentdb", event);
-const Profiledb = mongoose.model('profiledb', profile);
-// profile cover file paths
-// root/upload
+// profile cover file paths // root/upload
 const uploadBasePath = "upload"
-// profile cover file paths
-// root/uploadBasePath/profileCovers
+// profile cover file paths // root/uploadBasePath/profileCovers
 const profileCoverBasePath = "profileCovers"
-module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb, Eventdb, Profiledb, uploadBasePath, profileCoverBasePath }
+
+volunteerSchema.virtual('imagePath').get(function () {
+  if (this.profileCoverName) {
+    return `${uploadBasePath}/${profileCoverBasePath}/${this.profileCoverName}`
+  }
+  return ""
+});
+
+const Studentdb = mongoose.model("studentdb", studentSchema);
+const Volunteerdb = mongoose.model("volunteerdb", volunteerSchema);
+const Lessondb = mongoose.model("lessonsdb", lessonSchema);
+const Subjectdb = mongoose.model("subjectdb", subjectSchema);
+const Eventdb = mongoose.model("enentdb", eventSchema);
+module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb, Eventdb, uploadBasePath, profileCoverBasePath }

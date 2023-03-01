@@ -8,8 +8,15 @@ const storage = multer.diskStorage({
     destination: (req, file, callback) => {
         callback(null, profileCoverUploadPath)
     },
-    filename: (req, file, callback) => {
-        callback(null, new Date().toISOString().replace(/[-:]/g, '') + '-' + file.fieldname + '-' + file.originalname)
+    filename: async (req, file, callback) => {
+        await req.body
+        let fileName;
+        if (req.body.profileCoverName) {
+            fileName = req.body.profileCoverName;
+        } else {
+            fileName = String(Math.random());
+        }
+        callback(null, fileName);
     }
 });
 const profileUpload = multer({

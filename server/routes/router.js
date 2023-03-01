@@ -5,7 +5,6 @@ const volunteerController = require("../controllers/volunteer");
 const lessonsController = require("../controllers/lesson");
 const subjectController = require("../controllers/subject");
 const eventController = require("../controllers/event");
-const profileCoverController = require("../controllers/profileCover");
 const profileUpload = require("../middleware/multer/profileCover");
 
 /**
@@ -23,9 +22,9 @@ route.delete("/api/students/:id", studentController.delete);
 
 // =============== volunteer router ==================
 // API
-route.post("/api/volunteers", volunteerController.create);
+route.post("/api/volunteers", profileUpload.single('profileCover'), volunteerController.create);
 route.get("/api/volunteers", volunteerController.find);
-route.put("/api/volunteers/:id", volunteerController.update);
+route.put("/api/volunteers/:id", profileUpload.single('profileCover'), volunteerController.update);
 route.delete("/api/volunteers/:id", volunteerController.delete);
 // =============== lesson router ==================
 // API
@@ -45,10 +44,4 @@ route.post("/api/events", eventController.create);
 route.get("/api/events", eventController.find);
 route.put("/api/events/:id", eventController.update);
 route.delete("/api/events/:id", eventController.delete);
-// =============== profile router ==================
-// API
-route.post('/api/upload', profileUpload.single('profileCover'), profileCoverController.upload)
-route.get('/api/upload', profileCoverController.find)
-route.delete('/api/upload/:id', profileCoverController.delete)
-route.get('/upload', (req, res) => { res.render("upload") })
 module.exports = route;

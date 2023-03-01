@@ -12,7 +12,7 @@ function setTemporary(element) {
 function setTemporaryEmpty() {
     this.setState({ temporary: {} });
 };
-// ===============  setting this.state.temporary to empty value
+// ===============  genarate random 24 hexadecimal digit ID
 function generateId() {
     const chars = '0123456789abcdef';
     let hex = '';
@@ -21,6 +21,16 @@ function generateId() {
         hex += chars[idx];
     }
     return hex;
+}
+// ===============  genarate random number with seed property
+
+function randomSeed(seed) {
+    let x = Math.sin(seed);
+    return x - Math.floor(x);
+}
+// convert 12445.5338383 to 124455338383
+function toIntegerRemoveFloatPoint(n) {
+    return parseInt(String(n).split(".").join(""))
 }
 // ===============  convert date object to string to use it to fill the input Date when using onChange
 function dateFormaterForInput(date) {
@@ -53,4 +63,4 @@ function isValidDate(newObject, oldObject) {
     return noOvelap
 }
 
-export { handleChange, setTemporary, setTemporaryEmpty, generateId, dateFormaterForInput, isValidDate }
+export { handleChange, setTemporary, setTemporaryEmpty, generateId, randomSeed, dateFormaterForInput, isValidDate }
