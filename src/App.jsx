@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.css";
 import React, { Component } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-import "./App.css";
+import "./scss/App.scss";
 
 // ====== helpers files/
 import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI } from "./helpers/apiEndpoints";
@@ -13,6 +13,8 @@ import { createElement, updateElement, deleteElement } from "./helpers/crudFunct
 // ====== components/
 import Home from "./component/home";
 import Navbar from "./component/navbar";
+import Sidebar from "./component/sidebar";
+import Login from "./component/login";
 // ====== components/Form/
 import StudentForm from "./component/form/student";
 import VolunteerForm from "./component/form/volunteer";
@@ -73,15 +75,13 @@ class App extends Component {
     return (
       <>
         <Navbar />
-        <main className="container-fluid">
+        <main className="mainContainer">
           <Routes>
-            <Route path="/"
-              element={<Home
-                setTemporaryEmpty={this.setTemporaryEmpty}
-              />}
-            />
+            <Route path="/" element={<Home />} />
+            <Route path="/login"element={<Login/>}/>
+            <Route path="/sidebar" element={<Sidebar />} />
             {/* ########### show ########### */}
-            <>
+              <>
               <Route
                 path="/studentTable"
                 element={
@@ -149,17 +149,17 @@ class App extends Component {
                   setTemporary={this.setTemporary}
                 />}
               />
-            </>
-            {/* ########### calendar ############*/}
-            <>
+              </>
+              {/* ########### calendar ############*/}
+              <>
               <Route path="/calendar"
                 element={<Calendar
                   events={this.state.events}
                 />}
               />
-            </>
-            {/* ########### add ########### */}
-            <>
+              </>
+              {/* ########### add ########### */}
+              <>
               <Route path="/addStudent"
                 element={<StudentForm
                   name="add"
@@ -207,9 +207,9 @@ class App extends Component {
                   create={this.createElement}
                 />}
               />
-            </>
-            {/* ########### update ########### */}
-            <>
+              </>
+              {/* ########### update ########### */}
+              <>
               <Route path="/updateStudent"
                 element={<StudentForm
                   name="update"
@@ -258,11 +258,16 @@ class App extends Component {
                   update={this.updateElement}
                 />}
               />
-            </>
-          </Routes>
-        </main>
-      </>
+              </>
+                        </Routes>
+                      </main>
+                    </>
     );
   }
 }
 export default App;
+
+
+
+
+// setTemporaryEmpty={this.setTemporaryEmpty}

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-import "./profile.css"
+// import "./profile.css"
 // import profile_img from "./download.png";
 
 const ImgUpload =({
