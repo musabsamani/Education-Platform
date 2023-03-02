@@ -1,39 +1,52 @@
 const mongoose = require("mongoose");
-var student = new mongoose.Schema({
+const studentSchema = new mongoose.Schema({
   _id: String,
   name: String,
   age: String,
   address: String,
   phone: String,
 });
-var volunteer = new mongoose.Schema({
+const volunteerSchema = new mongoose.Schema({
   _id: String,
   name: String,
   age: String,
   email: String,
   address: String,
   phone: String,
-  subject: String
+  subject: String,
+  profileCoverName: String,
 });
-var lesson = new mongoose.Schema({
+const lessonSchema = new mongoose.Schema({
   _id: String,
   subject: String,
-  volunteer: String,
   date: String,
+  volunteer: String
 });
-var subject = new mongoose.Schema({
+const subjectSchema = new mongoose.Schema({
   _id: String,
   name: String,
 });
-var event = new mongoose.Schema({
+const eventSchema = new mongoose.Schema({
   _id: String,
   title: String,
   start: String,
   end: String,
 });
-const Studentdb = mongoose.model("studentdb", student);
-const Volunteerdb = mongoose.model("volunteerdb", volunteer);
-const Lessondb = mongoose.model("lessonsdb", lesson);
-const Subjectdb = mongoose.model("subjectdb", subject);
-const Eventdb = mongoose.model("enentdb", event);
-module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb, Eventdb }
+// profile cover file paths // root/upload
+const uploadBasePath = "upload"
+// profile cover file paths // root/uploadBasePath/profileCovers
+const profileCoverBasePath = "profileCovers"
+
+volunteerSchema.virtual('imagePath').get(function () {
+  if (this.profileCoverName) {
+    return `${uploadBasePath}/${profileCoverBasePath}/${this.profileCoverName}`
+  }
+  return ""
+});
+
+const Studentdb = mongoose.model("studentdb", studentSchema);
+const Volunteerdb = mongoose.model("volunteerdb", volunteerSchema);
+const Lessondb = mongoose.model("lessonsdb", lessonSchema);
+const Subjectdb = mongoose.model("subjectdb", subjectSchema);
+const Eventdb = mongoose.model("enentdb", eventSchema);
+module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb, Eventdb, uploadBasePath, profileCoverBasePath }

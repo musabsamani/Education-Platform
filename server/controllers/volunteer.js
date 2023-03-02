@@ -1,4 +1,5 @@
-var { Volunteerdb } = require("../model/model");
+const { Volunteerdb } = require("../model/model");
+const { removeFile } = require("../helpers/helpersFunction")
 // create and save new volunteer
 exports.create = (req, res) => {
   if (!req.body) {
@@ -13,13 +14,21 @@ exports.create = (req, res) => {
     address: req.body.address,
     phone: req.body.phone,
     subject: req.body.subject,
+    profileCoverName: req.body.profileCoverName
   });
   volunteer
     .save(volunteer)
     .then((data) => {
-      res.send("Volunteer Added successfully");
+      // res.send(`Volunteer Added successfully ${fileName ? "with profile cover name " + fileName : ""}`);
+      // res.send(data);
+      res.send(data);
+      // res.send(data);
     })
     .catch((err) => {
+      if (volunteer.profileCoverName) {
+        removeFile(volunteer.profileCoverName)
+        console.error(err)
+      }
       res.status(500).send({ message: err.message || "Some error occured while performing a create operation" });
     });
 };
@@ -39,10 +48,12 @@ exports.find = (req, res) => {
         res.status(500).send({ message: `Error occured while rettriving volunteer with id ${id}` });
       });
   } else {
-    Volunteerdb.find()
-      .then((volunteer) => {
-        res.send(volunteer);
+    Volunteerdb.find().then(volunteers => {
+      volunteers.forEach(v => {
+        v.profileCoverName = v.imagePath
       })
+      res.send(volunteers);
+    })
       .catch((err) => {
         res.status(500).send({ message: err.message || "Error occured while retriving volunteer information" });
       });
@@ -59,10 +70,17 @@ exports.update = (req, res) => {
       if (!data) {
         res.status(404).send({ message: `Can't update volunteer with id ${id}, maybe volunteer doesn't exist` });
       } else {
+        if (req.body.oldProfileCoverName) {
+          removeFile(req.body.oldProfileCoverName)
+        }
         res.send(data);
       }
     })
     .catch((err) => {
+      if (data.profileCoverName) {
+        removeFile(data.profileCoverName)
+      }
+      console.error(err)
       res.status(500).send({ message: "Error update volunteer information" });
     });
 };
@@ -74,10 +92,14 @@ exports.delete = (req, res) => {
       if (!data) {
         res.status(404).send({ message: `Can't delete volunteer with id ${id}. Maybe volunteer doesn't exist` });
       } else {
+        if (data.profileCoverName) {
+          removeFile(data.profileCoverName)
+        }
         res.send({ message: "Volunteer Deleted successfully" });
       }
     })
     .catch((err) => {
+      console.error(err)
       res.status(500).send({ message: "Couldn't delete volunteer with id " + id });
     });
 };

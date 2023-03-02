@@ -1,2 +1,2 @@
 
-GET http://localhost:3000/api/students
+DELETE  http://localhost:5000/api/volunteers/886cdddbc807d0cc7b072372
