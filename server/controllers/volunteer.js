@@ -1,7 +1,7 @@
 const { Volunteerdb } = require("../model/model");
 const { removeFile } = require("../helpers/helpersFunction")
 // create and save new volunteer
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   if (!req.body) {
     res.status(400).send({ message: "request body can't be empty" });
     return;

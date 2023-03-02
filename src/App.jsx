@@ -8,7 +8,7 @@ import "./scss/App.scss";
 // ====== helpers files/
 import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI } from "./helpers/apiEndpoints";
 import { handleChange, setTemporary, setTemporaryEmpty, dateFormaterForInput } from "./helpers/helpersFunctions";
-import { createElement, updateElement, deleteElement } from "./helpers/crudFunctions";
+import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement } from "./helpers/crudFunctions";
 // ###################### React Components ######################
 // ====== components/
 import Home from "./component/home";
@@ -30,21 +30,17 @@ import EventTable from "./component/show/eventTable";
 // ====== components/show/profile
 import Profile from "./component/show/profile";
 import Calendar from "./component/calendar";
-// import comments from './helpers/comments';
-// =============== this is for axios for POST and PUT methods
-// ?? its so important
-axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-axios.defaults.headers.put["Content-Type"] = "application/x-www-form-urlencoded";
-
 class App extends Component {
   constructor(props) {
     super(props);
-    this.createElement = createElement.bind(this);
-    this.updateElement = updateElement.bind(this);
-    this.deleteElement = deleteElement.bind(this);
     this.handleChange = handleChange.bind(this);
     this.setTemporary = setTemporary.bind(this);
     this.setTemporaryEmpty = setTemporaryEmpty.bind(this);
+    this.createElement = createElement.bind(this);
+    this.updateElement = updateElement.bind(this);
+    this.deleteElement = deleteElement.bind(this);
+    this.multiPartCreateElement = multiPartCreateElement.bind(this);
+    this.multiPartUpdateElement = multiPartUpdateElement.bind(this);
   }
   state = {
     students: [],
@@ -78,10 +74,10 @@ class App extends Component {
         <main className="mainContainer">
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login"element={<Login/>}/>
+            <Route path="/login" element={<Login />} />
             <Route path="/sidebar" element={<Sidebar />} />
             {/* ########### show ########### */}
-              <>
+            <>
               <Route
                 path="/studentTable"
                 element={
@@ -149,17 +145,17 @@ class App extends Component {
                   setTemporary={this.setTemporary}
                 />}
               />
-              </>
-              {/* ########### calendar ############*/}
-              <>
+            </>
+            {/* ########### calendar ############*/}
+            <>
               <Route path="/calendar"
                 element={<Calendar
                   events={this.state.events}
                 />}
               />
-              </>
-              {/* ########### add ########### */}
-              <>
+            </>
+            {/* ########### add ########### */}
+            <>
               <Route path="/addStudent"
                 element={<StudentForm
                   name="add"
@@ -174,7 +170,7 @@ class App extends Component {
                   temporary={this.state.temporary}
                   subjects={this.state.subjects}
                   onChange={this.handleChange}
-                  create={this.createElement}
+                  create={this.multiPartCreateElement}
                 />}
               />
               <Route path="/addSubject"
@@ -207,9 +203,9 @@ class App extends Component {
                   create={this.createElement}
                 />}
               />
-              </>
-              {/* ########### update ########### */}
-              <>
+            </>
+            {/* ########### update ########### */}
+            <>
               <Route path="/updateStudent"
                 element={<StudentForm
                   name="update"
@@ -224,7 +220,7 @@ class App extends Component {
                   temporary={this.state.temporary}
                   subjects={this.state.subjects}
                   onChange={this.handleChange}
-                  update={this.updateElement}
+                  update={this.multiPartUpdateElement}
                 />}
               />
               <Route path="/updateSubject"
@@ -258,10 +254,10 @@ class App extends Component {
                   update={this.updateElement}
                 />}
               />
-              </>
-                        </Routes>
-                      </main>
-                    </>
+            </>
+          </Routes>
+        </main>
+      </>
     );
   }
 }

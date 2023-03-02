@@ -2,22 +2,12 @@ import { generateId } from "./helpersFunctions";
 import { baseAPI } from "./apiEndpoints";
 import $ from "jquery";
 import axios from "axios";
-// import comments from './helpers/comments';
-// =============== this is for axios for POST and PUT methods
-// ?? its so important
-axios.defaults.headers.post["Content-Type"] = "application/x-www-form-urlencoded";
-axios.defaults.headers.put["Content-Type"] = "application/x-www-form-urlencoded";
-
 // =======  CREAT  ========
 async function createElement(event, formId, resource) {
     try {
         event.preventDefault();
-        var unindexed_array = $(`#${formId}`).serializeArray();
-        var data = {};
-        unindexed_array.forEach((n, i) => {
-            data[n["name"]] = n["value"];
-        });
-        data._id = generateId();
+        const data = new FormData(document.getElementById(formId))
+        data.append("_id", generateId())
         const uri = `${baseAPI}/${resource}`;
         await axios.post(`${uri}`, data).then((res) => {
             const element = [...this.state[resource], data];
@@ -33,11 +23,7 @@ async function createElement(event, formId, resource) {
 async function updateElement(event, formId, resource) {
     try {
         event.preventDefault();
-        var unindexed_array = $(`#${formId}`).serializeArray();
-        var data = {};
-        unindexed_array.forEach((n, i) => {
-            data[n["name"]] = n["value"];
-        });
+        const data = new FormData(document.getElementById(formId))
         const uri = `${baseAPI}/${resource}/${data._id}`
         await axios.put(`${uri}`, data).then(() => {
             const element = [...this.state[resource]]
@@ -66,12 +52,14 @@ async function deleteElement(id, resource) {
 // =======  CREAT  ========
 async function multiPartCreateElement(event, fileInputFieldName, formId, resource) {
     try {
-        event.preventDefault()
         const uri = `${baseAPI}/${resource}`;
         const data = new FormData(document.getElementById(formId))
         const formFile = data.get(fileInputFieldName);
         const timeStampFileName = new Date().toISOString().replace(/[-:]/g, '') + "-" + fileInputFieldName + "-" + formFile.name
         const fileName = formFile.name ? timeStampFileName : ""
+        // console.log(formFile)
+        // console.log(fileInputFieldName)
+        // console.log(fileName)
         data.append("_id", generateId())
         data.append("profileCoverName", fileName)
         const iterator = {}
@@ -81,6 +69,7 @@ async function multiPartCreateElement(event, fileInputFieldName, formId, resourc
             }
             iterator[key] = value
         }
+        console.log(iterator)
         iterator[fileName] = fileName;
         axios.post(`${uri}`, data).then((res) => {
             const element = [...this.state[resource], iterator];
@@ -97,7 +86,6 @@ async function multiPartCreateElement(event, fileInputFieldName, formId, resourc
 // =======  UPDATE  ========
 async function multiPartUpdateElement(event, fileInputFieldName, formId, resource) {
     try {
-        event.preventDefault()
         const data = new FormData(document.getElementById(formId))
         const formFile = data.get(fileInputFieldName);
         const uri = `${baseAPI}/${resource}/${data.get("_id")}`

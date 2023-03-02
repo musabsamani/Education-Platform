@@ -1,6 +1,6 @@
 const multer = require("multer")
 const path = require("path")
-const { uploadBasePath, profileCoverBasePath } = require("../../model/model")
+const { uploadBasePath, profileCoverBasePath } = require("../../helpers/fileSystemPathes")
 const profileCoverUploadPath = path.join(uploadBasePath, profileCoverBasePath)
 let imageMimeTypes = ["image/jpeg", "image/png", "image/gif", "image/bmp", "image/tiff", "image/svg+xml", "image/webp"
 ];
@@ -9,13 +9,15 @@ const storage = multer.diskStorage({
         callback(null, profileCoverUploadPath)
     },
     filename: async (req, file, callback) => {
-        await req.body
-        let fileName;
-        if (req.body.profileCoverName) {
-            fileName = req.body.profileCoverName;
-        } else {
+        // const timeStampFileName = new Date().toISOString().replace(/[-:]/g, '') + "-" + fileInputFieldName + "-" + formFile.name
+        // const fileName = formFile.name ? timeStampFileName : ""
+        const body = await req.body
+        let fileName = body.profileCoverName
+        console.log(fileName)
+        if (!fileName) {
             fileName = String(Math.random());
         }
+        console.log(fileName)
         callback(null, fileName);
     }
 });

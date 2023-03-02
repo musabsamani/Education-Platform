@@ -9,7 +9,7 @@ const bodyParser = require("body-parser");
 // require path
 const path = require("path");
 // require mongoDB connection file
-const connectDB = require("./server/model/connection");
+const connectDB = require("./server/helpers/connection");
 // use express server as constant named app
 const app = express();
 // config file path for environment and credentials
@@ -22,7 +22,7 @@ app.use(morgan("tiny"));
 // mongoDB connction
 connectDB();
 // parse request to body-parser
-app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.urlencoded({ extended: true }));
 // set HTML engine
 app.set("view engine", "ejs");
 // set HTML to not default path
@@ -32,7 +32,6 @@ app.set("view engine", "ejs");
 app.use("/css", express.static(path.resolve(__dirname, "assets/css")));
 app.use("/js", express.static(path.resolve(__dirname, "assets/js")));
 app.use("/img", express.static(path.resolve(__dirname, "assets/img")));
-// load router
 app.use("/", require("./server/routes/router"));
 app.listen(port, () => {
   console.log(`Express server is running on : http://localhost:${port}`);
