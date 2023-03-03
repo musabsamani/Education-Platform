@@ -7,22 +7,24 @@ const ImgUpload = ({ onChange, src }) => (
   <label htmlFor="photo-upload" className="custom-file-upload fas">
     <div className="img-wrap img-upload">
       <img className="image" src={src} style={{ cursor: "pointer" }} />
-      <input id="photo-upload" type="file" name="profileCover" style={{ display: "none" }} onChange={onChange} />
     </div>
+    <input id="photo-upload" type="file" name="profileCover" onChange={onChange} />
+    {/* <input id="photo-upload" type="file" name="profileCover" style={{ display: "none" }} onChange={onChange} /> */}
   </label>
 );
 class AddVolunteer extends Component {
+  src = this.props.temporary.profileCoverName ? this.props.temporary.profileCoverName : "src/assets/img/uploadCover.webp"
   state = {
     file: "",
-    src: this.props.temporary.profileCoverName ? this.props.temporary.profileCoverName : "src/assets/img/uploadCover.webp",
+    src: this.src
   };
-  submit = (e) => {
+  submit = async (e) => {
     e.preventDefault()
-    this.props.name === "add" ?
-      this.props.create(e, "profileCover", "addVolunteer", "volunteers")
+    await this.props.name === "add" ?
+      this.props.create(e, "addVolunteer", "volunteers")
       :
-      this.props.update(e, "profileCover", "updateVolunteer", "volunteers");
-  };
+      this.props.update(e, "updateVolunteer", "volunteers")
+  }
   photoUpload = (e) => {
     e.preventDefault();
     const reader = new FileReader();
@@ -38,7 +40,7 @@ class AddVolunteer extends Component {
     } else {
       this.setState({
         file: "",
-        src: this.props.temporary.profileCoverName ? this.props.temporary.profileCoverName : "src/assets/img/uploadCover.webp"
+        src: this.src
       })
     }
   }

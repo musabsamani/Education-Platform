@@ -14,15 +14,13 @@ exports.create = async (req, res) => {
     address: req.body.address,
     phone: req.body.phone,
     subject: req.body.subject,
-    profileCoverName: req.body.profileCoverName
+    profileCoverName: req.fileName
   });
   volunteer
     .save(volunteer)
-    .then((data) => {
-      // res.send(`Volunteer Added successfully ${fileName ? "with profile cover name " + fileName : ""}`);
-      // res.send(data);
-      res.send(data);
-      // res.send(data);
+    .then(volunteer => {
+      volunteer.profileCoverName = volunteer.imagePath
+      res.send(volunteer);
     })
     .catch((err) => {
       if (volunteer.profileCoverName) {
@@ -49,8 +47,8 @@ exports.find = (req, res) => {
       });
   } else {
     Volunteerdb.find().then(volunteers => {
-      volunteers.forEach(v => {
-        v.profileCoverName = v.imagePath
+      volunteers.forEach(volunteer => {
+        volunteer.profileCoverName = volunteer.imagePath
       })
       res.send(volunteers);
     })
@@ -60,20 +58,33 @@ exports.find = (req, res) => {
   }
 };
 // update volunteer wih specified id
-exports.update = (req, res) => {
+exports.update = async (req, res) => {
   if (!req.body) {
     return res.status(400).send({ message: "Data to update can not be empty" });
   }
   const id = req.params.id;
-  Volunteerdb.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then((data) => {
-      if (!data) {
+  const old = await Volunteerdb.findById(id);
+  const profileCoverName = req.fileName || (old && old.profileCoverName);
+  const volunteer = new Volunteerdb({
+    _id: req.body._id,
+    name: req.body.name,
+    age: req.body.age,
+    email: req.body.email,
+    address: req.body.address,
+    phone: req.body.phone,
+    subject: req.body.subject,
+    profileCoverName: profileCoverName
+  });
+  Volunteerdb.findByIdAndUpdate(id, volunteer, { useFindAndModify: false })
+    .then((searchResult) => {
+      if (!searchResult) {
         res.status(404).send({ message: `Can't update volunteer with id ${id}, maybe volunteer doesn't exist` });
       } else {
-        if (req.body.oldProfileCoverName) {
-          removeFile(req.body.oldProfileCoverName)
+        if (req.fileName) {
+          removeFile(searchResult.profileCoverName)
         }
-        res.send(data);
+        volunteer.profileCoverName = volunteer.imagePath
+        res.send(volunteer);
       }
     })
     .catch((err) => {
