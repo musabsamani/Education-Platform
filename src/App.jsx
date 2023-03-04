@@ -30,6 +30,9 @@ import EventTable from "./component/show/eventTable";
 // ====== components/show/profile
 import Profile from "./component/show/profile";
 import Calendar from "./component/calendar";
+// important for request to reach correctly
+axios.defaults.headers.post["content-type"] = "application/x-www-form-urlencoded";
+axios.defaults.headers.put["content-type"] = "application/x-www-form-urlencoded";
 class App extends Component {
   constructor(props) {
     super(props);

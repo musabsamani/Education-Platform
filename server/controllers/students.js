@@ -1,6 +1,6 @@
 var { Studentdb } = require("../model/model");
 // create and save new student
-exports.create = (req, res) => {
+exports.create = async (req, res) => {
   if (!req.body) {
     res.status(400).send({ message: "request body can't be empty" });
     return;
@@ -15,7 +15,7 @@ exports.create = (req, res) => {
   student
     .save(student)
     .then((data) => {
-      res.send("student Added successfully")
+      res.send("student Added successfully");
       // res.redirect("/students/new");
     })
     .catch((err) => {

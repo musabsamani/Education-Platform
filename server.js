@@ -15,14 +15,14 @@ const app = express();
 // config file path for environment and credentials
 dotenv.config({ path: "config.env" });
 const port = process.env.PORT || 8080;
-var cors = require('cors');
+var cors = require("cors");
 app.use(cors());
 // log request in console
 app.use(morgan("tiny"));
 // mongoDB connction
 connectDB();
 // parse request to body-parser
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(bodyParser.urlencoded({ extended: false }));
 // set HTML engine
 app.set("view engine", "ejs");
 // set HTML to not default path
