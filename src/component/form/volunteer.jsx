@@ -1,7 +1,7 @@
 import React, { Component } from "react";
 import Input from "../include/_input";
 import "./addv.css";
-// import profile_img from "../show/download.png";
+
 
 const ImgUpload =({
   onChange,
@@ -13,26 +13,8 @@ const ImgUpload =({
     </div>
     <input id="photo-upload" type="file" onChange={onChange}/> 
   </label>
-// const [file, setFile] = useState()
-//     const send = event => {
-//         event.preventDefault()
-//         const data = new FormData()
-//         data.append("profileCover", file)
-//         const uri = "http://localhost:5000/api/upload"
-//         axios.post(uri, data).then(res => console.log(res)).catch(err => console.log(err))
-//     }
-//     const handleChange=e=>{const file = e.target.files[0];
-//                         setFile(file)}
 
-//     return (
-//         <form onSubmit={e => send(e)}>     
-//         <input type="file" name="profileCover"
-//                 onChange={e => handleChange(e)}
-//             />
-//             <button className="btn btn-primary" type="submit">Upload</button>
-//             <img src=""/>
-//         </form>
-//     )
+  // const now= new Date()
 class AddVolunteer extends Component {
   state = {
     file: '',
@@ -67,6 +49,7 @@ class AddVolunteer extends Component {
               <Input onChange={onChange} type="email" name="email" label="Email" value={temporary.email} />
               <Input onChange={onChange} type="text" name="address" label="Address" value={temporary.address} />
               <Input onChange={onChange} type="text" name="phone" label="Phone" value={temporary.phone} />
+              <Input  type="hidden" name="time" label="time" value={new Date()} />
             {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
             <div className="col-md-5">
               {subjects.length > 0 ? (

@@ -15,6 +15,7 @@ const volunteerSchema = new mongoose.Schema({
   phone: String,
   subject: String,
   profileCoverName: String,
+  time: String,
 });
 const lessonSchema = new mongoose.Schema({
   _id: String,

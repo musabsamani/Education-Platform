@@ -13,8 +13,19 @@ class Home extends Component {
             <button className="btn btn-primary">About Us</button>
           </div>
           <div className="bottom">
-            <div className="leftInfo">left</div>
-            <div className="rightInfo">right</div>
+            <div className="leftInfo">
+              <p>sign as volunteer</p>
+              <p>Add student</p>
+              <p>Our subjects</p>
+              <p>Calendar</p>
+            </div>
+            <div className="rightInfo">
+              <p>mrmo2010508@gmail.com</p>
+              <p>for support:</p>
+              <p>011 997 8588</p>
+              <p></p>
+              <p></p>
+            </div>
           </div>
         </div>
       </>

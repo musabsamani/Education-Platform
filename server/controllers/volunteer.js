@@ -14,7 +14,8 @@ exports.create = (req, res) => {
     address: req.body.address,
     phone: req.body.phone,
     subject: req.body.subject,
-    profileCoverName: req.body.profileCoverName
+    profileCoverName: req.body.profileCoverName,
+    time: req.body.time
   });
   volunteer
     .save(volunteer)

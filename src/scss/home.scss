@@ -31,7 +31,9 @@
             background-color: rosybrown;
             height: 100%;
             width: 50%;
+            padding: 20px 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
@@ -39,7 +41,9 @@
             background-color: orange;
             height: 100%;
             width: 50%;
+            padding: 20px 0;
             display: flex;
+            flex-direction: column;
             justify-content: center;
             align-items: center;
         }
