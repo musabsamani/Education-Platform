@@ -6,9 +6,9 @@ function removeFile(fileName) {
     fs.unlink(cover, err => {
         if (err) {
             console.error(err)
+        } else {
+            console.log(`File on path "${cover}" deleted successfully`)
         }
-        console.log("File deleted successfully")
     })
-    console.log(cover)
 }
 module.exports = { removeFile }

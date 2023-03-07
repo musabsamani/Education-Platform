@@ -1,0 +1,20 @@
+.navbar{
+    background-color: #FFFFFF;
+    .cont{
+        padding: 0 50px ;
+        width: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        .sample{
+            display: flex;
+            justify-content: center;
+        }
+        .collapse{
+            justify-content: flex-end;
+            .nav{
+                width: 300px;
+            }
+        }
+    }
+}

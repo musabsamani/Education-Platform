@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { uploadBasePath, profileCoverBasePath } = require("../helpers/fileSystemPathes")
 const studentSchema = new mongoose.Schema({
   _id: String,
   name: String,
@@ -33,10 +34,6 @@ const eventSchema = new mongoose.Schema({
   start: String,
   end: String,
 });
-// profile cover file paths // root/upload
-const uploadBasePath = "upload"
-// profile cover file paths // root/uploadBasePath/profileCovers
-const profileCoverBasePath = "profileCovers"
 
 volunteerSchema.virtual('imagePath').get(function () {
   if (this.profileCoverName) {
