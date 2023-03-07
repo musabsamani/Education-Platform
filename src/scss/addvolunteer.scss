@@ -1,17 +1,34 @@
-select{
-    border: none;
-    padding: 10px 20px;
-    border-radius: 10px;
+._addvolunteer{
+    position: relative;
+    width: 100vw;
+    height: 100vh;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    &::after{
+        position: absolute;
+        content: " ";
+        background-image: url("../assets/img/pexels-pixabay-256417.jpg");
+        background-size: cover;
+        z-index: -1;
+    }
 }
-select.sel{
-    max-width: 10vw;
-    min-width: 250px;
-}
-select:targets{
-    border-color: aqua;
-}
-.image{
-    width: 200px;
-    height: 200px;
-    clip-path: circle(50% at 50% 50%);
-}
+// select{
+//     border: none;
+//     padding: 10px 20px;
+//     border-radius: 10px;
+// }
+// select.sel{
+//     max-width: 10vw;
+//     min-width: 250px;
+// }
+// select:targets{
+//     border-color: aqua;
+// }
+// .image{
+//     width: 200px;
+//     height: 200px;
+//     clip-path: circle(50% at 50% 50%);
+// }

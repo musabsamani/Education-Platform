@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Input from "../include/_input";
-import ""
+import "../../scss/addvolunteer.scss"
 
 
 const ImgUpload = ({ onChange, src }) => (
@@ -50,10 +50,10 @@ class AddVolunteer extends Component {
     const { onChange, temporary, subjects } = this.props;
     return (
       <>
-        <div className="container mt-5 ">
+        <div className="_addvolunteer">
           <h2>{this.props.name === "add" ? "New Voulunteer" : "Edit Voulunteer"}</h2>
           <form
-            className="col g-3 d-flex-column justify-content-center"
+            className=""
             id={`${this.props.name}Volunteer`}
             onSubmit={(e) => { this.submit(e) }}
           >
@@ -67,9 +67,9 @@ class AddVolunteer extends Component {
               <Input onChange={onChange} type="text" name="phone" label="Phone" value={temporary.phone} />
               <Input  type="hidden" name="time" label="time" value={new Date()} />
             {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
-            <div className="col-md-5">
+            <div className="">
               {subjects.length > 0 ? (
-                <select name="subject" className=" sel ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <select name="subject" className="" aria-label=".form-select-lg example">
                   {this.props.subjects.map((subject) => (
                     <option key={Math.random()} value={subject.value}>
                       {subject.name}
@@ -77,13 +77,13 @@ class AddVolunteer extends Component {
                   ))}
                 </select>
               ) : (
-                <select disabled className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
+                <select disabled className="" aria-label=".form-select-lg example">
                   <option>Subjects Database is Empty</option>
                 </select>
               )}
             </div>
-            <div className="s col mt-2">
-              <button className="btn btn-primary m-1" type="submit">
+            <div className="">
+              <button className="btn btn-primary" type="submit">
                 {this.props.name == "add" ? "Submit" : "Save"}
               </button>
             </div>
