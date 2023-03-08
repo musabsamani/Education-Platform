@@ -53,41 +53,41 @@ class AddVolunteer extends Component {
         <div className="_addvolunteer">
           <h2>{this.props.name === "add" ? "New Voulunteer" : "Edit Voulunteer"}</h2>
           <form
-            className=""
+            className="formalation"
             id={`${this.props.name}Volunteer`}
             onSubmit={(e) => { this.submit(e) }}
           >
-            <div>
+            <div className="immg">
               <ImgUpload onChange={this.photoUpload} src={src} />
             </div>
+            <div className="_inputs">
               <Input onChange={onChange} type="text" name="name" label="Name" value={temporary.name} />
               <Input onChange={onChange} type="text" name="age" label="Age" value={temporary.age} />
               <Input onChange={onChange} type="email" name="email" label="Email" value={temporary.email} />
               <Input onChange={onChange} type="text" name="address" label="Address" value={temporary.address} />
               <Input onChange={onChange} type="text" name="phone" label="Phone" value={temporary.phone} />
               <Input  type="hidden" name="time" label="time" value={new Date()} />
-            {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
-            <div className="">
-              {subjects.length > 0 ? (
-                <select name="subject" className="" aria-label=".form-select-lg example">
-                  {this.props.subjects.map((subject) => (
-                    <option key={Math.random()} value={subject.value}>
-                      {subject.name}
-                    </option>
-                  ))}
-                </select>
-              ) : (
-                <select disabled className="" aria-label=".form-select-lg example">
-                  <option>Subjects Database is Empty</option>
-                </select>
-              )}
-            </div>
-            <div className="">
+              {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
+              <div className="selection">
+                {subjects.length > 0 ? (
+                  <select name="subject" className="" aria-label=".form-select-lg example">
+                    {this.props.subjects.map((subject) => (
+                      <option key={Math.random()} value={subject.value}>
+                        {subject.name}
+                      </option>
+                    ))}
+                  </select>
+                ) : (
+                  <select disabled className="" aria-label=".form-select-lg example">
+                    <option>Subjects Database is Empty</option>
+                  </select>
+                )}
+                </div>
+              </div>
+          </form>
               <button className="btn btn-primary" type="submit">
                 {this.props.name == "add" ? "Submit" : "Save"}
               </button>
-            </div>
-          </form>
         </div>
       </>
     );

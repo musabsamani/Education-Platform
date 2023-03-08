@@ -20,9 +20,25 @@ class Home extends Component {
               </div>
             </div>
             <div className="top_right">
-              <img src="https://d138zd1ktt9iqe.cloudfront.net/media/seo_landing_files/file-teaching-skills-1605625101.jpg" alt="" />
+              <img src="https://storyset.com/illustration/education/rafiki" alt="" />
             </div>
-            
+          </div>
+          <div className="center">
+              <div className="word">
+                <h2>Our Teachers</h2>
+              </div>
+              <div className="cards">
+                <div className="cardInfo">
+                  <img src="https://static.wikia.nocookie.net/ksi/images/b/b8/Baldski.png/revision/latest?cb=20201223000429" alt="" />
+                  <p>Mohammed Ismail</p>
+                  <p>Front-End Dev</p>
+                </div>
+                <div className="cardInfo">
+                  <img src="https://static.wikia.nocookie.net/ksi/images/b/b8/Baldski.png/revision/latest?cb=20201223000429" alt="" />
+                <p>Musab Obada</p>
+                <p>Back-End Dev</p>
+                </div>
+              </div>
           </div>
           <div className="bottom">
             <div className="leftInfo">

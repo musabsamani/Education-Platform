@@ -2,8 +2,6 @@ import React from "react";
 import { NavLink } from "react-router-dom";
 import "../scss/navbar.scss";
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
-import LoginIcon from '@mui/icons-material/Login';
-import HowToRegIcon from '@mui/icons-material/HowToReg';
 const Navbar = () => {
   return (
     <nav className="navbar navbar-expand-lg bg-body-tertiary">
@@ -15,12 +13,17 @@ const Navbar = () => {
           <ul className="nav navbar-nav">
             <li className="nav-item">
               <NavLink className="nav-link" to="/addVolunteer">
-               <HowToRegIcon/>Sign in
+               Sign in
               </NavLink>
             </li>
             <li className="nav-item">
               <NavLink className="nav-link" to="/login">
-                <LoginIcon/>Log in
+                Log in
+              </NavLink>
+            </li>
+            <li className="nav-item">
+              <NavLink className="nav-link" to="/subjectTable">
+                subjects
               </NavLink>
             </li>
             <li className="nav-item">
