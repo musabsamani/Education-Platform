@@ -66,7 +66,7 @@ class AddVolunteer extends Component {
               <Input onChange={onChange} type="email" name="email" label="Email" value={temporary.email} />
               <Input onChange={onChange} type="text" name="address" label="Address" value={temporary.address} />
               <Input onChange={onChange} type="text" name="phone" label="Phone" value={temporary.phone} />
-              <Input  type="hidden" name="time" label="time" value={new Date()} />
+              <Input type="hidden" name="time" label="time" value={new Date()} />
               {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
               <div className="selection">
                 {subjects.length > 0 ? (
@@ -82,12 +82,12 @@ class AddVolunteer extends Component {
                     <option>Subjects Database is Empty</option>
                   </select>
                 )}
-                </div>
               </div>
+            </div>
+            <button className="btn btn-primary" type="submit">
+              {this.props.name == "add" ? "Submit" : "Save"}
+            </button>
           </form>
-              <button className="btn btn-primary" type="submit">
-                {this.props.name == "add" ? "Submit" : "Save"}
-              </button>
         </div>
       </>
     );
