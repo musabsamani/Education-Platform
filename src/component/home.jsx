@@ -20,25 +20,27 @@ class Home extends Component {
               </div>
             </div>
             <div className="top_right">
-              <img src="https://storyset.com/illustration/education/rafiki" alt="" />
+              <img src="src/assets/img/teaching-skills.jpg" alt="" />
+              {/* <img src="src/assets/img/Education-rafiki.png" alt="" /> */}
             </div>
           </div>
           <div className="center">
-              <div className="word">
-                <h2>Our Teachers</h2>
+            <div className="word">
+              <h2>Our Teachers</h2>
+            </div>
+            <div className="cards">
+              <div className="cardInfo">
+                <img src="src/assets/img/Baldski.png" alt="" />
+                {/* <img src="https://static.wikia.nocookie.net/ksi/images/b/b8/Baldski.png/revision/latest?cb=20201223000429" alt="" /> */}
+                <p>Mohammed Ismail</p>
+                <p>Front-End Dev</p>
               </div>
-              <div className="cards">
-                <div className="cardInfo">
-                  <img src="https://static.wikia.nocookie.net/ksi/images/b/b8/Baldski.png/revision/latest?cb=20201223000429" alt="" />
-                  <p>Mohammed Ismail</p>
-                  <p>Front-End Dev</p>
-                </div>
-                <div className="cardInfo">
-                  <img src="https://static.wikia.nocookie.net/ksi/images/b/b8/Baldski.png/revision/latest?cb=20201223000429" alt="" />
+              <div className="cardInfo">
+                <img src="src/assets/img/Baldski.png" alt="" />
                 <p>Musab Obada</p>
                 <p>Back-End Dev</p>
-                </div>
               </div>
+            </div>
           </div>
           <div className="bottom">
             <div className="leftInfo">
