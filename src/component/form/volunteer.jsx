@@ -8,8 +8,8 @@ const ImgUpload = ({ onChange, src }) => (
     <div className="img-wrap img-upload">
       <img className="image" src={src} style={{ cursor: "pointer" }} />
     </div>
-    <input id="photo-upload" type="file" name="profileCover" onChange={onChange} />
-    {/* <input id="photo-upload" type="file" name="profileCover" style={{ display: "none" }} onChange={onChange} /> */}
+    {/* <input id="photo-upload" type="file" name="profileCover" onChange={onChange} /> */}
+    <input id="photo-upload" type="file" name="profileCover" style={{ display: "none" }} onChange={onChange} />
   </label>
 )
 class AddVolunteer extends Component {
