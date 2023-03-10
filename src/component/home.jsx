@@ -20,7 +20,7 @@ class Home extends Component {
               </div>
             </div>
             <div className="top_right">
-              <img src="src/assets/img/teaching-skills.jpg" alt="" />
+              <img src="src/assets/img/Education-rafiki.svg" alt="" />
               {/* <img src="src/assets/img/Education-rafiki.png" alt="" /> */}
             </div>
           </div>
