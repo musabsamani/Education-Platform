@@ -91,8 +91,8 @@ exports.update = async (req, res) => {
       }
     })
     .catch((err) => {
-      if (data.profileCoverName) {
-        removeFile(data.profileCoverName);
+      if (searchResult.profileCoverName) {
+        removeFile(searchResult.profileCoverName);
       }
       console.error(err);
       res.status(500).send({ message: "Error update volunteer information" });
