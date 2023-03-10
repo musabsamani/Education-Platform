@@ -17,7 +17,6 @@ exports.create = async (req, res) => {
     subject: req.body.subject,
     profileCoverName: req.fileName,
   });
-  console.log(volunteer);
   volunteer
     .save(volunteer)
     .then((volunteer) => {
