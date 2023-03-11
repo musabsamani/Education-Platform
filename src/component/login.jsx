@@ -16,7 +16,7 @@ class Login extends Component {
                             <form action="">
                                 <input className='_input' type="text" placeholder='UserName'/>
                                 <input className='_input' type="password" placeholder='Password'/>
-                                <Link to='/sidebar'><button className='btn btn-primary '>login</button></Link>
+                                <Link to='/dashboard'><button className='btn btn-primary '>login</button></Link>
                             </form>
                         </div>
                     </div>

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
-// import "./profile.css"
+import "../../scss/profile.scss"
 // import profile_img from "./download.png";
 
 const ImgUpload = ({
@@ -22,11 +22,15 @@ class Profile extends Component {
     const { temporary } = this.props
     return (
       <>
-        <div className="profile container mt-5 ">
-          <h2>Voulunteer Information</h2>
-          <div className="aligning">
-            <ImgUpload src={src} />
-            <div className="">
+        <div className="_profile">
+          <div className="title">
+            <h2>Voulunteer Information</h2>
+          </div>
+          <div className="_body">
+            <div className="_image">
+              <ImgUpload src={src} />
+            </div>
+            <div className="_inform">
               <h5>name : {temporary.name}</h5>
               <h5>phone : {temporary.phone}</h5>
               <h5>age : {temporary.age}</h5>
@@ -35,12 +39,8 @@ class Profile extends Component {
               <h5>address : {temporary.address}</h5>
             </div>
           </div>
-          <div className="col mt-2">
-            <Link to="#">
-              <button className="btn btn-success m-1" onClick={() => window.history.back()}>
-                Back
-              </button>
-            </Link>
+          <div className="_button">
+            <Link to="#"><button className="btn btn-success" onClick={() => window.history.back()}>Back</button></Link>
           </div>
         </div>
       </>

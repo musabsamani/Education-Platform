@@ -12,7 +12,7 @@ import { createElement, updateElement, deleteElement, multiPartCreateElement, mu
 // ###################### React Components ######################
 // ====== components/
 import Home from "./component/home";
-import Sidebar from "./component/sidebar";
+import Dashboard from "./component/dashboard";
 import Login from "./component/login";
 // ====== components/Form/
 import StudentForm from "./component/form/student";
@@ -82,7 +82,19 @@ class App extends Component {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
-            <Route path="/sidebar" element={<Sidebar />} />
+            <Route path="/dashboard" element={<Dashboard />}>
+              <Route
+                  path="volunteerTable"
+                  element={<VolunteerTable
+                      volunteers={this.state.volunteers}
+                      temporary={this.state.temporary}
+                      onDelete={this.deleteElement}
+                      setTemporary={this.setTemporary}
+                      setTemporaryEmpty={this.setTemporaryEmpty}
+                    />
+                  }
+                />
+            </Route>
             {/* ########### show ########### */}
             <>
               <Route
@@ -121,7 +133,7 @@ class App extends Component {
                   />
                 }
               />
-              <Route
+              {/* <Route
                 path="/volunteerTable"
                 element={
                   <VolunteerTable
@@ -132,7 +144,7 @@ class App extends Component {
                     setTemporaryEmpty={this.setTemporaryEmpty}
                   />
                 }
-              />
+              /> */}
               <Route
                 path="/lessonTable"
                 element={
