@@ -13,6 +13,7 @@ import { createElement, updateElement, deleteElement, multiPartCreateElement, mu
 // ====== components/
 import Home from "./component/home";
 import Dashboard from "./component/dashboard";
+import Chart from "./component/chart";
 import Login from "./component/login";
 // ====== components/Form/
 import StudentForm from "./component/form/student";
@@ -80,21 +81,24 @@ class App extends Component {
       <>
         <main className="mainContainer">
           <Routes>
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
-            <Route path="/dashboard" element={<Dashboard />}>
-              <Route
-                  path="volunteerTable"
-                  element={<VolunteerTable
-                      volunteers={this.state.volunteers}
-                      temporary={this.state.temporary}
-                      onDelete={this.deleteElement}
-                      setTemporary={this.setTemporary}
-                      setTemporaryEmpty={this.setTemporaryEmpty}
-                    />
-                  }
-                />
+            <Route path="/">
+              <Route index element={<Home />} />
+              <Route path="login" element={<Login />} />
             </Route>
+            <Route path="/dashboard" element={<Dashboard
+              volunteers={this.state.volunteers} />} />
+            <Route
+                path="/volunteerTable"
+                element={
+                  <VolunteerTable
+                    volunteers={this.state.volunteers}
+                    temporary={this.state.temporary}
+                    onDelete={this.deleteElement}
+                    setTemporary={this.setTemporary}
+                    setTemporaryEmpty={this.setTemporaryEmpty}
+                  />
+                }
+              />
             {/* ########### show ########### */}
             <>
               <Route
@@ -133,18 +137,7 @@ class App extends Component {
                   />
                 }
               />
-              {/* <Route
-                path="/volunteerTable"
-                element={
-                  <VolunteerTable
-                    volunteers={this.state.volunteers}
-                    temporary={this.state.temporary}
-                    onDelete={this.deleteElement}
-                    setTemporary={this.setTemporary}
-                    setTemporaryEmpty={this.setTemporaryEmpty}
-                  />
-                }
-              /> */}
+              
               <Route
                 path="/lessonTable"
                 element={

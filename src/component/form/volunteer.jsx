@@ -12,6 +12,8 @@ const ImgUpload = ({ onChange, src }) => (
     <input id="photo-upload" type="file" name="profileCover" style={{ display: "none" }} onChange={onChange} />
   </label>
 )
+const month = ['Jan','Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ogt', 'Sep', 'Oct', 'Nov','Dec']
+const date = new Date();
 class AddVolunteer extends Component {
   src = this.props.temporary.profileCoverName ? this.props.temporary.profileCoverName : "src/assets/img/uploadCover.webp"
   state = {
@@ -66,7 +68,7 @@ class AddVolunteer extends Component {
                 <Input onChange={onChange} type="email" name="email" label="Email" value={temporary.email} />
                 <Input onChange={onChange} type="text" name="address" label="Address" value={temporary.address} />
                 <Input onChange={onChange} type="text" name="phone" label="Phone" value={temporary.phone} />
-                <Input type="hidden" name="time" label="time" value={new Date()} />
+                <Input type="hidden" name="time" label="time" value={date} />
                 {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
                 <div className="selection">
                 <label>Teaching :</label>
