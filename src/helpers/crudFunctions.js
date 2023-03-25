@@ -106,4 +106,21 @@ async function multiPartUpdateElement(e, formId, resource) {
     console.error(`Error Updating ${resource}`);
   }
 }
-export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement };
+// =======  Send Mail  ========
+async function SendMail(e, formId) {
+  try {
+    const uri = `${baseAPI}/email`;
+    const data = {};
+    const formData = new FormData(document.getElementById(formId));
+    for (let [key, value] of formData) {
+      data[key] = value;
+    }
+    await axios.post(uri, data).then((res) => {
+      console.log(res.data);
+    });
+  } catch (err) {
+    console.error(err);
+    console.error(`Error sending Email`);
+  }
+}
+export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, SendMail };

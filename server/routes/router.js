@@ -5,6 +5,7 @@ const volunteerController = require("../controllers/volunteer");
 const lessonsController = require("../controllers/lesson");
 const subjectController = require("../controllers/subject");
 const eventController = require("../controllers/event");
+const emailController = require("../controllers/email");
 const profileUpload = require("../middleware/multer/profileCover");
 
 /**
@@ -12,7 +13,9 @@ const profileUpload = require("../middleware/multer/profileCover");
  * @method GET /
  */
 
-route.get("/", (req, res) => { res.send("server is running !!!") });
+route.get("/", (req, res) => {
+  res.send("server is running !!!");
+});
 // ================ student router ===================;
 // API
 route.get("/api/students", studentController.find);
@@ -22,9 +25,9 @@ route.delete("/api/students/:id", studentController.delete);
 
 // =============== volunteer router ==================
 // API
-route.post("/api/volunteers", profileUpload.single('profileCover'), volunteerController.create);
+route.post("/api/volunteers", profileUpload.single("profileCover"), volunteerController.create);
 route.get("/api/volunteers", volunteerController.find);
-route.put("/api/volunteers/:id", profileUpload.single('profileCover'), volunteerController.update);
+route.put("/api/volunteers/:id", profileUpload.single("profileCover"), volunteerController.update);
 route.delete("/api/volunteers/:id", volunteerController.delete);
 // =============== lesson router ==================
 // API
@@ -44,4 +47,7 @@ route.post("/api/events", eventController.create);
 route.get("/api/events", eventController.find);
 route.put("/api/events/:id", eventController.update);
 route.delete("/api/events/:id", eventController.delete);
+// =============== subject router ==================
+// API
+route.post("/api/email", emailController.send);
 module.exports = route;
