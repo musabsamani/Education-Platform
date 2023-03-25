@@ -1,49 +1,18 @@
 import React, { Component } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
-let janCount = 5;
-let febCount = 3;
-let marCount = 8;
-let aprCount = 28;
-let mayCount = 50;
-let junCount = 6;
-let julCount = 22;
-let ogtCount = 9;
-let sepCount = 35;
-let octCount = 18;
-let novCount = 42;
-let decCount = 30;
-
-// this.props.volunteers.forEach(e=> {
-//   const month = e.time.getMonth();
-
-//   switch (month) {
-//     case 0: janCount++;
-//       break;
-//     case 1: febCount++;
-//       break;
-//     case 2: marCount++;
-//       break;
-//     case 3: aprCount++;
-//       break;
-//     case 4: mayCount++;
-//       break;
-//     case 5: junCount++;
-//       break;
-//     case 6: julCount++;
-//       break;
-//     case 7: ogtCount++;
-//       break;
-//     case 8: sepCount++;
-//       break;
-//     case 9: octCount++;
-//       break;
-//     case 10: novCount++;
-//       break;
-//     case 11: decCount++;
-//       break;  
-//   }
-// });
+let janCount = 0;
+let febCount = 2;
+let marCount = 0;
+let aprCount = 5;
+let mayCount = 0;
+let junCount = 0;
+let julCount = 7;
+let ogtCount = 0;
+let sepCount = 0;
+let octCount = 0;
+let novCount = 0;
+let decCount = 0;
 
 
 const data = [
@@ -146,7 +115,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 class Chart extends Component {
-  state = {  } 
+
   render() { 
     return (
       <ResponsiveContainer width="100%" height="100%">

@@ -4,12 +4,12 @@ class VolunteerTable extends Component {
   render() {
     return (
       <>
-        <div className="container mt-5 ">
-          <Link to="/addVolunteer">
+        <div className="container mt-5">
+          {/* <Link to="/addVolunteer">
             <button className="btn btn-outline-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
               Add Volunteer
             </button>
-          </Link>
+          </Link> */}
           <table className="table caption-top mt-5">
             <thead>
               <tr>

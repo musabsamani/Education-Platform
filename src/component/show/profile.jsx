@@ -37,6 +37,7 @@ class Profile extends Component {
               <h5>email : {temporary.email}</h5>
               <h5>subject : {temporary.subject}</h5>
               <h5>address : {temporary.address}</h5>
+              <h5>time : {temporary.time}</h5>
             </div>
           </div>
           <div className="_button">
