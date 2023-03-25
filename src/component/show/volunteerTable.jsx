@@ -1,15 +1,23 @@
 import React, { Component } from "react";
+import Sidebar from "../sidebar";
+import Adminbar from "../adminbar";
 import { Link } from "react-router-dom";
 class VolunteerTable extends Component {
   render() {
     return (
       <>
-        <div className="container mt-5">
-          {/* <Link to="/addVolunteer">
+        <div className='main'>
+                <Sidebar/>
+                <div className='content'>
+                    <Adminbar/>
+                    <hr />
+                    <div className="center">
+                    <div className="tb container ">
+          <Link to="/addVolunteer">
             <button className="btn btn-outline-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
               Add Volunteer
             </button>
-          </Link> */}
+          </Link>
           <table className="table caption-top mt-5">
             <thead>
               <tr>
@@ -56,6 +64,12 @@ class VolunteerTable extends Component {
             </tbody>
           </table>
         </div>
+                    </div>  
+                    <div className="bottom">
+    
+                    </div>  
+                </div>
+            </div>
       </>
     );
   }

@@ -84,10 +84,21 @@ class App extends Component {
             <Route path="/">
               <Route index element={<Home />} />
               <Route path="login" element={<Login />} />
+              <Route path="dashboard" element={<Dashboard
+                volunteers={this.state.volunteers} />} />
             </Route>
-            <Route path="/dashboard" element={<Dashboard />}/>
             {/* ########### show ########### */}
             <>
+              <Route path="/volunteerTable"
+                element={<VolunteerTable
+                    volunteers={this.state.volunteers}
+                    temporary={this.state.temporary}
+                    onDelete={this.deleteElement}
+                    setTemporary={this.setTemporary}
+                    setTemporaryEmpty={this.setTemporaryEmpty}
+                  />
+                }
+              />
               <Route
                 path="/studentTable"
                 element={

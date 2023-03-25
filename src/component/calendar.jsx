@@ -8,7 +8,8 @@ import "react-big-calendar/lib/css/react-big-calendar.css"
 import ReactDatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { enUS, fr } from 'date-fns/esm/locale'
-
+import Adminbar from "./adminbar";
+import Sidebar from "./sidebar";
 const locales = { en: enUS, fr: fr }
 
 const localizer = dateFnsLocalizer({
@@ -47,7 +48,13 @@ function CAlendar(props) {
 
     return (
         <>
-            <div className="calendar text-center">
+            <div className='main'>
+                <Sidebar/>
+                <div className='content'>
+                    <Adminbar/>
+                    <hr />
+                    <div className="center">
+                    <div className="calendar text-center">
                 <h2>Add New Event</h2>
                 <div className="ca container ">
                     <input type="text" placeholder="Add Title" className="form-control"
@@ -77,6 +84,12 @@ function CAlendar(props) {
                     startAccessor="start"
                     endAccessor="end"
                     style={{ height: 500, margin: "20px" }} />
+            </div>
+                    </div>  
+                    <div className="bottom">
+    
+                    </div>  
+                </div>
             </div>
         </>
     );
