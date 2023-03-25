@@ -90,69 +90,71 @@ class Chart extends Component {
       }
     })
     { console.log(this.state) }
+
+    let data = [
+      {
+        name: 'Jan',
+        No_Volunteers_Signup: this.state.janCount,
+        amt: 2400,
+      },
+      {
+        name: 'Feb',
+        No_Volunteers_Signup: this.state.febCount,
+        amt: 2210,
+      },
+      {
+        name: 'Mar',
+        No_Volunteers_Signup: this.state.marCount,
+        amt: 2290,
+      },
+      {
+        name: 'Apr',
+        No_Volunteers_Signup: this.state.aprCount,
+        amt: 2000,
+      },
+      {
+        name: 'May',
+        No_Volunteers_Signup: this.state.mayCount,
+        amt: 2181,
+      },
+      {
+        name: 'Jun',
+        No_Volunteers_Signup: this.state.junCount,
+        amt: 2500,
+      },
+      {
+        name: 'Jul',
+        No_Volunteers_Signup: this.state.julCount,
+        amt: 2100,
+      },
+      {
+        name: 'Ogt',
+        No_Volunteers_Signup: this.state.ogtCount,
+        amt: 2100,
+      },
+      {
+        name: 'Sep',
+        No_Volunteers_Signup: this.state.sepCount,
+        amt: 2100,
+      },
+      {
+        name: 'Oct',
+        No_Volunteers_Signup: this.state.octCount,
+        amt: 2100,
+      },
+      {
+        name: 'Nov',
+        No_Volunteers_Signup: this.state.novCount,
+        amt: 2100,
+      },
+      {
+        name: 'Dec',
+        No_Volunteers_Signup: this.state.decCount,
+        amt: 2100,
+      },
+    ];
+    this.setState({ data })
   }
-  data = [
-    {
-      name: 'Jan',
-      No_Volunteers_Signup: this.state.janCount,
-      amt: 2400,
-    },
-    {
-      name: 'Feb',
-      No_Volunteers_Signup: this.state.febCount,
-      amt: 2210,
-    },
-    {
-      name: 'Mar',
-      No_Volunteers_Signup: this.state.marCount,
-      amt: 2290,
-    },
-    {
-      name: 'Apr',
-      No_Volunteers_Signup: this.state.aprCount,
-      amt: 2000,
-    },
-    {
-      name: 'May',
-      No_Volunteers_Signup: this.state.mayCount,
-      amt: 2181,
-    },
-    {
-      name: 'Jun',
-      No_Volunteers_Signup: this.state.junCount,
-      amt: 2500,
-    },
-    {
-      name: 'Jul',
-      No_Volunteers_Signup: this.state.julCount,
-      amt: 2100,
-    },
-    {
-      name: 'Ogt',
-      No_Volunteers_Signup: this.state.ogtCount,
-      amt: 2100,
-    },
-    {
-      name: 'Sep',
-      No_Volunteers_Signup: this.state.sepCount,
-      amt: 2100,
-    },
-    {
-      name: 'Oct',
-      No_Volunteers_Signup: this.state.octCount,
-      amt: 2100,
-    },
-    {
-      name: 'Nov',
-      No_Volunteers_Signup: this.state.novCount,
-      amt: 2100,
-    },
-    {
-      name: 'Dec',
-      No_Volunteers_Signup: this.state.decCount,
-      amt: 2100,
-    },
-  ];
 
   render() {
     // { console.log(this.data) }
@@ -161,7 +163,7 @@ class Chart extends Component {
         <BarChart
           width={500}
           height={300}
-          data={this.data}
+          data={this.state.data}
           margin={{
             top: 5,
             right: 30,
