@@ -1,11 +1,19 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Adminbar from "../adminbar";
+import Sidebar from "../sidebar";
 
 class StudentTable extends Component {
   render() {
     return (
       <>
-        <div className="container mt-5 ">
+        <div className='main'>
+                <Sidebar/>
+                <div className='content'>
+                    <Adminbar/>
+                    <hr />
+                    <div className="center">
+                    <div className="container mt-5 ">
           <Link to="/addStudent">
             <button className="btn btn-outline-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
               Add Student
@@ -52,6 +60,13 @@ class StudentTable extends Component {
             </tbody>
           </table>
         </div>
+                    </div>  
+                    <div className="bottom">
+    
+                    </div>  
+                </div>
+            </div>
+        
       </>
     );
   }

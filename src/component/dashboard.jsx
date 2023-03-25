@@ -19,7 +19,9 @@ class Dashboard extends Component {
                     <Adminbar/>
                     <hr />
                     <div className="center">
-                        <Route path='/component/show/volunteerTable.jsx' element={<VolunteerTable/>} />
+                        <Chart
+                            volunteers={this.props.volunteers}
+                            />
                     </div>  
                     <div className="bottom">
     
