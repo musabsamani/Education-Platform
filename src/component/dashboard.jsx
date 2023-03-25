@@ -10,26 +10,27 @@ import Adminbar from "./adminbar";
 
 // console.log(this.props.volunteers)
 class Dashboard extends Component {
-    state = {  } 
-    render() { 
-        return ( 
-            <div className='main'>
-                <Sidebar/>
+    state = {}
+    render() {
+        return (
+            < div className='main' >
+                {/* {console.log(this.props.volunteers)} */}
+                <Sidebar />
                 <div className='content'>
-                    <Adminbar/>
+                    <Adminbar />
                     <hr />
                     <div className="center">
                         <Chart
                             volunteers={this.props.volunteers}
-                            />
-                    </div>  
+                        />
+                    </div>
                     <div className="bottom">
-    
-                    </div>  
+
+                    </div>
                 </div>
-            </div>
-         );
+            </div >
+        );
     }
 }
- 
+
 export default Dashboard;

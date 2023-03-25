@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 class Email extends Component {
     submit = (e) => {
         e.preventDefault()
-        this.props.SendMail(e, "email")
+        this.props.sendMail(e, "email")
     }
     render() {
         return (

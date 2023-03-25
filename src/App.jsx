@@ -8,13 +8,14 @@ import "./scss/App.scss";
 // ====== helpers files/
 import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI } from "./helpers/apiEndpoints";
 import { handleChange, setTemporary, setTemporaryEmpty, dateFormaterForInput } from "./helpers/helpersFunctions";
-import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement } from "./helpers/crudFunctions";
+import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, sendMail } from "./helpers/crudFunctions";
 // ###################### React Components ######################
 // ====== components/
 import Home from "./component/home";
 import Dashboard from "./component/dashboard";
 import Chart from "./component/chart";
 import Login from "./component/login";
+import Email from "./component/email";
 // ====== components/Form/
 import StudentForm from "./component/form/student";
 import VolunteerForm from "./component/form/volunteer";
@@ -48,6 +49,7 @@ class App extends Component {
     this.deleteElement = deleteElement.bind(this);
     this.multiPartCreateElement = multiPartCreateElement.bind(this);
     this.multiPartUpdateElement = multiPartUpdateElement.bind(this);
+    this.sendMail = sendMail.bind(this);
   }
   state = {
     students: [],
@@ -74,7 +76,7 @@ class App extends Component {
       console.log("Error fetching data from the server on componentDidMount");
     }
   }
-  
+
   render() {
     return (
       // <RegistrationForm/>
@@ -91,12 +93,12 @@ class App extends Component {
             <>
               <Route path="/volunteerTable"
                 element={<VolunteerTable
-                    volunteers={this.state.volunteers}
-                    temporary={this.state.temporary}
-                    onDelete={this.deleteElement}
-                    setTemporary={this.setTemporary}
-                    setTemporaryEmpty={this.setTemporaryEmpty}
-                  />
+                  volunteers={this.state.volunteers}
+                  temporary={this.state.temporary}
+                  onDelete={this.deleteElement}
+                  setTemporary={this.setTemporary}
+                  setTemporaryEmpty={this.setTemporaryEmpty}
+                />
                 }
               />
               <Route
@@ -135,7 +137,7 @@ class App extends Component {
                   />
                 }
               />
-              
+
               <Route
                 path="/lessonTable"
                 element={
@@ -161,6 +163,14 @@ class App extends Component {
               <Route path="/calendar"
                 element={<Calendar
                   events={this.state.events}
+                />}
+              />
+            </>
+            {/* ########### email ############*/}
+            <>
+              <Route path="/email"
+                element={<Email
+                  sendMail={this.sendMail}
                 />}
               />
             </>
@@ -264,9 +274,9 @@ class App extends Component {
                   update={this.updateElement}
                 />}
               />
-              </>
-                        </Routes>
-                      </main>
+            </>
+          </Routes>
+        </main>
       </>
     );
   }

@@ -107,7 +107,7 @@ async function multiPartUpdateElement(e, formId, resource) {
   }
 }
 // =======  Send Mail  ========
-async function SendMail(e, formId) {
+async function sendMail(e, formId) {
   try {
     const uri = `${baseAPI}/email`;
     const data = {};
@@ -123,4 +123,4 @@ async function SendMail(e, formId) {
     console.error(`Error sending Email`);
   }
 }
-export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, SendMail };
+export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, sendMail };
