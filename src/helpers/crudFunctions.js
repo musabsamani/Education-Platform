@@ -107,7 +107,7 @@ async function multiPartUpdateElement(e, formId, resource) {
   }
 }
 // =======  Send Mail  ========
-async function sendMail(e, formId) {
+async function sendMail(e) {
   try {
     // console.log(e.target);
     const uri = `${baseAPI}/email`;
