@@ -8,12 +8,16 @@ import Sidebar from './sidebar';
 import Adminbar from "./adminbar";
 import Example from './eemail';
 import Email from './email';
+import { sendMail } from "../helpers/crudFunctions";
 
 
 // console.log(this.props.volunteers)
 class Dashboard extends Component {
+    constructor(props) {
+        super(props);
+        this.sendMail = sendMail.bind(this);
+    }
     render() {
-        // console.log(this.props.volunteers)
         return (
             < div className='main' >
                 <Sidebar />
@@ -22,7 +26,9 @@ class Dashboard extends Component {
                     <hr />
                     <div className="center">
                         <div className="msg">
-                            <Email/>
+                            <Email
+                                sendMail={this.sendMail}
+                            />
                         </div>
                     </div>
                 </div>

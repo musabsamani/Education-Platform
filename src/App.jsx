@@ -8,7 +8,7 @@ import "./scss/App.scss";
 // ====== helpers files/
 import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI } from "./helpers/apiEndpoints";
 import { handleChange, setTemporary, setTemporaryEmpty, dateFormaterForInput } from "./helpers/helpersFunctions";
-import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, sendMail } from "./helpers/crudFunctions";
+import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement } from "./helpers/crudFunctions";
 // ###################### React Components ######################
 // ====== components/
 import Home from "./component/home";
@@ -49,7 +49,6 @@ class App extends Component {
     this.deleteElement = deleteElement.bind(this);
     this.multiPartCreateElement = multiPartCreateElement.bind(this);
     this.multiPartUpdateElement = multiPartUpdateElement.bind(this);
-    this.sendMail = sendMail.bind(this);
   }
   state = {
     students: [],
