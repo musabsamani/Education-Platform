@@ -38,11 +38,7 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 class Chart extends Component {
-  state = {
-    data: {},
-    volunteers: this.props.volunteers,
-  }
-  async componentDidMount() {
+  chart = () => {
     let janCount = 0
     let febCount = 0
     let marCount = 0
@@ -55,17 +51,8 @@ class Chart extends Component {
     let octCount = 0
     let novCount = 0
     let decCount = 0
-    let volunteers = []
-    for (let i = 0; i < 3; i++) {
-      volunteers.push({ time: new Date() })
-    }
-    // console.log(this.state.volunteers)
-    // this.setState({ volunteers })
-    // console.log(this.state.volunteers)
-    console.log(volunteers)
-    // this.state.volunteers.forEach(element => {
-    volunteers.forEach(element => {
-      const month = element.time.getMonth();
+    this.props.volunteers.forEach(element => {
+      const month = new Date(element.time).getMonth();
       switch (month) {
         case 0: janCount++;
           break;
@@ -155,16 +142,15 @@ class Chart extends Component {
         amt: 2100,
       },
     ];
-    this.setState({ data })
+    return data
   }
   render() {
-
     return (
       < ResponsiveContainer width="100%" height="100%" >
         <BarChart
           width={500}
           height={300}
-          data={this.state.data}
+          data={this.chart()}
           margin={{
             top: 5,
             right: 30,

@@ -10,11 +10,10 @@ import Adminbar from "./adminbar";
 
 // console.log(this.props.volunteers)
 class Dashboard extends Component {
-    state = {}
     render() {
+        // console.log(this.props.volunteers)
         return (
             < div className='main' >
-                {/* {console.log(this.props.volunteers)} */}
                 <Sidebar />
                 <div className='content'>
                     <Adminbar />
