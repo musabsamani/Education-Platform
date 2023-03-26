@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 import EmailIcon from '@mui/icons-material/Email';
 import SearchIcon from '@mui/icons-material/Search';
 import ChatIcon from '@mui/icons-material/Chat';
@@ -13,7 +14,9 @@ const Adminbar = () => {
                 </div>
                 <div className="icons">
                     <SettingsIcon/>
-                    <EmailIcon/>
+                    <button>
+                        <Link to='/email'><EmailIcon /></Link>
+                    </button>
                     <ChatIcon/>
                     <div className='userphoto'>
                         <img src="https://cdn.pixabay.com/photo/2021/08/11/16/06/mountain-6538890_960_720.jpg" alt='user'/>

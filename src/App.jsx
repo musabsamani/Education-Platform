@@ -88,6 +88,8 @@ class App extends Component {
               <Route path="login" element={<Login />} />
               <Route path="dashboard" element={<Dashboard
                 volunteers={this.state.volunteers} />} />
+              <Route path="Chart" element={<Chart
+                volunteers={this.state.volunteers } />} />
             </Route>
             {/* ########### show ########### */}
             <>

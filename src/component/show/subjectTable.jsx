@@ -12,7 +12,7 @@ class SubjectTable extends Component {
                     <Adminbar/>
                     <hr />
                     <div className="center">
-                    <div className="container mt-5 ">
+                    <div className="tb container mt-5 ">
           <Link to="/addSubject">
             <button className="btn btn-outline-primary m-3 " onClick={() => this.props.setTemporaryEmpty()}>
               Add Subject
