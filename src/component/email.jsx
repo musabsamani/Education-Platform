@@ -8,66 +8,73 @@ class Email extends Component {
     state = {
         show: false,
     }
-    submit= e => {
+    submit = e => {
         e.preventDefault()
         this.props.sendMail(e, "email")
+
     }
-    handleClose = () => { this.setState({show:false}) };
-    handleShow = () => { this.setState({show:true}) };
+    handleClose = () => { this.setState({ show: false }) };
+    handleShow = () => { this.setState({ show: true }) };
     render() {
         return (
             <>
                 <Button variant="primary" onClick={this.handleShow}>
-                    <EmailIcon/>
+                    <EmailIcon />
                 </Button>
 
                 <Modal show={this.state.show} onHide={this.handleClose}>
                     <Modal.Header closeButton>
-                    <Modal.Title>Send Email</Modal.Title>
+                        <Modal.Title>Send Email</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        
-                    <Form>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="som3a"
-                            autoFocus
-                        />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Email address</Form.Label>
-                        <Form.Control
-                            type="email"
-                            placeholder="name@example.com"
-                            autoFocus
-                        />
-                        </Form.Group>
-                        <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
-                        <Form.Label>Subject</Form.Label>
-                        <Form.Control
-                            type="text"
-                            placeholder="subject"
-                            autoFocus
-                        />
-                        </Form.Group>
-                        <Form.Group
-                        className="mb-3"
-                        controlId="exampleForm.ControlTextarea1"
-                        >
-                        <Form.Label>The Message</Form.Label>
-                        <Form.Control as="textarea" rows={3} />
-                        </Form.Group>
-                    </Form>
+
+                        <Form onSubmit={e => this.submit(e)}>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Name</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="name"
+                                    placeholder="som3a"
+                                    autoFocus
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Email address</Form.Label>
+                                <Form.Control
+                                    type="email"
+                                    name="email"
+                                    placeholder="name@example.com"
+                                    autoFocus
+                                />
+                            </Form.Group>
+                            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+                                <Form.Label>Subject</Form.Label>
+                                <Form.Control
+                                    type="text"
+                                    name="subject"
+                                    placeholder="subject"
+                                    autoFocus
+                                />
+                            </Form.Group>
+                            <Form.Group
+                                className="mb-3"
+                                controlId="exampleForm.ControlTextarea1"
+                            >
+                                <Form.Label>The Message</Form.Label>
+                                <Form.Control as="textarea" rows={3} name="message" />
+                            </Form.Group>
+                            <Form.Group>
+                                <Button variant="secondary" onClick={this.handleClose}>
+                                    Close
+                                </Button>
+                                <Button type='submit' variant="primary">
+                                    Submit
+                                </Button>
+                            </Form.Group>
+                        </Form>
                     </Modal.Body>
                     <Modal.Footer>
-                    <Button variant="secondary" onClick={this.handleClose}>
-                        Close
-                    </Button>
-                    <Button type='submit' variant="primary" onClick={this.submit}>
-                        Submit
-                    </Button>
+
                     </Modal.Footer>
                 </Modal>
             </>

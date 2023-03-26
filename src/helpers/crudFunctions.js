@@ -109,9 +109,10 @@ async function multiPartUpdateElement(e, formId, resource) {
 // =======  Send Mail  ========
 async function sendMail(e, formId) {
   try {
+    // console.log(e.target);
     const uri = `${baseAPI}/email`;
     const data = {};
-    const formData = new FormData(document.getElementById(formId));
+    const formData = new FormData(e.target);
     for (let [key, value] of formData) {
       data[key] = value;
     }
