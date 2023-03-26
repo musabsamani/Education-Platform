@@ -3,12 +3,17 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 
-function Example() {
+function Email() {
   const [show, setShow] = useState(false);
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
+  const submit = (e) => {
+    e.preventDefault()
+    this.props.sendMail(e, "email")
+    console.log('send success')
+}
   return (
     <>
       <Button variant="primary" onClick={handleShow}>
@@ -17,10 +22,18 @@ function Example() {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Modal heading</Modal.Title>
+          <Modal.Title>Send Email</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          <Form>
+          <Form onSubmit={e => submit(e)} action="" id="email">
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Name</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="som3a"
+                autoFocus
+              />
+            </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
               <Form.Label>Email address</Form.Label>
               <Form.Control
@@ -29,11 +42,19 @@ function Example() {
                 autoFocus
               />
             </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
+              <Form.Label>Subject</Form.Label>
+              <Form.Control
+                type="text"
+                placeholder="subject"
+                autoFocus
+              />
+            </Form.Group>
             <Form.Group
               className="mb-3"
               controlId="exampleForm.ControlTextarea1"
             >
-              <Form.Label>Example textarea</Form.Label>
+              <Form.Label>The Message</Form.Label>
               <Form.Control as="textarea" rows={3} />
             </Form.Group>
           </Form>
@@ -42,8 +63,8 @@ function Example() {
           <Button variant="secondary" onClick={handleClose}>
             Close
           </Button>
-          <Button variant="primary" onClick={handleClose}>
-            Save Changes
+          <Button variant="primary">
+            Submit
           </Button>
         </Modal.Footer>
       </Modal>
@@ -51,4 +72,4 @@ function Example() {
   );
 }
 
-export default Example;
+export default Email;

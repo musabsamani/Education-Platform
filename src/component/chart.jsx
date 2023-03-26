@@ -2,24 +2,6 @@ import React, { Component } from 'react';
 import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
 
 const getIntroOfPage = (label) => {
-  if (label === 'Feb') {
-    return "Page A is about men's clothing";
-  }
-  if (label === 'Page B') {
-    return "Page B is about women's dress";
-  }
-  if (label === 'Page C') {
-    return "Page C is about women's bag";
-  }
-  if (label === 'Page D') {
-    return 'Page D is about household goods';
-  }
-  if (label === 'Page E') {
-    return 'Page E is about food';
-  }
-  if (label === 'Page F') {
-    return 'Page F is about baby food';
-  }
   return '';
 };
 
@@ -29,7 +11,6 @@ const CustomTooltip = ({ active, payload, label }) => {
       <div className="custom-tooltip">
         <p className="label">{`${label} : ${payload[0].value}`}</p>
         <p className="intro">{getIntroOfPage(label)}</p>
-        <p className="desc">Anything you want can be displayed here.</p>
       </div>
     );
   }
@@ -38,16 +19,12 @@ const CustomTooltip = ({ active, payload, label }) => {
 };
 
 class Chart extends Component {
-  state = {
-    data: {},
-    volunteers: this.props.volunteers,
-  }
-  async componentDidMount() {
-    let janCount = 0
+  chart = () => {
+    let janCount = 2
     let febCount = 0
     let marCount = 0
     let aprCount = 0
-    let mayCount = 0
+    let mayCount = 7
     let junCount = 0
     let julCount = 0
     let ogtCount = 0
@@ -55,17 +32,8 @@ class Chart extends Component {
     let octCount = 0
     let novCount = 0
     let decCount = 0
-    let volunteers = []
-    for (let i = 0; i < 3; i++) {
-      volunteers.push({ time: new Date() })
-    }
-    // console.log(this.state.volunteers)
-    // this.setState({ volunteers })
-    console.log(this.state.volunteers)
-    // console.log(volunteers)
-    // this.state.volunteers.forEach(element => {
-    volunteers.forEach(element => {
-      const month = element.time.getMonth();
+    this.props.volunteers.forEach(element => {
+      const month = new Date(element.time).getMonth();
       switch (month) {
         case 0: janCount++;
           break;
@@ -155,17 +123,16 @@ class Chart extends Component {
         amt: 2100,
       },
     ];
-    this.setState({ data })
+    return data
   }
   render() {
-
     return (
       <div className="chart">
         < ResponsiveContainer width="100%" height="100%" >
           <BarChart
-            width={500}
-            height={300}
-            data={this.state.data}
+            width={200}
+            height={100}
+            data={this.chart()}
             margin={{
               top: 5,
               right: 30,
@@ -182,7 +149,6 @@ class Chart extends Component {
           </BarChart>
         </ResponsiveContainer >
       </div>
-      
     );
   }
 }

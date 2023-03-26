@@ -84,12 +84,17 @@ class App extends Component {
         <main className="mainContainer">
           <Routes>
             <Route path="/">
-              <Route index element={<Home />} />
-              <Route path="login" element={<Login />} />
-              <Route path="dashboard" element={<Dashboard
-                volunteers={this.state.volunteers} />} />
-              <Route path="Chart" element={<Chart
-                volunteers={this.state.volunteers } />} />
+              <Route index
+                element={<Home />}
+              />
+              <Route path="login"
+                element={<Login />}
+              />
+              <Route path="dashboard"
+                element={<Dashboard
+                  volunteers={this.state.volunteers}
+                />}
+              />
             </Route>
             {/* ########### show ########### */}
             <>

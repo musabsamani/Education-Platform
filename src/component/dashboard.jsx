@@ -7,26 +7,23 @@ import VolunteerTable from './show/volunteerTable';
 import Sidebar from './sidebar';
 import Adminbar from "./adminbar";
 import Example from './eemail';
+import Email from './email';
 
 
 // console.log(this.props.volunteers)
 class Dashboard extends Component {
-    state = {}
     render() {
+        // console.log(this.props.volunteers)
         return (
             < div className='main' >
-                {/* {console.log(this.props.volunteers)} */}
                 <Sidebar />
                 <div className='content'>
                     <Adminbar />
                     <hr />
                     <div className="center">
-                        <Chart
-                            volunteers={this.props.volunteers}
-                        />
-                    </div>
-                    <div className="bottom">
-                        <Example/>
+                        <div className="msg">
+                            <Email/>
+                        </div>
                     </div>
                 </div>
             </div >
