@@ -45,7 +45,7 @@ exports.send = (req, res) => {
     };
     let mail = MailGenerator.generate(resopnse);
     let message = {
-      from: `Test<${EMAIL}>`,
+      from: `<${EMAIL}>`,
       to: form.email,
       subject: form.subject,
       //   html: mail,

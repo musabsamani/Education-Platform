@@ -6,6 +6,7 @@ import Profile from './show/profile';
 import VolunteerTable from './show/volunteerTable';
 import Sidebar from './sidebar';
 import Adminbar from "./adminbar";
+import Example from './eemail';
 
 
 // console.log(this.props.volunteers)
@@ -25,7 +26,7 @@ class Dashboard extends Component {
                         />
                     </div>
                     <div className="bottom">
-
+                        <Example/>
                     </div>
                 </div>
             </div >

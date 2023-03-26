@@ -40,126 +40,125 @@ const CustomTooltip = ({ active, payload, label }) => {
 class Chart extends Component {
   state = {
     data: {},
-    janCount: 0,
-    febCount: 0,
-    marCount: 0,
-    aprCount: 0,
-    mayCount: 0,
-    junCount: 0,
-    julCount: 0,
-    ogtCount: 0,
-    sepCount: 0,
-    octCount: 0,
-    novCount: 0,
-    decCount: 0
+    volunteers: this.props.volunteers,
   }
-  // componentDidMount() {
-  //   // let volunteers = [];
-  //   // for (let i = 0; i < 3; i++) {
-  //     //   let volunteer = { time: new Date() };
-  //     //   volunteers.push(volunteer);
-  //     // }
-  //     // console.log(volunteers)
-  //     this.props.volunteers.forEach(element => {
-  //       const month = element.time.getMonth();
-  //       // { console.log(month) }
-  //       switch (month) {
-  //         case 0: this.setState({ janCount: this.state.janCount++ });
-  //         break;
-  //         case 1: this.setState({ febCount: this.state.febCount++ });
-  //         break;
-  //         case 2: this.setState({ marCount: this.state.marCount++ });
-  //         break;
-  //         case 3: this.setState({ aprCount: this.state.aprCount++ });
-  //         break;
-  //         case 4: this.setState({ mayCount: this.state.mayCount++ });
-  //         break;
-  //         case 5: this.setState({ junCount: this.state.junCount++ });
-  //         break;
-  //         case 6: this.setState({ julCount: this.state.julCount++ });
-  //         break;
-  //         case 7: this.setState({ ogtCount: this.state.ogtCount++ });
-  //         break;
-  //         case 8: this.setState({ sepCount: this.state.sepCount++ });
-  //         break;
-  //         case 9: this.setState({ octCount: this.state.octCount++ });
-  //         break;
-  //         case 10: this.setState({ novCount: this.state.novCount++ });
-  //         break;
-  //         case 11: this.setState({ decCount: this.state.decCount++ });
-  //         break;
-  //       }
-  //     })
-  //     // { console.log(this.state) }
-  //     console.log(this.props.volunteers)
-      
-  //   let data = [
-  //     {
-  //       name: 'Jan',
-  //       No_Volunteers_Signup: this.state.janCount,
-  //       amt: 2400,
-  //     },
-  //     {
-  //       name: 'Feb',
-  //       No_Volunteers_Signup: this.state.febCount,
-  //       amt: 2210,
-  //     },
-  //     {
-  //       name: 'Mar',
-  //       No_Volunteers_Signup: this.state.marCount,
-  //       amt: 2290,
-  //     },
-  //     {
-  //       name: 'Apr',
-  //       No_Volunteers_Signup: this.state.aprCount,
-  //       amt: 2000,
-  //     },
-  //     {
-  //       name: 'May',
-  //       No_Volunteers_Signup: this.state.mayCount,
-  //       amt: 2181,
-  //     },
-  //     {
-  //       name: 'Jun',
-  //       No_Volunteers_Signup: this.state.junCount,
-  //       amt: 2500,
-  //     },
-  //     {
-  //       name: 'Jul',
-  //       No_Volunteers_Signup: this.state.julCount,
-  //       amt: 2100,
-  //     },
-  //     {
-  //       name: 'Ogt',
-  //       No_Volunteers_Signup: this.state.ogtCount,
-  //       amt: 2100,
-  //     },
-  //     {
-  //       name: 'Sep',
-  //       No_Volunteers_Signup: this.state.sepCount,
-  //       amt: 2100,
-  //     },
-  //     {
-  //       name: 'Oct',
-  //       No_Volunteers_Signup: this.state.octCount,
-  //       amt: 2100,
-  //     },
-  //     {
-  //       name: 'Nov',
-  //       No_Volunteers_Signup: this.state.novCount,
-  //       amt: 2100,
-  //     },
-  //     {
-  //       name: 'Dec',
-  //       No_Volunteers_Signup: this.state.decCount,
-  //       amt: 2100,
-  //     },
-  //   ];
-  //   this.setState({ data })
-  // }
-
+  async componentDidMount() {
+    let janCount = 0
+    let febCount = 0
+    let marCount = 0
+    let aprCount = 0
+    let mayCount = 0
+    let junCount = 0
+    let julCount = 0
+    let ogtCount = 0
+    let sepCount = 0
+    let octCount = 0
+    let novCount = 0
+    let decCount = 0
+    let volunteers = []
+    for (let i = 0; i < 3; i++) {
+      volunteers.push({ time: new Date() })
+    }
+    // console.log(this.state.volunteers)
+    // this.setState({ volunteers })
+    console.log(this.state.volunteers)
+    // console.log(volunteers)
+    // this.state.volunteers.forEach(element => {
+    volunteers.forEach(element => {
+      const month = element.time.getMonth();
+      switch (month) {
+        case 0: janCount++;
+          break;
+        case 1: febCount++;
+          break;
+        case 2: marCount++;
+          break;
+        case 3: aprCount++;
+          break;
+        case 4: mayCount++;
+          break;
+        case 5: junCount++;
+          break;
+        case 6: julCount++;
+          break;
+        case 7: ogtCount++;
+          break;
+        case 8: sepCount++;
+          break;
+        case 9: octCount++;
+          break;
+        case 10: novCount++;
+          break;
+        case 11: decCount++;
+          break;
+      }
+    })
+    let data = [
+      {
+        name: 'Jan',
+        No_Volunteers_Signup: janCount,
+        amt: 2400,
+      },
+      {
+        name: 'Feb',
+        No_Volunteers_Signup: febCount,
+        amt: 2210,
+      },
+      {
+        name: 'Mar',
+        No_Volunteers_Signup: marCount,
+        amt: 2290,
+      },
+      {
+        name: 'Apr',
+        No_Volunteers_Signup: aprCount,
+        amt: 2000,
+      },
+      {
+        name: 'May',
+        No_Volunteers_Signup: mayCount,
+        amt: 2181,
+      },
+      {
+        name: 'Jun',
+        No_Volunteers_Signup: junCount,
+        amt: 2500,
+      },
+      {
+        name: 'Jul',
+        No_Volunteers_Signup: julCount,
+        amt: 2100,
+      },
+      {
+        name: 'Ogt',
+        No_Volunteers_Signup: ogtCount,
+        amt: 2100,
+      },
+      {
+        name: 'Sep',
+        No_Volunteers_Signup: sepCount,
+        amt: 2100,
+      },
+      {
+        name: 'Oct',
+        No_Volunteers_Signup: octCount,
+        amt: 2100,
+      },
+      {
+        name: 'Nov',
+        No_Volunteers_Signup: novCount,
+        amt: 2100,
+      },
+      {
+        name: 'Dec',
+        No_Volunteers_Signup: decCount,
+        amt: 2100,
+      },
+    ];
+    this.setState({ data })
+  }
   render() {
-    // { console.log(this.data) }
+
     return (
       <div className="chart">
         < ResponsiveContainer width="100%" height="100%" >
