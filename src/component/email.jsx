@@ -11,7 +11,6 @@ class Email extends Component {
     submit = e => {
         e.preventDefault()
         this.props.sendMail(e)
-
     }
     handleClose = () => { this.setState({ show: false }) };
     handleShow = () => { this.setState({ show: true }) };
