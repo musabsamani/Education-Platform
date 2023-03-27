@@ -7,12 +7,14 @@ exports.create = (req, res) => {
   }
   const subject = new Subjectdb({
     _id: req.body._id,
+    code: req.body.code,
     name: req.body.name,
+    description: req.body.description,
   });
   subject
     .save(subject)
     .then((data) => {
-      res.send("Subject Added successfully")
+      res.send("Subject Added successfully");
       // res.redirect("/subjects/new");
     })
     .catch((err) => {
