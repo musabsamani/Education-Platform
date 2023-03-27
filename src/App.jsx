@@ -6,7 +6,7 @@ import axios from "axios";
 import "./scss/App.scss";
 
 // ====== helpers files/
-import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI, roomAPI } from "./helpers/apiEndpoints";
+import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI, roomAPI, sessionAPI } from "./helpers/apiEndpoints";
 import { handleChange, setTemporary, setTemporaryEmpty, dateFormaterForInput } from "./helpers/helpersFunctions";
 import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement } from "./helpers/crudFunctions";
 // ###################### React Components ######################
@@ -58,9 +58,10 @@ class App extends Component {
     students: [],
     volunteers: [],
     lessons: [],
-    rooms: [],
     subjects: [],
     events: [],
+    rooms: [],
+    sessions: [],
     temporary: {},
   };
   // this react function is fired up when page load initially
@@ -78,6 +79,8 @@ class App extends Component {
       this.setState({ events });
       const { data: rooms } = await axios.get(roomAPI);
       this.setState({ rooms });
+      const { data: sessions } = await axios.get(sessionAPI);
+      this.setState({ sessions });
     } catch {
       console.log("Error fetching data from the server on componentDidMount");
     }
@@ -177,7 +180,7 @@ class App extends Component {
                 path="/sessionTable"
                 element={
                   <SessionTable
-                    lessons={this.state.lessons}
+                    sessions={this.state.sessions}
                     temporary={this.state.temporary}
                     onDelete={this.deleteElement}
                     setTemporary={this.setTemporary}
@@ -335,6 +338,15 @@ class App extends Component {
               <Route
                 path="/updateRoom"
                 element={<RoomForm
+                  name="update"
+                  temporary={this.state.temporary}
+                  onChange={this.handleChange}
+                  update={this.updateElement}
+                />}
+              />
+              <Route
+                path="/updateSession"
+                element={<SessionForm
                   name="update"
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
