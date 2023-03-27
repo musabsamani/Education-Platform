@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const { uploadBasePath, profileCoverBasePath } = require("../helpers/fileSystemPathes");
 const studentSchema = new mongoose.Schema({
   _id: String,
   name: String,
