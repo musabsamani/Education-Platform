@@ -10,7 +10,6 @@ class Email extends Component {
     }
     submit = e => {
         e.preventDefault()
-        // alert("dd")
         this.props.sendMail(e)
     }
     handleClose = () => { this.setState({ show: false }) };

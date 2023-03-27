@@ -120,7 +120,14 @@ async function sendMail(e) {
     });
   } catch (err) {
     console.error(err);
-    console.error(`Error sending Email`);
+    console.error(`Error Sending Email`);
   }
 }
-export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, sendMail };
+async function sendWhatsapp(e) {
+  try {
+  } catch (err) {
+    console.error(err);
+    console.error(`Error Sending Whatsapp Message`);
+  }
+}
+export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, sendMail, sendWhatsapp };

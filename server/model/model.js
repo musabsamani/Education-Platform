@@ -1,5 +1,4 @@
 const mongoose = require("mongoose");
-const { uploadBasePath, profileCoverBasePath } = require("../helpers/fileSystemPathes")
 const studentSchema = new mongoose.Schema({
   _id: String,
   name: String,
@@ -20,13 +19,15 @@ const volunteerSchema = new mongoose.Schema({
 });
 const lessonSchema = new mongoose.Schema({
   _id: String,
-  subject: String,
-  date: String,
-  volunteer: String
+  subjectCode: String,
+  name: String,
+  content: String,
 });
 const subjectSchema = new mongoose.Schema({
   _id: String,
+  code: String,
   name: String,
+  description: String,
 });
 const eventSchema = new mongoose.Schema({
   _id: String,
@@ -34,12 +35,26 @@ const eventSchema = new mongoose.Schema({
   start: String,
   end: String,
 });
+const roomSchema = new mongoose.Schema({
+  _id: String,
+  name: String,
+});
 
-volunteerSchema.virtual('imagePath').get(function () {
+const sessionSchema = new mongoose.Schema({
+  _id: String,
+  subjectCode: String,
+  lesson: String,
+  room: String,
+  volunteer: String,
+  start: String,
+  end: String,
+});
+
+volunteerSchema.virtual("imagePath").get(function () {
   if (this.profileCoverName) {
-    return `${uploadBasePath}/${profileCoverBasePath}/${this.profileCoverName}`
+    return `${uploadBasePath}/${profileCoverBasePath}/${this.profileCoverName}`;
   }
-  return ""
+  return "";
 });
 
 const Studentdb = mongoose.model("studentdb", studentSchema);
@@ -47,4 +62,6 @@ const Volunteerdb = mongoose.model("volunteerdb", volunteerSchema);
 const Lessondb = mongoose.model("lessonsdb", lessonSchema);
 const Subjectdb = mongoose.model("subjectdb", subjectSchema);
 const Eventdb = mongoose.model("enentdb", eventSchema);
-module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb, Eventdb, uploadBasePath, profileCoverBasePath }
+const Roomdb = mongoose.model("roomdb", roomSchema);
+const Sessiondb = mongoose.model("sessiondb", sessionSchema);
+module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb, Eventdb, Roomdb, Sessiondb };

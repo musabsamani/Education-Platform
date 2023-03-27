@@ -5,6 +5,7 @@ const volunteerController = require("../controllers/volunteer");
 const lessonsController = require("../controllers/lesson");
 const subjectController = require("../controllers/subject");
 const eventController = require("../controllers/event");
+const sessionController = require("../controllers/session");
 const emailController = require("../controllers/email");
 const profileUpload = require("../middleware/multer/profileCover");
 
@@ -48,6 +49,12 @@ route.get("/api/events", eventController.find);
 route.put("/api/events/:id", eventController.update);
 route.delete("/api/events/:id", eventController.delete);
 // =============== subject router ==================
+// API
+route.post("/api/sessions", sessionController.create);
+route.get("/api/sessions", sessionController.find);
+route.put("/api/sessions/:id", sessionController.update);
+route.delete("/api/sessions/:id", sessionController.delete);
+// =============== email router ==================
 // API
 route.post("/api/email", emailController.send);
 module.exports = route;
