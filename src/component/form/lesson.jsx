@@ -13,7 +13,7 @@ class Lesson extends Component {
                 <select onChange={this.props.onChange} value={this.props.temporary.subject} name="subject" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">
                   {this.props.subjects.map((subject) => (
                     <option key={Math.random()} value={subject.value}>
-                      {subject.name}
+                      {subject.code}
                     </option>
                   ))}
                 </select>
@@ -23,7 +23,7 @@ class Lesson extends Component {
                 </select>
               )}
             </div>
-              <PopupSubject subject={this.props.subject}/>
+            <PopupSubject subject={this.props.subjects} />
             <div className="col-md-5">
               {this.props.volunteers.length > 0 ? (
                 <select onChange={this.props.onChange} value={this.props.temporary.volunteer} name="volunteer" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">

@@ -14,12 +14,11 @@ async function createElement(event, formId, resource) {
     }
     const uri = `${baseAPI}/${resource}`;
     await axios.post(`${uri}`, element).then((res) => {
-      const state = [...this.state[resource], data];
+      const state = [...this.state[resource], element];
       this.setState({ [resource]: state });
       // this.setTemporaryEmpty();
       // window.location.reload()
       console.log(`${resource} Created Successfully`);
-      //   console.log(res);
     });
   } catch {
     console.error(`Error Creating ${resource}`);

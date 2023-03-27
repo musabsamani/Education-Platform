@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import Input from "../include/_input";
-class AddSubject extends Component {
+class Subject extends Component {
   render() {
     return (
       <>
@@ -23,4 +23,4 @@ class AddSubject extends Component {
   }
 }
 
-export default AddSubject;
+export default Subject;

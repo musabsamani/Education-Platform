@@ -17,10 +17,9 @@ class Lessontaable extends Component {
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
                 <th scope="col">Subject</th>
-                <th scope="col">Date</th>
-                <th scope="col">Action</th>
+                <th scope="col">Name</th>
+                <th scope="col">content</th>
               </tr>
             </thead>
             <tbody>
@@ -29,10 +28,10 @@ class Lessontaable extends Component {
                   <tr key={lesson._id}>
                     <td>{i + 1}</td>
                     <td onClick={() => this.props.setTemporary(i)}>
-                      <Link to="/profile">{lesson.volunteer}</Link>
+                      {lesson.subjectCode}
                     </td>
-                    <td>{lesson.subject}</td>
-                    <td>{lesson.date}</td>
+                    <td>{lesson.name}</td>
+                    <td>{lesson.content}</td>
                     <td>
                       <Link to={`/updateLesson?id=${lesson._id}`}>
                         <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(lesson)}>
