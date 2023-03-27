@@ -35,7 +35,6 @@ async function updateElement(event, formId, resource) {
       element[key] = value;
     }
     const uri = `${baseAPI}/${resource}/${element._id}`;
-    console.log(element);
     await axios.put(`${uri}`, element).then((res) => {
       const state = [...this.state[resource]];
       state.forEach((round) => {
