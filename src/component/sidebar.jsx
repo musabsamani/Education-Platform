@@ -8,7 +8,7 @@ import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import PeopleIcon from '@mui/icons-material/People';
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import ClassIcon from '@mui/icons-material/Class';
-
+import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import "../scss/sidebar.scss"
 
 const Sidebar = () => {
@@ -46,6 +46,11 @@ const Sidebar = () => {
                         </li>
                         <li>
                             <NavLink to="/lessonTable" >
+                                <LocalLibraryIcon /><span>Lesson</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/session" >
                                 <ClassIcon /><span>Session</span>
                             </NavLink>
                         </li>

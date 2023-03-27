@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import PopupSubject from "../dashboardComponent/Subject";
 import Input from "../include/_input";
 class Lesson extends Component {
   render() {
@@ -22,6 +23,7 @@ class Lesson extends Component {
                 </select>
               )}
             </div>
+              <PopupSubject subject={this.props.subject}/>
             <div className="col-md-5">
               {this.props.volunteers.length > 0 ? (
                 <select onChange={this.props.onChange} value={this.props.temporary.volunteer} name="volunteer" className=" ml-3 mt-3 form-select form-select-lg mb-3" aria-label=".form-select-lg example">

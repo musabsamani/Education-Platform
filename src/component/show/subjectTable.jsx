@@ -25,7 +25,8 @@ class SubjectTable extends Component {
               <tr>
                 <th scope="col">#</th>
                 <th scope="col">Subject Code</th>
-                <th scope="col"></th>
+                <th scope="col">Subject Name</th>
+                <th scope="col">Description</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -34,10 +35,9 @@ class SubjectTable extends Component {
                 this.props.subjects.map((subject, i) => (
                   <tr key={subject._id}>
                     <td>{i + 1}</td>
-                    <td className="Sname" >{subject.name}</td>
-                    <td>
-                      <PopupSubject subject={subject} />
-                    </td>
+                    <td className="Sname" >{subject.code}</td>
+                    <td>{subject.name}</td>
+                    <td>{subject.description}</td>
                     <td>
                       <Link to={`/updateSubject?id=${subject._id}`}>
                         <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(subject)}>
@@ -71,3 +71,4 @@ class SubjectTable extends Component {
 }
 
 export default SubjectTable;
+                      {/* <PopupSubject subject={subject} /> */}
