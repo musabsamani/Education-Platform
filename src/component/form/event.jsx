@@ -27,9 +27,9 @@ class AddEvent extends Component {
     });
     if (isValid) {
       if (this.props.name === "add") {
-        this.props.create(e, "addEvent", "events")
+        this.props.create(e, "events")
       } else {
-        this.props.update(e, "updateEvent", "events")
+        this.props.update(e, "events")
       }
     };
   }
@@ -38,7 +38,7 @@ class AddEvent extends Component {
       <>
         <div className="container mt-5 ">
           <h2>{this.props.name === "add" ? "New Event" : "Edit event"}</h2>
-          <form className="col g-3 d-flex-column justify-content-center" id={`${this.props.name}Event`} onSubmit={(e) => { this.handleSubmit(e) }}>
+          <form className="col g-3 d-flex-column justify-content-center" onSubmit={(e) => { this.handleSubmit(e) }}>
             <Input onChange={this.props.onChange} type="text" name="title" label="Title" value={this.props.temporary.title} />
             <Input onChange={this.props.onChange} type="date" name="start" label="Start" value={this.props.temporary.start} />
             <Input onChange={this.props.onChange} type="date" name="end" label="End" value={this.props.temporary.end} />

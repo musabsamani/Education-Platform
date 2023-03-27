@@ -6,7 +6,7 @@ import axios from "axios";
 import "./scss/App.scss";
 
 // ====== helpers files/
-import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI } from "./helpers/apiEndpoints";
+import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI, roomAPI } from "./helpers/apiEndpoints";
 import { handleChange, setTemporary, setTemporaryEmpty, dateFormaterForInput } from "./helpers/helpersFunctions";
 import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement } from "./helpers/crudFunctions";
 // ###################### React Components ######################
@@ -22,12 +22,16 @@ import VolunteerForm from "./component/form/volunteer";
 import SubjectForm from "./component/form/subject";
 import EventForm from "./component/form/event";
 import LessonForm from "./component/form/lesson";
+import RoomForm from "./component/form/room";
+import SessionForm from "./component/form/session";
 // ====== components/show/
 import StudentTable from "./component/show/studentTable";
 import VolunteerTable from "./component/show/volunteerTable";
 import LessonTable from "./component/show/lessonTable";
 import SubjectTable from "./component/show/subjectTable";
 import EventTable from "./component/show/eventTable";
+import RoomTable from "./component/show/roomTable";
+import SessionTable from "./component/show/sessionTable";
 // ====== components/show/profile
 import Profile from "./component/show/profile";
 import Calendar from "./component/calendar";
@@ -54,6 +58,7 @@ class App extends Component {
     students: [],
     volunteers: [],
     lessons: [],
+    rooms: [],
     subjects: [],
     events: [],
     temporary: {},
@@ -71,6 +76,8 @@ class App extends Component {
       this.setState({ subjects });
       const { data: events } = await axios.get(eventAPI);
       this.setState({ events });
+      const { data: rooms } = await axios.get(roomAPI);
+      this.setState({ rooms });
     } catch {
       console.log("Error fetching data from the server on componentDidMount");
     }
@@ -155,6 +162,28 @@ class App extends Component {
                     setTemporaryEmpty={this.setTemporaryEmpty}
                   />
                 }
+              /><Route
+                path="/roomTable"
+                element={
+                  <RoomTable
+                    rooms={this.state.rooms}
+                    temporary={this.state.temporary}
+                    onDelete={this.deleteElement}
+                    setTemporary={this.setTemporary}
+                    setTemporaryEmpty={this.setTemporaryEmpty}
+                  />
+                }
+              /><Route
+                path="/sessionTable"
+                element={
+                  <SessionTable
+                    lessons={this.state.lessons}
+                    temporary={this.state.temporary}
+                    onDelete={this.deleteElement}
+                    setTemporary={this.setTemporary}
+                    setTemporaryEmpty={this.setTemporaryEmpty}
+                  />
+                }
               />
               {/* ########### profile ############*/}
               <Route path="/profile"
@@ -229,6 +258,29 @@ class App extends Component {
                   create={this.createElement}
                 />}
               />
+              <Route
+                path="/addRoom"
+                element={<RoomForm
+                  name="add"
+                  temporary={this.state.temporary}
+                  onChange={this.handleChange}
+                  create={this.createElement}
+                />}
+              />
+              <Route
+                path="/addSession"
+                element={<SessionForm
+                  name="add"
+                  subjects={this.state.subjects}
+                  lessons={this.state.lessons}
+                  rooms={this.state.rooms}
+                  volunteers={this.state.volunteers}
+                  temporary={this.state.temporary}
+                  formater={dateFormaterForInput}
+                  onChange={this.handleChange}
+                  create={this.createElement}
+                />}
+              />
             </>
             {/* ########### update ########### */}
             <>
@@ -276,6 +328,15 @@ class App extends Component {
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
                   formater={dateFormaterForInput}
+                  onChange={this.handleChange}
+                  update={this.updateElement}
+                />}
+              />
+              <Route
+                path="/updateRoom"
+                element={<RoomForm
+                  name="update"
+                  temporary={this.state.temporary}
                   onChange={this.handleChange}
                   update={this.updateElement}
                 />}

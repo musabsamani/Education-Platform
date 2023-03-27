@@ -1,1 +1,4 @@
-console.log("11" ? "yes" : 'nooo')
+function f(a) {
+  return a.toUpperCase();
+}
+console.log(f("dd"));
