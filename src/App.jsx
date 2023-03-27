@@ -28,6 +28,7 @@ import VolunteerTable from "./component/show/volunteerTable";
 import LessonTable from "./component/show/lessonTable";
 import SubjectTable from "./component/show/subjectTable";
 import EventTable from "./component/show/eventTable";
+import PopupSubject from "./component/dashboardComponent/Subject";
 // ====== components/show/profile
 import Profile from "./component/show/profile";
 import Calendar from "./component/calendar";
@@ -94,6 +95,7 @@ class App extends Component {
                   volunteers={this.state.volunteers}
                 />}
               />
+              <Route path="Subject" element={ <PopupSubject/>} />
             </Route>
             {/* ########### show ########### */}
             <>

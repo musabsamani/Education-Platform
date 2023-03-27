@@ -1,7 +1,9 @@
 import React, { Component } from "react";
-import { Link } from "react-router-dom";
 import Adminbar from "../adminbar";
+import { Link } from "react-router-dom";
 import Sidebar from "../sidebar";
+import '../../scss/subjectTable.scss'
+import PopupSubject from "../dashboardComponent/Subject";
 class SubjectTable extends Component {
   render() {
     return (
@@ -22,7 +24,8 @@ class SubjectTable extends Component {
             <thead>
               <tr>
                 <th scope="col">#</th>
-                <th scope="col">Name</th>
+                <th scope="col">Subject Code</th>
+                <th scope="col"></th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
@@ -31,7 +34,10 @@ class SubjectTable extends Component {
                 this.props.subjects.map((subject, i) => (
                   <tr key={subject._id}>
                     <td>{i + 1}</td>
-                    <td>{subject.name}</td>
+                    <td className="Sname" >{subject.name}</td>
+                    <td>
+                      <PopupSubject subject={subject} />
+                    </td>
                     <td>
                       <Link to={`/updateSubject?id=${subject._id}`}>
                         <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(subject)}>
@@ -55,7 +61,6 @@ class SubjectTable extends Component {
         </div>
                     </div>  
                     <div className="bottom">
-    
                     </div>  
                 </div>
             </div>
