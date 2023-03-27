@@ -1,5 +1,7 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
+import Sidebar from "../sidebar";
+import Adminbar from "../adminbar";
 class Lessontaable extends Component {
   state = {
     temporary: {},
@@ -7,7 +9,13 @@ class Lessontaable extends Component {
   render() {
     return (
       <>
-        <div className="container mt-5 ">
+        < div className='main' >
+                <Sidebar />
+                <div className='content'>
+                    <Adminbar />
+                    <hr />
+                    <div className="center">
+                    <div className="tb container mt-5 ">
           <Link to="/addLesson">
             <button className="btn btn-outline-primary m-3 " onClick={() => this.props.setTemporaryEmpty()}>
               Add Lesson
@@ -19,7 +27,8 @@ class Lessontaable extends Component {
                 <th scope="col">#</th>
                 <th scope="col">Subject</th>
                 <th scope="col">Name</th>
-                <th scope="col">content</th>
+                <th scope="col">Content</th>
+                <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
@@ -53,6 +62,10 @@ class Lessontaable extends Component {
             </tbody>
           </table>
         </div>
+                    </div>
+                </div>
+            </div >
+
       </>
     );
   }
