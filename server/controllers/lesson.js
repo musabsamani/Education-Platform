@@ -1,5 +1,5 @@
 var { Lessondb } = require("../model/model");
-// create and save new class
+// create and save new lesson
 exports.create = (req, res) => {
   if (!req.body) {
     res.status(400).send({ message: "request body can't be empty" });

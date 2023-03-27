@@ -5,9 +5,11 @@ const volunteerController = require("../controllers/volunteer");
 const lessonsController = require("../controllers/lesson");
 const subjectController = require("../controllers/subject");
 const eventController = require("../controllers/event");
+const roomController = require("../controllers/room");
 const sessionController = require("../controllers/session");
 const emailController = require("../controllers/email");
 const profileUpload = require("../middleware/multer/profileCover");
+const lessonUpload = require("../middleware/multer/lesson");
 
 /**
  * @description Root Route
@@ -32,9 +34,9 @@ route.put("/api/volunteers/:id", profileUpload.single("profileCover"), volunteer
 route.delete("/api/volunteers/:id", volunteerController.delete);
 // =============== lesson router ==================
 // API
-route.post("/api/lessons", lessonsController.create);
+route.post("/api/lessons", lessonUpload.single("filee"), lessonsController.create);
 route.get("/api/lessons", lessonsController.find);
-route.put("/api/lessons/:id", lessonsController.update);
+route.put("/api/lessons/:id", lessonUpload.single("filee"), lessonsController.update);
 route.delete("/api/lessons/:id", lessonsController.delete);
 // =============== subject router ==================
 // API
@@ -48,7 +50,13 @@ route.post("/api/events", eventController.create);
 route.get("/api/events", eventController.find);
 route.put("/api/events/:id", eventController.update);
 route.delete("/api/events/:id", eventController.delete);
-// =============== subject router ==================
+// =============== room router ==================
+// API
+route.post("/api/rooms", roomController.create);
+route.get("/api/rooms", roomController.find);
+route.put("/api/rooms/:id", roomController.update);
+route.delete("/api/rooms/:id", roomController.delete);
+// =============== sessions router ==================
 // API
 route.post("/api/sessions", sessionController.create);
 route.get("/api/sessions", sessionController.find);

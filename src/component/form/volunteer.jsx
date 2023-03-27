@@ -12,7 +12,7 @@ const ImgUpload = ({ onChange, src }) => (
     <input id="photo-upload" type="file" name="profileCover" style={{ display: "none" }} onChange={onChange} />
   </label>
 )
-const month = ['Jan','Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ogt', 'Sep', 'Oct', 'Nov','Dec']
+const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ogt', 'Sep', 'Oct', 'Nov', 'Dec']
 const date = new Date();
 class AddVolunteer extends Component {
   src = this.props.temporary.profileCoverName ? this.props.temporary.profileCoverName : "src/assets/img/uploadCover.webp"
@@ -54,10 +54,10 @@ class AddVolunteer extends Component {
       <>
         <div className="_volunteer">
           <div className="title">
-          <h2>{this.props.name === "add" ? "New Volunteer" : "Edit Volunteer"}</h2>
+            <h2>{this.props.name === "add" ? "New Volunteer" : "Edit Volunteer"}</h2>
           </div>
           <div className="body">
-            <form className="_form"id={`${this.props.name}Volunteer`} onSubmit={(e) => { this.submit(e) }}>
+            <form className="_form" id={`${this.props.name}Volunteer`} onSubmit={(e) => { this.submit(e) }}>
               <div className="_image">
                 <p>Profile image</p>
                 <ImgUpload onChange={this.photoUpload} src={src} />
@@ -71,7 +71,7 @@ class AddVolunteer extends Component {
                 <Input type="text" name="time" label="time" value={date} />
                 {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
                 <div className="selection">
-                <label>Teaching :</label>
+                  <label>Teaching :</label>
                   {subjects.length > 0 ? (
                     <select name="subject" aria-label=".form-select-lg example">
                       {this.props.subjects.map((subject) => (
