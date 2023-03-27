@@ -13,7 +13,7 @@ class StudentTable extends Component {
                     <Adminbar/>
                     <hr />
                     <div className="center">
-                    <div className="container mt-5 ">
+                    <div className="tb container mt-5 ">
           <Link to="/addStudent">
             <button className="btn btn-outline-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
               Add Student

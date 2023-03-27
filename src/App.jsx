@@ -13,7 +13,7 @@ import { createElement, updateElement, deleteElement, multiPartCreateElement, mu
 // ====== components/
 import Home from "./component/home";
 import Dashboard from "./component/dashboard";
-import Chart from "./component/chart";
+import Chart from "./component/dashboardComponent/chart";
 import Login from "./component/login";
 import Email from "./component/email";
 // ====== components/Form/

@@ -3,7 +3,7 @@ import Sidebar from "../sidebar";
 import Adminbar from "../adminbar";
 import { Link } from "react-router-dom";
 import '../../scss/dashboard.scss';
-import Chart from "../chart";
+import Chart from "../dashboardComponent/chart";
 class VolunteerTable extends Component {
   render() {
     return (
@@ -65,12 +65,10 @@ class VolunteerTable extends Component {
                           )}
                         </tbody>
                 </table>
-                <div className="bottom">
-                      <Chart
-                            volunteers={this.props.volunteers}
-                        />
-                    </div>
-                    </div>
+                        <div className="bottom">
+                      
+                        </div>
+                      </div>
                     </div>
                 </div>
             </div>

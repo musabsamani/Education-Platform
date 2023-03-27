@@ -1,12 +1,12 @@
 import React, { Component } from 'react';
 import { NavLink, Route, Routes } from 'react-router-dom';
-import Chart from './chart';
+import Chart from './dashboardComponent/chart';
 import "../scss/dashboard.scss"
 import Profile from './show/profile';
 import VolunteerTable from './show/volunteerTable';
 import Sidebar from './sidebar';
 import Adminbar from "./adminbar";
-import Example from './eemail';
+
 import Email from './email';
 import { sendMail } from "../helpers/crudFunctions";
 
@@ -25,6 +25,11 @@ class Dashboard extends Component {
                     <Adminbar />
                     <hr />
                     <div className="center">
+                        {/* <Subject />
+                        <Subject />
+                        <Subject />
+                        <Subject /> */}
+                        <Chart volunteers={this.props.volunteers} />
                         <div className="msg">
                             <Email
                                 sendMail={this.sendMail}
