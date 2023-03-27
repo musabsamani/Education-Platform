@@ -1,4 +1,4 @@
-var { Eventdb } = require("../model/model");
+const { Eventdb } = require("../model/model");
 // create and save new event
 exports.create = (req, res) => {
   if (!req.body) {
@@ -15,7 +15,7 @@ exports.create = (req, res) => {
     .save(event)
     .then((data) => {
       // res.send("Event Added successfully")
-      res.send(event)
+      res.send(event);
     })
     .catch((err) => {
       res.status(500).send({ message: err.message || "Some error occured while performing a create operation" });

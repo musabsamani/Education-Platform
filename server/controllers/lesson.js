@@ -7,9 +7,9 @@ exports.create = (req, res) => {
   }
   const lesson = new Lessondb({
     _id: req.body._id,
-    subject: req.body.subject,
-    volunteer: req.body.volunteer,
-    date: req.body.date
+    subjectCode: req.body.subjectCode,
+    name: req.body.name,
+    content: req.body.content,
   });
   lesson
     .save(lesson)
