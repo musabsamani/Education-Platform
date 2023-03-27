@@ -30,10 +30,10 @@ render(){
             ))}
             <Modal show={this.state.show} fullscreen={this.state.fullscreen} onHide={()=> this.handleClose()}>
                 <Modal.Header closeButton>
-                    <Modal.Title>{this.props.subject.name}</Modal.Title>
+                <Modal.Title>{this.props.subject.name}</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    
+
                 </Modal.Body>
             </Modal>
         </>
