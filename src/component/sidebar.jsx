@@ -7,6 +7,7 @@ import CalendarMonthIcon from '@mui/icons-material/CalendarMonth';
 import AccountBoxIcon from '@mui/icons-material/AccountBox';
 import PeopleIcon from '@mui/icons-material/People';
 import DashboardIcon from '@mui/icons-material/Dashboard';
+import ClassIcon from '@mui/icons-material/Class';
 
 import "../scss/sidebar.scss"
 
@@ -41,6 +42,11 @@ const Sidebar = () => {
                         <li>
                             <NavLink to="/subjectTable" >
                                 <MenuBookIcon /><span>Subject</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/lessonTable" >
+                                <ClassIcon /><span>Session</span>
                             </NavLink>
                         </li>
                         <li>
