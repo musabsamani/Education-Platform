@@ -7,16 +7,19 @@ exports.create = (req, res) => {
   }
   const lesson = new Lessondb({
     _id: req.body._id,
-    subjectCode: req.body.subjectCode,
+    subject: req.body.subject,
     name: req.body.name,
     content: req.body.content,
+    file: req.fileName,
   });
   lesson
     .save(lesson)
-    .then((data) => {
-      res.send("Lesson Added Successfully");
+    .then(async (data) => {
+      const pop = await Lessondb.findById(lesson._id).populate("subject");
+      res.send(pop);
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: err.message || "Some error occured while performing a create operation" });
     });
 };
@@ -25,6 +28,7 @@ exports.find = (req, res) => {
   if (req.query.id) {
     const id = req.query.id;
     Lessondb.findById(id)
+      .populate("subject")
       .then((data) => {
         if (!data) {
           res.status(404).send({ message: `Error lesson with id ${id} Not found` });
@@ -37,6 +41,7 @@ exports.find = (req, res) => {
       });
   } else {
     Lessondb.find()
+      .populate("subject")
       .then((lesson) => {
         res.send(lesson);
       })
@@ -56,10 +61,11 @@ exports.update = (req, res) => {
       if (!data) {
         res.status(404).send({ message: `Can't update lesson with id ${id}, maybe lesson doesn't exist` });
       } else {
-        res.send(data);
+        res.send(req.body);
       }
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: "Error update lesson information" });
     });
 };
@@ -75,6 +81,7 @@ exports.delete = (req, res) => {
       }
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: "Couldn't delete lesson with id " + id });
     });
 };

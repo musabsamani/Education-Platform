@@ -11,10 +11,13 @@ class Lesson extends Component {
           <h2>{this.props.name === "add" ? "New Lesson" : "Edit Lesson"}</h2>
           <form className="col g-3 d-flex-column justify-content-center" onSubmit={this.props.name === "add" ? (e) => this.props.create(e, "lessons") : (e) => this.props.update(e, "lessons")}>
             <div className="col-md-5">
-              <Select name="subjectCode" onChange={this.props.onChange} value={this.props.temporary.subjectCode} resourceArray={this.props.subjects} resoure="subject" resourceProperty="code" />
+              <Select name="subject" onChange={this.props.onChange} value={this.props.temporary.subject} resourceArray={this.props.subjects} resoure="subject" resourceProperty="code" />
             </div>
             <div className="col-md-5">
               <Input type="text" name="name" label="Name" onChange={this.props.onChange} value={this.props.temporary.name} />
+            </div>
+            <div className="col-md-5">
+              <Input type="file" name="file" label="File" onChange={this.props.onChange} value={this.props.temporary.file} />
             </div>
             <div className="col-md-5">
               <Textarea name="content" label="Content" onChange={this.props.onChange} value={this.props.temporary.content} />

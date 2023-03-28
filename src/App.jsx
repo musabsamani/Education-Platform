@@ -258,7 +258,7 @@ class App extends Component {
                   temporary={this.state.temporary}
                   formater={dateFormaterForInput}
                   onChange={this.handleChange}
-                  create={this.createElement}
+                  create={this.multiPartCreateElement}
                 />}
               />
               <Route
@@ -330,7 +330,6 @@ class App extends Component {
                   subjects={this.state.subjects}
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
-                  formater={dateFormaterForInput}
                   onChange={this.handleChange}
                   update={this.updateElement}
                 />}
@@ -348,6 +347,11 @@ class App extends Component {
                 path="/updateSession"
                 element={<SessionForm
                   name="update"
+                  subjects={this.state.subjects}
+                  rooms={this.state.rooms}
+                  lessons={this.state.lessons}
+                  volunteers={this.state.volunteers}
+                  formater={dateFormaterForInput}
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
                   update={this.updateElement}

@@ -16,19 +16,28 @@ const volunteerSchema = new mongoose.Schema({
   phone: String,
   subject: String,
   profileCoverName: String,
+  // time: {
+  //   type: Date,
+  //   Immutable: true,
+  //   default: () => Date.now(),
+  // },
   time: String,
-});
-const lessonSchema = new mongoose.Schema({
-  _id: String,
-  subjectCode: String,
-  name: String,
-  content: String,
 });
 const subjectSchema = new mongoose.Schema({
   _id: String,
   code: String,
   name: String,
   description: String,
+});
+const lessonSchema = new mongoose.Schema({
+  _id: String,
+  subject: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "subjectdb",
+  },
+  name: String,
+  content: String,
+  file: String,
 });
 const eventSchema = new mongoose.Schema({
   _id: String,
@@ -43,10 +52,22 @@ const roomSchema = new mongoose.Schema({
 
 const sessionSchema = new mongoose.Schema({
   _id: String,
-  subjectCode: String,
-  lesson: String,
-  room: String,
-  volunteer: String,
+  subject: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "subjectdb",
+  },
+  lesson: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "lessonsdb",
+  },
+  room: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "roomdb",
+  },
+  volunteer: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "volunteerdb",
+  },
   start: String,
   end: String,
 });

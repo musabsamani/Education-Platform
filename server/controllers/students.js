@@ -19,6 +19,7 @@ exports.create = async (req, res) => {
       // res.redirect("/students/new");
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: err.message || "Some error occured while performing a create operation" });
     });
 };
@@ -62,6 +63,7 @@ exports.update = (req, res) => {
       }
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: "Error update student information" });
     });
 };
@@ -77,6 +79,7 @@ exports.delete = (req, res) => {
       }
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: "Couldn't delete student with id " + id });
     });
 };

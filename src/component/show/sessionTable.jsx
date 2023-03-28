@@ -24,7 +24,7 @@ class SessionTable extends Component {
                   <thead>
                     <tr>
                       <th scope="col">#</th>
-                      <th scope="col">subjectCode</th>
+                      <th scope="col">subject</th>
                       <th scope="col">lesson</th>
                       <th scope="col">room</th>
                       <th scope="col">volunteer</th>
@@ -38,10 +38,10 @@ class SessionTable extends Component {
                       this.props.sessions.map((session, i) => (
                         <tr key={session._id}>
                           <td>{i + 1}</td>
-                          <td>{session.subjectCode}</td>
-                          <td>{session.lesson}</td>
-                          <td>{session.room}</td>
-                          <td>{session.volunteer}</td>
+                          <td>{session.subject.code}</td>
+                          <td>{session.lesson.name}</td>
+                          <td>{session.room.name}</td>
+                          <td>{session.volunteer.name}</td>
                           <td>{session.start}</td>
                           <td>{session.end}</td>
                           <td>
