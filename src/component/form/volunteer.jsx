@@ -23,9 +23,9 @@ class AddVolunteer extends Component {
   submit = async (e) => {
     e.preventDefault()
     await this.props.name === "add" ?
-      this.props.create(e, "addVolunteer", "volunteers")
+      this.props.create(e, "volunteers")
       :
-      this.props.update(e, "updateVolunteer", "volunteers")
+      this.props.update(e, "volunteers")
   }
   photoUpload = (e) => {
     e.preventDefault();
@@ -57,7 +57,7 @@ class AddVolunteer extends Component {
             <h2>{this.props.name === "add" ? "New Volunteer" : "Edit Volunteer"}</h2>
           </div>
           <div className="body">
-            <form className="_form" id={`${this.props.name}Volunteer`} onSubmit={(e) => { this.submit(e) }}>
+            <form className="_form" onSubmit={(e) => { this.submit(e) }}>
               <div className="_image">
                 <p>Profile image</p>
                 <ImgUpload onChange={this.photoUpload} src={src} />

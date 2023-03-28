@@ -50,7 +50,12 @@ const Sidebar = () => {
                             </NavLink>
                         </li>
                         <li>
-                            <NavLink to="/session" >
+                            <NavLink to="/roomTable" >
+                                <ClassIcon /><span>room</span>
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink to="/sessionTable" >
                                 <ClassIcon /><span>Session</span>
                             </NavLink>
                         </li>

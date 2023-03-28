@@ -3,10 +3,10 @@ import { baseAPI } from "./apiEndpoints";
 import axios from "axios";
 
 // =======  CREAT  ========
-async function createElement(event, formId, resource) {
+async function createElement(event, resource) {
   try {
     event.preventDefault();
-    const data = new FormData(document.getElementById(formId));
+    const data = new FormData(event.target);
     data.append("_id", generateId());
     let element = {};
     for (const [key, value] of data) {
@@ -25,10 +25,10 @@ async function createElement(event, formId, resource) {
   }
 }
 // =======  UPDATE  ========
-async function updateElement(event, formId, resource) {
+async function updateElement(event, resource) {
   try {
     event.preventDefault();
-    const data = new FormData(document.getElementById(formId));
+    const data = new FormData(event.target);
     // const uri = `http://httpbin.org/anything`;
     let element = {};
     for (const [key, value] of data) {
@@ -65,10 +65,10 @@ async function deleteElement(id, resource) {
   }
 }
 // =======  CREAT  ========
-async function multiPartCreateElement(e, formId, resource) {
+async function multiPartCreateElement(event, resource) {
   try {
     const uri = `${baseAPI}/${resource}`;
-    const data = new FormData(document.getElementById(formId));
+    const data = new FormData(event.target);
     data.append("_id", generateId());
     axios.post(`${uri}`, data).then((res) => {
       const element = [...this.state[resource], res.data];
@@ -84,9 +84,9 @@ async function multiPartCreateElement(e, formId, resource) {
   }
 }
 // =======  UPDATE  ========
-async function multiPartUpdateElement(e, formId, resource) {
+async function multiPartUpdateElement(event, resource) {
   try {
-    const data = new FormData(document.getElementById(formId));
+    const data = new FormData(event.target);
     const uri = `${baseAPI}/${resource}/${data.get("_id")}`;
     await axios.put(`${uri}`, data).then((res) => {
       const element = [...this.state[resource]];
