@@ -31,6 +31,7 @@ import EventTable from "./component/show/eventTable";
 // ====== components/show/profile
 import Profile from "./component/show/profile";
 import Calendar from "./component/calendar";
+import Session from "./component/dashboardComponent/session";
 // import RegistrationForm from "./component/include/registerationTime";
 // import comments from './helpers/comments';
 // =============== this is for axios for POST and PUT methods
@@ -169,6 +170,19 @@ class App extends Component {
               <Route path="/calendar"
                 element={<Calendar
                   events={this.state.events}
+                />}
+              />
+            </>
+            {/* ########### Session ############*/}
+            <>
+              <Route path="/session" element={<Session
+                    volunteers={this.state.volunteers}
+                    lessons={this.state.lessons}
+                    
+              />} />
+              <Route path="/email"
+                element={<Email
+                  sendMail={this.sendMail}
                 />}
               />
             </>
