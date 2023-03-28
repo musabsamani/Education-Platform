@@ -208,15 +208,10 @@ class App extends Component {
             {/* ########### Session ############*/}
             <>
               <Route path="/session" element={<Session
-                    volunteers={this.state.volunteers}
-                    lessons={this.state.lessons}
-                    
+                volunteers={this.state.volunteers}
+                lessons={this.state.lessons}
+
               />} />
-              <Route path="/email"
-                element={<Email
-                  sendMail={this.sendMail}
-                />}
-              />
             </>
             {/* ########### email ############*/}
             <>
