@@ -34,9 +34,9 @@ route.put("/api/volunteers/:id", profileUpload.single("profileCover"), volunteer
 route.delete("/api/volunteers/:id", volunteerController.delete);
 // =============== lesson router ==================
 // API
-route.post("/api/lessons", lessonUpload.single("filee"), lessonsController.create);
+route.post("/api/lessons", lessonUpload.single("file"), lessonsController.create);
 route.get("/api/lessons", lessonsController.find);
-route.put("/api/lessons/:id", lessonUpload.single("filee"), lessonsController.update);
+route.put("/api/lessons/:id", lessonUpload.single("file"), lessonsController.update);
 route.delete("/api/lessons/:id", lessonsController.delete);
 // =============== subject router ==================
 // API

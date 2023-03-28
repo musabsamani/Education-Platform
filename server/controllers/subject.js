@@ -18,6 +18,7 @@ exports.create = (req, res) => {
       // res.redirect("/subjects/new");
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: err.message || "Some error occured while performing a create operation" });
     });
 };
@@ -34,6 +35,7 @@ exports.find = (req, res) => {
         }
       })
       .catch((err) => {
+        console.log(err.message);
         res.status(500).send({ message: `Error occured while rettriving subject with id ${id}` });
       });
   } else {
@@ -42,6 +44,7 @@ exports.find = (req, res) => {
         res.send(subject);
       })
       .catch((err) => {
+        console.log(err.message);
         res.status(500).send({ message: err.message || "Error occured while retriving subject information" });
       });
   }
@@ -61,6 +64,7 @@ exports.update = (req, res) => {
       }
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: "Error update subject information" });
     });
 };
@@ -76,6 +80,7 @@ exports.delete = (req, res) => {
       }
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: "Couldn't delete subject with id " + id });
     });
 };

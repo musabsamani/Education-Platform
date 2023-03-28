@@ -2,7 +2,7 @@ const multer = require("multer");
 const path = require("path");
 const { uploadBasePath, lessonBasePath } = require("../../helpers/fileSystemPathes");
 const lessonUploadPath = path.join(uploadBasePath, lessonBasePath);
-let fileMimeTypes = ["application/pdf"];
+// let fileMimeTypes = ["application/pdf"];
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
     callback(null, lessonUploadPath);

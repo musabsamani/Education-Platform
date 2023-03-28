@@ -6,7 +6,7 @@ exports.create = (req, res) => {
   }
   const session = new Sessiondb({
     _id: req.body._id,
-    subjectCode: req.body.subjectCode,
+    subject: req.body.subject,
     lesson: req.body.lesson,
     room: req.body.room,
     volunteer: req.body.volunteer,
@@ -15,10 +15,12 @@ exports.create = (req, res) => {
   });
   session
     .save(session)
-    .then((data) => {
-      res.send(data);
+    .then(async (data) => {
+      const pop = await Sessiondb.findById(data._id).populate("subject").populate("lesson").populate("room").populate("volunteer");
+      res.send(pop);
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: err.message || "Some Error occured while performing a create operation" });
     });
 };
@@ -26,6 +28,10 @@ exports.find = (req, res) => {
   if (req.query.id) {
     const id = req.query.id;
     Sessiondb.findById(id)
+      .populate("subject")
+      .populate("lesson")
+      .populate("room")
+      .populate("volunteer")
       .then((data) => {
         if (!data) {
           res.status(404).send({ message: `Error Session with id ${id} Not Found` });
@@ -38,6 +44,10 @@ exports.find = (req, res) => {
       });
   } else {
     Sessiondb.find()
+      .populate("subject")
+      .populate("lesson")
+      .populate("room")
+      .populate("volunteer")
       .then((sessions) => {
         res.send(sessions);
       })
@@ -52,14 +62,16 @@ exports.update = (req, res) => {
   }
   const id = req.params.id;
   Sessiondb.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then((data) => {
+    .then(async (data) => {
+      const pop = await Sessiondb.findById(req.body._id).populate("subject").populate("lesson").populate("room").populate("volunteer");
       if (!data) {
         res.status(404).send({ message: `Can't update session with id ${id}, maybe session doesn't exist` });
       } else {
-        res.send(req.body);
+        res.send(pop);
       }
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: "Error update lesson information" });
     });
 };
@@ -74,6 +86,7 @@ exports.delete = (req, res) => {
       }
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: "Couldn't delete lesson with id " + id });
     });
 };

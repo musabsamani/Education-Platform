@@ -14,10 +14,11 @@ async function createElement(event, resource) {
     }
     const uri = `${baseAPI}/${resource}`;
     await axios.post(`${uri}`, element).then((res) => {
-      const state = [...this.state[resource], element];
+      const state = [...this.state[resource], res.data];
       this.setState({ [resource]: state });
       // this.setTemporaryEmpty();
       // window.location.reload()
+      console.log(res.data);
       console.log(`${resource} Created Successfully`);
     });
   } catch {
@@ -38,13 +39,13 @@ async function updateElement(event, resource) {
     await axios.put(`${uri}`, element).then((res) => {
       const state = [...this.state[resource]];
       state.forEach((round) => {
-        round._id === element._id ? Object.assign(round, element) : round;
+        round._id === res.data._id ? Object.assign(round, res.data) : round;
       });
       this.setState({ [resource]: state });
       //   this.setTemporaryEmpty();
       // window.location.reload()
       console.log(`${resource} Updated Successfully`);
-      //   console.log(res);
+      console.log(res.data);
     });
   } catch {
     console.error(`Error Updating ${resource}`);
@@ -67,6 +68,7 @@ async function deleteElement(id, resource) {
 // =======  CREAT  ========
 async function multiPartCreateElement(event, resource) {
   try {
+    // event.preventDefault();
     const uri = `${baseAPI}/${resource}`;
     const data = new FormData(event.target);
     data.append("_id", generateId());
@@ -76,7 +78,7 @@ async function multiPartCreateElement(event, resource) {
       // this.setTemporaryEmpty();
       // window.location.reload()
       console.log(`${resource}  Created Successfully !!!`);
-      // console.log(res.data)
+      console.log(res.data);
     });
   } catch (err) {
     console.error(err);
@@ -86,18 +88,19 @@ async function multiPartCreateElement(event, resource) {
 // =======  UPDATE  ========
 async function multiPartUpdateElement(event, resource) {
   try {
+    // event.preventDefault();
     const data = new FormData(event.target);
     const uri = `${baseAPI}/${resource}/${data.get("_id")}`;
     await axios.put(`${uri}`, data).then((res) => {
       const element = [...this.state[resource]];
-      element.forEach((element) => {
-        element._id === res.data._id ? Object.assign(element, res.data) : element;
+      element.forEach((round) => {
+        round._id === res.data._id ? Object.assign(round, res.data) : round;
       });
       this.setState({ [resource]: element });
       // this.setTemporaryEmpty()
       // window.location.reload()
       console.log(`${resource} Updated Successfully !!!`);
-      // console.log(res.data)
+      console.log(res.data);
     });
   } catch (err) {
     console.error(err);

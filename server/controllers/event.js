@@ -18,6 +18,7 @@ exports.create = (req, res) => {
       res.send(event);
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: err.message || "Some error occured while performing a create operation" });
     });
 };
@@ -61,6 +62,7 @@ exports.update = (req, res) => {
       }
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: "Error update event information" });
     });
 };
@@ -76,6 +78,7 @@ exports.delete = (req, res) => {
       }
     })
     .catch((err) => {
+      console.log(err.message);
       res.status(500).send({ message: "Couldn't delete event with id " + id });
     });
 };
