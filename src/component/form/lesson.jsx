@@ -4,12 +4,20 @@ import Input from "../include/_input";
 import Textarea from "../include/_textarea";
 import Select from "../include/_select";
 class Lesson extends Component {
+  state = { filee: {} }
+  submit = e => {
+    e.preventDefault()
+    this.props.name === "add" ?
+      this.props.create(e, "lessons")
+      :
+      this.props.update(e, "lessons")
+  }
   render() {
     return (
       <>
         <div className="container mt-5 ">
           <h2>{this.props.name === "add" ? "New Lesson" : "Edit Lesson"}</h2>
-          <form className="col g-3 d-flex-column justify-content-center" onSubmit={this.props.name === "add" ? (e) => this.props.create(e, "lessons") : (e) => this.props.update(e, "lessons")}>
+          <form className="col g-3 d-flex-column justify-content-center" onSubmit={e => this.submit(e)}>
             <div className="col-md-5">
               <Select name="subject" onChange={this.props.onChange} value={this.props.temporary.subject} resourceArray={this.props.subjects} resoure="subject" resourceProperty="code" />
             </div>
@@ -17,7 +25,7 @@ class Lesson extends Component {
               <Input type="text" name="name" label="Name" onChange={this.props.onChange} value={this.props.temporary.name} />
             </div>
             <div className="col-md-5">
-              <Input type="file" name="file" label="File" onChange={this.props.onChange} value={this.props.temporary.file} />
+              <Input type="file" name="file" label="File" />
             </div>
             <div className="col-md-5">
               <Textarea name="content" label="Content" onChange={this.props.onChange} value={this.props.temporary.content} />

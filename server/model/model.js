@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { uploadBasePath, profileCoverBasePath } = require("../helpers/fileSystemPathes");
+const { uploadBasePath, profileCoverBasePath, lessonBasePath } = require("../helpers/fileSystemPathes");
 const studentSchema = new mongoose.Schema({
   _id: String,
   name: String,
@@ -75,6 +75,12 @@ const sessionSchema = new mongoose.Schema({
 volunteerSchema.virtual("imagePath").get(function () {
   if (this.profileCoverName) {
     return `${uploadBasePath}/${profileCoverBasePath}/${this.profileCoverName}`;
+  }
+  return "";
+});
+lessonSchema.virtual("filePath").get(function () {
+  if (this.file) {
+    return `${uploadBasePath}/${lessonBasePath}/${this.file}`;
   }
   return "";
 });

@@ -15,10 +15,8 @@ const storage = multer.diskStorage({
 });
 const lessonUpload = multer({
   storage: storage,
-  fileFilter: (req, file, callback) => {
-    // callback(null, fileMimeTypes.includes(file.mimetype));
-    callback(null);
-  },
+  // fileFilter: (req, file, callback) => {
+  // callback(null, fileMimeTypes.includes(file.mimetype));
+  // },
 });
-module.exports = lessonUpload;
-module.exports.lessonUploadPath = lessonUploadPath;
+module.exports = { lessonUpload, lessonUploadPath };

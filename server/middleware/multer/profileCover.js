@@ -19,5 +19,5 @@ const profileUpload = multer({
     callback(null, imageMimeTypes.includes(file.mimetype));
   },
 });
-module.exports = profileUpload;
-module.exports.profileCoverUploadPath = profileCoverUploadPath;
+module.exports = { profileUpload, profileCoverUploadPath };
+// module.exports.profileCoverUploadPath = profileCoverUploadPath;

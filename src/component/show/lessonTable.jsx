@@ -36,7 +36,7 @@ class Lessontaable extends Component {
                       this.props.lessons.map((lesson, i) => (
                         <tr key={lesson._id}>
                           <td>{i + 1}</td>
-                          <td>{lesson.subject.code}</td>
+                          <td>{lesson.subject && lesson.subject.code}</td>
                           <td>{lesson.name}</td>
                           <td>{lesson.content}</td>
                           <td>

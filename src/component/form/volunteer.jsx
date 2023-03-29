@@ -1,25 +1,13 @@
 import React, { Component } from "react";
 import Input from "../include/_input";
 import "../../scss/addvolunteer.scss"
+import ImgUpload from "../include/_imgUpload"
 
 
-const ImgUpload = ({ onChange, src }) => (
-  <label htmlFor="photo-upload" className="custom-file-upload fas">
-    <div className="img-wrap img-upload">
-      <img className="image" src={src} style={{ cursor: "pointer" }} />
-    </div>
-    {/* <input id="photo-upload" type="file" name="profileCover" onChange={onChange} /> */}
-    <input id="photo-upload" type="file" name="profileCover" style={{ display: "none" }} onChange={onChange} />
-  </label>
-)
 const month = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Ogt', 'Sep', 'Oct', 'Nov', 'Dec']
 const date = new Date();
 class AddVolunteer extends Component {
-  src = this.props.temporary.profileCoverName ? this.props.temporary.profileCoverName : "src/assets/img/uploadCover.webp"
-  state = {
-    file: "",
-    src: this.src
-  };
+
   submit = async (e) => {
     e.preventDefault()
     await this.props.name === "add" ?
@@ -27,28 +15,9 @@ class AddVolunteer extends Component {
       :
       this.props.update(e, "volunteers")
   }
-  photoUpload = (e) => {
-    e.preventDefault();
-    const reader = new FileReader();
-    const file = e.target.files[0];
-    if (file) {
-      reader.readAsDataURL(file);
-      reader.onloadend = () => {
-        this.setState({
-          file: file,
-          src: reader.result,
-        })
-      }
-    } else {
-      this.setState({
-        file: "",
-        src: this.src
-      })
-    }
-  }
+
 
   render() {
-    const { src } = this.state;
     const { onChange, temporary, subjects } = this.props;
     return (
       <>
@@ -60,7 +29,7 @@ class AddVolunteer extends Component {
             <form className="_form" onSubmit={(e) => { this.submit(e) }}>
               <div className="_image">
                 <p>Profile image</p>
-                <ImgUpload onChange={this.photoUpload} src={src} />
+                <ImgUpload temporary={this.props.temporary} name="profileCoverName" />
               </div>
               <div className="_inputs">
                 <Input onChange={onChange} type="text" name="name" label="Name" value={temporary.name} />
