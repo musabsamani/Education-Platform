@@ -340,7 +340,7 @@ class App extends Component {
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
-                  update={this.updateElement}
+                  update={this.multiPartUpdateElement}
                 />}
               />
               <Route

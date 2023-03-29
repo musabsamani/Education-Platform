@@ -38,10 +38,10 @@ class SessionTable extends Component {
                       this.props.sessions.map((session, i) => (
                         <tr key={session._id}>
                           <td>{i + 1}</td>
-                          <td>{session.subject.code}</td>
-                          <td>{session.lesson.name}</td>
-                          <td>{session.room.name}</td>
-                          <td>{session.volunteer.name}</td>
+                          <td>{session.subject && session.subject.code}</td>
+                          <td>{session.lesson && session.lesson.name}</td>
+                          <td>{session.room && session.room.name}</td>
+                          <td>{session.volunteer && session.volunteer.name}</td>
                           <td>{session.start}</td>
                           <td>{session.end}</td>
                           <td>

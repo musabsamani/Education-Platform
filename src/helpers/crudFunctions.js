@@ -68,7 +68,6 @@ async function deleteElement(id, resource) {
 // =======  CREAT  ========
 async function multiPartCreateElement(event, resource) {
   try {
-    // event.preventDefault();
     const uri = `${baseAPI}/${resource}`;
     const data = new FormData(event.target);
     data.append("_id", generateId());

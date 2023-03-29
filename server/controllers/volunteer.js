@@ -1,5 +1,6 @@
 const { Volunteerdb } = require("../model/model");
 const { removeFile } = require("../helpers/helpersFunction");
+const { profileCoverUploadPath } = require("../middleware/multer/profileCover");
 // create and save new volunteer
 exports.create = async (req, res) => {
   if (!req.body) {
@@ -25,9 +26,9 @@ exports.create = async (req, res) => {
     })
     .catch((err) => {
       if (volunteer.profileCoverName) {
-        removeFile(volunteer.profileCoverName);
-        console.error(err);
+        removeFile(profileCoverUploadPath, volunteer.profileCoverName);
       }
+      console.error(err.message);
       res.status(500).send({ message: err.message || "Some error occured while performing a create operation" });
     });
 };
@@ -40,6 +41,7 @@ exports.find = (req, res) => {
         if (!data) {
           res.status(404).send({ message: `Error volunteer with id ${id} Not found` });
         } else {
+          data.profileCoverName = data.imagePath;
           res.send(data);
         }
       })
@@ -62,39 +64,34 @@ exports.find = (req, res) => {
 // update volunteer wih specified id
 exports.update = async (req, res) => {
   if (!req.body) {
+    if (req.fileName) {
+      removeFile(profileCoverUploadPath, req.body.profileCoverName);
+    }
     return res.status(400).send({ message: "Data to update can not be empty" });
   }
   const id = req.params.id;
-  const old = await Volunteerdb.findById(id);
-  const profileCoverName = req.fileName || (old && old.profileCoverName);
-  const volunteer = new Volunteerdb({
-    _id: req.body._id,
-    name: req.body.name,
-    time: req.body.time,
-    age: req.body.age,
-    email: req.body.email,
-    address: req.body.address,
-    phone: req.body.phone,
-    subject: req.body.subject,
-    profileCoverName: profileCoverName,
-  });
-  Volunteerdb.findByIdAndUpdate(id, volunteer, { useFindAndModify: false })
-    .then((searchResult) => {
-      if (!searchResult) {
+  req.fileName ? (req.body["profileCoverName"] = req.fileName) : "";
+  const old = await Volunteerdb.findById(req.body._id);
+  Volunteerdb.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false })
+    .then((data) => {
+      if (!data) {
+        if (req.fileName) {
+          removeFile(profileCoverUploadPath, req.fileName);
+        }
         res.status(404).send({ message: `Can't update volunteer with id ${id}, maybe volunteer doesn't exist` });
       } else {
         if (req.fileName) {
-          removeFile(searchResult.profileCoverName);
+          removeFile(profileCoverUploadPath, old.profileCoverName);
         }
-        volunteer.profileCoverName = volunteer.imagePath;
-        res.send(volunteer);
+        data.profileCoverName = data.imagePath;
+        res.send(data);
       }
     })
     .catch((err) => {
-      if (searchResult.profileCoverName) {
-        removeFile(searchResult.profileCoverName);
+      if (req.fileName) {
+        removeFile(profileCoverUploadPath, req.fileName);
       }
-      console.error(err);
+      console.error(err.message);
       res.status(500).send({ message: "Error update volunteer information" });
     });
 };
@@ -107,13 +104,13 @@ exports.delete = (req, res) => {
         res.status(404).send({ message: `Can't delete volunteer with id ${id}. Maybe volunteer doesn't exist` });
       } else {
         if (data.profileCoverName) {
-          removeFile(data.profileCoverName);
+          removeFile(profileCoverUploadPath, data.profileCoverName);
         }
         res.send({ message: "Volunteer Deleted successfully" });
       }
     })
     .catch((err) => {
-      console.error(err);
+      console.error(err.message);
       res.status(500).send({ message: "Couldn't delete volunteer with id " + id });
     });
 };

@@ -8,8 +8,8 @@ const eventController = require("../controllers/event");
 const roomController = require("../controllers/room");
 const sessionController = require("../controllers/session");
 const emailController = require("../controllers/email");
-const profileUpload = require("../middleware/multer/profileCover");
-const lessonUpload = require("../middleware/multer/lesson");
+const { profileUpload } = require("../middleware/multer/profileCover");
+const { lessonUpload } = require("../middleware/multer/lesson");
 
 /**
  * @description Root Route
@@ -28,9 +28,9 @@ route.delete("/api/students/:id", studentController.delete);
 
 // =============== volunteer router ==================
 // API
-route.post("/api/volunteers", profileUpload.single("profileCover"), volunteerController.create);
+route.post("/api/volunteers", profileUpload.single("profileCoverName"), volunteerController.create);
 route.get("/api/volunteers", volunteerController.find);
-route.put("/api/volunteers/:id", profileUpload.single("profileCover"), volunteerController.update);
+route.put("/api/volunteers/:id", profileUpload.single("profileCoverName"), volunteerController.update);
 route.delete("/api/volunteers/:id", volunteerController.delete);
 // =============== lesson router ==================
 // API

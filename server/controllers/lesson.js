@@ -1,4 +1,6 @@
-var { Lessondb } = require("../model/model");
+const { Lessondb } = require("../model/model");
+const { lessonUploadPath } = require("../middleware/multer/lesson");
+const { removeFile } = require("../helpers/helpersFunction");
 // create and save new lesson
 exports.create = (req, res) => {
   if (!req.body) {
@@ -13,13 +15,17 @@ exports.create = (req, res) => {
     file: req.fileName,
   });
   lesson
-    .save(lesson)
+    .save()
     .then(async (data) => {
-      const pop = await Lessondb.findById(lesson._id).populate("subject");
-      res.send(pop);
+      await data.populate("subject");
+      data.file = data.filePath;
+      res.send(data);
     })
     .catch((err) => {
-      console.log(err.message);
+      if (lesson.file) {
+        removeFile(lessonUploadPath, lesson.file);
+      }
+      console.error(err.message);
       res.status(500).send({ message: err.message || "Some error occured while performing a create operation" });
     });
 };
@@ -33,6 +39,7 @@ exports.find = (req, res) => {
         if (!data) {
           res.status(404).send({ message: `Error lesson with id ${id} Not found` });
         } else {
+          data.file = data.filePath;
           res.send(data);
         }
       })
@@ -42,8 +49,11 @@ exports.find = (req, res) => {
   } else {
     Lessondb.find()
       .populate("subject")
-      .then((lesson) => {
-        res.send(lesson);
+      .then((lessons) => {
+        lessons.forEach((lesson) => {
+          lesson.file = lesson.filePath;
+        });
+        res.send(lessons);
       })
       .catch((err) => {
         res.status(500).send({ message: err.message || "Error occured while retriving lesson information" });
@@ -51,23 +61,37 @@ exports.find = (req, res) => {
   }
 };
 // update lesson wih specified id
-exports.update = (req, res) => {
-  if (!req.body) {
-    return res.status(400).send({ message: "Data to update can not be empty" });
-  }
-  const id = req.params.id;
-  Lessondb.findByIdAndUpdate(id, req.body, { useFindAndModify: false })
-    .then((data) => {
-      if (!data) {
-        res.status(404).send({ message: `Can't update lesson with id ${id}, maybe lesson doesn't exist` });
-      } else {
-        res.send(req.body);
+exports.update = async (req, res) => {
+  try {
+    if (!req.body) {
+      if (req.fileName) {
+        removeFile(lessonUploadPath, req.body.file);
       }
-    })
-    .catch((err) => {
-      console.log(err.message);
-      res.status(500).send({ message: "Error update lesson information" });
-    });
+      return res.status(400).send({ message: "Data to update can not be empty" });
+    }
+    const id = req.params.id;
+    const old = await Lessondb.findById(req.body._id);
+    req.fileName ? (req.body["file"] = req.fileName) : "";
+    const data = await Lessondb.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false }).populate("subject");
+    if (!data) {
+      if (req.fileName) {
+        removeFile(lessonUploadPath, data.file);
+      }
+      res.status(404).send({ message: `Can't update lesson with id ${id}, maybe lesson doesn't exist` });
+    } else {
+      if (req.fileName) {
+        removeFile(lessonUploadPath, old.file);
+      }
+      data.file = data.filePath;
+      res.send(data);
+    }
+  } catch (err) {
+    if (req.fileName) {
+      removeFile(lessonUploadPath, req.fileName);
+    }
+    console.error(err.message);
+    res.status(500).send({ message: "Error update lesson information" });
+  }
 };
 // delete lesson wih specified id
 exports.delete = (req, res) => {
@@ -77,6 +101,9 @@ exports.delete = (req, res) => {
       if (!data) {
         res.status(404).send({ message: `Can't delete lesson with id ${id}. Maybe lesson doesn't exist` });
       } else {
+        if (data.file) {
+          removeFile(lessonUploadPath, data.file);
+        }
         res.send({ message: "lesson Deleted successfully" });
       }
     })
