@@ -3,6 +3,11 @@ import PopupSubject from "../dashboardComponent/Subject";
 import Input from "../include/_input";
 import Textarea from "../include/_textarea";
 import Select from "../include/_select";
+import { Viewer } from '@react-pdf-viewer/core';
+// import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
+import '@react-pdf-viewer/core/lib/styles/index.css';
+// import '@react-pdf-viewer/default-layout/lib/styles/index.css';
+// const defaultLayoutPluginInstance = defaultLayoutPlugin();
 class Lesson extends Component {
   render() {
     return (
@@ -19,6 +24,9 @@ class Lesson extends Component {
             <div className="col-md-5">
               <Input type="file" name="file" label="File" onChange={this.props.onChange} value={this.props.temporary.file} />
             </div>
+            {/* <Viewer
+              fileUrl='/assets/pdf-open-parameters.pdf'
+            /> */}
             <div className="col-md-5">
               <Textarea name="content" label="Content" onChange={this.props.onChange} value={this.props.temporary.content} />
             </div>

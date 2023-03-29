@@ -4,7 +4,7 @@ import React, { Component } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
 import "./scss/App.scss";
-
+import PDFUploader from "./viewPdf";
 // ====== helpers files/
 import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI, roomAPI, sessionAPI } from "./helpers/apiEndpoints";
 import { handleChange, setTemporary, setTemporaryEmpty, dateFormaterForInput } from "./helpers/helpersFunctions";
@@ -154,7 +154,7 @@ class App extends Component {
                   />
                 }
               />
-
+              <Route path="viewPdf" element={<PDFUploader />} />
               <Route
                 path="/lessonTable"
                 element={

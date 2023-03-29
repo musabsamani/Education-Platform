@@ -2,10 +2,15 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../sidebar";
 import Adminbar from "../adminbar";
-class Lessontaable extends Component {
+
+class LessonTable extends Component {
   state = {
     temporary: {},
   };
+  // handle() {
+  //   lessons = this.props.lessons;
+  //   return lessons;
+  // }
   render() {
     return (
       <>
@@ -32,6 +37,7 @@ class Lessontaable extends Component {
                     </tr>
                   </thead>
                   <tbody>
+                    {/* {console.log(this.props.lessons)} */}
                     {this.props.lessons.length > 0 ? (
                       this.props.lessons.map((lesson, i) => (
                         <tr key={lesson._id}>
@@ -69,4 +75,4 @@ class Lessontaable extends Component {
   }
 }
 
-export default Lessontaable;
+export default LessonTable;
