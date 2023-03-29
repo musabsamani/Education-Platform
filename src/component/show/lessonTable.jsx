@@ -37,7 +37,6 @@ class LessonTable extends Component {
                     </tr>
                   </thead>
                   <tbody>
-                    {/* {console.log(this.props.lessons)} */}
                     {this.props.lessons.length > 0 ? (
                       this.props.lessons.map((lesson, i) => (
                         <tr key={lesson._id}>

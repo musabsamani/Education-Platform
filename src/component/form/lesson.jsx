@@ -3,7 +3,7 @@ import PopupSubject from "../dashboardComponent/Subject";
 import Input from "../include/_input";
 import Textarea from "../include/_textarea";
 import Select from "../include/_select";
-import { Viewer } from '@react-pdf-viewer/core';
+// import { Viewer } from '@react-pdf-viewer/core';
 // import { defaultLayoutPlugin } from '@react-pdf-viewer/default-layout';
 import '@react-pdf-viewer/core/lib/styles/index.css';
 // import '@react-pdf-viewer/default-layout/lib/styles/index.css';
