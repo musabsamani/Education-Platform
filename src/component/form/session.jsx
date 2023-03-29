@@ -1,10 +1,9 @@
 import React, { Component } from "react";
-import Form from 'react-bootstrap/Form';
 import Input from "../include/_input";
 import Select from "../include/_select";
+
 class Session extends Component {
   render() {
-
     return (
       <>
         <div className="container mt-5 ">
@@ -21,10 +20,6 @@ class AddStudent extends Component {
         <div className="container mt-5 ">
           <h2>{this.props.name === "add" ? "New Session" : "Edit Session"}</h2>
           <form className="col g-3 d-flex-column justify-content-center" onSubmit={this.props.name === "add" ? (e) => this.props.create(e, "sessions") : (e) => this.props.update(e, "sessions")}>
-            <Form.Group controlId="formFile" className="mb-3">
-              <Form.Label>Default file input example</Form.Label>
-              <Form.Control type="file" />
-            </Form.Group>
             <Select onChange={this.props.onChange} name="subject" resource="subject" resourceArray={this.props.subjects} resourceProperty="code" value={this.props.temporary.subject} />
             <Select onChange={this.props.onChange} name="lesson" resource="lesson" resourceArray={this.props.lessons} resourceProperty="name" value={this.props.temporary.lesson} />
             <Select onChange={this.props.onChange} name="room" resource="room" resourceArray={this.props.rooms} resourceProperty="name" value={this.props.temporary.room} />

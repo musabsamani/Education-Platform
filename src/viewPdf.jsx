@@ -6,15 +6,16 @@ import './scss/test.scss';
 pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
 
 
-const PDFUploader = () => {
-    const [pdfFile, setPdfFile] = useState(null);
+const PDFUploader = ({ session }) => {
+    console.log(session);
+    const pdfFile = session;
     const [numPages, setNumPages] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
 
 
-    const onFileChange = (event) => {
-        setPdfFile(event.target.files[0]);
-    };
+    // const onFileChange = (event) => {
+    //     setPdfFile(event.target.files[0]);
+    // };
 
     const onDocumentLoadSuccess = ({ numPages }) => {
         setNumPages(numPages);
@@ -36,7 +37,7 @@ const PDFUploader = () => {
 
     return (
         <>
-            <input type="file" onChange={onFileChange} />
+            <input type="file" />
             {pdfFile && (
                 <div>
                     <nav>
