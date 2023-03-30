@@ -201,7 +201,7 @@ class App extends Component {
             <>
               <Route path="/calendar"
                 element={<Calendar
-                  events={this.state.events}
+                  sessions={this.state.sessions}
                 />}
               />
             </>
