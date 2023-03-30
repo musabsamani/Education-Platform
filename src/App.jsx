@@ -283,6 +283,7 @@ class App extends Component {
                 path="/addSession"
                 element={<SessionForm
                   name="add"
+                  sessions={this.state.sessions}
                   subjects={this.state.subjects}
                   lessons={this.state.lessons}
                   rooms={this.state.rooms}
@@ -356,6 +357,7 @@ class App extends Component {
                 path="/updateSession"
                 element={<SessionForm
                   name="update"
+                  sessions={this.state.sessions}
                   subjects={this.state.subjects}
                   rooms={this.state.rooms}
                   lessons={this.state.lessons}
