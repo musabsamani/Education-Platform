@@ -14,8 +14,7 @@ exports.create = (req, res) => {
   subject
     .save(subject)
     .then((data) => {
-      res.send("Subject Added successfully");
-      // res.redirect("/subjects/new");
+      res.send(data);
     })
     .catch((err) => {
       console.log(err.message);

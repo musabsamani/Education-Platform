@@ -14,10 +14,13 @@ exports.create = (req, res) => {
     end: req.body.end,
   });
   session
-    .save(session)
+    .save()
     .then(async (data) => {
-      const pop = await Sessiondb.findById(data._id).populate("subject").populate("lesson").populate("room").populate("volunteer");
-      res.send(pop);
+      await data.populate("lesson");
+      await data.populate("lesson");
+      await data.populate("room");
+      await data.populate("volunteer");
+      res.send(data);
     })
     .catch((err) => {
       console.log(err.message);

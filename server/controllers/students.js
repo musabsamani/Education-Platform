@@ -15,8 +15,7 @@ exports.create = async (req, res) => {
   student
     .save(student)
     .then((data) => {
-      res.send("student Added successfully");
-      // res.redirect("/students/new");
+      res.send(data);
     })
     .catch((err) => {
       console.log(err.message);

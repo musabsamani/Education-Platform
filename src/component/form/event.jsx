@@ -31,7 +31,9 @@ class AddEvent extends Component {
       } else {
         this.props.update(e, "events")
       }
-    };
+    } else {
+      console.log("event not valid")
+    }
   }
   render() {
     return (

@@ -12,7 +12,7 @@ exports.create = (req, res) => {
   room
     .save(room)
     .then((data) => {
-      res.send("Room Added Successfully");
+      res.send(data);
     })
     .catch((err) => {
       console.log(err.message);
