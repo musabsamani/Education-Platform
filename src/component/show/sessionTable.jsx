@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Sidebar from "../sidebar";
 import Adminbar from "../adminbar";
 import { Link } from "react-router-dom";
+import PopupComponent from "../dashboardComponent/popupComponent"
 import '../../scss/dashboard.scss';
 import Chart from "../dashboardComponent/chart";
 class SessionTable extends Component {
@@ -26,6 +27,7 @@ class SessionTable extends Component {
                       <th scope="col">#</th>
                       <th scope="col">subject</th>
                       <th scope="col">lesson</th>
+                      <th scope="col">lesson Content</th>
                       <th scope="col">room</th>
                       <th scope="col">volunteer</th>
                       <th scope="col">start</th>
@@ -40,6 +42,7 @@ class SessionTable extends Component {
                           <td>{i + 1}</td>
                           <td>{session.subject && session.subject.code}</td>
                           <td>{session.lesson && session.lesson.name}</td>
+                          <td><PopupComponent session={session} /></td>
                           <td>{session.room && session.room.name}</td>
                           <td>{session.volunteer && session.volunteer.name}</td>
                           <td>{session.start}</td>

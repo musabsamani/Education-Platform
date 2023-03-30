@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import PDFUploader from '../../viewPdf';
 
-class PopupSubject extends Component {
+class PopupComponent extends Component {
     state = {
         values: [true],
         fullscreen: true,
@@ -24,7 +25,7 @@ class PopupSubject extends Component {
             <>
                 {this.state.values.map((v, idx) => (
                     <Button key={idx} className="me-2 mb-2" onClick={() => this.handleShow(v)}>
-                        Show
+                        Show Conetent
                         {typeof v === 'string' && `below ${v.split('-')[0]}`}
                     </Button>
                 ))}
@@ -36,10 +37,12 @@ class PopupSubject extends Component {
                             <Modal.Title>{this.props.subject.name}</Modal.Title>
                             */
                         }
-                        <Modal.Title>{this.props.subject[0] ? this.props.subject[0].code : ""}</Modal.Title>
+                        <Modal.Title>{this.props.session.lesson.name}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-
+                        {this.props.session.lesson.file}
+                        <hr />
+                        <PDFUploader session={this.props.session.lesson.file} />
                     </Modal.Body>
                 </Modal>
             </>
@@ -47,4 +50,4 @@ class PopupSubject extends Component {
     }
 }
 
-export default PopupSubject;
+export default PopupComponent;
