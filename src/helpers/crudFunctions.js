@@ -107,6 +107,19 @@ async function multiPartUpdateElement(event, resource) {
     console.error(err.message);
   }
 }
+// =======  UPDATE  ========
+async function updateState(resource, resourceApi) {
+  try {
+    const { data: data } = await axios.get(resourceApi);
+    console.log(data);
+    console.log(this.state[resource] == data);
+    this.setState({ [resource]: data });
+    console.log(this.state[resource]);
+    console.log(this.state[resource] == data);
+  } catch (err) {
+    console.error(err.message);
+  }
+}
 // =======  Send Mail  ========
 async function sendMail(e) {
   try {
@@ -131,4 +144,4 @@ async function sendWhatsapp(e) {
     console.error(err.message);
   }
 }
-export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, sendMail, sendWhatsapp };
+export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, updateState, sendMail, sendWhatsapp };

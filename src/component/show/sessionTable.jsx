@@ -41,8 +41,9 @@ class SessionTable extends Component {
                         <tr key={session._id}>
                           <td>{i + 1}</td>
                           <td>{session.subject && session.subject.code}</td>
+                          <td>{session.lesson.subject && session.lesson.subject.code}</td>
                           <td>{session.lesson && session.lesson.name}</td>
-                          <td><PopupComponent session={session} /></td>
+                          <td>{session.lesson && <PopupComponent lesson={session.lesson} />}</td>
                           <td>{session.room && session.room.name}</td>
                           <td>{session.volunteer && session.volunteer.name}</td>
                           <td>{session.start}</td>
