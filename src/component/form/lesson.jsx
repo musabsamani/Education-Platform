@@ -1,17 +1,20 @@
 import React, { Component } from "react";
-import PopupSubject from "../dashboardComponent/popupComponent";
 import Input from "../include/_input";
 import Textarea from "../include/_textarea";
 import Select from "../include/_select";
+import { sessionAPI } from "../../helpers/apiEndpoints";
 
 class Lesson extends Component {
   state = { filee: {} }
   submit = e => {
     e.preventDefault()
-    this.props.name === "add" ?
+    if (this.props.name === "add") {
       this.props.create(e, "lessons")
-      :
+    }
+    else {
       this.props.update(e, "lessons")
+      // this.props.updateState("sessions", sessionAPI)
+    }
   }
   render() {
     return (

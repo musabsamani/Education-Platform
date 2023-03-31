@@ -8,7 +8,7 @@ import PDFUploader from "./viewPdf";
 // ====== helpers files/
 import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI, roomAPI, sessionAPI } from "./helpers/apiEndpoints";
 import { handleChange, setTemporary, setTemporaryEmpty, dateFormaterForInput } from "./helpers/helpersFunctions";
-import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement } from "./helpers/crudFunctions";
+import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, updateState } from "./helpers/crudFunctions";
 // ###################### React Components ######################
 // ====== components/
 import Home from "./component/home";
@@ -54,6 +54,7 @@ class App extends Component {
     this.deleteElement = deleteElement.bind(this);
     this.multiPartCreateElement = multiPartCreateElement.bind(this);
     this.multiPartUpdateElement = multiPartUpdateElement.bind(this);
+    this.updateState = updateState.bind(this);
   }
   state = {
     students: [],
@@ -265,7 +266,6 @@ class App extends Component {
                   subjects={this.state.subjects}
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
-                  formater={dateFormaterForInput}
                   onChange={this.handleChange}
                   create={this.multiPartCreateElement}
                 />}
@@ -339,6 +339,7 @@ class App extends Component {
                   name="update"
                   subjects={this.state.subjects}
                   volunteers={this.state.volunteers}
+                  updateState={this.updateState}
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
                   update={this.multiPartUpdateElement}

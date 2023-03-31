@@ -19,7 +19,7 @@ class PopupComponent extends Component {
         this.setState({ show: false })
     }
     render() {
-        const { session } = this.props
+        const { lesson } = this.props
         return (
             <>
                 {this.state.values.map((v, idx) => (
@@ -30,18 +30,15 @@ class PopupComponent extends Component {
                 ))}
                 <Modal show={this.state.show} fullscreen={this.state.fullscreen} onHide={() => this.handleClose()}>
                     <Modal.Header closeButton>
-                        {
-                            /* i don't get below line what do you want ??? 
-                            old line was like:
-                            <Modal.Title>{subject.name}</Modal.Title>
-                            */
-                        }
-                        <Modal.Title>{session.lesson.name}</Modal.Title>
+                        <Modal.Title>{lesson.subject.code}</Modal.Title>
+                        <Modal.Title>{console.log(lesson.subject)}</Modal.Title>
+                        <Modal.Title>{console.log(lesson)}</Modal.Title>
+                        <Modal.Title>{lesson.name}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {session.lesson.file}
+                        {lesson.file}
                         <hr />
-                        {session.lesson && <PDFUploader file={session.lesson.file} />}
+                        {lesson && <PDFUploader file={lesson.file} />}
                     </Modal.Body>
                 </Modal>
             </>
