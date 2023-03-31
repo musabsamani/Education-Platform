@@ -1,7 +1,7 @@
 const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
 const dotenv = require("dotenv");
-dotenv.config({ path: "config.env" });
+dotenv.config();
 exports.send = (req, res) => {
   const EMAIL = process.env.EMAIL;
   const PASS = process.env.PASS;

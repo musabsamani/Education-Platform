@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import PDFUploader from '../../viewPdf';
-
 class PopupComponent extends Component {
     state = {
         values: [true],
@@ -12,7 +11,6 @@ class PopupComponent extends Component {
 
     handleShow(breakpoint) {
         //   setFullscreen(breakpoint);
-        console.log(breakpoint)
         const breakp = breakpoint;
         this.setState({ fullscreen: breakp })
         this.setState({ show: true })
@@ -21,6 +19,7 @@ class PopupComponent extends Component {
         this.setState({ show: false })
     }
     render() {
+        const { session } = this.props
         return (
             <>
                 {this.state.values.map((v, idx) => (
@@ -34,15 +33,15 @@ class PopupComponent extends Component {
                         {
                             /* i don't get below line what do you want ??? 
                             old line was like:
-                            <Modal.Title>{this.props.subject.name}</Modal.Title>
+                            <Modal.Title>{subject.name}</Modal.Title>
                             */
                         }
-                        <Modal.Title>{this.props.session.lesson.name}</Modal.Title>
+                        <Modal.Title>{session.lesson.name}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {this.props.session.lesson.file}
+                        {session.lesson.file}
                         <hr />
-                        <PDFUploader session={this.props.session.lesson.file} />
+                        {session.lesson && <PDFUploader file={session.lesson.file} />}
                     </Modal.Body>
                 </Modal>
             </>
