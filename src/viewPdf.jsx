@@ -7,15 +7,18 @@ pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/$
 
 
 const PDFUploader = ({ session }) => {
-    console.log(session);
-    const pdfFile = session;
+    console.log(session)
+    const [pdfFile, setPdfFile] = useState(null);
     const [numPages, setNumPages] = useState(null);
     const [currentPage, setCurrentPage] = useState(1);
 
 
-    // const onFileChange = (event) => {
-    //     setPdfFile(event.target.files[0]);
-    // };
+    const onFileChange = (event) => {
+        console.log(event);
+        setPdfFile(event.target.files[0]);
+        console.log(event.target.files[0]);
+        console.log(setPdfFile);
+    };
 
     const onDocumentLoadSuccess = ({ numPages }) => {
         setNumPages(numPages);
@@ -37,7 +40,7 @@ const PDFUploader = ({ session }) => {
 
     return (
         <>
-            <input type="file" />
+            <input type="file" onChange={onFileChange} />
             {pdfFile && (
                 <div>
                     <nav>
@@ -49,7 +52,7 @@ const PDFUploader = ({ session }) => {
                         </button>
                     </nav>
                     <div className='pdff'>
-                        <Document className='sizee' file={pdfFile} onLoadSuccess={onDocumentLoadSuccess}>
+                        <Document file={pdfFile} onLoadSuccess={onDocumentLoadSuccess}>
                             {/* {Array.from(new Array(numPages), (el, index) => (
                             <Page key={`page_${index + 1}`} pageNumber={index + 1} />
                         ))} */}
