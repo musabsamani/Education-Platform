@@ -6,6 +6,7 @@ function handleChange(e) {
 }
 // ===============  store value in this.state.temporary
 function setTemporary(element) {
+  console.log(element);
   this.setState({ temporary: element });
 }
 // ===============  setting this.state.temporary to empty value
