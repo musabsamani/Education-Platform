@@ -29,7 +29,7 @@ class AddVolunteer extends Component {
             <form className="_form" onSubmit={(e) => { this.submit(e) }}>
               <div className="_image">
                 <p>Profile image</p>
-                <ImgUpload temporary={this.props.temporary} name="profileCoverName" />
+                <ImgUpload temporary={this.props.temporary} name="profileCover" />
               </div>
               <div className="_inputs">
                 <Input onChange={onChange} type="text" name="name" label="Name" value={temporary.name} />

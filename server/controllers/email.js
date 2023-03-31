@@ -1,17 +1,16 @@
 const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
-const EMAIL = "uofktestemail@gmail.com";
-const PASS = "bnstimwadcuaikhh";
+const dotenv = require("dotenv");
+dotenv.config({ path: "config.env" });
 exports.send = (req, res) => {
+  const EMAIL = process.env.EMAIL;
+  const PASS = process.env.PASS;
   const form = {
     name: req.body.name,
     email: req.body.email,
     subject: req.body.subject,
     message: req.body.message,
   };
-  //   res.send(data);
-
-  // async..await is not allowed in global scope, must use a wrapper
   async function main() {
     let config = {
       service: "gmail",
@@ -54,8 +53,6 @@ exports.send = (req, res) => {
     let info = await transporter.sendMail(message).then(() => {
       return res.status(201).send("Email send !!!");
     });
-    // console.log("Message sent: %s", info.messageId);
-    // console.log("Preview URL: %s", nodemailer.getTestMessageUrl(info));
   }
-  main().catch(console.error);
+  main().catch((err) => console.error(err.message));
 };

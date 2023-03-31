@@ -28,9 +28,9 @@ route.delete("/api/students/:id", studentController.delete);
 
 // =============== volunteer router ==================
 // API
-route.post("/api/volunteers", profileUpload.single("profileCoverName"), volunteerController.create);
+route.post("/api/volunteers", profileUpload.single("profileCover"), volunteerController.create);
 route.get("/api/volunteers", volunteerController.find);
-route.put("/api/volunteers/:id", profileUpload.single("profileCoverName"), volunteerController.update);
+route.put("/api/volunteers/:id", profileUpload.single("profileCover"), volunteerController.update);
 route.delete("/api/volunteers/:id", volunteerController.delete);
 // =============== lesson router ==================
 // API

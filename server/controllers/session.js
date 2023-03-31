@@ -20,6 +20,8 @@ exports.create = (req, res) => {
       await data.populate("lesson");
       await data.populate("room");
       await data.populate("volunteer");
+      data.lesson.file = data.lesson.filePath;
+      data.volunteer.profileCover = data.volunteer.imagePath;
       res.send(data);
     })
     .catch((err) => {
@@ -51,8 +53,8 @@ exports.find = (req, res) => {
       .populate("lesson")
       .populate("room")
       .populate("volunteer")
-      .then((sessions) => {
-        res.send(sessions);
+      .then((data) => {
+        res.send(data);
       })
       .catch((err) => {
         res.status(500).send({ message: err.message || "Error occured while retriving sessions information" });

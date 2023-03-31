@@ -12,7 +12,7 @@ const ImgUpload = ({
     </div>
   </label>
 class Profile extends Component {
-  src = this.props.temporary.profileCoverName ? this.props.temporary.profileCoverName : "src/assets/img/uploadCover.webp"
+  src = this.props.temporary.profileCover ? this.props.temporary.profileCover : "src/assets/img/uploadCover.webp"
   state = {
     src: this.src,
     file: '',

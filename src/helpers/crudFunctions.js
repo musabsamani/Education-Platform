@@ -58,11 +58,12 @@ async function deleteElement(id, resource) {
     await axios.delete(`${uri}/${id}`).then((res) => {
       const data = this.state[resource].filter((element) => element._id !== id);
       this.setState({ [resource]: data });
+      console.log(res.data);
       console.log(`${resource} Deleted Successfully`);
     });
   } catch (err) {
-    const errr = err;
     console.error(`Error Deleting ${resource}`);
+    console.error(err.message);
   }
 }
 // =======  CREAT  ========
@@ -80,8 +81,8 @@ async function multiPartCreateElement(event, resource) {
       console.log(res.data);
     });
   } catch (err) {
-    console.error(err);
     console.error(`Error Creating ${resource}`);
+    console.error(err.message.message);
   }
 }
 // =======  UPDATE  ========
@@ -102,8 +103,8 @@ async function multiPartUpdateElement(event, resource) {
       console.log(res.data);
     });
   } catch (err) {
-    console.error(err);
     console.error(`Error Updating ${resource}`);
+    console.error(err.message);
   }
 }
 // =======  Send Mail  ========
@@ -119,15 +120,15 @@ async function sendMail(e) {
       console.log(res.data);
     });
   } catch (err) {
-    console.error(err);
     console.error(`Error Sending Email`);
+    console.error(err.message);
   }
 }
 async function sendWhatsapp(e) {
   try {
   } catch (err) {
-    console.error(err);
     console.error(`Error Sending Whatsapp Message`);
+    console.error(err.message);
   }
 }
 export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, sendMail, sendWhatsapp };

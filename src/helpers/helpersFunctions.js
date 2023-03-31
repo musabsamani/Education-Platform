@@ -56,7 +56,7 @@ function isValidDate(newObject, oldObject) {
   }
   return noOvelap;
 }
-function validator(Array, temporary) {
+function validator(array, temporary) {
   const notEmpty = temporary.start && temporary.end;
   const isStartBeforeEnd = temporary.start <= temporary.end;
   if (!notEmpty) {
@@ -72,12 +72,15 @@ function validator(Array, temporary) {
   // there may be a collision. so we have two opttion to avoid this
   // 1 - run this function on the back-end
   // 2 - await untill App.jsx state.events load from database then allow updating or creating events
-  Array.forEach((element) => {
+  for (let element of array) {
+    if (temporary._id === element._id) {
+      continue;
+    }
     if (!isValidDate(temporary, element)) {
       isValid = false;
       return false;
     }
-  });
+  }
   return isValid;
 }
 export { handleChange, setTemporary, setTemporaryEmpty, generateId, randomSeed, dateFormaterForInput, validator };

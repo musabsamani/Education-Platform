@@ -9,7 +9,7 @@ const storage = multer.diskStorage({
   },
   filename: async (req, file, callback) => {
     const fileName = file ? new Date().toISOString().replace(/[-:]/g, "") + "-" + file.fieldname + "-" + file.originalname : "";
-    req.fileName = fileName;
+    req.fileName = req.fileName = path.join(lessonUploadPath, fileName);
     callback(null, fileName);
   },
 });

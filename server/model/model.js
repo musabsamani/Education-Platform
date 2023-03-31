@@ -15,7 +15,7 @@ const volunteerSchema = new mongoose.Schema({
   address: String,
   phone: String,
   subject: String,
-  profileCoverName: String,
+  profileCover: String,
   // time: {
   //   type: Date,
   //   Immutable: true,
@@ -73,8 +73,8 @@ const sessionSchema = new mongoose.Schema({
 });
 
 volunteerSchema.virtual("imagePath").get(function () {
-  if (this.profileCoverName) {
-    return `${uploadBasePath}/${profileCoverBasePath}/${this.profileCoverName}`;
+  if (this.profileCover) {
+    return `${uploadBasePath}/${profileCoverBasePath}/${this.profileCover}`;
   }
   return "";
 });
