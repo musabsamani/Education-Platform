@@ -1,71 +1,67 @@
 .sidebar{
+    position: fixed;
     display: flex;
     flex-direction:column ;
-    flex:1;
-    border-right: 0.5px solid rgb(227, 227, 227);
+    background-color: rgb(56, 55, 55);
+    width: 300px;
+    height: 100vh;
+    padding: 30px 15px;
     a{
         text-decoration: none;
-        color: rgb(120, 120, 120);
-        &:active{
-            color: black;
-        }
+        color: rgb(255, 255, 255);
     }
     .top{
-        height: 50px;
-        width: 100%;
+        
         display: flex;
+        justify-content: flex-start;
         align-items: center;
-        justify-content: center;
-        .logo{
-            font-size: 20px;
-            font-weight: bold;
-            color: rgb(173, 48, 173);
-        }
+        font-size: 1.4rem;
+        font-weight: bold;
+        color: rgb(222, 226, 232);
+        padding-left: 20px 10px;
+        margin: 10px;
     }
     .center{
-        padding-left: 10px;
+        flex: 6;
+        padding: 30px 15px;
         height: 500px;
         ul{
             list-style: none;
-            margin: 0;
+            margin: 20px 0;
             padding: 0;
         }
-        .title{
-            margin:15px 0;
-            font-size: 10px;
-            font-weight: bold;
-            color: grey;
-        }
         li{
-            display: flex;
-            align-items: center;
-            padding: 5px;
+            font-size:larger;
+            // display: flex;
+            // align-items: center;
+            padding: 13px 10px;
             cursor: pointer;
-            &:hover{
-                background-color: rgb(218, 216, 216);
+            :hover{
+                color:blue;
+                transition: all .2s ease-in-out  ;
             }
+            
+            
         }
     }
     .bottom{
         padding-left: 10px;
         ul{
+            display: flex;
             list-style: none;
-            margin: 0;
+            margin: 20px 0;
             padding: 0;
         }
-        .title{
-            margin:15px 0;
-            font-size: 10px;
-            font-weight: bold;
-            color: grey;
-        }
         li{
+            width: 50px;
+            height: 50px;
             display: flex;
             align-items: center;
-            padding: 5px;
+            padding: 13px 10px;
             cursor: pointer;
-            &:hover{
-                background-color: rgb(218, 216, 216);
+            transition: all .2s ease  ;
+            :hover{
+                color: blue;
             }
         }
     }

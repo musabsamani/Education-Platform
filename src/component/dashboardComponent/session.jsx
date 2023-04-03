@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import Sidebar from '../sidebar';
 import Adminbar from '../adminbar';
-import '../../scss/session.scss';
+// import '../../scss/session.scss';
 
 
 class Session extends Component {
-    state = {  } 
-    render() { 
+    state = {}
+    render() {
         return (
             <>
                 < div className='main' >
                     <Sidebar />
                     <div className='content'>
                         <Adminbar />
-                        <hr />
                         <div className="center">
                             <h1>Hello</h1>
                         </div>
@@ -23,5 +22,5 @@ class Session extends Component {
         );
     }
 }
- 
+
 export default Session;

@@ -10,7 +10,6 @@ class RoomTable extends Component {
           <Sidebar />
           <div className='content'>
             <Adminbar />
-            <hr />
             <div className="center">
               <div className="tb container mt-5 ">
                 <Link to="/addRoom">

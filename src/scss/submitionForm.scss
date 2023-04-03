@@ -1,0 +1,39 @@
+.create_header
+{ 
+    position: relative;   
+    height: 200px;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-image: url('../assets/img/pexels-steve-johnson-1416367.jpg');
+    background-size: cover;
+    z-index: 1;
+}
+
+.create_bottom{
+    background-color: rgb(16, 16, 16);
+    color: white;
+    display: flex;
+    align-items: center;
+    height: 60px;
+    padding: 16;
+    position: relative;
+
+}
+
+.create_lesson_formfield{
+    min-height: 80vh;
+    .create_lesson_formarea{
+        border: .5px solid rgb(205, 205, 205);
+        border-radius: 10px;
+        margin: 100px 100px;
+        min-height: 800px;
+        .bs-stepper-header{
+            height: 170px;
+            display: flex;
+            justify-content: space-evenly;
+            align-items: center;
+        }
+    }
+}

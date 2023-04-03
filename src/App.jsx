@@ -13,8 +13,7 @@ import { createElement, updateElement, deleteElement, multiPartCreateElement, mu
 // ###################### React Components ######################
 // ====== components/
 import Home from "./component/home";
-import Dashboard from "./component/dashboard";
-import Chart from "./component/dashboardComponent/chart";
+import Dashboard from "./component/dashboardComponent/dashboard";
 import Login from "./component/login";
 import Email from "./component/email";
 // ====== components/Form/

@@ -1,9 +1,12 @@
-.top{
+.adminbar{
+    position: relative;
+    background-color: white;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 50px;
-    padding: 0 50px;
+    height: 75px;
+    padding: 1.6rem;
+    box-shadow: 0px 0px 40px rgba(29, 58, 83, 0.15);
     .searchpart{
         width: 300px;
         height: inherit;
