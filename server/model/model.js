@@ -41,7 +41,7 @@ const lessonSchema = new mongoose.Schema({
 });
 const roomSchema = new mongoose.Schema({
   _id: String,
-  name: Number,
+  name: String,
 });
 
 const sessionSchema = new mongoose.Schema({
