@@ -3,4 +3,5 @@ uploads/lesson
 node_modules
 build
 src/assets
+src\assets
 
