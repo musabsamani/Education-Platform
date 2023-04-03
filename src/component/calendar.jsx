@@ -52,7 +52,6 @@ function CAlendar(props) {
                 <Sidebar />
                 <div className='content'>
                     <Adminbar />
-                    <hr />
                     <div className="center">
                         <div className="calendar text-center">
                             <h2>Add New Event</h2>
