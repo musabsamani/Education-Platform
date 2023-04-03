@@ -83,9 +83,9 @@ class App extends Component {
       const { data: sessions } = await axios.get(sessionAPI);
       this.setState({ sessions });
     } catch (err) {
-      console.log("Error fetching data from the server on componentDidMount");
       console.log(err.message);
-      this.messageShow("error", "Error fetching data from the server on componentDidMount", err.message)
+      console.log("Error fetching data from the server on componentDidMount");
+      // this.messageShow("error", "Error fetching data from the server on componentDidMount", err.message)
     }
   }
   componentDidUpdate() {
@@ -101,6 +101,7 @@ class App extends Component {
       }
     }
   }
+
   render() {
     return (
       // <RegistrationForm/>

@@ -1,9 +1,11 @@
 import { generateId } from "./helpersFunctions";
 import { baseAPI } from "./apiEndpoints";
 import axios from "axios";
+import Operation from "antd/es/transfer/operation";
 
 // =======  CREAT  ========
 async function createElement(event, resource) {
+  let res;
   try {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -14,22 +16,27 @@ async function createElement(event, resource) {
     }
     // const uri = `http://httpbin.org/anything`;
     const uri = `${baseAPI}/${resource}`;
-    await axios.post(`${uri}`, element).then((res) => {
+    res = await axios.post(`${uri}`, element);
+    if (res.statusText === "OK") {
       const state = [...this.state[resource], res.data.data];
       this.setState({ [resource]: state });
       this.setState({ message: res.data.message });
       // this.setTemporaryEmpty();
       // window.location.reload()
       console.log(res.data.message.content);
-      // console.log(res.data.data);
-      // console.log(res.data);
-    });
-  } catch {
-    console.error(`Error Creating ${resource}`);
+    }
+    // console.log(res.data.data);
+    // console.log(res.data);
+  } catch (err) {
+    const { type, content, details, operation } = err.response.data.message;
+    console.error(content);
+    console.error(details);
+    this.messageShow(type, content, details);
   }
 }
 // =======  UPDATE  ========
 async function updateElement(event, resource) {
+  let res;
   try {
     event.preventDefault();
     const data = new FormData(event.target);
@@ -38,7 +45,8 @@ async function updateElement(event, resource) {
       element[key] = value;
     }
     const uri = `${baseAPI}/${resource}/${element._id}`;
-    await axios.put(`${uri}`, element).then((res) => {
+    res = await axios.put(`${uri}`, element);
+    if (res.statusText === "OK") {
       const state = [...this.state[resource]];
       state.forEach((round) => {
         round._id === res.data.data._id ? Object.assign(round, res.data.data) : round;
@@ -50,16 +58,21 @@ async function updateElement(event, resource) {
       console.log(res.data.message.content);
       // console.log(res.data.data);
       // console.log(res.data);
-    });
+    }
   } catch {
-    console.error(`Error Updating ${resource}`);
+    const { type, content, details, operation } = err.response.data.message;
+    console.error(content);
+    console.error(details);
+    this.messageShow(type, content, details);
   }
 }
 // =======  DELETE  ========
 async function deleteElement(id, resource) {
+  let res;
   try {
     const uri = `${baseAPI}/${resource}`;
-    await axios.delete(`${uri}/${id}`).then((res) => {
+    res = await axios.delete(`${uri}/${id}`);
+    if (res.statusText === "OK") {
       const data = this.state[resource].filter((element) => element._id !== id);
       this.setState({ [resource]: data });
       this.setState({ message: res.data.message });
@@ -68,19 +81,23 @@ async function deleteElement(id, resource) {
       console.log(res.data.message.content);
       // console.log(res.data.data);
       // console.log(res.data);
-    });
+    }
   } catch (err) {
-    console.error(`Error Deleting ${resource}`);
-    console.error(err.message);
+    const { type, content, details, operation } = err.response.data.message;
+    console.error(content);
+    console.error(details);
+    this.messageShow(type, content, details);
   }
 }
 // =======  CREAT  ========
 async function multiPartCreateElement(event, resource) {
+  let res;
   try {
     const uri = `${baseAPI}/${resource}`;
     const data = new FormData(event.target);
     data.append("_id", generateId());
-    axios.post(`${uri}`, data).then((res) => {
+    res = await axios.post(`${uri}`, data);
+    if (res.statusText === "OK") {
       const element = [...this.state[resource], res.data.data];
       this.setState({ [resource]: element });
       this.setState({ message: res.data.message });
@@ -89,19 +106,23 @@ async function multiPartCreateElement(event, resource) {
       console.log(res.data.message.content);
       // console.log(res.data.data);
       // console.log(res.data);
-    });
+    }
   } catch (err) {
-    console.error(`Error Creating ${resource}`);
-    console.error(err.message.message);
+    const { type, content, details, operation } = err.response.data.message;
+    console.error(content);
+    console.error(details);
+    this.messageShow(type, content, details);
   }
 }
 // =======  UPDATE  ========
 async function multiPartUpdateElement(event, resource) {
+  let res;
   try {
     // event.preventDefault();
     const data = new FormData(event.target);
     const uri = `${baseAPI}/${resource}/${data.get("_id")}`;
-    await axios.put(`${uri}`, data).then((res) => {
+    res = await axios.put(`${uri}`, data);
+    if (res.statusText === "OK") {
       const element = [...this.state[resource]];
       element.forEach((round) => {
         round._id === res.data.data._id ? Object.assign(round, res.data.data) : round;
@@ -113,10 +134,12 @@ async function multiPartUpdateElement(event, resource) {
       console.log(res.data.message.content);
       // console.log(res.data.data);
       // console.log(res.data);
-    });
+    }
   } catch (err) {
-    console.error(`Error Updating ${resource}`);
-    console.error(err.message);
+    const { type, content, details, operation } = err.response.data.message;
+    console.error(content);
+    console.error(details);
+    this.messageShow(type, content, details);
   }
 }
 // =======  UPDATE  ========
