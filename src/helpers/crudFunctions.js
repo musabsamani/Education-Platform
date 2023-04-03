@@ -12,14 +12,17 @@ async function createElement(event, resource) {
     for (const [key, value] of data) {
       element[key] = value;
     }
+    // const uri = `http://httpbin.org/anything`;
     const uri = `${baseAPI}/${resource}`;
     await axios.post(`${uri}`, element).then((res) => {
-      const state = [...this.state[resource], res.data];
+      const state = [...this.state[resource], res.data.data];
       this.setState({ [resource]: state });
+      this.setState({ message: res.data.message });
       // this.setTemporaryEmpty();
       // window.location.reload()
-      console.log(res.data);
-      console.log(`${resource} Created Successfully`);
+      console.log(res.data.message.content);
+      // console.log(res.data.data);
+      // console.log(res.data);
     });
   } catch {
     console.error(`Error Creating ${resource}`);
@@ -30,7 +33,6 @@ async function updateElement(event, resource) {
   try {
     event.preventDefault();
     const data = new FormData(event.target);
-    // const uri = `http://httpbin.org/anything`;
     let element = {};
     for (const [key, value] of data) {
       element[key] = value;
@@ -39,13 +41,15 @@ async function updateElement(event, resource) {
     await axios.put(`${uri}`, element).then((res) => {
       const state = [...this.state[resource]];
       state.forEach((round) => {
-        round._id === res.data._id ? Object.assign(round, res.data) : round;
+        round._id === res.data.data._id ? Object.assign(round, res.data.data) : round;
       });
       this.setState({ [resource]: state });
-      //   this.setTemporaryEmpty();
+      this.setState({ message: res.data.message });
+      // this.setTemporaryEmpty();
       // window.location.reload()
-      console.log(`${resource} Updated Successfully`);
-      console.log(res.data);
+      console.log(res.data.message.content);
+      // console.log(res.data.data);
+      // console.log(res.data);
     });
   } catch {
     console.error(`Error Updating ${resource}`);
@@ -58,8 +62,12 @@ async function deleteElement(id, resource) {
     await axios.delete(`${uri}/${id}`).then((res) => {
       const data = this.state[resource].filter((element) => element._id !== id);
       this.setState({ [resource]: data });
-      console.log(res.data);
-      console.log(`${resource} Deleted Successfully`);
+      this.setState({ message: res.data.message });
+      // this.setTemporaryEmpty();
+      // window.location.reload()
+      console.log(res.data.message.content);
+      // console.log(res.data.data);
+      // console.log(res.data);
     });
   } catch (err) {
     console.error(`Error Deleting ${resource}`);
@@ -73,12 +81,14 @@ async function multiPartCreateElement(event, resource) {
     const data = new FormData(event.target);
     data.append("_id", generateId());
     axios.post(`${uri}`, data).then((res) => {
-      const element = [...this.state[resource], res.data];
+      const element = [...this.state[resource], res.data.data];
       this.setState({ [resource]: element });
+      this.setState({ message: res.data.message });
       // this.setTemporaryEmpty();
       // window.location.reload()
-      console.log(`${resource}  Created Successfully !!!`);
-      console.log(res.data);
+      console.log(res.data.message.content);
+      // console.log(res.data.data);
+      // console.log(res.data);
     });
   } catch (err) {
     console.error(`Error Creating ${resource}`);
@@ -94,13 +104,15 @@ async function multiPartUpdateElement(event, resource) {
     await axios.put(`${uri}`, data).then((res) => {
       const element = [...this.state[resource]];
       element.forEach((round) => {
-        round._id === res.data._id ? Object.assign(round, res.data) : round;
+        round._id === res.data.data._id ? Object.assign(round, res.data.data) : round;
       });
       this.setState({ [resource]: element });
-      // this.setTemporaryEmpty()
+      this.setState({ message: res.data.message });
+      // this.setTemporaryEmpty();
       // window.location.reload()
-      console.log(`${resource} Updated Successfully !!!`);
-      console.log(res.data);
+      console.log(res.data.message.content);
+      // console.log(res.data.data);
+      // console.log(res.data);
     });
   } catch (err) {
     console.error(`Error Updating ${resource}`);
@@ -116,6 +128,12 @@ async function updateState(resource, resourceApi) {
     this.setState({ [resource]: data });
     console.log(this.state[resource]);
     console.log(this.state[resource] == data);
+    // this.setState({ message: res.data.message });
+    // // this.setTemporaryEmpty();
+    // // window.location.reload()
+    // console.log(res.data.message.content);
+    // console.log(res.data.data);
+    // console.log(res.data);
   } catch (err) {
     console.error(err.message);
   }
@@ -131,6 +149,9 @@ async function sendMail(e) {
     }
     await axios.post(uri, data).then((res) => {
       console.log(res.data);
+      this.setState({ message: res.data });
+      // this.setTemporaryEmpty();
+      // window.location.reload()\
     });
   } catch (err) {
     console.error(`Error Sending Email`);
@@ -139,6 +160,7 @@ async function sendMail(e) {
 }
 async function sendWhatsapp(e) {
   try {
+    // this.setState({ message: res.data });
   } catch (err) {
     console.error(`Error Sending Whatsapp Message`);
     console.error(err.message);

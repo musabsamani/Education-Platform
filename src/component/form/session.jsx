@@ -13,18 +13,25 @@ class Session extends Component {
     )
   }
 }
-class AddStudent extends Component {
-  handleSubmit = (e, array, temporary) => {
+class sessionForm extends Component {
+  handleSubmit = (e, array) => {
     e.preventDefault()
-    let isValid = validator(array, temporary)
-    if (isValid) {
+    const form = new FormData(e.target)
+    let data = {}
+    for (let [key, value] of form) {
+      data[key] = value
+    }
+    this.props.setTemporary(data)
+    let isValid = validator(array, this.props.temporary)
+    if (isValid === true) {
       if (this.props.name === "add") {
         this.props.create(e, "sessions")
       } else {
         this.props.update(e, "sessions")
       }
     } else {
-      console.log("event not valid")
+      this.props.messageShow(isValid[0], isValid[1])
+      console.log(isValid[0], isValid[1])
     }
   }
   render() {
@@ -32,7 +39,7 @@ class AddStudent extends Component {
       <>
         <div className="container mt-5 ">
           <h2>{this.props.name === "add" ? "New Session" : "Edit Session"}</h2>
-          <form className="col g-3 d-flex-column justify-content-center" onSubmit={e => this.handleSubmit(e, this.props.sessions, this.props.temporary)}>
+          <form className="col g-3 d-flex-column justify-content-center" onSubmit={e => this.handleSubmit(e, this.props.sessions)}>
             <Select onChange={this.props.onChange} name="subject" resourceArray={this.props.subjects} resourceProperty="code" value={this.props.temporary.subject} />
             <Select onChange={this.props.onChange} name="lesson" resourceArray={this.props.lessons} resourceProperty="name" value={this.props.temporary.lesson} />
             <Select onChange={this.props.onChange} name="room" resourceArray={this.props.rooms} resourceProperty="name" value={this.props.temporary.room} />
@@ -52,4 +59,4 @@ class AddStudent extends Component {
   }
 }
 
-export default AddStudent;
+export default sessionForm;

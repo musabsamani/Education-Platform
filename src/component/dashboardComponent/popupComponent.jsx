@@ -30,10 +30,8 @@ class PopupComponent extends Component {
                 ))}
                 <Modal show={this.state.show} fullscreen={this.state.fullscreen} onHide={() => this.handleClose()}>
                     <Modal.Header closeButton>
-                        <Modal.Title>{lesson.subject.code}</Modal.Title>
-                        <Modal.Title>{console.log(lesson.subject)}</Modal.Title>
-                        <Modal.Title>{console.log(lesson)}</Modal.Title>
-                        <Modal.Title>{lesson.name}</Modal.Title>
+                        <Modal.Title>{lesson.subject && lesson.subject.code}</Modal.Title>
+                        <Modal.Title>{lesson.name && lesson.name}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
                         {lesson.file}

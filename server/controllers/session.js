@@ -1,8 +1,10 @@
 const { Sessiondb } = require("../model/model");
+const { populateFind, populateSave } = require("../helpers/populate");
+const { messageCRUD } = require("../helpers/messages");
 exports.create = async (req, res) => {
   try {
-    if (!req.body) {
-      res.status(400).send({ message: "request bodu can't be empty" });
+    if (Object.keys(req.body).length === 0) {
+      res.status(400).send(messageCRUD("error", "create", "session", "empty-body"));
       return;
     }
     const session = new Sessiondb({
@@ -14,67 +16,63 @@ exports.create = async (req, res) => {
       start: req.body.start,
       end: req.body.end,
     });
-    const data = await session.save();
-    await data.populate("subject");
-    await data.populate("lesson");
-    await data.populate("room");
-    await data.populate("volunteer");
-    res.send(data);
+    const data = await populateSave(await session.save(), "session");
+    res.send(messageCRUD("success", "create", "session", data));
   } catch (err) {
     console.log(err.message);
-    res.status(500).send({ message: err.message || "Some Error occured while performing a create operation" });
+    res.status(500).send(messageCRUD("error", "create", "session", err.message));
   }
 };
 exports.find = async (req, res) => {
   if (req.query.id) {
     const id = req.query.id;
     try {
-      const data = await Sessiondb.findById(id).populate("subject").populate("lesson").populate("room").populate("volunteer");
+      const data = await populateFind(Sessiondb.findById(id), "session");
       if (!data) {
-        res.status(404).send({ message: `Error Session with id ${id} Not Found` });
+        res.status(404).send(messageCRUD("error", "read", "session", id));
       } else {
-        res.send(data);
+        res.send(messageCRUD("success", "read", "session", data));
       }
     } catch (err) {
-      res.status(500).send({ message: `Error occured while retriving session with id ${id}` });
+      res.status(500).send(messageCRUD("error", "read", "session", err.message));
     }
   } else {
     try {
-      const data = Sessiondb.find().populate("subject").populate("lesson").populate("room").populate("volunteer");
-      res.send(data);
+      const data = await populateFind(Sessiondb.find(), "session");
+      res.send(messageCRUD("success", "read", "session", data));
     } catch (err) {
-      res.status(500).send({ message: err.message || "Error occured while retriving sessions information" });
+      res.status(500).send(messageCRUD("error", "read", "session", err.message));
     }
   }
 };
 exports.update = async (req, res) => {
   try {
-    if (!req.body) {
-      return res.status(400).send({ message: "Data to update can not be empty" });
+    if (Object.keys(req.body).length === 0) {
+      return res.status(400).send(messageCRUD("error", "update", "session", "empty-body"));
     }
     const id = req.params.id;
-    const data = await Sessiondb.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false }).populate("subject").populate("lesson").populate("room").populate("volunteer");
+    const data = await populateFind(Sessiondb.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false }), "session");
     if (!data) {
-      res.status(404).send({ message: `Can't update session with id ${id}, maybe session doesn't exist` });
+      res.status(404).send(messageCRUD("error", "update", "session", id));
     } else {
-      res.send(data);
+      res.send(messageCRUD("success", "update", "session", data));
     }
   } catch (err) {
     console.log(err.message);
-    res.status(500).send({ message: "Error update lesson information" });
+    res.status(500).send(messageCRUD("error", "update", "session", err.message));
   }
 };
 exports.delete = async (req, res) => {
   const id = req.params.id;
   try {
-    const data = await Sessiondb.findByIdAndDelete(id);
+    const data = await populateFind(Sessiondb.findByIdAndDelete(id), "session");
     if (!data) {
-      res.status(404).send({ message: `Can't delete session with id ${id}. Maybe session doesn't exist` });
+      res.status(404).send(messageCRUD("error", "delete", "session", id));
     } else {
-      res.send({ message: "session Deleted successfully" });
+      res.send(messageCRUD("success", "delete", "session", data));
     }
   } catch (err) {
     console.log(err.message);
-    res.status(500).send({ message: "Couldn't delete lesson with id " + id });
+    res.status(500).send(messageCRUD("error", "delete", "session", err.message));
   }
 };

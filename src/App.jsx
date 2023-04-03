@@ -6,8 +6,9 @@ import axios from "axios";
 import "./scss/App.scss";
 import PDFUploader from "./viewPdf";
 // ====== helpers files/
-import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, eventAPI, roomAPI, sessionAPI } from "./helpers/apiEndpoints";
+import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, roomAPI, sessionAPI } from "./helpers/apiEndpoints";
 import { handleChange, setTemporary, setTemporaryEmpty, dateFormaterForInput } from "./helpers/helpersFunctions";
+import { messageShow } from "./helpers/messages"
 import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, updateState } from "./helpers/crudFunctions";
 // ###################### React Components ######################
 // ====== components/
@@ -20,7 +21,6 @@ import Email from "./component/email";
 import StudentForm from "./component/form/student";
 import VolunteerForm from "./component/form/volunteer";
 import SubjectForm from "./component/form/subject";
-import EventForm from "./component/form/event";
 import LessonForm from "./component/form/lesson";
 import RoomForm from "./component/form/room";
 import SessionForm from "./component/form/session";
@@ -29,13 +29,13 @@ import StudentTable from "./component/show/studentTable";
 import VolunteerTable from "./component/show/volunteerTable";
 import LessonTable from "./component/show/lessonTable";
 import SubjectTable from "./component/show/subjectTable";
-import EventTable from "./component/show/eventTable";
 import RoomTable from "./component/show/roomTable";
 import SessionTable from "./component/show/sessionTable";
 // ====== components/show/profile
 import Profile from "./component/show/profile";
 import Calendar from "./component/calendar";
 import Session from "./component/dashboardComponent/session";
+import { message } from "antd";
 // import RegistrationForm from "./component/include/registerationTime";
 // import comments from './helpers/comments';
 // =============== this is for axios for POST and PUT methods
@@ -55,16 +55,17 @@ class App extends Component {
     this.multiPartCreateElement = multiPartCreateElement.bind(this);
     this.multiPartUpdateElement = multiPartUpdateElement.bind(this);
     this.updateState = updateState.bind(this);
+    this.messageShow = messageShow.bind(this);
   }
   state = {
     students: [],
     volunteers: [],
     lessons: [],
     subjects: [],
-    events: [],
     rooms: [],
     sessions: [],
     temporary: {},
+    message: {}
   };
   // this react function is fired up when page load initially
   async componentDidMount() {
@@ -77,17 +78,29 @@ class App extends Component {
       this.setState({ lessons });
       const { data: subjects } = await axios.get(subjectAPI);
       this.setState({ subjects });
-      const { data: events } = await axios.get(eventAPI);
-      this.setState({ events });
       const { data: rooms } = await axios.get(roomAPI);
       this.setState({ rooms });
       const { data: sessions } = await axios.get(sessionAPI);
       this.setState({ sessions });
-    } catch {
+    } catch (err) {
       console.log("Error fetching data from the server on componentDidMount");
+      console.log(err.message);
+      this.messageShow("error", "Error fetching data from the server on componentDidMount", err.message)
     }
   }
-
+  componentDidUpdate() {
+    if (Object.keys(this.state.message).length > 0) {
+      if (this.state.message.operation == "delete") {
+        this.setState({ message: {} })
+      } else {
+        if (confirm(`${this.state.message.type}\n${this.state.message.content}`)) {
+          this.setState({ message: {} })
+        } else {
+          this.setState({ message: {} })
+        }
+      }
+    }
+  }
   render() {
     return (
       // <RegistrationForm/>
@@ -136,18 +149,6 @@ class App extends Component {
                 element={
                   <SubjectTable
                     subjects={this.state.subjects}
-                    temporary={this.state.temporary}
-                    onDelete={this.deleteElement}
-                    setTemporary={this.setTemporary}
-                    setTemporaryEmpty={this.setTemporaryEmpty}
-                  />
-                }
-              />
-              <Route
-                path="/eventTable"
-                element={
-                  <EventTable
-                    events={this.state.events}
                     temporary={this.state.temporary}
                     onDelete={this.deleteElement}
                     setTemporary={this.setTemporary}
@@ -249,16 +250,6 @@ class App extends Component {
                   create={this.createElement}
                 />}
               />
-              <Route path="/addEvent"
-                element={<EventForm
-                  name="add"
-                  events={this.state.events}
-                  temporary={this.state.temporary}
-                  formater={dateFormaterForInput}
-                  onChange={this.handleChange}
-                  create={this.createElement}
-                />}
-              />
               <Route
                 path="/addLesson"
                 element={<LessonForm
@@ -292,6 +283,8 @@ class App extends Component {
                   formater={dateFormaterForInput}
                   onChange={this.handleChange}
                   create={this.createElement}
+                  setTemporary={this.setTemporary}
+                  messageShow={this.messageShow}
                 />}
               />
             </>
@@ -320,16 +313,6 @@ class App extends Component {
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
                   dateFormater={this.dateFormater}
-                  update={this.updateElement}
-                />}
-              />
-              <Route path="/updateEvent"
-                element={<EventForm
-                  name="update"
-                  events={this.state.events}
-                  temporary={this.state.temporary}
-                  formater={dateFormaterForInput}
-                  onChange={this.handleChange}
                   update={this.updateElement}
                 />}
               />
@@ -367,6 +350,8 @@ class App extends Component {
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
                   update={this.updateElement}
+                  setTemporary={this.setTemporary}
+                  messageShow={this.messageShow}
                 />}
               />
             </>

@@ -6,12 +6,8 @@ import Profile from './show/profile';
 import VolunteerTable from './show/volunteerTable';
 import Sidebar from './sidebar';
 import Adminbar from "./adminbar";
-
 import Email from './email';
 import { sendMail } from "../helpers/crudFunctions";
-
-
-// console.log(this.props.volunteers)
 class Dashboard extends Component {
     constructor(props) {
         super(props);

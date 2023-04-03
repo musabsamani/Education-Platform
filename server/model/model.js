@@ -39,12 +39,6 @@ const lessonSchema = new mongoose.Schema({
   content: String,
   file: String,
 });
-const eventSchema = new mongoose.Schema({
-  _id: String,
-  title: String,
-  start: String,
-  end: String,
-});
 const roomSchema = new mongoose.Schema({
   _id: String,
   name: String,
@@ -89,7 +83,6 @@ const Studentdb = mongoose.model("studentdb", studentSchema);
 const Volunteerdb = mongoose.model("volunteerdb", volunteerSchema);
 const Lessondb = mongoose.model("lessonsdb", lessonSchema);
 const Subjectdb = mongoose.model("subjectdb", subjectSchema);
-const Eventdb = mongoose.model("enentdb", eventSchema);
 const Roomdb = mongoose.model("roomdb", roomSchema);
 const Sessiondb = mongoose.model("sessiondb", sessionSchema);
-module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb, Eventdb, Roomdb, Sessiondb };
+module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb, Roomdb, Sessiondb };

@@ -1,10 +1,11 @@
 const { Volunteerdb } = require("../model/model");
 const { removeFile } = require("../helpers/helpersFunction");
+const { messageCRUD } = require("../helpers/messages");
 // create and save new volunteer
 exports.create = async (req, res) => {
   try {
-    if (!req.body) {
-      res.status(400).send({ message: "request body can't be empty" });
+    if (Object.keys(req.body).length === 0) {
+      res.status(400).send(messageCRUD("error", "create", "volunteer", "empty-body"));
       return;
     }
     const volunteer = new Volunteerdb({
@@ -19,13 +20,13 @@ exports.create = async (req, res) => {
       profileCover: req.fileName,
     });
     const data = await volunteer.save();
-    res.send(data);
+    res.send(messageCRUD("success", "create", "volunteer", data));
   } catch (err) {
     if (req.fileName) {
       removeFile(req.fileName);
     }
     console.error(err.message);
-    res.status(500).send({ message: err.message || "Some error occured while performing a create operation" });
+    res.status(500).send(messageCRUD("error", "create", "volunteer", err.message));
   }
 };
 // return all volunteers / single volunteer
@@ -35,24 +36,24 @@ exports.find = async (req, res) => {
     try {
       const data = await Volunteerdb.findById(id);
       if (!data) {
-        res.status(404).send({ message: `Error volunteer with id ${id} Not found` });
+        res.status(404).send(messageCRUD("error", "read", "volunteer", id));
       } else {
-        res.send(data);
+        res.send(messageCRUD("success", "read", "volunteer", data));
       }
     } catch (err) {
       console.error(err.message);
-      res.status(500).send({ message: `Error occured while rettriving volunteer with id ${id}` });
+      res.status(500).send(messageCRUD("error", "read", "volunteer", err.message));
     }
   } else {
     try {
       const data = await Volunteerdb.find();
-      res.send(data);
+      res.send(messageCRUD("success", "read", "volunteer", data));
     } catch (err) {
       if (req.fileName) {
         removeFile(req.fileName);
       }
       console.error(err.message);
-      res.status(500).send({ message: err.message || "Error occured while retriving volunteer information" });
+      res.status(500).send(messageCRUD("error", "read", "volunteer", err.message));
     }
   }
 };
@@ -60,32 +61,32 @@ exports.find = async (req, res) => {
 exports.update = async (req, res) => {
   const id = req.params.id;
   try {
-    if (!req.body) {
+    if (Object.keys(req.body).length === 0) {
       if (req.fileName) {
         removeFile(req.fileName);
       }
-      return res.status(400).send({ message: "Data to update can not be empty" });
+      return res.status(400).send(messageCRUD("error", "update", "volunteer", "empty-body"));
     }
     req.fileName ? (req.body["profileCover"] = req.fileName) : "";
     const old = await Volunteerdb.findById(req.body._id);
-    const data = Volunteerdb.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false });
+    const data = await Volunteerdb.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false });
     if (!data) {
       if (req.fileName) {
         removeFile(req.fileName);
       }
-      res.status(404).send({ message: `Can't update volunteer with id ${id}, maybe volunteer doesn't exist` });
+      res.status(404).send(messageCRUD("error", "update", "volunteer", id));
     } else {
       if (req.fileName) {
         removeFile(old.profileCover);
       }
-      res.send(data);
+      res.send(messageCRUD("success", "update", "volunteer", data));
     }
   } catch (err) {
     if (req.fileName) {
       removeFile(req.fileName);
     }
     console.error(err.message);
-    res.status(500).send({ message: "Error update volunteer information" });
+    res.status(500).send(messageCRUD("error", "update", "volunteer", err.message));
   }
 };
 // delete volunteer wih specified id
@@ -94,15 +95,15 @@ exports.delete = async (req, res) => {
   try {
     const data = await Volunteerdb.findByIdAndDelete(id);
     if (!data) {
-      res.status(404).send({ message: `Can't delete volunteer with id ${id}. Maybe volunteer doesn't exist` });
+      res.status(404).send(messageCRUD("error", "delete", "volunteer", id));
     } else {
       if (data.profileCover) {
         removeFile(data.profileCover);
       }
-      res.send(data);
+      res.send(messageCRUD("success", "delete", "volunteer", data));
     }
   } catch (err) {
     console.error(err.message);
-    res.status(500).send({ message: "Couldn't delete volunteer with id " + id });
+    res.status(500).send(messageCRUD("error", "delete", "volunteer", err.message));
   }
 };

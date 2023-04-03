@@ -1,3 +1,4 @@
+import { messageShow } from "./messages";
 // ===============  setting this.state.temporary while typing in the input fields
 function handleChange(e) {
   const temporary = { ...this.state.temporary };
@@ -6,7 +7,7 @@ function handleChange(e) {
 }
 // ===============  store value in this.state.temporary
 function setTemporary(element) {
-  console.log(element);
+  // console.log(element);
   this.setState({ temporary: element });
 }
 // ===============  setting this.state.temporary to empty value
@@ -44,7 +45,7 @@ function dateFormaterForInput(date) {
 // ===============  check if the date is valid
 // 1 start date is before end
 // 2 not overlaping with any other dates
-function isValidDate(newObject, oldObject) {
+const isValidDate = (newObject, oldObject) => {
   const newObjectStart = new Date(newObject.start).getTime();
   const newObjectEnd = new Date(newObject.end).getTime();
   const oldObjectStart = new Date(oldObject.start).getTime();
@@ -56,19 +57,21 @@ function isValidDate(newObject, oldObject) {
     return false;
   }
   return noOvelap;
-}
-function validator(array, temporary) {
+};
+const validator = (array, temporary) => {
+  let isValid = true;
   const notEmpty = temporary.start && temporary.end;
   const isStartBeforeEnd = temporary.start <= temporary.end;
+  const equal = temporary.start === temporary.end;
   if (!notEmpty) {
-    console.log("Both Start and End Dates Must Be Filled");
-    return false;
+    return ["error", "both start and end dates must be filled"];
+  }
+  if (equal) {
+    return ["error", "start and end dates must not be equal"];
   }
   if (!isStartBeforeEnd) {
-    console.log("End Date is Before Start Date");
-    return false;
+    return ["error", "end date is before start date"];
   }
-  let isValid = true;
   // note that if events are empty because state didnot load from cloud and still awaiting
   // there may be a collision. so we have two opttion to avoid this
   // 1 - run this function on the back-end
@@ -77,11 +80,12 @@ function validator(array, temporary) {
     if (temporary._id === element._id) {
       continue;
     }
-    if (!isValidDate(temporary, element)) {
-      isValid = false;
-      return false;
+    if (temporary.room === element.room._id) {
+      if (!isValidDate(temporary, element)) {
+        return ["error", "event not valid, event overlap with other event"];
+      }
     }
   }
   return isValid;
-}
+};
 export { handleChange, setTemporary, setTemporaryEmpty, generateId, randomSeed, dateFormaterForInput, validator };
