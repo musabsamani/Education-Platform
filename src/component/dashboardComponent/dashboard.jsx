@@ -27,12 +27,14 @@ class Dashboard extends Component {
                     <Adminbar />
                     <div className='content_area'>
                         <h1>hello</h1>
-                        <Video loop
-                            poster='src/assets/71 brilliant Photoshop tutorials to boost your skills.jpg'
-                            onCanPlayThrough={() => { console.log('video play') }}
-                        >
-                            <source src='src/assets/How To Build Self-Discipline & Stop Procrastinating 720 x 1280.mp4' type='video/mp4' />
-                        </Video>
+                        <div className='video'>
+                            <Video loop
+                                poster='src/assets/71 brilliant Photoshop tutorials to boost your skills.jpg'
+                                onCanPlayThrough={() => { console.log('video play') }}
+                            >
+                                <source src='src/assets/How To Build Self-Discipline & Stop Procrastinating 720 x 1280.mp4' type='video/mp4' />
+                            </Video>
+                        </div>
                     </div>
                 </div>
             </div >
