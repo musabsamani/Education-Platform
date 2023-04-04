@@ -38,6 +38,14 @@ exports.find = async (req, res) => {
     }
   } else {
     try {
+      let searchOptions = {};
+      if (req.body.searchOptions != null && req.body.searchOptions !== "") {
+        searchOptions.name = new RegExp(req.body.searchOptions, "i");
+      }
+      let order = 1;
+      if (req.body.order != null && req.body.order !== "") {
+        order = req.body.order;
+      }
       const data = await populateFind(Sessiondb.find(), "session");
       res.send(messageCRUD("success", "read", "session", data));
     } catch (err) {
