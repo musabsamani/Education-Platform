@@ -1,12 +1,20 @@
-.card{
-    width: 800px;
-    min-height: 200px;
-    .col{
-        max-width: 250px;
-        .session_image{
-            width: 250px;
-            height: 100%;
-        }
-    }
+.propabilties{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    // justify-content: center;
     
+    .card{
+        margin: 10px;
+        width: 800px;
+        min-height: 200px;
+        .col{
+            max-width: 250px;
+            .session_image{
+                width: 250px;
+                height: 100%;
+            }
+        }
+    
+    }
 }

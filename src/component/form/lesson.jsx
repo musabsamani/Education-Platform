@@ -33,8 +33,8 @@ class Lesson extends Component {
             <div className="create_header">
               <h1>Submit A New Lesson</h1>
             </div>
-            <div className="create_lesson_formfield">
-              <div className="create_lesson_formarea">
+            <div className="create_formfield">
+              <div className="create_formarea">
                 <div className="bs-stepper-header">
                   <h2>{this.props.name === "add" ? "New Lesson" : "Edit Lesson"}</h2>
 
