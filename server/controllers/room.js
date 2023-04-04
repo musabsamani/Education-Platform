@@ -43,7 +43,11 @@ exports.find = async (req, res) => {
       if (req.body.order != null && req.body.order !== "") {
         order = req.body.order;
       }
-      const data = await Roomdb.find(searchOptions).sort({ name: order });
+      if (req.body.lt != null && req.body.lt !== "") {
+        lt = req.body.lt;
+      }
+      const data = await Roomdb.find(searchOptions).sort({ name: order }).lt("or", lt);
+
       res.send(messageCRUD("success", "read", "room", data));
     } catch (err) {
       console.log(err.message);
