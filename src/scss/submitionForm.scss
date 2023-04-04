@@ -29,7 +29,9 @@
         border-radius: 10px;
         margin: 100px 100px;
         min-height: 800px;
+        overflow: hidden;
         .bs-stepper-header{
+            background-color: rgb(238, 238, 238);
             height: 170px;
             display: flex;
             justify-content: space-evenly;

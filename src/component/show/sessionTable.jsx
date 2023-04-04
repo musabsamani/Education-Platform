@@ -18,7 +18,7 @@ class SessionTable extends Component {
               <div className="_topContent">
                 <h1>Sessions</h1>
                 <Link to="/addSession">
-                  <button className="btn btn-outline-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
+                  <button className="btn btn-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
                     Add Session
                   </button>
                 </Link>
@@ -28,50 +28,59 @@ class SessionTable extends Component {
                 ###########################
                  */}
                 {/*  Start */}
-                <div className="card rounded overflow-hidden shadow">
-                  <div className="row g-0">
-                    {/* <!-- Image --> */}
-                    <div className="col">
-                      <img className="session_image" src="src/assets/71 brilliant Photoshop tutorials to boost your skills.jpg" alt="card image" />
-                    </div>
-                    {/* <!-- Card body --> */}
-                    <div className="col-md-8">
-                      <div className="card-body">
-                        {/* <!-- Title --> */}
-                        <div className="d-flex justify-content-between mb-2 mb-sm-3">
-                          <h5 className="card-title mb-0"><a href="#">Graphic Design Masterclass</a></h5>
-                          {/* <!-- Wishlist icon --> */}
-                          <a href="#"><i className="far fa-heart text-dark"></i></a>
-                          <div>
-                            <button className="btn btn-info btn-sm m-1">
-                              Update
-                            </button>
-                            <button className="btn btn-danger btn-sm m-1">
-                              Delete
-                            </button>
+                {this.props.sessions.length > 0 ? (
+                  this.props.sessions.map((session, i) => (
+                    <div className="card rounded overflow-hidden shadow">
+                      <div className="row g-0">
+                        {/* <!-- Image --> */}
+                        <div className="col">
+                          <img className="session_image" src="src/assets/71 brilliant Photoshop tutorials to boost your skills.jpg" alt="card image" />
+                        </div>
+                        {/* <!-- Card body --> */}
+                        <div className="col-md-8">
+                          <div className="card-body">
+                            {/* <!-- Title --> */}
+                            <div className="d-flex justify-content-between mb-2 mb-sm-3">
+                              <h5 className="card-title mb-0"><a href="#">helo</a></h5>
+                              {/* <!-- Wishlist icon --> */}
+                              <a href="#"><i className="far fa-heart text-dark"></i></a>
+                              <div>
+                                <button className="btn btn-info btn-sm m-1">
+                                  Update
+                                </button>
+                                <button className="btn btn-danger btn-sm m-1">
+                                  Delete
+                                </button>
+                              </div>
+                            </div>
+                            {/* <!-- Content --> */}
+                            {/* <!-- Info --> */}
+                            <ul className="list-inline mb-2">
+                              <i className="far fa-clock text-danger me-2">{session.subject.code}</i>
+                              <i className="fas fa-table text-orange me-2">{session.room}</i>
+                              <i className="fas fa-signal text-success me-2" key={session._id}>{i + 1}</i>
+                            </ul>
+                            {/* <!-- Rating --> */}
+                            <ul className="list-inline mt-2">
+                              <li className="item me-0 small mb-1"><i className="fas fa-star text-info">Volunteer :</i> {session.volunteer.name}</li>
+                              <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">Start Date</i> time</li>
+                              <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">End Date</i> time</li>
+                              <li className="list-inline-item ms-2 text-dark"><button className="btn btn-outline-primary mt-3">more details</button></li>
+                              <li className="list-inline-item me-0 small">
+
+                              </li>
+                            </ul>
                           </div>
                         </div>
-                        {/* <!-- Content --> */}
-                        {/* <!-- Info --> */}
-                        <ul className="list-inline mb-2">
-                          <i className="far fa-clock text-danger me-2">MATH</i>
-                          <i className="fas fa-table text-orange me-2">Room A-4</i>
-                          <i className="fas fa-signal text-success me-2">All level</i>
-                        </ul>
-                        {/* <!-- Rating --> */}
-                        <ul className="list-inline mt-2">
-                          <li className="item me-0 small mb-1"><i className="fas fa-star text-info">Volunteer :</i> Mosab Obada</li>
-                          <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">Start Date</i> time</li>
-                          <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">End Date</i> time</li>
-                          <li className="list-inline-item ms-2 text-dark"><button className="btn btn-outline-primary mt-3">more details</button></li>
-                          <li className="list-inline-item me-0 small">
-
-                          </li>
-                        </ul>
                       </div>
                     </div>
+                  ))
+                ) : (
+                  <div>
+                    Databse is Empty
                   </div>
-                </div>
+                )
+                }
                 {/*  End */}
               </div>
               {/* Table style */}
@@ -131,3 +140,4 @@ export default SessionTable;
   </tbody>
 </table>
 */}
+

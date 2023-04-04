@@ -12,60 +12,79 @@ class VolunteerTable extends Component {
           <Sidebar />
           <div className='content'>
             <Adminbar />
-            <div className="center">
-              <div className="tb container ">
+            <div className='content_area'>
+              <div className="_topContent">
+                <h1>Volunteers</h1>
                 <Link to="/addVolunteer">
-                  <button className="btn btn-outline-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
+                  <button className="btn btn-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
                     Add Volunteer
                   </button>
                 </Link>
-                <table className="table caption-top mt-5">
-                  <thead>
-                    <tr>
-                      <th scope="col">#</th>
-                      <th scope="col">Name</th>
-                      <th scope="col">Age</th>
-                      <th scope="col">Subject</th>
-                      <th scope="col">Address</th>
-                      <th scope="col">Phone</th>
-                      <th scope="col">Email</th>
-                      <th scope="col">Action</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    {this.props.volunteers.length > 0 ? (
-                      this.props.volunteers.map((volunteer, i) => (
-                        <tr key={volunteer._id}>
-                          <td>{i + 1}</td>
-                          <td onClick={() => this.props.setTemporary(volunteer)}>
-                            <Link to="/profile">{volunteer.name}</Link>
-                          </td>
-                          <td>{volunteer.age}</td>
-                          <td>{volunteer.subject}</td>
-                          <td>{volunteer.address}</td>
-                          <td>{volunteer.phone}</td>
-                          <td>{volunteer.email}</td>
-                          <td>
-                            <Link to={`/updateVolunteer?id=${volunteer._id}`}>
-                              <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(volunteer)}>
-                                Update
-                              </button>
-                            </Link>
-                            <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(volunteer._id, "volunteers")}>
-                              Delete
-                            </button>
-                          </td>
-                        </tr>
-                      ))
-                    ) : (
-                      <tr>
-                        <td>Databse is Empty</td>
-                      </tr>
-                    )}
-                  </tbody>
-                </table>
-                <div className="bottom">
+              </div>
+              <div className="propabilties">
+                <div className="totalLesson">Total Volunteers</div>
+              </div>
+              <div className="table_section">
+                <div className="tablebar">
+                  <input className="searchbar" type="search" placeholder="Search..." />
+                  <div className="dropdownSelect">
+                    <select className="form-select" aria-label="Default select example">
+                      <option selected>Sort By</option>
+                      <option value="1">Name</option>
+                      <option value="2">Date</option>
+                      <option value="3">Approved</option>
+                    </select>
+                  </div>
+                </div>
 
+                {/* ########### Table content section #############   */}
+
+                <div className="tableContent">
+                  <table className="table caption-top">
+                    <thead>
+                      <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Name</th>
+                        <th scope="col">Age</th>
+                        <th scope="col">Subject</th>
+                        <th scope="col">Address</th>
+                        <th scope="col">Phone</th>
+                        <th scope="col">Email</th>
+                        <th scope="col">Action</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      {this.props.volunteers.length > 0 ? (
+                        this.props.volunteers.map((volunteer, i) => (
+                          <tr key={volunteer._id}>
+                            <td>{i + 1}</td>
+                            <td onClick={() => this.props.setTemporary(volunteer)}>
+                              <Link to="/profile">{volunteer.name}</Link>
+                            </td>
+                            <td>{volunteer.age}</td>
+                            <td>{volunteer.subject}</td>
+                            <td>{volunteer.address}</td>
+                            <td>{volunteer.phone}</td>
+                            <td>{volunteer.email}</td>
+                            <td>
+                              <Link to={`/updateVolunteer?id=${volunteer._id}`}>
+                                <button className="btn btn-info btn-sm m-1" onClick={() => this.props.setTemporary(volunteer)}>
+                                  Update
+                                </button>
+                              </Link>
+                              <button className="btn btn-danger btn-sm m-1" onClick={() => this.props.onDelete(volunteer._id, "volunteers")}>
+                                Delete
+                              </button>
+                            </td>
+                          </tr>
+                        ))
+                      ) : (
+                        <tr>
+                          <td>Databse is Empty</td>
+                        </tr>
+                      )}
+                    </tbody>
+                  </table>
                 </div>
               </div>
             </div>
@@ -77,3 +96,4 @@ class VolunteerTable extends Component {
 }
 
 export default VolunteerTable;
+

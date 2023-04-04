@@ -18,3 +18,22 @@
         }
     }
 }
+
+.b{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    ul{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        li{
+            margin: 0 6px;
+            a{
+                text-decoration: none;
+                color: white;
+            }
+        }
+    }
+    
+}

@@ -62,12 +62,12 @@ class SubjectTable extends Component {
                             <td>{subject.description}</td>
                             <td>
                               <Link to={`/updateSubject?id=${subject._id}`}>
-                                <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(subject)}>
+                                <button className="btn btn-info btn-sm m-1" onClick={() => this.props.setTemporary(subject)}>
                                   Update
                                 </button>
                               </Link>
 
-                              <button className="btn btn-danger btn-sm" onClick={() => this.props.onDelete(subject._id, "subjects")}>
+                              <button className="btn btn-danger btn-sm m-1" onClick={() => this.props.onDelete(subject._id, "subjects")}>
                                 Delete
                               </button>
                             </td>
