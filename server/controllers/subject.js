@@ -37,7 +37,15 @@ exports.find = async (req, res) => {
     }
   } else {
     try {
-      const data = await Subjectdb.find();
+      let searchOptions = {};
+      if (req.body.searchOptions != null && req.body.searchOptions !== "") {
+        searchOptions.name = new RegExp(req.body.searchOptions, "i");
+      }
+      let order = 1;
+      if (req.body.order != null && req.body.order !== "") {
+        order = req.body.order;
+      }
+      const data = await Subjectdb.find(searchOptions).sort({ name: order });
       res.send(messageCRUD("success", "read", "subject", data));
     } catch (err) {
       console.log(err.message);

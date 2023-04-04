@@ -1,10 +1,18 @@
 const multer = require("multer");
 const path = require("path");
+const fs = require("fs");
+const root = path.dirname(path.dirname(path.dirname(__dirname)));
 const { uploadBasePath, profileCoverBasePath } = require("../../helpers/fileSystemPathes");
-const profileCoverUploadPath = path.join(uploadBasePath, profileCoverBasePath);
+const profileCoverUploadPath = path.join(root, uploadBasePath, profileCoverBasePath);
 let imageMimeTypes = ["image/jpeg", "image/png", "image/gif", "image/bmp", "image/tiff", "image/svg+xml", "image/webp"];
+if (!fs.existsSync(profileCoverUploadPath)) {
+  fs.mkdirSync(profileCoverUploadPath);
+}
 const storage = multer.diskStorage({
   destination: (req, file, callback) => {
+    if (!fs.existsSync(profileCoverUploadPath)) {
+      fs.mkdirSync(profileCoverUploadPath);
+    }
     callback(null, profileCoverUploadPath);
   },
   filename: async (req, file, callback) => {

@@ -35,7 +35,15 @@ exports.find = async (req, res) => {
     }
   } else {
     try {
-      const data = await Roomdb.find();
+      let searchOptions = {};
+      if (req.body.searchOptions != null && req.body.searchOptions !== "") {
+        searchOptions.name = new RegExp(req.body.searchOptions, "i");
+      }
+      let order = 1;
+      if (req.body.order != null && req.body.order !== "") {
+        order = req.body.order;
+      }
+      const data = await Roomdb.find(searchOptions).sort({ name: order });
       res.send(messageCRUD("success", "read", "room", data));
     } catch (err) {
       console.log(err.message);
