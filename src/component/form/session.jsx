@@ -5,6 +5,7 @@ import { validator } from "../../helpers/helpersFunctions"
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import '../../scss/submitionForm.scss';
 import Subnav from "./subnav";
+import ReactDatePicker from "react-datepicker";
 
 class sessionForm extends Component {
   handleSubmit = (e, array) => {
@@ -14,6 +15,10 @@ class sessionForm extends Component {
     for (let [key, value] of form) {
       data[key] = value
     }
+    console.log(typeof data["start"])
+    console.log(data["start"])
+    console.log(data["end"])
+    console.log(data)
     this.props.setTemporary(data)
     let isValid = validator(array, this.props.temporary)
     if (isValid === true) {
@@ -55,8 +60,8 @@ class sessionForm extends Component {
                     <Select onChange={this.props.onChange} name="lesson" resourceArray={this.props.lessons} resourceProperty="name" value={this.props.temporary.lesson} />
                     <Select onChange={this.props.onChange} name="room" resourceArray={this.props.rooms} resourceProperty="name" value={this.props.temporary.room} />
                     <Select onChange={this.props.onChange} name="volunteer" resourceArray={this.props.volunteers} resourceProperty="name" value={this.props.temporary.volunteer} />
-                    <Input onChange={this.props.onChange} type="date" name="start" label="Start" value={this.props.temporary.start} />
-                    <Input onChange={this.props.onChange} type="date" name="end" label="End" value={this.props.temporary.end} />
+                    <Input onChange={this.props.onChange} type="datetime-local" name="start" label="Start" value={this.props.temporary.start} />
+                    <Input onChange={this.props.onChange} type="datetime-local" name="end" label="End" value={this.props.temporary.end} />
                     {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
                     <div className="s col mt-2">
                       <button className="btn btn-primary m-1" type="submit">

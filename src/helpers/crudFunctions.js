@@ -32,6 +32,15 @@ async function createElement(event, resource) {
     console.error(content);
     console.error(details);
     this.messageShow(type, content, details);
+    // if (err.message.data) {
+    //   const { type, content, details, operation } = err.response.data.message;
+    //   console.error(content);
+    //   console.error(details);
+    //   this.messageShow(type, content, details);
+    // } else {
+    //   console.error(err.message);
+    //   this.messageShow("error", err.message);
+    // }
   }
 }
 // =======  UPDATE  ========
@@ -59,7 +68,7 @@ async function updateElement(event, resource) {
       // console.log(res.data.data);
       // console.log(res.data);
     }
-  } catch {
+  } catch (err) {
     const { type, content, details, operation } = err.response.data.message;
     console.error(content);
     console.error(details);

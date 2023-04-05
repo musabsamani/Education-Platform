@@ -37,18 +37,20 @@ exports.find = async (req, res) => {
     try {
       let searchOptions = {};
       let order = 1;
-      let lt;
       if (req.body.searchOptions != null && req.body.searchOptions !== "") {
         searchOptions.name = new RegExp(req.body.searchOptions, "i");
       }
       if (req.body.order != null && req.body.order !== "") {
         order = req.body.order;
       }
-      if (req.body.lt != null && req.body.lt !== "") {
-        lt = req.body.lt;
-      }
+      let data = await Roomdb.find(searchOptions).sort({ name: order });
+      // if (req.body.lt != null && req.body.lt !== "") {
+      //   data.lt("or", req.body.lt);
+      // }
+      // if (req.body.gt != null && req.body.gt !== "") {
+      //   data.gt("or", req.body.gt);
+      // }
       // const data = await Roomdb.find(searchOptions).sort({ name: order }).lt("or", lt);
-      const data = await Roomdb.find(searchOptions).sort({ name: order });
 
       res.send(messageCRUD("success", "read", "room", data));
     } catch (err) {
