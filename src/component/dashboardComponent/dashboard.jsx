@@ -6,7 +6,8 @@ import Email from '../email';
 import { sendMail } from "../../helpers/crudFunctions";
 import { DefaultPlayer as Video } from 'react-html5video/dist';
 import 'react-html5video/dist/styles.css'
-import "../../scss/dashboard.scss"
+import "../../scss/dashboard.scss";
+import Chart from './chart';
 
 
 
@@ -28,12 +29,13 @@ class Dashboard extends Component {
                     <div className='content_area'>
                         <h1>hello</h1>
                         <div className='video'>
-                            <Video loop
-                                poster='src/assets/71 brilliant Photoshop tutorials to boost your skills.jpg'
-                                onCanPlayThrough={() => { console.log('video play') }}
-                            >
-                                <source src='src/assets/How To Build Self-Discipline & Stop Procrastinating 720 x 1280.mp4' type='video/mp4' />
-                            </Video>
+                            <div className="msg">
+                                <Email
+                                    sendMail={this.sendMail}
+                                />
+                            </div >
+                            <Chart />
+
                         </div>
                     </div>
                 </div>

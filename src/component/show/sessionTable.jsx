@@ -45,12 +45,20 @@ class SessionTable extends Component {
                               {/* <!-- Wishlist icon --> */}
                               <a href="#"><i className="far fa-heart text-dark"></i></a>
                               <div>
-                                <button className="btn btn-info btn-sm m-1">
+                                <Link to={`/updateSession?id=${session._id}`}>
+                                  <button className="btn btn-info btn-sm m-1" onClick={() => this.props.setTemporary(session)}>
+                                    Update
+                                  </button>
+                                </Link>
+                                {/* <button className="btn btn-info btn-sm m-1">
                                   Update
-                                </button>
-                                <button className="btn btn-danger btn-sm m-1">
+                                </button> */}
+                                <button className="btn btn-danger btn-sm m-1" onClick={() => this.props.onDelete(session._id, "sessions")}>
                                   Delete
                                 </button>
+                                {/* <button className="btn btn-danger btn-sm m-1">
+                                  Delete
+                                </button> */}
                               </div>
                             </div>
                             {/* <!-- Content --> */}
