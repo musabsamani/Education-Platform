@@ -71,8 +71,8 @@ class SessionTable extends Component {
                             {/* <!-- Rating --> */}
                             <ul className="list-inline mt-2">
                               <li className="item me-0 small mb-1"><i className="fas fa-star text-info">Volunteer :</i> {session.volunteer && session.volunteer.name}</li>
-                              <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">Start Date</i> {session.start}</li>
-                              <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">End Date</i> {session.end}</li>
+                              <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">Start Date</i> {`${session.start.split("T")[0]}  ${session.start.split("T")[1]}`}</li>
+                              <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">End Date</i> {`${session.end.split("T")[0]}  ${session.end.split("T")[1]}`}</li>
                               <li className="list-inline-item ms-2 text-dark">{session.lesson && <PopupComponent lesson={session.lesson} />}</li>
                               <li className="list-inline-item me-0 small">
 
