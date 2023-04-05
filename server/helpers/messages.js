@@ -8,8 +8,8 @@ function messageCRUD(type, operation, resource, data = "") {
     }
     return {
       message: {
-        type: type,
-        content: content,
+        type,
+        content,
         operation,
         details,
       },
@@ -32,11 +32,41 @@ function messageCRUD(type, operation, resource, data = "") {
     return {
       message: {
         type: type,
-        content: content,
         details: data,
+        content,
         operation,
       },
     };
   }
 }
-module.exports = { messageCRUD };
+function message(type, operation, data = "") {
+  let content;
+  if (type == "success") {
+    if (operation == "email") {
+      content = "email sent successfully";
+    }
+    return {
+      message: {
+        type: type,
+        content,
+        operation,
+        data,
+      },
+    };
+  }
+  if (type == "error") {
+    if (operation == "email") {
+      content = "error sending email";
+    }
+    return {
+      message: {
+        type: type,
+        content,
+        operation,
+        data,
+      },
+    };
+  }
+}
+
+module.exports = { messageCRUD, message };

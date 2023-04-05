@@ -82,7 +82,7 @@ const validator = (array, temporary) => {
     }
     if (temporary.room === element.room._id) {
       if (!isValidDate(temporary, element)) {
-        return ["error", "event not valid, event overlap with other event"];
+        return ["error", "session not valid, session overlap with other session"];
       }
     }
   }
