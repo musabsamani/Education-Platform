@@ -34,7 +34,7 @@ class Dashboard extends Component {
                                     sendMail={this.sendMail}
                                 />
                             </div >
-                            <Chart />
+                            {/* <Chart /> */}
 
                         </div>
                     </div>
