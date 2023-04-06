@@ -34,7 +34,6 @@ import SessionTable from "./component/show/sessionTable";
 import Profile from "./component/show/profile";
 import Calendar from "./component/calendar";
 import Session from "./component/dashboardComponent/session";
-import { message } from "antd";
 // import RegistrationForm from "./component/include/registerationTime";
 // import comments from './helpers/comments';
 // =============== this is for axios for POST and PUT methods

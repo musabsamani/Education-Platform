@@ -20,27 +20,17 @@ async function createElement(event, resource) {
     if (res.statusText === "OK") {
       const state = [...this.state[resource], res.data.data];
       this.setState({ [resource]: state });
-      this.setState({ message: res.data.message });
       // this.setTemporaryEmpty();
       // window.location.reload()
       console.log(res.data.message.content);
+      const { type, content } = res.data.message;
+      this.messageShow(type, content);
     }
-    // console.log(res.data.data);
-    // console.log(res.data);
   } catch (err) {
     const { type, content, details, operation } = err.response.data.message;
     console.error(content);
     console.error(details);
     this.messageShow(type, content, details);
-    // if (err.message.data) {
-    //   const { type, content, details, operation } = err.response.data.message;
-    //   console.error(content);
-    //   console.error(details);
-    //   this.messageShow(type, content, details);
-    // } else {
-    //   console.error(err.message);
-    //   this.messageShow("error", err.message);
-    // }
   }
 }
 // =======  UPDATE  ========
@@ -65,8 +55,8 @@ async function updateElement(event, resource) {
       // this.setTemporaryEmpty();
       // window.location.reload()
       console.log(res.data.message.content);
-      // console.log(res.data.data);
-      // console.log(res.data);
+      const { type, content } = res.data.message;
+      this.messageShow(type, content);
     }
   } catch (err) {
     const { type, content, details, operation } = err.response.data.message;
@@ -88,8 +78,8 @@ async function deleteElement(id, resource) {
       // this.setTemporaryEmpty();
       // window.location.reload()
       console.log(res.data.message.content);
-      // console.log(res.data.data);
-      // console.log(res.data);
+      const { type, content } = res.data.message;
+      // this.messageShow(type, content);
     }
   } catch (err) {
     const { type, content, details, operation } = err.response.data.message;
@@ -113,8 +103,8 @@ async function multiPartCreateElement(event, resource) {
       // this.setTemporaryEmpty();
       // window.location.reload()
       console.log(res.data.message.content);
-      // console.log(res.data.data);
-      // console.log(res.data);
+      const { type, content } = res.data.message;
+      this.messageShow(type, content);
     }
   } catch (err) {
     const { type, content, details, operation } = err.response.data.message;
@@ -141,8 +131,8 @@ async function multiPartUpdateElement(event, resource) {
       // this.setTemporaryEmpty();
       // window.location.reload()
       console.log(res.data.message.content);
-      // console.log(res.data.data);
-      // console.log(res.data);
+      const { type, content } = res.data.message;
+      this.messageShow(type, content);
     }
   } catch (err) {
     const { type, content, details, operation } = err.response.data.message;
@@ -182,6 +172,9 @@ async function sendMail(e) {
     await axios.post(uri, data).then((res) => {
       console.log(res.data);
       this.setState({ message: res.data });
+      console.log(res.data.message.content);
+      const { type, content } = res.data.message;
+      this.messageShow(type, content);
       // this.setTemporaryEmpty();
       // window.location.reload()\
     });
@@ -190,12 +183,4 @@ async function sendMail(e) {
     console.error(err.message);
   }
 }
-async function sendWhatsapp(e) {
-  try {
-    // this.setState({ message: res.data });
-  } catch (err) {
-    console.error(`Error Sending Whatsapp Message`);
-    console.error(err.message);
-  }
-}
-export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, updateState, sendMail, sendWhatsapp };
+export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, updateState, sendMail };
