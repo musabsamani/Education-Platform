@@ -5,10 +5,26 @@ import Adminbar from "../adminbar";
 
 import "../../scss/lessonTable.scss"
 import Select from "../include/_select";
+import { handleOrder, handleOrderChange, handleAscendantly, handleSearch } from "../../helpers/helpersFunctions"
 class LessonTable extends Component {
   state = {
-    temporary: {},
-  };
+    lessons: [],
+  }
+  constructor(props) {
+    super(props)
+    this.handleSearch = handleSearch.bind(this)
+    this.handleOrder = handleOrder.bind(this)
+    this.handleOrderChange = handleOrderChange.bind(this)
+    this.handleAscendantly = handleAscendantly.bind(this)
+  }
+  componentDidMount() {
+    this.setState({ lessons: this.props.lessons });
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.lessons !== prevProps.lessons) {
+      this.setState({ lessons: this.props.lessons });
+    }
+  }
 
 
   render() {
@@ -34,13 +50,17 @@ class LessonTable extends Component {
               </div>
               <div className="table_section">
                 <div className="tablebar">
-                  <input className="searchbar" type="search" placeholder="Search..." />
+                  <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "lessons")} />
                   <div className="dropdownSelect">
-                    <select className="form-select" aria-label="Default select example">
-                      <option selected>Sort By</option>
-                      <option value="1">Name</option>
-                      <option value="2">Date</option>
-                      <option value="3">Approved</option>
+                    <select className="form-select" aria-label="Default select example" onChange={e => this.handleOrderChange(e, "lessons")}>
+                      <option label="Sort By" value="" />
+                      <option label="subject" value="subject" />
+                      <option label="content" value="content" />
+                      <option label="name" value="name" />
+                    </select>
+                    <select onChange={e => this.handleAscendantly(e, "lessons")} >
+                      <option label="ascendantly" value="ascendantly" />
+                      <option label="descendantly" value="descendantly" />
                     </select>
                   </div>
                 </div>
@@ -59,8 +79,8 @@ class LessonTable extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.lessons.length > 0 ? (
-                        this.props.lessons.map((lesson, i) => (
+                      {this.state.lessons.length > 0 ? (
+                        this.state.lessons.map((lesson, i) => (
                           <tr key={lesson._id}>
                             <td>{i + 1}</td>
                             <td>{lesson.subject && lesson.subject.code}</td>

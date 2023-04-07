@@ -1,4 +1,3 @@
-import { messageShow } from "./messages";
 // ===============  setting this.state.temporary while typing in the input fields
 function handleChange(e) {
   const temporary = { ...this.state.temporary };
@@ -88,4 +87,49 @@ const validator = (array, temporary) => {
   }
   return isValid;
 };
-export { handleChange, setTemporary, setTemporaryEmpty, generateId, randomSeed, dateFormaterForInput, validator };
+function handleOrder(e, resource, order, ascendantly = "ascendantly") {
+  if (!order) {
+    order = "_id";
+  }
+  let arrayCopy = [...this.props[resource]];
+  let ordered;
+  const propsArray = order.split(".");
+  ordered = arrayCopy.sort((a, b) => {
+    let valueA = a;
+    let valueB = b;
+    for (let i = 0; i < propsArray.length; i++) {
+      valueA = valueA[propsArray[i]];
+    }
+    for (let i = 0; i < propsArray.length; i++) {
+      valueB = valueB[propsArray[i]];
+    }
+    if (ascendantly === "descendantly") {
+      return valueB.localeCompare(valueA);
+    } else {
+      return valueA.localeCompare(valueB);
+    }
+  });
+  this.setState({ [resource]: ordered });
+}
+function handleOrderChange(e, resource) {
+  this.setState({ orderField: e.currentTarget.value });
+  if (this.state.ascendantly) {
+    this.handleOrder(e, resource, e.currentTarget.value, this.state.ascendantly);
+  } else {
+    this.handleOrder(e, resource, e.currentTarget.value);
+  }
+}
+function handleAscendantly(e, resource) {
+  this.setState({ ascendantly: e.currentTarget.value });
+  if (this.state.orderField) {
+    this.handleOrder(e, resource, this.state.orderField, e.target.value);
+  }
+}
+function handleSearch(e, resource) {
+  const searchValue = e.currentTarget.value.toLowerCase();
+  const filtered = this.props[resource].filter((element) => {
+    return element.name.toLowerCase().includes(searchValue);
+  });
+  this.setState({ [resource]: filtered });
+}
+export { handleChange, setTemporary, setTemporaryEmpty, generateId, randomSeed, dateFormaterForInput, validator, handleOrder, handleOrderChange, handleAscendantly, handleSearch };

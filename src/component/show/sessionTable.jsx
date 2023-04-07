@@ -6,7 +6,26 @@ import PopupComponent from "../dashboardComponent/popupComponent";
 // import '../../scss/dashboard.scss';
 import '../../scss/sessionTable.scss';
 import Chart from "../dashboardComponent/chart";
+import { handleOrder, handleOrderChange, handleAscendantly, handleSearch } from "../../helpers/helpersFunctions"
 class SessionTable extends Component {
+  state = {
+    sessions: [],
+  }
+  constructor(props) {
+    super(props)
+    this.handleSearch = handleSearch.bind(this)
+    this.handleOrder = handleOrder.bind(this)
+    this.handleOrderChange = handleOrderChange.bind(this)
+    this.handleAscendantly = handleAscendantly.bind(this)
+  }
+  componentDidMount() {
+    this.setState({ sessions: this.props.sessions });
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.sessions !== prevProps.sessions) {
+      this.setState({ sessions: this.props.sessions });
+    }
+  }
   render() {
     return (
       <>
@@ -23,13 +42,33 @@ class SessionTable extends Component {
                   </button>
                 </Link>
               </div>
+              <div className="tablebar">
+                <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "sessions")} />
+                <div className="dropdownSelect">
+                  <select className="form-select" aria-label="Default select example" onChange={e => this.handleOrderChange(e, "sessions")}>
+                    <option label="Sort By" value="" />
+                    <option label="Name" value="name" />
+                    <option label="lesson" value="lesson.name" />
+                    <option label="subject" value="lesson.subject.code" />
+                    <option label="room" value="room.name" />
+                    <option label="volunteer" value="volunteer.name" />
+                    <option label="start date" value="start" />
+                    <option label="end date" value="end" />
+                    {/* <option label="Approved" value="approved" /> */}
+                  </select>
+                  <select onChange={e => this.handleAscendantly(e, "sessions")} >
+                    <option label="ascendantly" value="ascendantly" />
+                    <option label="descendantly" value="descendantly" />
+                  </select>
+                </div>
+              </div>
               <div className="propabilties">
                 {/* for propabilties ##################
                 ###########################
                  */}
                 {/*  Start */}
-                {this.props.sessions.length > 0 ? (
-                  this.props.sessions.map((session, i) => (
+                {this.state.sessions.length > 0 ? (
+                  this.state.sessions.map((session, i) => (
                     <div key={session._id} className="card rounded overflow-hidden shadow">
                       <div className="row g-0">
                         {/* <!-- Image --> */}
@@ -41,6 +80,7 @@ class SessionTable extends Component {
                           <div className="card-body">
                             {/* <!-- Title --> */}
                             <div className="d-flex justify-content-between mb-2 mb-sm-3">
+                              <h5 className="card-title mb-0"><a>{session && session.name}</a></h5>
                               <h5 className="card-title mb-0"><a>{session.lesson && session.lesson.name}</a></h5>
                               {/* <!-- Wishlist icon --> */}
                               <a href="#"><i className="far fa-heart text-dark"></i></a>
@@ -64,9 +104,9 @@ class SessionTable extends Component {
                             {/* <!-- Content --> */}
                             {/* <!-- Info --> */}
                             <ul className="list-inline mb-2">
+                              <i className="fas fa-signal text-success me-2" >{i + 1}</i>
                               <i className="far fa-clock text-danger me-2">{session.lesson && session.lesson.subject && session.lesson.subject.code}</i>
                               <i className="fas fa-table text-orange me-2">{session.room && session.room.name}</i>
-                              <i className="fas fa-signal text-success me-2" >{i + 1}</i>
                             </ul>
                             {/* <!-- Rating --> */}
                             <ul className="list-inline mt-2">

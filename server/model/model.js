@@ -46,6 +46,7 @@ const roomSchema = new mongoose.Schema({
 
 const sessionSchema = new mongoose.Schema({
   _id: String,
+  name: String,
   subject: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "subjectdb",

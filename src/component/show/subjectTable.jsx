@@ -4,7 +4,27 @@ import { Link } from "react-router-dom";
 import Sidebar from "../sidebar";
 import '../../scss/subjectTable.scss'
 import PopupSubject from "../dashboardComponent/popupComponent";
+import { handleOrder, handleOrderChange, handleAscendantly, handleSearch } from "../../helpers/helpersFunctions"
+
 class SubjectTable extends Component {
+  state = {
+    subjects: [],
+  }
+  constructor(props) {
+    super(props)
+    this.handleSearch = handleSearch.bind(this)
+    this.handleOrder = handleOrder.bind(this)
+    this.handleOrderChange = handleOrderChange.bind(this)
+    this.handleAscendantly = handleAscendantly.bind(this)
+  }
+  componentDidMount() {
+    this.setState({ subjects: this.props.subjects });
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.subjects !== prevProps.subjects) {
+      this.setState({ subjects: this.props.subjects });
+    }
+  }
   render() {
     return (
       <>
@@ -28,13 +48,17 @@ class SubjectTable extends Component {
               </div>
               <div className="table_section">
                 <div className="tablebar">
-                  <input className="searchbar" type="search" placeholder="Search..." />
+                  <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "subjects")} />
                   <div className="dropdownSelect">
-                    <select className="form-select" aria-label="Default select example">
-                      <option selected>Sort By</option>
-                      <option value="1">Name</option>
-                      <option value="2">Date</option>
-                      <option value="3">Approved</option>
+                    <select className="form-select" aria-label="Default select example" onChange={e => this.handleOrderChange(e, "subjects")}>
+                      <option label="Sort By" value="" />
+                      <option label="Code" value="code" />
+                      <option label="Name" value="name" />
+                      <option label="Description" value="description" />
+                    </select>
+                    <select onChange={e => this.handleAscendantly(e, "subjects")} >
+                      <option label="ascendantly" value="ascendantly" />
+                      <option label="descendantly" value="descendantly" />
                     </select>
                   </div>
                 </div>
@@ -53,8 +77,8 @@ class SubjectTable extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.subjects.length > 0 ? (
-                        this.props.subjects.map((subject, i) => (
+                      {this.state.subjects.length > 0 ? (
+                        this.state.subjects.map((subject, i) => (
                           <tr key={subject._id}>
                             <td>{i + 1}</td>
                             <td className="Sname" >{subject.code}</td>

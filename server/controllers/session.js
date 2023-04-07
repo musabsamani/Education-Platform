@@ -9,6 +9,7 @@ exports.create = async (req, res) => {
     }
     const session = new Sessiondb({
       _id: req.body._id,
+      name: req.body.name,
       subject: req.body.subject,
       lesson: req.body.lesson,
       room: req.body.room,
