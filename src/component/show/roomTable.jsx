@@ -3,7 +3,18 @@ import Adminbar from "../adminbar";
 import { Link } from "react-router-dom";
 import Sidebar from "../sidebar";
 class RoomTable extends Component {
+  state = {
+    allRooms: this.props.rooms,
+    rooms: this.props.rooms,
+  }
+  onChange = e => {
+    const searchValue = e.currentTarget.value.toLowerCase();
+    const filteredRooms = this.state.allRooms.filter(room => room.name.toLowerCase().includes(searchValue));
+    this.setState({ rooms: filteredRooms });
+  }
   render() {
+
+    const { rooms, temporary } = this.state
     return (
       <>
         <div className='main'>
@@ -26,7 +37,7 @@ class RoomTable extends Component {
               </div>
               <div className="table_section">
                 <div className="tablebar">
-                  <input className="searchbar" type="search" placeholder="Search..." />
+                  <input className="searchbar" type="search" placeholder="Search..." onChange={this.onChange} />
                   <div className="dropdownSelect">
                     <select className="form-select" aria-label="Default select example">
                       <option selected>Sort By</option>
@@ -49,8 +60,8 @@ class RoomTable extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.rooms.length > 0 ? (
-                        this.props.rooms.map((room, i) => (
+                      {rooms.length > 0 ? (
+                        rooms.map((room, i) => (
                           <tr key={room._id}>
                             <td>{i + 1}</td>
                             <td>{room.name}</td>

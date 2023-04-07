@@ -15,7 +15,9 @@ const { lessonUpload } = require("../middleware/multer/lesson");
  * @method GET /
  */
 
-route.get("/", roomController.find);
+route.get("/", (req, res) => {
+  res.send("server is running !!!");
+});
 // ================ student router ===================;
 // API
 route.get("/api/students", studentController.find);
