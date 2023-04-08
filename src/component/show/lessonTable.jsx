@@ -86,6 +86,9 @@ class LessonTable extends Component {
                             <td>{lesson.subject && lesson.subject.code}</td>
                             <td>{lesson.name}</td>
                             <td>{lesson.content}</td>
+                            {console.log(lesson.file)}
+                            {(lesson.file.includes("pdf")) ? console.log("pdf") : ""}
+                            {(lesson.file.includes("mp4")) ? console.log("mp4") : ""}
                             <td>
                               <Link to={`/updateLesson?id=${lesson._id}`}>
                                 <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(lesson)}>

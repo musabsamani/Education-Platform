@@ -1,4 +1,4 @@
-const { Subjectdb } = require("../model/model");
+const { Subjectdb, Lessondb } = require("../model/model");
 const { messageCRUD } = require("../helpers/messages");
 // create and save new subject
 exports.create = async (req, res) => {
@@ -76,6 +76,8 @@ exports.delete = async (req, res) => {
   try {
     const id = req.params.id;
     const data = await Subjectdb.findByIdAndDelete(id);
+    // const isReferenced = await Lessondb.exists({ subject: id });
+    // console.log(isReferenced);
     if (!data) {
       res.status(404).send(messageCRUD("error", "delete", "subject", id));
     } else {

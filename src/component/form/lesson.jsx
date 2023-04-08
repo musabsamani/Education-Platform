@@ -52,9 +52,6 @@ class Lesson extends Component {
                       <Input type="file" name="file" label="File" />
                     </div>
                     <div className="col-md-5 m-1">
-                      <Input type="file" name="file" label="Video Url" />
-                    </div>
-                    <div className="col-md-5 m-1">
                       <Textarea name="content" label="Content" onChange={this.props.onChange} value={this.props.temporary.content} />
                     </div>
                     {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
