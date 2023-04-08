@@ -6,6 +6,11 @@ import '../../scss/dashboard.scss';
 import Chart from "../dashboardComponent/chart";
 class VolunteerTable extends Component {
   render() {
+
+    let volNo = 0
+    this.props.volunteers.forEach(element => {
+      volNo++;
+    });
     return (
       <>
         <div className='main'>
@@ -22,14 +27,18 @@ class VolunteerTable extends Component {
                 </Link>
               </div>
               <div className="propabilties">
-                <div className="totalLesson">Total Volunteers</div>
+                <div className="totalVolunteer">
+                  <div>Total Volunteers</div>
+                  <h1>{volNo}</h1>
+                </div>
+
               </div>
               <div className="table_section">
                 <div className="tablebar">
                   <input className="searchbar" type="search" placeholder="Search..." />
                   <div className="dropdownSelect">
                     <select className="form-select" aria-label="Default select example">
-                      <option selected>Sort By</option>
+                      <option value='none'>Sort By</option>
                       <option value="1">Name</option>
                       <option value="2">Date</option>
                       <option value="3">Approved</option>

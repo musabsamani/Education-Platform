@@ -52,7 +52,7 @@ class Lesson extends Component {
                       <Input type="file" name="file" label="File" />
                     </div>
                     <div className="col-md-5 m-1">
-                      <Input type="file" name="file" label="Video Url" />
+                      <Input type="file" name="filevid" label="Video Url" />
                     </div>
                     <div className="col-md-5 m-1">
                       <Textarea name="content" label="Content" onChange={this.props.onChange} value={this.props.temporary.content} />
@@ -71,7 +71,7 @@ class Lesson extends Component {
           {/* ############################################## End Main ################################################ */}
           {/* ############################################## Start Footer ################################################ */}
           <footer className="create_bottom">
-            <div className="logo"><a className="navbar-brand" href="#"><AutoStoriesIcon />Unlimited Learning</a></div>
+            <div className="logo"><a className="navbar-brand d-flex align-items-center" href="#"><AutoStoriesIcon />Unlimited Learning</a></div>
             <div>Copyrights ©2023. All rights reserved.</div>
             <div>icons</div>
           </footer>

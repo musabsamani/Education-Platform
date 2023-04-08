@@ -12,13 +12,14 @@
 }
 
 .create_bottom{
+    position: relative;
     background-color: rgb(16, 16, 16);
     color: white;
     display: flex;
     align-items: center;
+    justify-content: space-around;
     height: 60px;
     padding: 16;
-    position: relative;
 
 }
 

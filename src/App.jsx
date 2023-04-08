@@ -35,6 +35,7 @@ import Profile from "./component/show/profile";
 import Calendar from "./component/calendar";
 import Session from "./component/dashboardComponent/session";
 import { message } from "antd";
+import ApexChart from "./component/dashboardComponent/apexchart";
 // import RegistrationForm from "./component/include/registerationTime";
 // import comments from './helpers/comments';
 // =============== this is for axios for POST and PUT methods
@@ -117,11 +118,16 @@ class App extends Component {
               <Route path="dashboard"
                 element={<Dashboard
                   volunteers={this.state.volunteers}
+                  students={this.state.students}
+                  subjects={this.state.subjects}
+                  sessions={this.state.sessions}
                 />}
               />
+
             </Route>
             {/* ########### show ########### */}
             <>
+
               <Route path="/volunteerTable"
                 element={<VolunteerTable
                   volunteers={this.state.volunteers}

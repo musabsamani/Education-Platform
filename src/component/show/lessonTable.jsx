@@ -27,11 +27,6 @@ class LessonTable extends Component {
                   </button>
                 </Link>
               </div>
-              <div className="propabilties">
-                <div className="totalLesson">Total Lessons</div>
-                <div className="totalLesson">Activated Lessons</div>
-                <div className="totalLesson">Pending Lessons</div>
-              </div>
               <div className="table_section">
                 <div className="tablebar">
                   <input className="searchbar" type="search" placeholder="Search..." />
