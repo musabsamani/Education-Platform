@@ -5,12 +5,13 @@ import Adminbar from "../adminbar";
 import Email from '../email';
 import { sendMail } from "../../helpers/crudFunctions";
 import "../../scss/dashboard.scss";
-import ApexChart from './apexchart';
+import ApexChart from './apexchartv';
 import Notify from './notify';
 import SubjectCard from './subjectCards';
 import Propabilities from './propabities';
 import Chart from './chart';
 import Block1 from './block1';
+
 class Dashboard extends Component {
     constructor(props) {
         super(props);
@@ -34,6 +35,7 @@ class Dashboard extends Component {
                                 students={this.props.students}
                                 sessions={this.props.sessions} />
                             <Block1 />
+
                         </div>
 
 

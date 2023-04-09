@@ -1,10 +1,10 @@
 import React, { Component } from 'react';
 import Nofmember from '../include/noOfmember';
+import Chart from "react-apexcharts";
 
-import Chart from 'react-apexcharts';
 
 
-class ApexChart extends Component {
+class ApexChartv extends Component {
     state = {
 
         options: {
@@ -91,73 +91,8 @@ class ApexChart extends Component {
                     break;
             }
         })
-        this.props.students.forEach(element => {
-            const month = new Date(element.time).getMonth();
-            switch (month) {
-                case 0: janCount++;
-                    break;
-                case 1: febCount++;
-                    break;
-                case 2: marCount++;
-                    break;
-                case 3: aprCount++;
-                    break;
-                case 4: mayCount++;
-                    break;
-                case 5: junCount++;
-                    break;
-                case 6: julCount++;
-                    break;
-                case 7: ogtCount++;
-                    break;
-                case 8: sepCount++;
-                    break;
-                case 9: octCount++;
-                    break;
-                case 10: novCount++;
-                    break;
-                case 11: decCount++;
-                    break;
-            }
-        })
-        this.props.sessions.forEach(element => {
-            const month = new Date(element.time).getMonth();
-            switch (month) {
-                case 0: janCount++;
-                    break;
-                case 1: febCount++;
-                    break;
-                case 2: marCount++;
-                    break;
-                case 3: aprCount++;
-                    break;
-                case 4: mayCount++;
-                    break;
-                case 5: junCount++;
-                    break;
-                case 6: julCount++;
-                    break;
-                case 7: ogtCount++;
-                    break;
-                case 8: sepCount++;
-                    break;
-                case 9: octCount++;
-                    break;
-                case 10: novCount++;
-                    break;
-                case 11: decCount++;
-                    break;
-            }
-        })
         let series = [{
             name: 'Volunteer',
-            data: [janCount, febCount, marCount, aprCount, mayCount, junCount, julCount, ogtCount, sepCount, octCount, novCount, decCount]
-        }, {
-            name: 'Student',
-            data: [janCount, febCount, marCount, aprCount, mayCount, junCount, julCount, ogtCount, sepCount, octCount, novCount, decCount]
-
-        }, {
-            name: 'Session',
             data: [janCount, febCount, marCount, aprCount, mayCount, junCount, julCount, ogtCount, sepCount, octCount, novCount, decCount]
         }]
 
@@ -172,4 +107,5 @@ class ApexChart extends Component {
     }
 }
 
-export default ApexChart;
+export default ApexChartv;
+

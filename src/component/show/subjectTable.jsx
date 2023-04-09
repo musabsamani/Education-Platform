@@ -56,7 +56,7 @@ class SubjectTable extends Component {
                       <option label="Name" value="name" />
                       <option label="Description" value="description" />
                     </select>
-                    <select onChange={e => this.handleAscendantly(e, "subjects")} >
+                    <select className="form-select" onChange={e => this.handleAscendantly(e, "subjects")} >
                       <option label="ascendantly" value="ascendantly" />
                       <option label="descendantly" value="descendantly" />
                     </select>

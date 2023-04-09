@@ -6,6 +6,7 @@ import { sessionAPI } from "../../helpers/apiEndpoints";
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import '../../scss/submitionForm.scss';
 import Subnav from "./subnav";
+import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
 
 class Lesson extends Component {
   state = { filee: {} }
@@ -48,11 +49,14 @@ class Lesson extends Component {
                     <div className="col-md-5 m-1">
                       <Input type="text" name="name" label="Lesson Name" onChange={this.props.onChange} value={this.props.temporary.name} />
                     </div>
-                    <div className="col-md-5 m-1">
-                      <Input type="file" name="file" label="File" />
+                    <div className="col-md-5 m-1 d-flex align-items-end">
+                      <Input type="file" name="file" label="File Pdf" /><span><button type="button" className="btn btn-outline-dark ms-2">Dark <AddCircleOutlineIcon /> </button></span>
                     </div>
                     <div className="col-md-5 m-1">
                       <Input type="file" name="filevid" label="Video Url" />
+                    </div>
+                    <div className="col-md-5 m-1">
+                      <Input type="file" name="fileaud" label="Audio Url" />
                     </div>
                     <div className="col-md-5 m-1">
                       <Textarea name="content" label="Content" onChange={this.props.onChange} value={this.props.temporary.content} />

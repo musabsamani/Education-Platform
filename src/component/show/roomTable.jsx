@@ -52,7 +52,7 @@ class RoomTable extends Component {
                       <option label="Sort By" value="" />
                       <option label="Name" value="name" />
                     </select>
-                    <select onChange={e => this.handleAscendantly(e, "rooms")} >
+                    <select className="form-select" onChange={e => this.handleAscendantly(e, "rooms")} >
                       <option label="ascendantly" value="ascendantly" />
                       <option label="descendantly" value="descendantly" />
                     </select>

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import ApexChart from './apexchart';
+import ApexChartv from './apexchartv';
+import ApexCharts from './apexcharts';
+import ApexChartss from './apexchartss';
+
 
 class Chart extends Component {
   state = {}
@@ -18,10 +21,9 @@ class Chart extends Component {
             <div id="ChartPayout" min-height='315px'>
               <div className="card-body" style={{ position: 'relative' }}>
                 {/* <!-- Apex chart --> */}
-                <ApexChart
-                  volunteers={this.props.volunteers}
-                  students={this.props.students}
-                  sessions={this.props.sessions} />
+                <ApexChartv volunteers={this.props.volunteers} />
+                <ApexCharts students={this.props.students} />
+                <ApexChartss sessions={this.props.sessions} />
               </div>
             </div>
           </div>

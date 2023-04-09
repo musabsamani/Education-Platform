@@ -53,7 +53,7 @@ class LessonTable extends Component {
                       <option label="content" value="content" />
                       <option label="name" value="name" />
                     </select>
-                    <select onChange={e => this.handleAscendantly(e, "lessons")} >
+                    <select className="form-select" onChange={e => this.handleAscendantly(e, "lessons")} >
                       <option label="ascendantly" value="ascendantly" />
                       <option label="descendantly" value="descendantly" />
                     </select>
@@ -83,8 +83,8 @@ class LessonTable extends Component {
                             <td>{lesson.name}</td>
                             <td>{lesson.content}</td>
                             {console.log(lesson.file)}
-                            {(lesson.file.includes("pdf")) ? console.log("pdf") : ""}
-                            {(lesson.file.includes("mp4")) ? console.log("mp4") : ""}
+                            {(lesson.file && lesson.file.includes("pdf")) ? console.log("pdf") : ""}
+                            {(lesson.file && lesson.file.includes("mp4")) ? console.log("mp4") : ""}
                             <td>{lesson && <PopupComponent lesson={lesson} />}</td>
                             <td>
                               <Link to={`/updateLesson?id=${lesson._id}`}>

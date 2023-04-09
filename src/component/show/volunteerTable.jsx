@@ -28,10 +28,6 @@ class VolunteerTable extends Component {
 
   render() {
 
-    let volNo = 0
-    this.props.volunteers.forEach(element => {
-      volNo++;
-    });
     return (
       <>
         <div className='main'>
@@ -47,13 +43,6 @@ class VolunteerTable extends Component {
                   </button>
                 </Link>
               </div>
-              <div className="propabilties">
-                <div className="totalVolunteer">
-                  <div>Total Volunteers</div>
-                  <h1>{volNo}</h1>
-                </div>
-
-              </div>
               <div className="table_section">
                 <div className="tablebar">
                   <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "volunteers")} />
@@ -67,7 +56,7 @@ class VolunteerTable extends Component {
                       <option label="phone" value="phone" />
                       <option label="email" value="email" />
                     </select>
-                    <select onChange={e => this.handleAscendantly(e, "volunteers")} >
+                    <select className="form-select" onChange={e => this.handleAscendantly(e, "volunteers")} >
                       <option label="ascendantly" value="ascendantly" />
                       <option label="descendantly" value="descendantly" />
                     </select>

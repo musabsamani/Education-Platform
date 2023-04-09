@@ -20,8 +20,10 @@ class Block1 extends Component {
                             <div className="d-flex justify-content-between position-relative">
                                 <div className="d-sm-flex">
                                     {/* <!-- Avatar --> */}
-                                    <div className="avatar avatar-md flex-shrink-0">
-                                        <img className="avatar-img rounded-circle" src="src/assets/img/Adobe Photoshop CC.svg" alt="avatar" />
+                                    <div className="">
+                                        <picture>
+                                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" className="rounded-circle" width='50px' alt="Avatar" />
+                                        </picture>
                                     </div>
                                     {/* <!-- Info --> */}
                                     <div className="ms-0 ms-sm-2 mt-2 mt-sm-0">
@@ -39,14 +41,14 @@ class Block1 extends Component {
                             <div className="d-flex justify-content-between position-relative">
                                 <div className="d-sm-flex">
                                     {/* <!-- Avatar --> */}
-                                    <div className="avatar avatar-md flex-shrink-0">
-                                        <div className="avatar-img rounded-circle bg-purple bg-opacity-10">
-                                            <span className="text-purple position-absolute top-50 start-50 translate-middle fw-bold">DB</span>
-                                        </div>
+                                    <div className="">
+                                        <picture>
+                                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp" className="rounded-circle" width='50px' alt="Avatar" />
+                                        </picture>
                                     </div>
                                     {/* <!-- Info --> */}
                                     <div className="ms-0 ms-sm-2 mt-2 mt-sm-0">
-                                        <h6 className="mb-0"><a href="#" className="stretched-link">Dennis Barrett</a></h6>
+                                        <h6 className="mb-0"><a href="#" className="stretched-link">David Korria</a></h6>
                                         <p className="mb-0">Comment from Billy Vasquez on ticket #659</p>
                                         <span className="small">8 hour ago</span>
                                     </div>
@@ -61,14 +63,14 @@ class Block1 extends Component {
                             <div className="d-flex justify-content-between position-relative">
                                 <div className="d-sm-flex">
                                     {/* <!-- Avatar --> */}
-                                    <div className="avatar avatar-md flex-shrink-0">
-                                        <div className="avatar-img rounded-circle bg-orange bg-opacity-10">
-                                            <span className="text-orange position-absolute top-50 start-50 translate-middle fw-bold">WB</span>
-                                        </div>
+                                    <div className="">
+                                        <picture>
+                                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/1.webp" className="rounded-circle" width='50px' alt="Avatar" />
+                                        </picture>
                                     </div>
                                     {/* <!-- Info --> */}
                                     <div className="ms-0 ms-sm-2 mt-2 mt-sm-0">
-                                        <h6 className="mb-0"><a href="#" className="stretched-link">Dennis Barrett</a></h6>
+                                        <h6 className="mb-0"><a href="#" className="stretched-link">Alonso Dekhia</a></h6>
                                         <p className="mb-0"><b>Webestica</b> assign you a new ticket for <b>Eduport theme</b></p>
                                         <span className="small">5 hour ago</span>
                                     </div>
@@ -83,12 +85,14 @@ class Block1 extends Component {
                             <div className="d-flex justify-content-between position-relative">
                                 <div className="d-sm-flex">
                                     {/* <!-- Avatar --> */}
-                                    <div className="avatar avatar-md flex-shrink-0">
-                                        <img className="avatar-img rounded-circle" src="" alt="avatar" />
+                                    <div className="">
+                                        <picture>
+                                            <img src="https://mdbcdn.b-cdn.net/img/new/avatars/8.webp" className="rounded-circle" width='50px' alt="Avatar" />
+                                        </picture>
                                     </div>
                                     {/* <!-- Info --> */}
                                     <div className="ms-0 ms-sm-2 mt-2 mt-sm-0">
-                                        <h6 className="mb-0"><a href="#" className="stretched-link">Dennis Barrett</a></h6>
+                                        <h6 className="mb-0"><a href="#" className="stretched-link">Angolo Konte</a></h6>
                                         <p className="mb-0">Thanks for contact us with your issues.</p>
                                         <span className="small">9 hour ago</span>
                                     </div>
