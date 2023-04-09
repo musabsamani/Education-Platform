@@ -21,7 +21,7 @@ async function preFindOneAndDeleteMiddleware(collectionToCheck, GeneralRuledb, p
 }
 async function subjectPreFindOneAndDeleteMiddleware(collectionArray, GeneralRuledb, id, next) {
   try {
-    let cascade = GeneralRuledb.find({ name: "cascade" });
+    let cascade = await GeneralRuledb.find({ name: "cascade" });
     console.log(cascade);
     cascade = null;
     // console.log(cascade);
