@@ -36,10 +36,21 @@ class PopupComponent extends Component {
                         <Modal.Title>{lesson.name && lesson.name}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-                        {lesson.file}
-                        <hr />
-                        {lesson && <PDFUploader file={lesson.file} />}
-                        {lesson && <Videohandler file={lesson.file} />}
+
+                        <div className='d-flex flex-column justify-content-around' width='100%'>
+                            <div className="col g-4 mb-4">
+                                {lesson && <Videohandler file={lesson.file} />}
+                            </div>
+
+                            <div className="col g-4 mb-4">
+                                {lesson && <PDFUploader file={lesson.file} />}
+                            </div>
+
+                            <div className="col g-4 mb-4">
+                                {/* {lesson && <Videohandler file={lesson.file} />} */}
+                            </div>
+                            <hr />
+                        </div>
                     </Modal.Body>
                 </Modal>
             </>

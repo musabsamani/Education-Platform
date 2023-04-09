@@ -6,7 +6,7 @@ class ApexCharts extends Component {
         options: {
             chart: {
                 type: 'bar',
-                height: 350
+                height: 150
             },
             plotOptions: {
                 bar: {
@@ -57,7 +57,7 @@ class ApexCharts extends Component {
         let octCount = 90
         let novCount = 100
         let decCount = 5
-
+        console.log(this.props.students)
         this.props.students.forEach(element => {
             const month = new Date(element.time).getMonth();
             switch (month) {

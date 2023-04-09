@@ -73,7 +73,7 @@ class SessionTable extends Component {
                       <div className="row g-0">
                         {/* <!-- Image --> */}
                         <div className="col">
-                          <img className="session_image" src="src/assets/71 brilliant Photoshop tutorials to boost your skills.jpg" alt="card image" />
+                          <img className="session_image" src="src/assets/img/71 brilliant Photoshop tutorials to boost your skills.jpg" alt="card image" />
                         </div>
                         {/* <!-- Card body --> */}
                         <div className="col-md-8">
