@@ -45,7 +45,7 @@ exports.find = async (req, res) => {
       if (req.body.order != null && req.body.order !== "") {
         order = req.body.order;
       }
-      const data = await Subjectdb.find(searchOptions).sort({ name: order });
+      const data = await Subjectdb.find(searchOptions);
       res.send(messageCRUD("success", "read", "subject", data));
     } catch (err) {
       console.log(err.message);
@@ -75,9 +75,7 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     const id = req.params.id;
-    const data = await Subjectdb.findByIdAndDelete(id);
-    // const isReferenced = await Lessondb.exists({ subject: id });
-    // console.log(isReferenced);
+    let data = await Subjectdb.findOneAndDelete({ _id: id });
     if (!data) {
       res.status(404).send(messageCRUD("error", "delete", "subject", id));
     } else {
@@ -85,6 +83,10 @@ exports.delete = async (req, res) => {
     }
   } catch (err) {
     console.log(err.message);
-    res.status(500).send(messageCRUD("error", "delete", "subject", err.message));
+    if (err.message === "cannot delete this document it has refrencing") {
+      res.status(500).send(messageCRUD("warning", "delete", "subject", err.message));
+    } else {
+      res.status(500).send(messageCRUD("error", "delete", "subject", err.message));
+    }
   }
 };

@@ -88,7 +88,7 @@ class VolunteerTable extends Component {
                               <Link to="/profile">{volunteer.name}</Link>
                             </td>
                             <td>{volunteer.age}</td>
-                            <td>{volunteer.subject}</td>
+                            <td>{volunteer.subject && volunteer.subject.code}</td>
                             <td>{volunteer.address}</td>
                             <td>{volunteer.phone}</td>
                             <td>{volunteer.email}</td>

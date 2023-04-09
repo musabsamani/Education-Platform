@@ -1,11 +1,12 @@
 const express = require("express");
 const route = express.Router();
-const studentController = require("../controllers/students");
+const studentController = require("../controllers/student");
 const volunteerController = require("../controllers/volunteer");
 const lessonsController = require("../controllers/lesson");
 const subjectController = require("../controllers/subject");
 const roomController = require("../controllers/room");
 const sessionController = require("../controllers/session");
+const generalRuleController = require("../controllers/generalRule");
 const emailController = require("../controllers/notification/email");
 const { profileUpload } = require("../middleware/multer/profileCover");
 const { lessonUpload } = require("../middleware/multer/lesson");
@@ -55,6 +56,12 @@ route.post("/api/sessions", sessionController.create);
 route.get("/api/sessions", sessionController.find);
 route.put("/api/sessions/:id", sessionController.update);
 route.delete("/api/sessions/:id", sessionController.delete);
+// =============== generalRule router ==================
+// API
+route.post("/api/generalRules", generalRuleController.create);
+route.get("/api/generalRules", generalRuleController.find);
+route.put("/api/generalRules/:id", generalRuleController.update);
+route.delete("/api/generalRules", generalRuleController.delete);
 // =============== email router ==================
 // API
 route.post("/api/email", emailController.send);

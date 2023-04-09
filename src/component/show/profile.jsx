@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import "../../scss/profile.scss"
-// import profile_img from "./download.png";
 
 const ImgUpload = ({
   src
@@ -35,7 +34,7 @@ class Profile extends Component {
               <h5>phone : {temporary.phone}</h5>
               <h5>age : {temporary.age}</h5>
               <h5>email : {temporary.email}</h5>
-              <h5>subject : {temporary.subject}</h5>
+              <h5>subject : {temporary.subject && temporary.subject.code}</h5>
               <h5>address : {temporary.address}</h5>
               <h5>time : {temporary.time}</h5>
             </div>

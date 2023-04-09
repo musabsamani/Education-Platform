@@ -1,7 +1,6 @@
 function populateFind(data, resource) {
   if (resource == "session") {
     return data
-      .populate("subject")
       .populate("room")
       .populate("volunteer")
       .populate({
@@ -14,7 +13,6 @@ function populateFind(data, resource) {
 }
 async function populateSave(data, resource) {
   if (resource == "session") {
-    await data.populate("subject");
     await data.populate("volunteer");
     await data.populate("room");
     await data.populate({

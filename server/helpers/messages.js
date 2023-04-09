@@ -1,6 +1,6 @@
 function messageCRUD(type, operation, resource, data = "") {
   let content;
-  if (type == "success") {
+  if (type === "success") {
     let details = "";
     content = `${resource} ${operation}d successfully`;
     if (operation === "read") {
@@ -16,7 +16,7 @@ function messageCRUD(type, operation, resource, data = "") {
       data,
     };
   }
-  if (type == "error") {
+  if (type === "error" || type === "warning") {
     content = `error ${operation.slice(0, -1)}ing ${resource}`;
     if (operation === "read") {
       content = `error ${operation}ing ${resource}`;

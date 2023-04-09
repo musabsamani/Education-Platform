@@ -11,7 +11,6 @@ exports.create = async (req, res) => {
     const volunteer = new Volunteerdb({
       _id: req.body._id,
       name: req.body.name,
-      time: req.body.time,
       age: req.body.age,
       email: req.body.email,
       address: req.body.address,
@@ -20,6 +19,7 @@ exports.create = async (req, res) => {
       profileCover: req.fileName,
     });
     const data = await volunteer.save();
+    await data.populate("subject");
     res.send(messageCRUD("success", "create", "volunteer", data));
   } catch (err) {
     if (req.fileName) {
@@ -34,7 +34,7 @@ exports.find = async (req, res) => {
   if (req.query.id) {
     const id = req.query.id;
     try {
-      const data = await Volunteerdb.findById(id);
+      const data = await Volunteerdb.findById(id).populate("subject");
       if (!data) {
         res.status(404).send(messageCRUD("error", "read", "volunteer", id));
       } else {
@@ -54,7 +54,7 @@ exports.find = async (req, res) => {
       if (req.body.order != null && req.body.order !== "") {
         order = req.body.order;
       }
-      const data = await Volunteerdb.find(searchOptions).sort({ name: order });
+      const data = await Volunteerdb.find(searchOptions).populate("subject");
       res.send(messageCRUD("success", "read", "volunteer", data));
     } catch (err) {
       if (req.fileName) {
@@ -77,7 +77,7 @@ exports.update = async (req, res) => {
     }
     req.fileName ? (req.body["profileCover"] = req.fileName) : "";
     const old = await Volunteerdb.findById(req.body._id);
-    const data = await Volunteerdb.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false });
+    const data = await Volunteerdb.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false }).populate("subject");
     if (!data) {
       if (req.fileName) {
         removeFile(req.fileName);
@@ -101,7 +101,7 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   const id = req.params.id;
   try {
-    const data = await Volunteerdb.findByIdAndDelete(id);
+    const data = await Volunteerdb.findOneAndDelete({ _id: id }).populate("subject");
     if (!data) {
       res.status(404).send(messageCRUD("error", "delete", "volunteer", id));
     } else {

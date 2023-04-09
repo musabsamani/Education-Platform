@@ -87,13 +87,17 @@ class App extends Component {
     } catch (err) {
       console.log(err.message);
       console.log("Error fetching data from the server on componentDidMount");
-      // this.messageShow("error", "Error fetching data from the server on componentDidMount", err.message)
+      // this.setState({ message: err.message });
     }
   }
   componentDidUpdate() {
     if (Object.keys(this.state.message).length > 0) {
-      if (this.state.message.operation == "delete") {
-        this.setState({ message: {} })
+      let operation = this.state.message.operation
+      let condition = operation === "delete" || operation === "create" || operation === "update"
+      if (condition) {
+        // his is for testing only 
+        // console.log(this.state.message)
+        // this.setState({ message: {} })
       } else {
         if (confirm(`${this.state.message.type}\n${this.state.message.content}`)) {
           this.setState({ message: {} })

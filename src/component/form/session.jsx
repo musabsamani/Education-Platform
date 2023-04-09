@@ -5,9 +5,40 @@ import { validator } from "../../helpers/helpersFunctions"
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import '../../scss/submitionForm.scss';
 import Subnav from "./subnav";
-import ReactDatePicker from "react-datepicker";
 
 class sessionForm extends Component {
+  state = { lessons: [] }
+  /*  -- @musabobada 
+      The function below is responsible for dynamically populating 
+      the options of a lesson select field based on the currently 
+      selected value of a subject select field, which serves as a reference:
+  */
+  initialLessonPopulating = () => {
+    let input = document.querySelector('select[name=""]')
+    if (input) {
+      let id = input.value
+      const filtered = this.props.lessons.filter((element) => element.subject._id === id);
+      this.setState({ lessons: filtered })
+    } else {
+      this.setState({ lessons: this.props.lessons });
+    }
+  }
+  componentDidMount() {
+    this.initialLessonPopulating()
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.lessons !== prevProps.lessons) {
+      this.initialLessonPopulating()
+    }
+  }
+  handleSubjectChange = (e) => {
+    const id = e.target.value
+    e.currentTarget.name = "subject";
+    this.props.onChange(e)
+    e.currentTarget.name = "";
+    const filtered = this.props.lessons.filter((element) => element.subject._id === id);
+    this.setState({ lessons: filtered })
+  }
   handleSubmit = (e, array) => {
     e.preventDefault()
     const form = new FormData(e.target)
@@ -29,6 +60,7 @@ class sessionForm extends Component {
     }
   }
   render() {
+    const { temporary } = this.props
     return (
       <>
         <div className="create_session_page">
@@ -52,14 +84,14 @@ class sessionForm extends Component {
                 {/* ########## */}
                 <div className="container mt-5 ">
                   <form className="col g-3 d-flex-column justify-content-center" onSubmit={e => this.handleSubmit(e, this.props.sessions)}>
-                    <Input onChange={this.props.onChange} type="text" name="name" label="Name" value={this.props.temporary.name} />
-                    <Select onChange={this.props.onChange} name="subject" resourceArray={this.props.subjects} resourceProperty="code" value={this.props.temporary.subject} />
-                    <Select onChange={this.props.onChange} name="lesson" resourceArray={this.props.lessons} resourceProperty="name" value={this.props.temporary.lesson} />
-                    <Select onChange={this.props.onChange} name="room" resourceArray={this.props.rooms} resourceProperty="name" value={this.props.temporary.room} />
-                    <Select onChange={this.props.onChange} name="volunteer" resourceArray={this.props.volunteers} resourceProperty="name" value={this.props.temporary.volunteer} />
-                    <Input onChange={this.props.onChange} type="datetime-local" name="start" label="Start" value={this.props.temporary.start} />
-                    <Input onChange={this.props.onChange} type="datetime-local" name="end" label="End" value={this.props.temporary.end} />
-                    {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
+                    <Input onChange={this.props.onChange} type="text" name="name" label="Name" value={temporary.name} />
+                    <Select onChange={this.handleSubjectChange} name="hidden subject" resourceArray={this.props.subjects} resourceProperty="code" value={temporary.subject} />
+                    <Select onChange={this.props.onChange} name="lesson" resourceArray={this.state.lessons} resourceProperty="name" value={temporary.lesson} />
+                    <Select onChange={this.props.onChange} name="room" resourceArray={this.props.rooms} resourceProperty="name" value={temporary.room} />
+                    <Select onChange={this.props.onChange} name="volunteer" resourceArray={this.props.volunteers} resourceProperty="name" value={temporary.volunteer} />
+                    <Input onChange={this.props.onChange} type="datetime-local" name="start" label="Start" value={temporary.start} />
+                    <Input onChange={this.props.onChange} type="datetime-local" name="end" label="End" value={temporary.end} />
+                    {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={temporary._id} />}
                     <div className="s col mt-2">
                       <button className="btn btn-primary m-1" type="submit">
                         {this.props.name == "add" ? "Submit" : "Save"}

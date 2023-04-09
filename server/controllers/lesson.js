@@ -51,7 +51,7 @@ exports.find = async (req, res) => {
       if (req.body.order != null && req.body.order !== "") {
         order = req.body.order;
       }
-      const data = await Lessondb.find(searchOptions).sort({ name: order }).populate("subject");
+      const data = await Lessondb.find(searchOptions).populate("subject");
       res.send(messageCRUD("success", "read", "lesson", data));
     } catch (err) {
       console.log(err.message);
@@ -95,7 +95,7 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   const id = req.params.id;
   try {
-    const data = await Lessondb.findByIdAndDelete(id);
+    const data = await Lessondb.findOneAndDelete({ _id: id }).populate("subject");
     if (!data) {
       res.status(404).send(messageCRUD("error", "delete", "lesson", id));
     } else {

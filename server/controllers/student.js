@@ -45,7 +45,7 @@ exports.find = async (req, res) => {
       if (req.body.order != null && req.body.order !== "") {
         order = req.body.order;
       }
-      const data = await Studentdb.find(searchOptions).sort({ name: order });
+      const data = await Studentdb.find(searchOptions);
       res.send(messageCRUD("success", "read", "student", data));
     } catch (err) {
       res.status(500).send(messageCRUD("error", "read", "student", err.message));
@@ -74,7 +74,7 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     const id = req.params.id;
-    const data = await Studentdb.findByIdAndDelete(id);
+    const data = await Studentdb.findOneAndDelete({ _id: id });
     if (!data) {
       res.status(404).send(messageCRUD("error", "delete", "student", id));
     } else {

@@ -4,14 +4,14 @@ import format from "date-fns/format";
 import parse from "date-fns/parse";
 import startOfWeek from "date-fns/startOfWeek";
 import getDay from "date-fns/getDay";
-import "react-big-calendar/lib/css/react-big-calendar.css"
-import ReactDatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { enUS, fr } from 'date-fns/esm/locale'
 import Adminbar from "./adminbar";
 import Sidebar from "./sidebar";
-const locales = { en: enUS, fr: fr }
+import "react-big-calendar/lib/css/react-big-calendar.css"
+// import ReactDatePicker from "react-datepicker";
+// import "react-datepicker/dist/react-datepicker.css";
 
+const locales = { en: enUS, fr: fr }
 const localizer = dateFnsLocalizer({
     format,
     parse,
@@ -25,26 +25,23 @@ function CAlendar(props) {
     const events = []
     props.sessions.forEach(session => {
         let temp = {
-            title: session.lesson.name,
-            // event date is in for of string in form YYYY-MM-DD
+            title: session.lesson ? session.lesson.name : "",
             start: new Date(session.start),
             end: new Date(session.end)
         }
         events.push(temp)
     })
     const [newEvent, setNewEvent] = useState({ title: '', time: '' })
-    const [allEvents, setAllEvents] = useState(events)
-
-    const addeventhandler = () => {
-        setAllEvents([...allEvents, newEvent])
-        console.log(setAllEvents)
-        console.log(newEvent)
-
-    }
-    const isWeekday = (date) => {
-        const day = getDay(date);
-        return day !== 0 && day !== 6;
-    };
+    // const [allEvents, setAllEvents] = useState(events)
+    // const addeventhandler = () => {
+    //     setAllEvents([...allEvents, newEvent])
+    //     console.log(setAllEvents)
+    //     console.log(newEvent)
+    // }
+    // const isWeekday = (date) => {
+    //     const day = getDay(date);
+    //     return day !== 0 && day !== 6;
+    // };
 
     return (
         <>
@@ -54,10 +51,10 @@ function CAlendar(props) {
                     <Adminbar />
                     <div className="center">
                         <div className="calendar text-center">
-                            <h2>Add New Event</h2>
+                            {/* <h2>Add New Event</h2> */}
                             <input type="text" placeholder="Add Title" className="form-control"
                                 value={newEvent.title} onChange={(e) => setNewEvent({ ...newEvent, title: e.target.value, })} />
-                            <div className="ca container ">
+                            {/* <div className="ca container ">
                                 <ReactDatePicker
                                     className="form-control"
                                     isClearable
@@ -75,7 +72,7 @@ function CAlendar(props) {
                                     form='submitDate'
                                 />
                                 <button id='submitDate' className="btn btn-success" onClick={(e) => addeventhandler(e)}>Add Event</button>
-                            </div>
+                            </div> */}
                             <Calendar
                                 className="calendarTable"
                                 localizer={localizer}

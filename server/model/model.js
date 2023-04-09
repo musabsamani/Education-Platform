@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const { uploadBasePath, profileCoverBasePath, lessonBasePath } = require("../helpers/fileSystemPathes");
+const { preFindOneAndDeleteMiddleware, subjectPreFindOneAndDeleteMiddleware } = require("../middleware/mongoose/delete");
 const studentSchema = new mongoose.Schema({
   _id: String,
   name: String,
@@ -14,15 +14,22 @@ const volunteerSchema = new mongoose.Schema({
   email: String,
   address: String,
   phone: String,
-  subject: String,
   profileCover: String,
-  // time: {
-  //   type: Date,
-  //   Immutable: true,
-  //   default: () => Date.now(),
-  // },
-  time: String,
+  subject: {
+    type: mongoose.SchemaTypes.ObjectId,
+    ref: "subjectdb",
+  },
+  time: {
+    type: Date,
+    Immutable: true,
+    default: () => Date.now(),
+  },
 });
+const roomSchema = new mongoose.Schema({
+  _id: String,
+  name: String,
+});
+
 const subjectSchema = new mongoose.Schema({
   _id: String,
   code: String,
@@ -39,18 +46,9 @@ const lessonSchema = new mongoose.Schema({
   content: String,
   file: String,
 });
-const roomSchema = new mongoose.Schema({
-  _id: String,
-  name: String,
-});
-
 const sessionSchema = new mongoose.Schema({
   _id: String,
   name: String,
-  subject: {
-    type: mongoose.SchemaTypes.ObjectId,
-    ref: "subjectdb",
-  },
   lesson: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "lessonsdb",
@@ -66,43 +64,30 @@ const sessionSchema = new mongoose.Schema({
   start: String,
   end: String,
 });
-
-volunteerSchema.virtual("imagePath").get(function () {
-  if (this.profileCover) {
-    return `${uploadBasePath}/${profileCoverBasePath}/${this.profileCover}`;
-  }
-  return "";
+const generalRuleSchema = new mongoose.Schema({
+  _id: String,
+  name: String,
+  content: String,
+  description: String,
 });
-lessonSchema.virtual("filePath").get(function () {
-  if (this.file) {
-    return `${uploadBasePath}/${lessonBasePath}/${this.file}`;
-  }
-  return "";
+subjectSchema.pre("findOneAndDelete", function (next) {
+  subjectPreFindOneAndDeleteMiddleware([Volunteerdb, Lessondb, Sessiondb], GeneralRuledb, this._conditions._id, next);
 });
-// volunteerSchema.pre("findByIdAndDelete",function(){
-
-// })
+roomSchema.pre("findOneAndDelete", function (next) {
+  preFindOneAndDeleteMiddleware(Sessiondb, "room", GeneralRuledb, this._conditions._id, next);
+});
+volunteerSchema.pre("findOneAndDelete", function (next) {
+  preFindOneAndDeleteMiddleware(Sessiondb, "volunteer", GeneralRuledb, this._conditions._id, next);
+});
+lessonSchema.pre("findOneAndDelete", function (next) {
+  preFindOneAndDeleteMiddleware(Sessiondb, "lesson", GeneralRuledb, this._conditions._id, next);
+});
 const Studentdb = mongoose.model("studentdb", studentSchema);
 const Volunteerdb = mongoose.model("volunteerdb", volunteerSchema);
 const Lessondb = mongoose.model("lessonsdb", lessonSchema);
-const Subjectdb = mongoose.model("subjectdb", subjectSchema);
 const Roomdb = mongoose.model("roomdb", roomSchema);
 const Sessiondb = mongoose.model("sessiondb", sessionSchema);
-// subjectSchema.pre("findByIdAndDelete", function () {
-//   Lessondb.find({ subject: this.id }, (err, subjects) => {
-//     if (err) {
-//       next(err);
-//     } else if (subjects.length > 0) {
-//       nextThursday(new Error("this subject has lesson delete lesson first"));
-//     } else {
-//       next();
-//     }
-//   });
-// });
-// lessonSchema.pre("findByIdAndDelete",function(){
+const Subjectdb = mongoose.model("subjectdb", subjectSchema);
+const GeneralRuledb = mongoose.model("generalRuledb", generalRuleSchema);
 
-// })
-// roomSchema.pre("findByIdAndDelete",function(){
-
-// })
-module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb, Roomdb, Sessiondb };
+module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb, Roomdb, Sessiondb, GeneralRuledb };
