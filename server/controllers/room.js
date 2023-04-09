@@ -43,14 +43,14 @@ exports.find = async (req, res) => {
       if (req.body.order != null && req.body.order !== "") {
         order = req.body.order;
       }
-      let data = await Roomdb.find(searchOptions).sort({ name: order });
+      let data = await Roomdb.find(searchOptions);
       // if (req.body.lt != null && req.body.lt !== "") {
       //   data.lt("or", req.body.lt);
       // }
       // if (req.body.gt != null && req.body.gt !== "") {
       //   data.gt("or", req.body.gt);
       // }
-      // const data = await Roomdb.find(searchOptions).sort({ name: order }).lt("or", lt);
+      // const data = await Roomdb.find(searchOptions).lt("or", lt);
 
       res.send(messageCRUD("success", "read", "room", data));
     } catch (err) {
@@ -81,7 +81,7 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   try {
     const id = req.params.id;
-    const data = await Roomdb.findByIdAndDelete(id);
+    const data = await Roomdb.findOneAndDelete({ _id: id });
     if (!data) {
       res.status(404).send(messageCRUD("error", "delete", "room", id));
     } else {

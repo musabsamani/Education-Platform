@@ -10,7 +10,6 @@ exports.create = async (req, res) => {
     const session = new Sessiondb({
       _id: req.body._id,
       name: req.body.name,
-      subject: req.body.subject,
       lesson: req.body.lesson,
       room: req.body.room,
       volunteer: req.body.volunteer,
@@ -74,7 +73,7 @@ exports.update = async (req, res) => {
 exports.delete = async (req, res) => {
   const id = req.params.id;
   try {
-    const data = await populateFind(Sessiondb.findByIdAndDelete(id), "session");
+    const data = await populateFind(Sessiondb.findOneAndDelete({ _id: id }), "session");
     if (!data) {
       res.status(404).send(messageCRUD("error", "delete", "session", id));
     } else {

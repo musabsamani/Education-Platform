@@ -1,9 +1,8 @@
 const multer = require("multer");
 const path = require("path");
 const fs = require("fs");
-const root = path.dirname(path.dirname(path.dirname(__dirname)));
 const { uploadBasePath, lessonBasePath } = require("../../helpers/fileSystemPathes");
-const lessonUploadPath = path.join(root, uploadBasePath, lessonBasePath);
+const lessonUploadPath = path.join(uploadBasePath, lessonBasePath);
 // let fileMimeTypes = ["application/pdf"];
 if (!fs.existsSync(lessonUploadPath)) {
   fs.mkdirSync(lessonUploadPath);
