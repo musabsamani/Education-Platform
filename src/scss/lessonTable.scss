@@ -5,6 +5,16 @@
     // width: 100%;
     justify-content: space-around;
     margin: 30px 0;
+    .totalVolnteer{
+        display: flex;
+        flex-direction: column;
+        padding: 10px 20px;
+        text-align: center;
+        border-radius: 6px;
+        border: 2px solid rgba(1, 64, 136, 0.61);
+        width: 350px;
+        height: 150px;
+    }
     .totalLesson{
         display: flex;
         justify-content: center;

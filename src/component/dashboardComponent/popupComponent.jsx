@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import PDFUploader from '../../viewPdf';
-import Videohandler from './videohandler';
+import Videohandler from '../include/videohandler';
+
 class PopupComponent extends Component {
     state = {
         values: [true],

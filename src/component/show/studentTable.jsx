@@ -52,7 +52,7 @@ class StudentTable extends Component {
                       <option label="phone" value="phone" />
                       <option label="name" value="name" />
                     </select>
-                    <select onChange={e => this.handleAscendantly(e, "students")} >
+                    <select className="form-select" onChange={e => this.handleAscendantly(e, "students")} >
                       <option label="ascendantly" value="ascendantly" />
                       <option label="descendantly" value="descendantly" />
                     </select>

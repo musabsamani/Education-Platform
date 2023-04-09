@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import Sidebar from "../sidebar";
 import Adminbar from "../adminbar";
-
+import PopupComponent from "../dashboardComponent/popupComponent";
 import "../../scss/lessonTable.scss"
 import Select from "../include/_select";
 import { handleOrder, handleOrderChange, handleAscendantly, handleSearch } from "../../helpers/helpersFunctions"
@@ -43,11 +43,6 @@ class LessonTable extends Component {
                   </button>
                 </Link>
               </div>
-              <div className="propabilties">
-                <div className="totalLesson">Total Lessons</div>
-                <div className="totalLesson">Activated Lessons</div>
-                <div className="totalLesson">Pending Lessons</div>
-              </div>
               <div className="table_section">
                 <div className="tablebar">
                   <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "lessons")} />
@@ -58,7 +53,7 @@ class LessonTable extends Component {
                       <option label="content" value="content" />
                       <option label="name" value="name" />
                     </select>
-                    <select onChange={e => this.handleAscendantly(e, "lessons")} >
+                    <select className="form-select" onChange={e => this.handleAscendantly(e, "lessons")} >
                       <option label="ascendantly" value="ascendantly" />
                       <option label="descendantly" value="descendantly" />
                     </select>
@@ -75,6 +70,7 @@ class LessonTable extends Component {
                         <th scope="col">Subject</th>
                         <th scope="col">Name</th>
                         <th scope="col">Content</th>
+                        <th scope="col"></th>
                         <th scope="col">Action</th>
                       </tr>
                     </thead>
@@ -86,8 +82,8 @@ class LessonTable extends Component {
                             <td>{lesson.subject && lesson.subject.code}</td>
                             <td>{lesson.name}</td>
                             <td>{lesson.content}</td>
-                            {/* {console.log(lesson.file)} */}
-                            {/* {(lesson.file && lesson.file.includes("pdf")) ? console.log("pdf") : ""}
+                            {/* {console.log(lesson.file)}
+                            {(lesson.file && lesson.file.includes("pdf")) ? console.log("pdf") : ""}
                             {(lesson.file && lesson.file.includes("mp4")) ? console.log("mp4") : ""} */}
                             <td>
                               <Link to={`/updateLesson?id=${lesson._id}`}>

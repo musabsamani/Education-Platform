@@ -56,7 +56,7 @@ class SessionTable extends Component {
                     <option label="end date" value="end" />
                     {/* <option label="Approved" value="approved" /> */}
                   </select>
-                  <select onChange={e => this.handleAscendantly(e, "sessions")} >
+                  <select className="form-select" onChange={e => this.handleAscendantly(e, "sessions")} >
                     <option label="ascendantly" value="ascendantly" />
                     <option label="descendantly" value="descendantly" />
                   </select>

@@ -3,7 +3,9 @@ import "bootstrap/dist/css/bootstrap.css";
 import React, { Component } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-import "./scss/App.scss";
+// import "./App.css";
+
+
 import PDFUploader from "./viewPdf";
 // ====== helpers files/
 import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, roomAPI, sessionAPI } from "./helpers/apiEndpoints";
@@ -34,6 +36,8 @@ import SessionTable from "./component/show/sessionTable";
 import Profile from "./component/show/profile";
 import Calendar from "./component/calendar";
 import Session from "./component/dashboardComponent/session";
+import { message } from "antd";
+import ApexChart from "./component/dashboardComponent/apexchartv";
 // import RegistrationForm from "./component/include/registerationTime";
 // import comments from './helpers/comments';
 // =============== this is for axios for POST and PUT methods
@@ -120,11 +124,16 @@ class App extends Component {
               <Route path="dashboard"
                 element={<Dashboard
                   volunteers={this.state.volunteers}
+                  students={this.state.students}
+                  subjects={this.state.subjects}
+                  sessions={this.state.sessions}
                 />}
               />
+
             </Route>
             {/* ########### show ########### */}
             <>
+
               <Route path="/volunteerTable"
                 element={<VolunteerTable
                   volunteers={this.state.volunteers}

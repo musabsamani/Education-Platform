@@ -31,12 +31,16 @@
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
+                
+            }
+            .dropdownSelect{
+                display: flex;
+                select{
+                    margin: 2px;
+                }
             }
 
         }
         
     }
 }
-
-
-
