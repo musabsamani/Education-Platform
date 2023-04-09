@@ -2,7 +2,27 @@ import React, { Component } from "react";
 import Adminbar from "../adminbar";
 import { Link } from "react-router-dom";
 import Sidebar from "../sidebar";
+import Chart from "../dashboardComponent/chart";
+import { handleOrder, handleOrderChange, handleAscendantly, handleSearch } from "../../helpers/helpersFunctions"
 class RoomTable extends Component {
+  state = {
+    rooms: [],
+  }
+  constructor(props) {
+    super(props)
+    this.handleSearch = handleSearch.bind(this)
+    this.handleOrder = handleOrder.bind(this)
+    this.handleOrderChange = handleOrderChange.bind(this)
+    this.handleAscendantly = handleAscendantly.bind(this)
+  }
+  componentDidMount() {
+    this.setState({ rooms: this.props.rooms });
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.rooms !== prevProps.rooms) {
+      this.setState({ rooms: this.props.rooms });
+    }
+  }
   render() {
     return (
       <>
@@ -26,13 +46,15 @@ class RoomTable extends Component {
               </div>
               <div className="table_section">
                 <div className="tablebar">
-                  <input className="searchbar" type="search" placeholder="Search..." />
+                  <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "rooms")} />
                   <div className="dropdownSelect">
-                    <select className="form-select" aria-label="Default select example">
-                      <option selected>Sort By</option>
-                      <option value="1">Name</option>
-                      <option value="2">Date</option>
-                      <option value="3">Approved</option>
+                    <select className="form-select" aria-label="Default select example" onChange={e => this.handleOrderChange(e, "rooms")}>
+                      <option label="Sort By" value="" />
+                      <option label="Name" value="name" />
+                    </select>
+                    <select onChange={e => this.handleAscendantly(e, "rooms")} >
+                      <option label="ascendantly" value="ascendantly" />
+                      <option label="descendantly" value="descendantly" />
                     </select>
                   </div>
                 </div>
@@ -49,8 +71,8 @@ class RoomTable extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.rooms.length > 0 ? (
-                        this.props.rooms.map((room, i) => (
+                      {this.state.rooms.length > 0 ? (
+                        this.state.rooms.map((room, i) => (
                           <tr key={room._id}>
                             <td>{i + 1}</td>
                             <td>{room.name}</td>

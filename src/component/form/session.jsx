@@ -15,10 +15,6 @@ class sessionForm extends Component {
     for (let [key, value] of form) {
       data[key] = value
     }
-    console.log(typeof data["start"])
-    console.log(data["start"])
-    console.log(data["end"])
-    console.log(data)
     this.props.setTemporary(data)
     let isValid = validator(array, this.props.temporary)
     if (isValid === true) {
@@ -56,6 +52,7 @@ class sessionForm extends Component {
                 {/* ########## */}
                 <div className="container mt-5 ">
                   <form className="col g-3 d-flex-column justify-content-center" onSubmit={e => this.handleSubmit(e, this.props.sessions)}>
+                    <Input onChange={this.props.onChange} type="text" name="name" label="Name" value={this.props.temporary.name} />
                     <Select onChange={this.props.onChange} name="subject" resourceArray={this.props.subjects} resourceProperty="code" value={this.props.temporary.subject} />
                     <Select onChange={this.props.onChange} name="lesson" resourceArray={this.props.lessons} resourceProperty="name" value={this.props.temporary.lesson} />
                     <Select onChange={this.props.onChange} name="room" resourceArray={this.props.rooms} resourceProperty="name" value={this.props.temporary.room} />

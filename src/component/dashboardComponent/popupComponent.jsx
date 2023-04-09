@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
 import PDFUploader from '../../viewPdf';
-// import Videohandler from './videohandler';
+import Videohandler from '../include/videohandler';
+
 class PopupComponent extends Component {
     state = {
         values: [true],
@@ -38,7 +39,7 @@ class PopupComponent extends Component {
                         {lesson.file}
                         <hr />
                         {lesson && <PDFUploader file={lesson.file} />}
-                        {/* {lesson && <Videohandler file={lesson.file} />} */}
+                        {lesson && <Videohandler file={lesson.file} />}
                     </Modal.Body>
                 </Modal>
             </>

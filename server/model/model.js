@@ -46,6 +46,7 @@ const roomSchema = new mongoose.Schema({
 
 const sessionSchema = new mongoose.Schema({
   _id: String,
+  name: String,
   subject: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "subjectdb",
@@ -78,11 +79,30 @@ lessonSchema.virtual("filePath").get(function () {
   }
   return "";
 });
+// volunteerSchema.pre("findByIdAndDelete",function(){
 
+// })
 const Studentdb = mongoose.model("studentdb", studentSchema);
 const Volunteerdb = mongoose.model("volunteerdb", volunteerSchema);
 const Lessondb = mongoose.model("lessonsdb", lessonSchema);
 const Subjectdb = mongoose.model("subjectdb", subjectSchema);
 const Roomdb = mongoose.model("roomdb", roomSchema);
 const Sessiondb = mongoose.model("sessiondb", sessionSchema);
+// subjectSchema.pre("findByIdAndDelete", function () {
+//   Lessondb.find({ subject: this.id }, (err, subjects) => {
+//     if (err) {
+//       next(err);
+//     } else if (subjects.length > 0) {
+//       nextThursday(new Error("this subject has lesson delete lesson first"));
+//     } else {
+//       next();
+//     }
+//   });
+// });
+// lessonSchema.pre("findByIdAndDelete",function(){
+
+// })
+// roomSchema.pre("findByIdAndDelete",function(){
+
+// })
 module.exports = { Studentdb, Volunteerdb, Lessondb, Subjectdb, Roomdb, Sessiondb };

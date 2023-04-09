@@ -4,7 +4,28 @@ import Adminbar from "../adminbar";
 import { Link } from "react-router-dom";
 import '../../scss/dashboard.scss';
 import Chart from "../dashboardComponent/chart";
+import { handleOrder, handleOrderChange, handleAscendantly, handleSearch } from "../../helpers/helpersFunctions"
 class VolunteerTable extends Component {
+  state = {
+    volunteers: [],
+  }
+  constructor(props) {
+    super(props)
+    this.handleSearch = handleSearch.bind(this)
+    this.handleOrder = handleOrder.bind(this)
+    this.handleOrderChange = handleOrderChange.bind(this)
+    this.handleAscendantly = handleAscendantly.bind(this)
+  }
+  componentDidMount() {
+    this.setState({ volunteers: this.props.volunteers });
+  }
+  componentDidUpdate(prevProps) {
+    if (this.props.volunteers !== prevProps.volunteers) {
+      this.setState({ volunteers: this.props.volunteers });
+    }
+  }
+
+
   render() {
 
     let volNo = 0
@@ -35,13 +56,20 @@ class VolunteerTable extends Component {
               </div>
               <div className="table_section">
                 <div className="tablebar">
-                  <input className="searchbar" type="search" placeholder="Search..." />
+                  <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "volunteers")} />
                   <div className="dropdownSelect">
-                    <select className="form-select" aria-label="Default select example">
-                      <option value='none'>Sort By</option>
-                      <option value="1">Name</option>
-                      <option value="2">Date</option>
-                      <option value="3">Approved</option>
+                    <select className="form-select" aria-label="Default select example" onChange={e => this.handleOrderChange(e, "volunteers")}>
+                      <option label="Sort By" value="" />
+                      <option label="name" value="name" />
+                      <option label="age" value="age" />
+                      <option label="subject" value="subject" />
+                      <option label="address" value="address" />
+                      <option label="phone" value="phone" />
+                      <option label="email" value="email" />
+                    </select>
+                    <select onChange={e => this.handleAscendantly(e, "volunteers")} >
+                      <option label="ascendantly" value="ascendantly" />
+                      <option label="descendantly" value="descendantly" />
                     </select>
                   </div>
                 </div>
@@ -63,8 +91,8 @@ class VolunteerTable extends Component {
                       </tr>
                     </thead>
                     <tbody>
-                      {this.props.volunteers.length > 0 ? (
-                        this.props.volunteers.map((volunteer, i) => (
+                      {this.state.volunteers.length > 0 ? (
+                        this.state.volunteers.map((volunteer, i) => (
                           <tr key={volunteer._id}>
                             <td>{i + 1}</td>
                             <td onClick={() => this.props.setTemporary(volunteer)}>

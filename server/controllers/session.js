@@ -9,6 +9,7 @@ exports.create = async (req, res) => {
     }
     const session = new Sessiondb({
       _id: req.body._id,
+      name: req.body.name,
       subject: req.body.subject,
       lesson: req.body.lesson,
       room: req.body.room,
@@ -46,7 +47,7 @@ exports.find = async (req, res) => {
       if (req.body.order != null && req.body.order !== "") {
         order = req.body.order;
       }
-      const data = await populateFind(Sessiondb.find(), "session");
+      const data = await populateFind(Sessiondb.find({}), "session").sort({ start: order });
       res.send(messageCRUD("success", "read", "session", data));
     } catch (err) {
       res.status(500).send(messageCRUD("error", "read", "session", err.message));
