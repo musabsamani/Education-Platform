@@ -6,6 +6,11 @@ const studentSchema = new mongoose.Schema({
   age: String,
   address: String,
   phone: String,
+  time: {
+    type: Date,
+    Immutable: true,
+    default: () => Date.now(),
+  },
 });
 const volunteerSchema = new mongoose.Schema({
   _id: String,
@@ -63,6 +68,11 @@ const sessionSchema = new mongoose.Schema({
   },
   start: String,
   end: String,
+  time: {
+    type: Date,
+    Immutable: true,
+    default: () => Date.now(),
+  },
 });
 const generalRuleSchema = new mongoose.Schema({
   _id: String,
