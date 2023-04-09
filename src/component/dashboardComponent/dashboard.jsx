@@ -37,6 +37,11 @@ class Dashboard extends Component {
                             <Block1 />
 
                         </div>
+                        <div className="msg">
+                            <Email
+                                sendMail={this.sendMail}
+                            />
+                        </div >
 
 
                         {/* <div className="col-12">
@@ -63,11 +68,7 @@ class Dashboard extends Component {
 }
 
 export default Dashboard;
-// <div className="msg">
-//     <Email
-//         sendMail={this.sendMail}
-//     />
-// </div >
+// 
 // <div className="video-player">
 //     <div id="player-youtube" data-plyr-provider="youtube" data-plyr-embed-id="Uh9643c2P6k"></div>
 // </div>
