@@ -1,17 +1,20 @@
 import React, { Component } from 'react';
 import Chart from "react-apexcharts";
-class Apexchartss extends Component {
+
+
+
+class VolunteerChart extends Component {
     state = {
 
         options: {
             chart: {
                 type: 'bar',
-                height: 350
+                height: 150
             },
             plotOptions: {
                 bar: {
                     horizontal: false,
-                    columnWidth: '88%',
+                    columnWidth: '66%',
                     endingShape: 'rounded'
                 },
             },
@@ -44,7 +47,7 @@ class Apexchartss extends Component {
         },
     }
 
-    vchart = () => {
+    calc = () => {
         let janCount = 60
         let febCount = 45
         var marCount = 0
@@ -58,7 +61,7 @@ class Apexchartss extends Component {
         let novCount = 100
         let decCount = 5
 
-        this.props.sessions.forEach(element => {
+        this.props.volunteers.forEach(element => {
             const month = new Date(element.time).getMonth();
             switch (month) {
                 case 0: janCount++;
@@ -88,7 +91,7 @@ class Apexchartss extends Component {
             }
         })
         let series = [{
-            name: 'Sessions',
+            name: 'Volunteer',
             data: [janCount, febCount, marCount, aprCount, mayCount, junCount, julCount, ogtCount, sepCount, octCount, novCount, decCount]
         }]
 
@@ -97,10 +100,11 @@ class Apexchartss extends Component {
     render() {
         return (
             <>
-                <Chart options={this.state.options} series={this.vchart()} type="bar" />
+                <Chart options={this.state.options} series={this.calc()} type="bar" />
             </>
         );
     }
 }
 
-export default Apexchartss;
+export default VolunteerChart;
+

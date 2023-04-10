@@ -4,7 +4,7 @@ import Form from 'react-bootstrap/Form';
 import Modal from 'react-bootstrap/Modal';
 import EmailIcon from '@mui/icons-material/Email';
 
-class Email extends Component {
+class Demail extends Component {
     state = {
         show: false,
     }
@@ -35,6 +35,7 @@ class Email extends Component {
                                     name="name"
                                     placeholder="Mohammed"
                                     autoFocus
+                                    value={this.props.Dmsg && this.props.Dmsg.volunteer.name}
                                 />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -44,6 +45,7 @@ class Email extends Component {
                                     name="email"
                                     placeholder="name@example.com"
                                     autoFocus
+                                    value={this.props.Dmsg && this.props.Dmsg.volunteer.email}
                                 />
                             </Form.Group>
                             <Form.Group className="mb-3" controlId="exampleForm.ControlInput1">
@@ -53,6 +55,7 @@ class Email extends Component {
                                     name="subject"
                                     placeholder="subject"
                                     autoFocus
+                                    value="Session Alert !!"
                                 />
                             </Form.Group>
                             <Form.Group
@@ -60,7 +63,17 @@ class Email extends Component {
                                 controlId="exampleForm.ControlTextarea1"
                             >
                                 <Form.Label>The Message</Form.Label>
-                                <Form.Control as="textarea" rows={3} name="message" />
+                                <Form.Control as="textarea"
+                                    rows={3}
+                                    name="message"
+                                    value={`You have session with information :\n
+                                    Lesson Name : ${this.props.Dmsg.lesson.name} \n 
+                                    Room : ${this.props.Dmsg.room.name} \n 
+                                    Start Date Time : ${this.props.Dmsg.start} \n 
+                                    End Date Time : ${this.props.Dmsg.end} \n 
+                                                   
+                                    ` }
+                                />
                             </Form.Group>
                             <Form.Group>
                                 <Button variant="secondary" onClick={this.handleClose}>
@@ -80,4 +93,4 @@ class Email extends Component {
         )
     }
 }
-export default Email;
+export default Demail;

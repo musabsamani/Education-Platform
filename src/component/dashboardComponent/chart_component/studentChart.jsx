@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Chart from "react-apexcharts";
-class ApexCharts extends Component {
+class StudentChart extends Component {
     state = {
 
         options: {
@@ -11,7 +11,7 @@ class ApexCharts extends Component {
             plotOptions: {
                 bar: {
                     horizontal: false,
-                    columnWidth: '88%',
+                    columnWidth: '66%',
                     endingShape: 'rounded'
                 },
             },
@@ -44,7 +44,7 @@ class ApexCharts extends Component {
         },
     }
 
-    schart = () => {
+    calc = () => {
         let janCount = 60
         let febCount = 45
         var marCount = 0
@@ -97,10 +97,10 @@ class ApexCharts extends Component {
     render() {
         return (
             <>
-                <Chart options={this.state.options} series={this.schart()} type="bar" />
+                <Chart options={this.state.options} series={this.calc()} type="bar" />
             </>
         );
     }
 }
 
-export default ApexCharts;
+export default StudentChart;

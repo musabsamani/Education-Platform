@@ -18,9 +18,9 @@ const Adminbar = () => {
                     <input type="search" placeholder='search...' /><SearchIcon />
                 </div>
                 <div className="icons">
-                    <button><SettingsIcon /></button>
-                    <button ><EmailIcon /></button>
-                    <button><ChatIcon /></button>
+                    <SettingsIcon />
+                    {/* <EmailIcon /> */}
+                    <ChatIcon />
                     <div className='userphoto'>
                         <img src="https://cdn.pixabay.com/photo/2021/08/11/16/06/mountain-6538890_960_720.jpg" alt='user' />
                     </div>
