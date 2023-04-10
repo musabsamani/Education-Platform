@@ -18,6 +18,7 @@ import Home from "./component/home";
 import Dashboard from "./component/dashboardComponent/dashboard";
 import Login from "./component/login";
 import Email from "./component/email";
+import Demail from "./component/Demail";
 // ====== components/Form/
 import StudentForm from "./component/form/student";
 import VolunteerForm from "./component/form/volunteer";
@@ -197,6 +198,7 @@ class App extends Component {
                     onDelete={this.deleteElement}
                     setTemporary={this.setTemporary}
                     setTemporaryEmpty={this.setTemporaryEmpty}
+                    sendMail={this.sendMail}
                   />
                 }
               />
@@ -228,6 +230,11 @@ class App extends Component {
             <>
               <Route path="/email"
                 element={<Email
+                  sendMail={this.sendMail}
+                />}
+              />
+              <Route path="/Demail"
+                element={<Demail
                   sendMail={this.sendMail}
                 />}
               />

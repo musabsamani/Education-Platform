@@ -13,8 +13,28 @@ class SessionTable extends Component {
     sessions: [],
   }
   handleNotify = e => {
-    <Demail Dmsg={e} />
+    console.log(e);
+
   }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   constructor(props) {
     super(props)
     this.handleSearch = handleSearch.bind(this)
@@ -125,7 +145,7 @@ class SessionTable extends Component {
                               {session.lesson && <PopupComponent lesson={session.lesson} />}
                             </div>
                             <div className="notify me-2">
-                              <button type="button" className="btn btn-success" onClick={this.handleNotify(session)}>Success</button>
+                              <button type='button' className="btn btn-success" onClick={() => <Demail Dmsg={session} open={true} />}>Send Notify</button>
                             </div>
                           </div>
                         </div>
