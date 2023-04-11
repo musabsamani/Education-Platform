@@ -1,17 +1,17 @@
 import React, { Component } from 'react';
 import Chart from "react-apexcharts";
-class ApexCharts extends Component {
+class SessionChart extends Component {
     state = {
 
         options: {
             chart: {
                 type: 'bar',
-                height: 350
+                height: 150
             },
             plotOptions: {
                 bar: {
                     horizontal: false,
-                    columnWidth: '88%',
+                    columnWidth: '66%',
                     endingShape: 'rounded'
                 },
             },
@@ -44,7 +44,7 @@ class ApexCharts extends Component {
         },
     }
 
-    schart = () => {
+    calc = () => {
         let janCount = 60
         let febCount = 45
         var marCount = 0
@@ -58,7 +58,7 @@ class ApexCharts extends Component {
         let novCount = 100
         let decCount = 5
 
-        this.props.students.forEach(element => {
+        this.props.sessions.forEach(element => {
             const month = new Date(element.time).getMonth();
             switch (month) {
                 case 0: janCount++;
@@ -88,7 +88,7 @@ class ApexCharts extends Component {
             }
         })
         let series = [{
-            name: 'Students',
+            name: 'Sessions',
             data: [janCount, febCount, marCount, aprCount, mayCount, junCount, julCount, ogtCount, sepCount, octCount, novCount, decCount]
         }]
 
@@ -97,10 +97,10 @@ class ApexCharts extends Component {
     render() {
         return (
             <>
-                <Chart options={this.state.options} series={this.schart()} type="bar" />
+                <Chart options={this.state.options} series={this.calc()} type="bar" />
             </>
         );
     }
 }
 
-export default ApexCharts;
+export default SessionChart;

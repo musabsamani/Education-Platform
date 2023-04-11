@@ -8,6 +8,7 @@
         margin: 10px;
         width: 800px;
         min-height: 200px;
+        position: relative;
         .col{
             max-width: 250px;
             .session_image{
@@ -15,6 +16,18 @@
                 height: 100%;
             }
         }
-    
+        .card-body{
+            position: relative;
+            .contentShow{
+                position: absolute;
+                right: 10px;
+                top:100px;
+            }
+            .notify{
+                position: absolute;
+                right: 10px;
+                top: 200px;
+            }
+        }
     }
 }

@@ -5,7 +5,7 @@ class Block1 extends Component {
     render() {
         return (
             <>
-                <div className="col-xxl-4">
+                <div className="col-xxl-4 ">
                     <div className="card shadow h-100">
                         {/* <!-- Card header --> */}
                         <div className="card-header border-bottom d-flex justify-content-between align-items-center p-4">
@@ -102,7 +102,7 @@ class Block1 extends Component {
                         </div>
                         {/* <!-- Card body END --> */}
                     </div>
-                </div>
+                </div >
             </>
         );
     }

@@ -13,6 +13,10 @@ const Propabilities = (props) => {
     props.subjects.forEach(element => {
         subNo++;
     });
+    let sessNo = 0
+    props.sessions.forEach(element => {
+        sessNo++;
+    });
     return (
         <>
             <div className="row g-4 mb-4">
@@ -68,7 +72,7 @@ const Propabilities = (props) => {
                             {/* <!-- Digit --> */}
                             <div>
                                 <div className="d-flex">
-                                    <h2 className="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="845" data-purecounter-delay="200" data-purecounter-duration="0">44</h2>
+                                    <h2 className="purecounter mb-0 fw-bold" data-purecounter-start="0" data-purecounter-end="845" data-purecounter-delay="200" data-purecounter-duration="0">{sessNo}</h2>
                                 </div>
                                 <span className="mb-0 h6 fw-light">Compeleted Lessons</span>
                             </div>

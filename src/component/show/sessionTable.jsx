@@ -7,10 +7,34 @@ import PopupComponent from "../dashboardComponent/popupComponent";
 import '../../scss/sessionTable.scss';
 import Chart from "../dashboardComponent/chart";
 import { handleOrder, handleOrderChange, handleAscending, handleSearch } from "../../helpers/helpersFunctions"
+import Demail from "../Demail";
 class SessionTable extends Component {
   state = {
     sessions: [],
   }
+  handleNotify = e => {
+    console.log(e);
+
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   constructor(props) {
     super(props)
     this.handleSearch = handleSearch.bind(this)
@@ -73,15 +97,16 @@ class SessionTable extends Component {
                       <div className="row g-0">
                         {/* <!-- Image --> */}
                         <div className="col">
-                          <img className="session_image" src="src/assets/71 brilliant Photoshop tutorials to boost your skills.jpg" alt="card image" />
+                          <picture >
+                            <img className="session_image" src="src/assets/img/71 brilliant Photoshop tutorials to boost your skills.jpg" alt="card image" />
+                          </picture>
                         </div>
                         {/* <!-- Card body --> */}
                         <div className="col-md-8">
                           <div className="card-body">
                             {/* <!-- Title --> */}
                             <div className="d-flex justify-content-between mb-2 mb-sm-3">
-                              <h5 className="card-title mb-0"><a>{session && session.name}</a></h5>
-                              <h5 className="card-title mb-0"><a>{session.lesson && session.lesson.name}</a></h5>
+                              <h5 className="card-title fas fa-signal mb-0"> Session No : <a className="text-danger">{i + 1}</a></h5>
                               {/* <!-- Wishlist icon --> */}
                               <a href="#"><i className="far fa-heart text-dark"></i></a>
                               <div>
@@ -104,20 +129,24 @@ class SessionTable extends Component {
                             {/* <!-- Content --> */}
                             {/* <!-- Info --> */}
                             <ul className="list-inline mb-2">
-                              <i className="fas fa-signal text-success me-2" >{i + 1}</i>
-                              <i className="far fa-clock text-danger me-2">{session.lesson && session.lesson.subject && session.lesson.subject.code}</i>
-                              <i className="fas fa-table text-orange me-2">{session.room && session.room.name}</i>
+                              <i className="fas fa-signal me-2">Name Of Lesson : <span className="text-success">{session.lesson && session.lesson.name}</span></i>
+                              <i className="far fa-clock me-2">Code : <span className="text-danger">{session.lesson && session.lesson.subject && session.lesson.subject.code}</span></i>
+
                             </ul>
                             {/* <!-- Rating --> */}
-                            <ul className="list-inline mt-2">
+                            <ul className="list-inline mt-2" width="300px">
+                              <li className="item me-0 small mb-1"><i className="fas fa-star text-info">Room :</i> {session.room && session.room.name}</li>
                               <li className="item me-0 small mb-1"><i className="fas fa-star text-info">Volunteer :</i> {session.volunteer && session.volunteer.name}</li>
                               <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">Start Date</i> {`${session.start.split("T")[0]}  ${session.start.split("T")[1]}`}</li>
                               <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">End Date</i> {`${session.end.split("T")[0]}  ${session.end.split("T")[1]}`}</li>
-                              <li className="list-inline-item ms-2 text-dark">{session.lesson && <PopupComponent lesson={session.lesson} />}</li>
-                              <li className="list-inline-item me-0 small">
-
-                              </li>
+                              <li className="list-inline-item me-0 small"></li>
                             </ul>
+                            <div className="contentShow">
+                              {session.lesson && <PopupComponent lesson={session.lesson} />}
+                            </div>
+                            <div className="notify me-2">
+                              <button type='button' className="btn btn-success" onClick={() => <Demail Dmsg={session} open={true} />}>Send Notify</button>
+                            </div>
                           </div>
                         </div>
                       </div>

@@ -10,6 +10,8 @@ import DashboardIcon from '@mui/icons-material/Dashboard';
 import ClassIcon from '@mui/icons-material/Class';
 import LocalLibraryIcon from '@mui/icons-material/LocalLibrary';
 import AutoStoriesIcon from '@mui/icons-material/AutoStories';
+// import Email from './email';
+
 
 import "../scss/sidebar.scss"
 
@@ -77,6 +79,13 @@ const Sidebar = () => {
                                 <LogoutIcon />
                             </NavLink>
                         </li>
+                        {/* <li>
+                            <div className="msg">
+                                <Email
+                                    sendMail={this.sendMail}
+                                />
+                            </div >
+                        </li> */}
                     </ul>
                 </div>
             </div>

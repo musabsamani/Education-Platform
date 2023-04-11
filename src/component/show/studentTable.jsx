@@ -31,15 +31,12 @@ class StudentTable extends Component {
             <Adminbar />
             <div className='content_area'>
               <div className="_topContent">
-                <h1>Volunteers</h1>
+                <h1>Students</h1>
                 <Link to="/addStudent">
                   <button className="btn btn-primary m-3" onClick={() => this.props.setTemporaryEmpty()}>
                     Add Student
                   </button>
                 </Link>
-              </div>
-              <div className="propabilties">
-                <div className="totalLesson">Total Students</div>
               </div>
               <div className="table_section">
                 <div className="tablebar">

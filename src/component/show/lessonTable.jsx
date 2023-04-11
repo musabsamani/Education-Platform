@@ -85,8 +85,8 @@ class LessonTable extends Component {
                             {/* 
                             {console.log(lesson.file)}
                             {(lesson.file && lesson.file.includes("pdf")) ? console.log("pdf") : ""}
-                            {(lesson.file && lesson.file.includes("mp4")) ? console.log("mp4") : ""} */
-                            }
+                            {(lesson.file && lesson.file.includes("mp4")) ? console.log("mp4") : ""} */}
+                            <td>{lesson && <PopupComponent lesson={lesson} />}</td>
                             <td>
                               <Link to={`/updateLesson?id=${lesson._id}`}>
                                 <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(lesson)}>

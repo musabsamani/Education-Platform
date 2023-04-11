@@ -13,6 +13,7 @@ import Home from "./component/home";
 import Dashboard from "./component/dashboardComponent/dashboard";
 import Login from "./component/login";
 import Email from "./component/email";
+import Demail from "./component/Demail";
 // ====== components/Form/
 import StudentForm from "./component/form/student";
 import VolunteerForm from "./component/form/volunteer";
@@ -31,8 +32,6 @@ import SessionTable from "./component/show/sessionTable";
 import Profile from "./component/show/profile";
 import Calendar from "./component/calendar";
 import Session from "./component/dashboardComponent/session";
-import ApexChart from "./component/dashboardComponent/apexchartv";
-// import RegistrationForm from "./component/include/registerationTime";
 // import comments from './helpers/comments';
 // =============== this is for axios for POST and PUT methods
 // ?? its so important
@@ -154,6 +153,7 @@ class App extends Component {
                     onDelete={this.deleteElement}
                     setTemporary={this.setTemporary}
                     setTemporaryEmpty={this.setTemporaryEmpty}
+                    sendMail={this.sendMail}
                   />
                 }
               />
@@ -185,6 +185,11 @@ class App extends Component {
             <>
               <Route path="/email"
                 element={<Email
+                  sendMail={this.sendMail}
+                />}
+              />
+              <Route path="/Demail"
+                element={<Demail
                   sendMail={this.sendMail}
                 />}
               />
@@ -324,8 +329,3 @@ class App extends Component {
   }
 }
 export default App;
-
-
-
-
-// setTemporaryEmpty={this.setTemporaryEmpty}
