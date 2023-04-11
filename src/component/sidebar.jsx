@@ -42,7 +42,7 @@ const Sidebar = () => {
                         </li>
                         <li>
                             <NavLink to="/roomTable" >
-                                <ClassIcon /><span>rooms</span>
+                                <ClassIcon /><span>Rooms</span>
                             </NavLink>
                         </li>
                         <li>

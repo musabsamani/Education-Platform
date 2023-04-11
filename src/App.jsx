@@ -153,7 +153,7 @@ class App extends Component {
                     onDelete={this.deleteElement}
                     setTemporary={this.setTemporary}
                     setTemporaryEmpty={this.setTemporaryEmpty}
-                    sendMail={this.sendMail}
+                    sessionNotify={this.sessionNotify}
                   />
                 }
               />

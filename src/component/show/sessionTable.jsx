@@ -12,29 +12,9 @@ class SessionTable extends Component {
   state = {
     sessions: [],
   }
-  handleNotify = e => {
-    console.log(e);
-
+  sessionNotify = (e, session) => {
+    this.props.sessionNotify(session)
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   constructor(props) {
     super(props)
     this.handleSearch = handleSearch.bind(this)
@@ -66,105 +46,107 @@ class SessionTable extends Component {
                   </button>
                 </Link>
               </div>
-              <div className="tablebar">
-                <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "sessions", ["name", "lesson.name", "lesson.subject.code", "room.name", "volunteer.name", "start", "end"])} />
-                <div className="dropdownSelect">
-                  <select className="form-select" aria-label="Default select example" onChange={e => this.handleOrderChange(e, "sessions")}>
-                    <option label="Sort By" value="" />
-                    <option label="Name" value="name" />
-                    <option label="lesson" value="lesson.name" />
-                    <option label="subject" value="lesson.subject.code" />
-                    <option label="room" value="room.name" />
-                    <option label="volunteer" value="volunteer.name" />
-                    <option label="start date" value="start" />
-                    <option label="end date" value="end" />
-                    {/* <option label="Approved" value="approved" /> */}
-                  </select>
-                  <select className="form-select" onChange={e => this.handleAscending(e, "sessions")} >
-                    <option label="ascending" value="ascending" />
-                    <option label="descending" value="descending" />
-                  </select>
+              <div className="table_section">
+                <div className="tablebar">
+                  <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "sessions", ["name", "lesson.name", "lesson.subject.code", "room.name", "volunteer.name", "start", "end"])} />
+                  <div className="dropdownSelect">
+                    <select className="form-select" aria-label="Default select example" onChange={e => this.handleOrderChange(e, "sessions")}>
+                      <option label="Sort By" value="" />
+                      <option label="Name" value="name" />
+                      <option label="lesson" value="lesson.name" />
+                      <option label="subject" value="lesson.subject.code" />
+                      <option label="room" value="room.name" />
+                      <option label="volunteer" value="volunteer.name" />
+                      <option label="start date" value="start" />
+                      <option label="end date" value="end" />
+                      {/* <option label="Approved" value="approved" /> */}
+                    </select>
+                    <select className="form-select" onChange={e => this.handleAscending(e, "sessions")} >
+                      <option label="ascending" value="ascending" />
+                      <option label="descending" value="descending" />
+                    </select>
+                  </div>
                 </div>
-              </div>
-              <div className="propabilties">
-                {/* for propabilties ##################
+                <div className="propabilties">
+                  {/* for propabilties ##################
                 ###########################
                  */}
-                {/*  Start */}
-                {this.state.sessions.length > 0 ? (
-                  this.state.sessions.map((session, i) => (
-                    <div key={session._id} className="card rounded overflow-hidden shadow">
-                      <div className="row g-0">
-                        {/* <!-- Image --> */}
-                        <div className="col">
-                          <picture >
-                            <img className="session_image" src="src/assets/img/71 brilliant Photoshop tutorials to boost your skills.jpg" alt="card image" />
-                          </picture>
-                        </div>
-                        {/* <!-- Card body --> */}
-                        <div className="col-md-8">
-                          <div className="card-body">
-                            {/* <!-- Title --> */}
-                            <div className="d-flex justify-content-between mb-2 mb-sm-3">
-                              <h5 className="card-title fas fa-signal mb-0"> Session No : <a className="text-danger">{i + 1}</a></h5>
-                              {/* <!-- Wishlist icon --> */}
-                              <a href="#"><i className="far fa-heart text-dark"></i></a>
-                              <div>
-                                <Link to={`/updateSession?id=${session._id}`}>
-                                  <button className="btn btn-info btn-sm m-1" onClick={() => this.props.setTemporary(session)}>
-                                    Update
-                                  </button>
-                                </Link>
-                                {/* <button className="btn btn-info btn-sm m-1">
+                  {/*  Start */}
+                  {this.state.sessions.length > 0 ? (
+                    this.state.sessions.map((session, i) => (
+                      <div key={session._id} className="card rounded overflow-hidden shadow">
+                        <div className="row g-0">
+                          {/* <!-- Image --> */}
+                          <div className="col">
+                            <picture >
+                              <img className="session_image" src="src/assets/img/71 brilliant Photoshop tutorials to boost your skills.jpg" alt="card image" />
+                            </picture>
+                          </div>
+                          {/* <!-- Card body --> */}
+                          <div className="col-md-8">
+                            <div className="card-body">
+                              {/* <!-- Title --> */}
+                              <div className="d-flex justify-content-between mb-2 mb-sm-3">
+                                <h5 className="card-title fas fa-signal mb-0"> Session No : <a className="text-danger">{i + 1}</a></h5>
+                                {/* <!-- Wishlist icon --> */}
+                                <a href="#"><i className="far fa-heart text-dark"></i></a>
+                                <div>
+                                  <Link to={`/updateSession?id=${session._id}`}>
+                                    <button className="btn btn-info btn-sm m-1" onClick={() => this.props.setTemporary(session)}>
+                                      Update
+                                    </button>
+                                  </Link>
+                                  {/* <button className="btn btn-info btn-sm m-1">
                                   Update
                                 </button> */}
-                                <button className="btn btn-danger btn-sm m-1" onClick={() => this.props.onDelete(session._id, "sessions")}>
-                                  Delete
-                                </button>
-                                {/* <button className="btn btn-danger btn-sm m-1">
+                                  <button className="btn btn-danger btn-sm m-1" onClick={() => this.props.onDelete(session._id, "sessions")}>
+                                    Delete
+                                  </button>
+                                  {/* <button className="btn btn-danger btn-sm m-1">
                                   Delete
                                 </button> */}
+                                </div>
                               </div>
-                            </div>
-                            {/* <!-- Content --> */}
-                            {/* <!-- Info --> */}
-                            <ul className="list-inline mb-2">
-                              <i className="fas fa-signal me-2">Name Of Lesson : <span className="text-success">{session.lesson && session.lesson.name}</span></i>
-                              <i className="far fa-clock me-2">Code : <span className="text-danger">{session.lesson && session.lesson.subject && session.lesson.subject.code}</span></i>
+                              {/* <!-- Content --> */}
+                              {/* <!-- Info --> */}
+                              <ul className="list-inline mb-2">
+                                <i className="fas fa-signal me-2">Name Of Lesson : <span className="text-success">{session.lesson && session.lesson.name}</span></i>
+                                <i className="far fa-clock me-2">Code : <span className="text-danger">{session.lesson && session.lesson.subject && session.lesson.subject.code}</span></i>
 
-                            </ul>
-                            {/* <!-- Rating --> */}
-                            <ul className="list-inline mt-2" width="300px">
-                              <li className="item me-0 small mb-1"><i className="fas fa-star text-info">Room :</i> {session.room && session.room.name}</li>
-                              <li className="item me-0 small mb-1"><i className="fas fa-star text-info">Volunteer :</i> {session.volunteer && session.volunteer.name}</li>
-                              <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">Start Date</i> {`${session.start.split("T")[0]}  ${session.start.split("T")[1]}`}</li>
-                              <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">End Date</i> {`${session.end.split("T")[0]}  ${session.end.split("T")[1]}`}</li>
-                              <li className="list-inline-item me-0 small"></li>
-                            </ul>
-                            <div className="contentShow">
-                              {session.lesson && <PopupComponent lesson={session.lesson} />}
-                            </div>
-                            <div className="notify me-2">
-                              <button type='button' className="btn btn-success" onClick={() => <Demail Dmsg={session} open={true} />}>Send Notify</button>
+                              </ul>
+                              {/* <!-- Rating --> */}
+                              <ul className="list-inline mt-2" width="300px">
+                                <li className="item me-0 small mb-1"><i className="fas fa-star text-info">Room :</i> {session.room && session.room.name}</li>
+                                <li className="item me-0 small mb-1"><i className="fas fa-star text-info">Volunteer :</i> {session.volunteer && session.volunteer.name}</li>
+                                <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">Start Date</i> {`${session.start.split("T")[0]}  ${session.start.split("T")[1]}`}</li>
+                                <li className="item me-0 small mb-1"><i className="fas fa-star text-warning">End Date</i> {`${session.end.split("T")[0]}  ${session.end.split("T")[1]}`}</li>
+                                <li className="list-inline-item me-0 small"></li>
+                              </ul>
+                              <div className="contentShow">
+                                {session.lesson && <PopupComponent lesson={session.lesson} />}
+                              </div>
+                              <div className="notify me-2">
+                                <button type='button' className="btn btn-success" onClick={(e) => this.sessionNotify(e, session)}>Send Notify</button>
+                              </div>
                             </div>
                           </div>
                         </div>
                       </div>
+                    ))
+                  ) : (
+                    <div>
+                      Databse is Empty
                     </div>
-                  ))
-                ) : (
-                  <div>
-                    Databse is Empty
-                  </div>
-                )
-                }
-                {/*  End */}
+                  )
+                  }
+                  {/*  End */}
+                </div>
+                {/* Table style */}
+                {/* End Table style */}
               </div>
-              {/* Table style */}
-              {/* End Table style */}
             </div>
           </div>
-        </div >
+        </div>
       </>
     );
   }
