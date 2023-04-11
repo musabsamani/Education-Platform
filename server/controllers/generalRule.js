@@ -7,9 +7,8 @@ exports.create = async (req, res) => {
       return;
     }
     const generalRule = new GeneralRuledb({
-      _id: req.body._id,
       name: req.body.name,
-      content: req.body.content,
+      value: req.body.value,
       description: req.body.description,
     });
     const data = await generalRule.save();

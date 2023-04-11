@@ -1,4 +1,5 @@
 import { generateId } from "./helpersFunctions";
+// export { baseAPI, studentAPI, volunteerAPI, lessonAPI, subjectAPI, roomAPI, sessionAPI };
 import { baseAPI } from "./apiEndpoints";
 import axios from "axios";
 
@@ -19,13 +20,9 @@ async function createElement(event, resource) {
       const state = [...this.state[resource], res.data.data];
       this.setState({ [resource]: state });
       this.setState({ message: res.data.message });
-      console.log(res.data.message.content);
     }
   } catch (err) {
-    const { content, details } = err.response.data.message;
-    console.error(content);
-    console.error(details);
-    this.setState({ message: err.response.data.message });
+    this.catchErr(err);
   }
 }
 // =======  UPDATE  ========
@@ -46,13 +43,9 @@ async function updateElement(event, resource) {
       });
       this.setState({ [resource]: state });
       this.setState({ message: res.data.message });
-      console.log(res.data.message.content);
     }
   } catch (err) {
-    const { content, details } = err.response.data.message;
-    console.error(content);
-    console.error(details);
-    this.setState({ message: err.response.data.message });
+    this.catchErr(err);
   }
 }
 // =======  DELETE  ========
@@ -64,13 +57,9 @@ async function deleteElement(id, resource) {
       const data = this.state[resource].filter((element) => element._id !== id);
       this.setState({ [resource]: data });
       this.setState({ message: res.data.message });
-      console.log(res.data.message.content);
     }
   } catch (err) {
-    const { content, details } = err.response.data.message;
-    console.error(content);
-    console.error(details);
-    this.setState({ message: err.response.data.message });
+    this.catchErr(err);
   }
 }
 // =======  CREAT  ========
@@ -84,13 +73,9 @@ async function multiPartCreateElement(event, resource) {
       const element = [...this.state[resource], res.data.data];
       this.setState({ [resource]: element });
       this.setState({ message: res.data.message });
-      console.log(res.data.message.content);
     }
   } catch (err) {
-    const { content, details } = err.response.data.message;
-    console.error(content);
-    console.error(details);
-    this.setState({ message: err.response.data.message });
+    this.catchErr(err);
   }
 }
 // =======  UPDATE  ========
@@ -106,31 +91,22 @@ async function multiPartUpdateElement(event, resource) {
       });
       this.setState({ [resource]: element });
       this.setState({ message: res.data.message });
-      console.log(res.data.message.content);
     }
   } catch (err) {
-    const { content, details } = err.response.data.message;
-    console.error(content);
-    console.error(details);
-    this.setState({ message: err.response.data.message });
+    this.catchErr(err);
   }
 }
 // =======  UPDATE  ========
-async function updateState(resource, resourceApi) {
+async function updateState(resourceArray) {
   try {
-    const { data: data } = await axios.get(resourceApi);
-    console.log(data);
-    console.log(this.state[resource] == data);
-    this.setState({ [resource]: data });
-    console.log(this.state[resource]);
-    console.log(this.state[resource] == data);
-    this.setState({ message: res.data.message });
-    console.log(res.data.message.content);
+    let api;
+    resourceArray.forEach(async (resource) => {
+      api = `${baseAPI}/${resource}`;
+      const { data: data } = await axios.get(api);
+      this.setState({ [resource]: data });
+    });
   } catch (err) {
-    const { content, details } = err.response.data.message;
-    console.error(content);
-    console.error(details);
-    this.setState({ message: err.response.data.message });
+    this.catchErr(err);
   }
 }
 // =======  Send Mail  ========
@@ -143,14 +119,9 @@ async function sendMail(e) {
       data[key] = value;
     }
     const res = await axios.post(uri, data);
-    console.log(res.data);
     this.setState({ message: res.data.message });
-    console.log(res.data.message.content);
   } catch (err) {
-    const { content, details } = err.response.data.message;
-    console.error(content);
-    console.error(details);
-    this.setState({ message: err.response.data.message });
+    this.catchErr(err);
   }
 }
 export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, updateState, sendMail };

@@ -6,7 +6,6 @@ function handleChange(e) {
 }
 // ===============  store value in this.state.temporary
 function setTemporary(element) {
-  // console.log(element);
   this.setState({ temporary: element });
 }
 // ===============  setting this.state.temporary to empty value
@@ -87,23 +86,23 @@ const validator = (array, temporary) => {
   }
   return isValid;
 };
-function handleOrder(e, resource, order, ascendantly = "ascendantly") {
+function handleOrder(e, resource, order, ascending = "ascending") {
   if (!order) {
     order = "_id";
   }
-  let arrayCopy = [...this.props[resource]];
   let ordered;
+  let arrayCopy = [...this.props[resource]];
   const propsArray = order.split(".");
   ordered = arrayCopy.sort((a, b) => {
     let valueA = a;
     let valueB = b;
     for (let i = 0; i < propsArray.length; i++) {
-      valueA = valueA[propsArray[i]];
+      valueB = valueB[propsArray[i]] ? valueB[propsArray[i]] : valueB;
     }
     for (let i = 0; i < propsArray.length; i++) {
-      valueB = valueB[propsArray[i]];
+      valueA = valueA[propsArray[i]] ? valueA[propsArray[i]] : valueA;
     }
-    if (ascendantly === "descendantly") {
+    if (ascending === "descending") {
       return valueB.localeCompare(valueA);
     } else {
       return valueA.localeCompare(valueB);
@@ -113,23 +112,32 @@ function handleOrder(e, resource, order, ascendantly = "ascendantly") {
 }
 function handleOrderChange(e, resource) {
   this.setState({ orderField: e.currentTarget.value });
-  if (this.state.ascendantly) {
-    this.handleOrder(e, resource, e.currentTarget.value, this.state.ascendantly);
+  if (this.state.ascending) {
+    this.handleOrder(e, resource, e.currentTarget.value, this.state.ascending);
   } else {
     this.handleOrder(e, resource, e.currentTarget.value);
   }
 }
-function handleAscendantly(e, resource) {
-  this.setState({ ascendantly: e.currentTarget.value });
+function handleAscending(e, resource) {
+  this.setState({ ascending: e.currentTarget.value });
   if (this.state.orderField) {
     this.handleOrder(e, resource, this.state.orderField, e.target.value);
   }
 }
-function handleSearch(e, resource) {
+function handleSearch(e, resource, propertyArray) {
   const searchValue = e.currentTarget.value.toLowerCase();
   const filtered = this.props[resource].filter((element) => {
-    return element.name.toLowerCase().includes(searchValue);
+    return propertyArray.some((nesedProps) => {
+      let nesedPropsArray = nesedProps.split(".");
+      let property = { ...element };
+      for (let i = 0; i < nesedPropsArray.length; i++) {
+        property = property[nesedPropsArray[i]] ? property[nesedPropsArray[i]] : property;
+      }
+      const propertyValue = property.toLowerCase();
+      return propertyValue.includes(searchValue);
+    });
   });
   this.setState({ [resource]: filtered });
 }
-export { handleChange, setTemporary, setTemporaryEmpty, generateId, randomSeed, dateFormaterForInput, validator, handleOrder, handleOrderChange, handleAscendantly, handleSearch };
+
+export { handleChange, setTemporary, setTemporaryEmpty, generateId, randomSeed, dateFormaterForInput, validator, handleOrder, handleOrderChange, handleAscending, handleSearch };

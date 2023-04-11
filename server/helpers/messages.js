@@ -12,6 +12,7 @@ function messageCRUD(type, operation, resource, data = "") {
         content,
         operation,
         details,
+        resource,
       },
       data,
     };
@@ -35,6 +36,7 @@ function messageCRUD(type, operation, resource, data = "") {
         details: data,
         content,
         operation,
+        resource,
       },
     };
   }

@@ -1,10 +1,11 @@
 async function preFindOneAndDeleteMiddleware(collectionToCheck, GeneralRuledb, property, id, next) {
   try {
-    let cascade = GeneralRuledb.find({ name: "cascade" });
-    console.log(cascade);
-    cascade = null;
-    // console.log(cascade);
+    let cascade = await GeneralRuledb.findOne({ name: "deleteCascade" });
+    if (cascade) {
+      cascade = cascade.value;
+    }
     let isReferenced = await collectionToCheck.find({ [property]: id });
+    isReferenced.length === 0 ? (isReferenced = false) : isReferenced;
     if (isReferenced) {
       if (!cascade) {
         throw new Error(`cannot delete this document it has refrencing`);
@@ -21,10 +22,10 @@ async function preFindOneAndDeleteMiddleware(collectionToCheck, GeneralRuledb, p
 }
 async function subjectPreFindOneAndDeleteMiddleware(collectionArray, GeneralRuledb, id, next) {
   try {
-    let cascade = await GeneralRuledb.find({ name: "cascade" });
-    console.log(cascade);
-    cascade = null;
-    // console.log(cascade);
+    let cascade = await GeneralRuledb.findOne({ name: "deleteCascade" });
+    if (cascade) {
+      cascade = cascade.value;
+    }
     let lessonIdArray;
     let subjecIsReferencedByVolunteer = await collectionArray[0].find({ subject: id });
     let subjecIsReferencedByLesson = await collectionArray[1].find({ subject: id });
@@ -32,6 +33,7 @@ async function subjectPreFindOneAndDeleteMiddleware(collectionArray, GeneralRule
       lessonIdArray = subjecIsReferencedByLesson.map((lesson) => lesson._id);
     }
     let isReferenced = subjecIsReferencedByVolunteer || subjecIsReferencedByLesson;
+    isReferenced.length === 0 ? (isReferenced = false) : isReferenced;
     if (isReferenced) {
       if (!cascade) {
         throw new Error(`cannot delete this document it has refrencing`);

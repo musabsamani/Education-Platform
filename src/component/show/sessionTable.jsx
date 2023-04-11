@@ -6,7 +6,7 @@ import PopupComponent from "../dashboardComponent/popupComponent";
 // import '../../scss/dashboard.scss';
 import '../../scss/sessionTable.scss';
 import Chart from "../dashboardComponent/chart";
-import { handleOrder, handleOrderChange, handleAscendantly, handleSearch } from "../../helpers/helpersFunctions"
+import { handleOrder, handleOrderChange, handleAscending, handleSearch } from "../../helpers/helpersFunctions"
 class SessionTable extends Component {
   state = {
     sessions: [],
@@ -16,7 +16,7 @@ class SessionTable extends Component {
     this.handleSearch = handleSearch.bind(this)
     this.handleOrder = handleOrder.bind(this)
     this.handleOrderChange = handleOrderChange.bind(this)
-    this.handleAscendantly = handleAscendantly.bind(this)
+    this.handleAscending = handleAscending.bind(this)
   }
   componentDidMount() {
     this.setState({ sessions: this.props.sessions });
@@ -43,7 +43,7 @@ class SessionTable extends Component {
                 </Link>
               </div>
               <div className="tablebar">
-                <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "sessions")} />
+                <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "sessions", ["name", "lesson.name", "lesson.subject.code", "room.name", "volunteer.name", "start", "end"])} />
                 <div className="dropdownSelect">
                   <select className="form-select" aria-label="Default select example" onChange={e => this.handleOrderChange(e, "sessions")}>
                     <option label="Sort By" value="" />
@@ -56,9 +56,9 @@ class SessionTable extends Component {
                     <option label="end date" value="end" />
                     {/* <option label="Approved" value="approved" /> */}
                   </select>
-                  <select className="form-select" onChange={e => this.handleAscendantly(e, "sessions")} >
-                    <option label="ascendantly" value="ascendantly" />
-                    <option label="descendantly" value="descendantly" />
+                  <select className="form-select" onChange={e => this.handleAscending(e, "sessions")} >
+                    <option label="ascending" value="ascending" />
+                    <option label="descending" value="descending" />
                   </select>
                 </div>
               </div>

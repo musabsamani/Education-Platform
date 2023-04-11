@@ -3,7 +3,7 @@ import Adminbar from "../adminbar";
 import { Link } from "react-router-dom";
 import Sidebar from "../sidebar";
 import Chart from "../dashboardComponent/chart";
-import { handleOrder, handleOrderChange, handleAscendantly, handleSearch } from "../../helpers/helpersFunctions"
+import { handleOrder, handleOrderChange, handleAscending, handleSearch } from "../../helpers/helpersFunctions"
 class RoomTable extends Component {
   state = {
     rooms: [],
@@ -13,7 +13,7 @@ class RoomTable extends Component {
     this.handleSearch = handleSearch.bind(this)
     this.handleOrder = handleOrder.bind(this)
     this.handleOrderChange = handleOrderChange.bind(this)
-    this.handleAscendantly = handleAscendantly.bind(this)
+    this.handleAscending = handleAscending.bind(this)
   }
   componentDidMount() {
     this.setState({ rooms: this.props.rooms });
@@ -46,15 +46,15 @@ class RoomTable extends Component {
               </div>
               <div className="table_section">
                 <div className="tablebar">
-                  <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "rooms")} />
+                  <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "rooms", ["name"])} />
                   <div className="dropdownSelect">
                     <select className="form-select" aria-label="Default select example" onChange={e => this.handleOrderChange(e, "rooms")}>
                       <option label="Sort By" value="" />
                       <option label="Name" value="name" />
                     </select>
-                    <select className="form-select" onChange={e => this.handleAscendantly(e, "rooms")} >
-                      <option label="ascendantly" value="ascendantly" />
-                      <option label="descendantly" value="descendantly" />
+                    <select className="form-select" onChange={e => this.handleAscending(e, "rooms")} >
+                      <option label="ascending" value="ascending" />
+                      <option label="descending" value="descending" />
                     </select>
                   </div>
                 </div>

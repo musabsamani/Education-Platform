@@ -65,4 +65,5 @@ route.delete("/api/generalRules", generalRuleController.delete);
 // =============== email router ==================
 // API
 route.post("/api/email", emailController.send);
+route.post("/api/sessionEmailBroadcast", emailController.sessionEmailBroadcast);
 module.exports = route;

@@ -5,7 +5,7 @@ import Adminbar from "../adminbar";
 import PopupComponent from "../dashboardComponent/popupComponent";
 import "../../scss/lessonTable.scss"
 import Select from "../include/_select";
-import { handleOrder, handleOrderChange, handleAscendantly, handleSearch } from "../../helpers/helpersFunctions"
+import { handleOrder, handleOrderChange, handleAscending, handleSearch } from "../../helpers/helpersFunctions"
 class LessonTable extends Component {
   state = {
     lessons: [],
@@ -15,7 +15,7 @@ class LessonTable extends Component {
     this.handleSearch = handleSearch.bind(this)
     this.handleOrder = handleOrder.bind(this)
     this.handleOrderChange = handleOrderChange.bind(this)
-    this.handleAscendantly = handleAscendantly.bind(this)
+    this.handleAscending = handleAscending.bind(this)
   }
   componentDidMount() {
     this.setState({ lessons: this.props.lessons });
@@ -45,17 +45,17 @@ class LessonTable extends Component {
               </div>
               <div className="table_section">
                 <div className="tablebar">
-                  <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "lessons")} />
+                  <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "lessons", ["name", "subject.code", "content"])} />
                   <div className="dropdownSelect">
                     <select className="form-select" aria-label="Default select example" onChange={e => this.handleOrderChange(e, "lessons")}>
                       <option label="Sort By" value="" />
-                      <option label="subject" value="subject" />
-                      <option label="content" value="content" />
                       <option label="name" value="name" />
+                      <option label="subject" value="subject.code" />
+                      <option label="content" value="content" />
                     </select>
-                    <select className="form-select" onChange={e => this.handleAscendantly(e, "lessons")} >
-                      <option label="ascendantly" value="ascendantly" />
-                      <option label="descendantly" value="descendantly" />
+                    <select className="form-select" onChange={e => this.handleAscending(e, "lessons")} >
+                      <option label="ascending" value="ascending" />
+                      <option label="descending" value="descending" />
                     </select>
                   </div>
                 </div>
@@ -82,9 +82,11 @@ class LessonTable extends Component {
                             <td>{lesson.subject && lesson.subject.code}</td>
                             <td>{lesson.name}</td>
                             <td>{lesson.content}</td>
-                            {/* {console.log(lesson.file)}
+                            {/* 
+                            {console.log(lesson.file)}
                             {(lesson.file && lesson.file.includes("pdf")) ? console.log("pdf") : ""}
-                            {(lesson.file && lesson.file.includes("mp4")) ? console.log("mp4") : ""} */}
+                            {(lesson.file && lesson.file.includes("mp4")) ? console.log("mp4") : ""} */
+                            }
                             <td>
                               <Link to={`/updateLesson?id=${lesson._id}`}>
                                 <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(lesson)}>

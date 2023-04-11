@@ -3,15 +3,10 @@ import "bootstrap/dist/css/bootstrap.css";
 import React, { Component } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
-// import "./App.css";
-
-
 import PDFUploader from "./viewPdf";
+// import "./App.css";
 // ====== helpers files/
-import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, roomAPI, sessionAPI } from "./helpers/apiEndpoints";
-import { handleChange, setTemporary, setTemporaryEmpty, dateFormaterForInput } from "./helpers/helpersFunctions";
-import { messageShow } from "./helpers/messages"
-import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, updateState } from "./helpers/crudFunctions";
+import { bindMethods } from "./helpers/reactBasicFunc";
 // ###################### React Components ######################
 // ====== components/
 import Home from "./component/home";
@@ -36,7 +31,6 @@ import SessionTable from "./component/show/sessionTable";
 import Profile from "./component/show/profile";
 import Calendar from "./component/calendar";
 import Session from "./component/dashboardComponent/session";
-import { message } from "antd";
 import ApexChart from "./component/dashboardComponent/apexchartv";
 // import RegistrationForm from "./component/include/registerationTime";
 // import comments from './helpers/comments';
@@ -48,16 +42,7 @@ axios.defaults.headers.put["Content-Type"] = "application/x-www-form-urlencoded"
 class App extends Component {
   constructor(props) {
     super(props);
-    this.handleChange = handleChange.bind(this);
-    this.setTemporary = setTemporary.bind(this);
-    this.setTemporaryEmpty = setTemporaryEmpty.bind(this);
-    this.createElement = createElement.bind(this);
-    this.updateElement = updateElement.bind(this);
-    this.deleteElement = deleteElement.bind(this);
-    this.multiPartCreateElement = multiPartCreateElement.bind(this);
-    this.multiPartUpdateElement = multiPartUpdateElement.bind(this);
-    this.updateState = updateState.bind(this);
-    this.messageShow = messageShow.bind(this);
+    bindMethods(this)
   }
   state = {
     students: [],
@@ -70,42 +55,11 @@ class App extends Component {
     message: {}
   };
   // this react function is fired up when page load initially
-  async componentDidMount() {
-    try {
-      const { data: students } = await axios.get(studentAPI);
-      this.setState({ students });
-      const { data: volunteers } = await axios.get(volunteerAPI);
-      this.setState({ volunteers });
-      const { data: lessons } = await axios.get(lessonAPI);
-      this.setState({ lessons });
-      const { data: subjects } = await axios.get(subjectAPI);
-      this.setState({ subjects });
-      const { data: rooms } = await axios.get(roomAPI);
-      this.setState({ rooms });
-      const { data: sessions } = await axios.get(sessionAPI);
-      this.setState({ sessions });
-    } catch (err) {
-      console.log(err.message);
-      console.log("Error fetching data from the server on componentDidMount");
-      // this.setState({ message: err.message });
-    }
+  componentDidMount() {
+    this.componentDidMount()
   }
-  componentDidUpdate() {
-    if (Object.keys(this.state.message).length > 0) {
-      let operation = this.state.message.operation
-      let condition = operation === "delete" || operation === "create" || operation === "update"
-      if (condition) {
-        // his is for testing only 
-        // console.log(this.state.message)
-        // this.setState({ message: {} })
-      } else {
-        if (confirm(`${this.state.message.type}\n${this.state.message.content}`)) {
-          this.setState({ message: {} })
-        } else {
-          this.setState({ message: {} })
-        }
-      }
-    }
+  componentDidUpdate(prevProps, prevState) {
+    this.componentDidUpdate(prevProps, prevState)
   }
 
   render() {
@@ -292,7 +246,6 @@ class App extends Component {
                   rooms={this.state.rooms}
                   volunteers={this.state.volunteers}
                   temporary={this.state.temporary}
-                  formater={dateFormaterForInput}
                   onChange={this.handleChange}
                   create={this.createElement}
                   setTemporary={this.setTemporary}
@@ -324,7 +277,6 @@ class App extends Component {
                   name="update"
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
-                  dateFormater={this.dateFormater}
                   update={this.updateElement}
                 />}
               />
@@ -334,7 +286,6 @@ class App extends Component {
                   name="update"
                   subjects={this.state.subjects}
                   volunteers={this.state.volunteers}
-                  updateState={this.updateState}
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
                   update={this.multiPartUpdateElement}
@@ -358,7 +309,6 @@ class App extends Component {
                   rooms={this.state.rooms}
                   lessons={this.state.lessons}
                   volunteers={this.state.volunteers}
-                  formater={dateFormaterForInput}
                   temporary={this.state.temporary}
                   onChange={this.handleChange}
                   update={this.updateElement}

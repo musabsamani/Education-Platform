@@ -75,22 +75,21 @@ const sessionSchema = new mongoose.Schema({
   },
 });
 const generalRuleSchema = new mongoose.Schema({
-  _id: String,
   name: String,
-  content: String,
+  value: Boolean,
   description: String,
 });
 subjectSchema.pre("findOneAndDelete", function (next) {
   subjectPreFindOneAndDeleteMiddleware([Volunteerdb, Lessondb, Sessiondb], GeneralRuledb, this._conditions._id, next);
 });
 roomSchema.pre("findOneAndDelete", function (next) {
-  preFindOneAndDeleteMiddleware(Sessiondb, "room", GeneralRuledb, this._conditions._id, next);
+  preFindOneAndDeleteMiddleware(Sessiondb, GeneralRuledb, "room", this._conditions._id, next);
 });
 volunteerSchema.pre("findOneAndDelete", function (next) {
-  preFindOneAndDeleteMiddleware(Sessiondb, "volunteer", GeneralRuledb, this._conditions._id, next);
+  preFindOneAndDeleteMiddleware(Sessiondb, GeneralRuledb, "volunteer", this._conditions._id, next);
 });
 lessonSchema.pre("findOneAndDelete", function (next) {
-  preFindOneAndDeleteMiddleware(Sessiondb, "lesson", GeneralRuledb, this._conditions._id, next);
+  preFindOneAndDeleteMiddleware(Sessiondb, GeneralRuledb, "lesson", this._conditions._id, next);
 });
 const Studentdb = mongoose.model("studentdb", studentSchema);
 const Volunteerdb = mongoose.model("volunteerdb", volunteerSchema);
