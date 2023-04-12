@@ -6,28 +6,34 @@
     
     .card{
         margin: 10px;
-        width: 800px;
+        width: 1000px;
         min-height: 200px;
         position: relative;
-        .col{
-            max-width: 250px;
-            .session_image{
-                width: 250px;
-                height: 100%;
+        .row{
+            width: 100%;
+            .col{
+                max-width: 250px;
+                .info{
+                    width: 700px;
+                    .card-body{
+                        position: relative;
+                        .contentShow{
+                            position: absolute;
+                            right: 10px;
+                            top:100px;
+                        }
+                        .notify{
+                            position: absolute;
+                            right: 10px;
+                            top: 200px;
+                        }
+                    }
+                }
+                .session_image{
+                    width: 250px;
+                    height: 100%;
+                }
             }
-        }
-        .card-body{
-            position: relative;
-            .contentShow{
-                position: absolute;
-                right: 10px;
-                top:100px;
-            }
-            .notify{
-                position: absolute;
-                right: 10px;
-                top: 200px;
-            }
-        }
+        } 
     }
 }

@@ -42,7 +42,7 @@ const Sidebar = () => {
                         </li>
                         <li>
                             <NavLink to="/roomTable" >
-                                <ClassIcon /><span>rooms</span>
+                                <ClassIcon /><span>Rooms</span>
                             </NavLink>
                         </li>
                         <li>
@@ -79,13 +79,6 @@ const Sidebar = () => {
                                 <LogoutIcon />
                             </NavLink>
                         </li>
-                        {/* <li>
-                            <div className="msg">
-                                <Email
-                                    sendMail={this.sendMail}
-                                />
-                            </div >
-                        </li> */}
                     </ul>
                 </div>
             </div>
