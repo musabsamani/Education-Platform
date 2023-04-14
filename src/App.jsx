@@ -1,6 +1,6 @@
 // ###################### Libraries ######################
 import "bootstrap/dist/css/bootstrap.css";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 // import TestDesign from "./testdesign";
 import React, { Component } from "react";

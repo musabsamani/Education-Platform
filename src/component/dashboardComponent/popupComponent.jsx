@@ -56,7 +56,7 @@ class PopupComponent extends Component {
                     </Modal.Header>
                     <Modal.Body>
                         {
-                            // fileTypes = ["image", "video", "audio", "pdf"]
+                            // fileTypes = ["image", "video", "audio", "pdf","unknown"]
                             // lesson file structue  
                             // fileType : [type here]  
                             // filePath : [path here]  
@@ -67,7 +67,7 @@ class PopupComponent extends Component {
                             {lesson.file && lesson.file.forEach((file => {
                                 <>
                                     {
-                                        file.filePath === "video"
+                                        file.fileType === "video"
                                             ?
                                             <div className="col g-4 mb-4">
                                                 {lesson && <Videohandler file={file.filePath} />}
@@ -76,7 +76,7 @@ class PopupComponent extends Component {
                                             ""
                                     }
                                     {
-                                        file.filePath === "pdf"
+                                        file.fileType === "pdf"
                                             ?
                                             <div className="col g-4 mb-4">
                                                 {lesson && <PDFUploader file={file.filePath} />}
