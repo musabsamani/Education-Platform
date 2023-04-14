@@ -57,7 +57,6 @@ function componentDidUpdate(prevProps, prevState) {
   let message = { ...this.state.message };
   if (Object.keys(message).length > 0) {
     if (message.content) {
-      toast(message.content);
       let operation = message.operation;
       let resource = message.resource;
       console.log(message.content);
@@ -68,14 +67,27 @@ function componentDidUpdate(prevProps, prevState) {
           this.updateState(["sessions"]);
         }
       }
-      let condition = operation === "delete" || operation === "create" || operation === "update";
-      if (condition) {
+      console.log(message.type);
+      console.log(message.type);
+      if (message.type === "success") {
+        toast.success(message.content);
+        console.info(message.content);
+        this.setState({ message: {} });
+      } else if (message.type === "error") {
+        toast.error(message);
+        console.error(message);
+        this.setState({ message: {} });
+      } else if (message.type === "warning") {
+        toast.warn(message);
+        console.warn(message);
         this.setState({ message: {} });
       } else {
-        alert(`${message.type}\n${message.content}`);
+        toast(message.content);
+        console.log(message.content);
         this.setState({ message: {} });
       }
     } else {
+      toast(message);
       console.log(message);
       this.setState({ message: {} });
     }

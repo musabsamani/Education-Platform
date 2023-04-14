@@ -32,7 +32,7 @@ const volunteerSchema = new mongoose.Schema({
 });
 const roomSchema = new mongoose.Schema({
   _id: String,
-  name: String,
+  name: Number,
 });
 
 const subjectSchema = new mongoose.Schema({
