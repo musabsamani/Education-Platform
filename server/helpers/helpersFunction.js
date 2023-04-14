@@ -1,12 +1,15 @@
 const path = require("path");
 const fs = require("fs");
-function removeFile(path) {
-  fs.unlink(path, (err) => {
-    if (err) {
-      console.error(err.message);
-    } else {
-      console.log(`File on path "${path}" deleted successfully`);
-    }
+function removeFile(array) {
+  array.forEach((element) => {
+    let path = element.filePath;
+    fs.unlink(path, (err) => {
+      if (err) {
+        console.error(err.message);
+      } else {
+        console.log(`File on path "${path}" deleted successfully`);
+      }
+    });
   });
 }
 function getDayOfWeek(date) {

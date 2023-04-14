@@ -10,7 +10,26 @@ class PopupComponent extends Component {
         fullscreen: true,
         show: false,
     }
-
+    // lessonn = {
+    //     _id: "998b552208c349ffd965c58e",
+    //     subject: new ObjectId("ed92f0ec7d5c9916c31164f0"),
+    //     name: "Back-End Start kick",
+    //     content: "this is content\r\n",
+    //     file: [
+    //         {
+    //             fileType: "pdf",
+    //             filePath: "uploads\\lesson\\20230414T004131.811Z-file-Computer_Graphics_with_OpenGL_4th_ed_Hearn,_Baker_&_Carithers_2013.pdf",
+    //         },
+    //         {
+    //             fileType: "video",
+    //             filePath: "uploads\\lesson\\20230414T004132.465Z-file-CRT How to work_144p.mp4",
+    //         },
+    //         {
+    //             fileType: "audio",
+    //             filePath: "uploads\\lesson\\20230414T004132.539Z-file-g3.ogg",
+    //         }
+    //     ],
+    // };
     handleShow(breakpoint) {
         //   setFullscreen(breakpoint);
         const breakp = breakpoint;
@@ -36,19 +55,45 @@ class PopupComponent extends Component {
                         <Modal.Title>{lesson.name && lesson.name}</Modal.Title>
                     </Modal.Header>
                     <Modal.Body>
-
+                        {
+                            // fileTypes = ["image", "video", "audio", "pdf"]
+                            // lesson file structue  
+                            // fileType : [type here]  
+                            // filePath : [path here]  
+                            // lesson exapmle line 13 in this same file
+                            // code implemented in line 85 here
+                        }
                         <div className='d-flex flex-column justify-content-around' width='100%'>
-                            <div className="col g-4 mb-4">
-                                {lesson && <Videohandler file={lesson.file} />}
-                            </div>
+                            {lesson.file && lesson.file.forEach((file => {
+                                <>
+                                    {
+                                        file.filePath === "video"
+                                            ?
+                                            <div className="col g-4 mb-4">
+                                                {lesson && <Videohandler file={file.filePath} />}
+                                            </div>
+                                            :
+                                            ""
+                                    }
+                                    {
+                                        file.filePath === "pdf"
+                                            ?
+                                            <div className="col g-4 mb-4">
+                                                {lesson && <PDFUploader file={file.filePath} />}
+                                            </div>
+                                            :
+                                            ""
+                                    }
+                                    {/* {file.filePath==="audio"?:""} */}
+                                    {/* {file.filePath==="image"?:""} */}
 
-                            <div className="col g-4 mb-4">
-                                {lesson && <PDFUploader file={lesson.file} />}
-                            </div>
 
-                            <div className="col g-4 mb-4">
-                                {/* {lesson && <Videohandler file={lesson.file} />} */}
-                            </div>
+
+                                    <div className="col g-4 mb-4">
+                                        {/* {lesson && <Videohandler file={lesson.file} />} */}
+                                    </div>
+                                </>
+                            }))}
                             <hr />
                         </div>
                     </Modal.Body>

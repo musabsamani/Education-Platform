@@ -50,14 +50,19 @@ class Lesson extends Component {
                       <Input type="text" name="name" label="Lesson Name" onChange={this.props.onChange} value={this.props.temporary.name} />
                     </div>
                     <div className="col-md-5 m-1 d-flex align-items-end">
-                      <Input type="file" name="file" label="File Pdf" /><span><button type="button" className="btn btn-outline-dark ms-2">Dark <AddCircleOutlineIcon /> </button></span>
+                      <Input type="file" name="file" label="Files" args={{ multiple: true }} />
+                      <span>
+                        <button type="button" className="btn btn-outline-dark ms-2">
+                          Dark <AddCircleOutlineIcon />
+                        </button>
+                      </span>
                     </div>
-                    <div className="col-md-5 m-1">
+                    {/* <div className="col-md-5 m-1">
                       <Input type="file" name="filevid" label="Video Url" />
                     </div>
                     <div className="col-md-5 m-1">
                       <Input type="file" name="fileaud" label="Audio Url" />
-                    </div>
+                    </div> */}
                     <div className="col-md-5 m-1">
                       <Textarea name="content" label="Content" onChange={this.props.onChange} value={this.props.temporary.content} />
                     </div>
