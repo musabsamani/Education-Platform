@@ -14,9 +14,6 @@ const Adminbar = () => {
     return (
         <>
             <div className="adminbar">
-                <div className="searchpart">
-                    <input type="search" placeholder='search...' /><SearchIcon />
-                </div>
                 <div className="icons">
                     <SettingsIcon />
                     {/* <EmailIcon /> */}

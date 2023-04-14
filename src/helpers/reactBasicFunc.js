@@ -56,6 +56,7 @@ function componentDidUpdate(prevProps, prevState) {
   let message = { ...this.state.message };
   if (Object.keys(message).length > 0) {
     if (message.content) {
+      toast(message.content);
       let operation = message.operation;
       let resource = message.resource;
       console.log(message.content);

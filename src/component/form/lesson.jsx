@@ -7,6 +7,7 @@ import AutoStoriesIcon from '@mui/icons-material/AutoStories';
 import '../../scss/submitionForm.scss';
 import Subnav from "./subnav";
 import AddCircleOutlineIcon from '@mui/icons-material/AddCircleOutline';
+import RemoveCircleOutlineIcon from '@mui/icons-material/RemoveCircleOutline';
 
 class Lesson extends Component {
   state = { filee: {} }

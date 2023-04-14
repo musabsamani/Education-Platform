@@ -1,5 +1,8 @@
 // ###################### Libraries ######################
 import "bootstrap/dist/css/bootstrap.css";
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+// import TestDesign from "./testdesign";
 import React, { Component } from "react";
 import { Route, Routes } from "react-router-dom";
 import axios from "axios";
@@ -66,6 +69,7 @@ class App extends Component {
       // <RegistrationForm/>
       <>
         <main className="mainContainer">
+          <ToastContainer />
           <Routes>
             <Route path="/">
               <Route index
@@ -74,6 +78,9 @@ class App extends Component {
               <Route path="login"
                 element={<Login />}
               />
+              {/* <Route path="testdesign"
+                element={<TestDesign />}
+              /> */}
               <Route path="dashboard"
                 element={<Dashboard
                   volunteers={this.state.volunteers}

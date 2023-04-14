@@ -71,6 +71,55 @@ class SessionTable extends Component {
                   {/* for propabilties ##################
                 ###########################
                  */}
+                  <div className="col-xxl-8">
+                    <div className="card shadow p-2">
+                      <div className="row g-0">
+                        <div className="col-lg-5">
+                          <img src="https://eduport.webestica.com/docs/assets/images/course/4by3/02.jpg" className="img-fluid rounded-2" alt="Card image" />
+                        </div>
+                        <div className="col-lg-7">
+                          <div className="card-body">
+                            {/* <!-- Badge and rating --> */}
+                            <div className="d-flex justify-content-between align-items-center mb-2">
+                              {/* <!-- Badge --> */}
+                              <a href="#" className="badge text-bg-primary mb-2 mb-sm-0">Marketing</a>
+                              {/* <!-- Rating and wishlist --> */}
+                              <div>
+                                <span className="text-dark me-3"><i className="fas fa-star text-warning me-1"></i>4.5</span>
+                                <a href="#" className="text-dark"><i className="far fa-heart"></i></a>
+                              </div>
+                            </div>
+
+                            {/* <!-- Title --> */}
+                            <h5 className="card-title"><a href="#">The Complete Digital Marketing Course - 12 Courses in 1</a></h5>
+                            <p className="text-truncate">Explained propriety off out perpetual his you. Dependent contented he explained propriety off out perpetual his you. </p>
+
+                            {/* <!-- Info --> */}
+                            <ul className="list-inline">
+                              <li className="list-inline-item text-dark mb-1 mb-sm-0"><i className="far fa-clock text-danger me-2"></i>6h 56m</li>
+                              <li className="list-inline-item text-dark mb-1 mb-sm-0"><i className="fas fa-table text-orange me-2"></i>82 lectures</li>
+                              <li className="list-inline-item text-dark"><i className="fas fa-signal text-success me-2"></i>Beginner</li>
+                            </ul>
+
+                            {/* <!-- Price and avatar --> */}
+                            <div className="d-sm-flex justify-content-sm-between align-items-center">
+                              {/* <!-- Avatar --> */}
+                              <div className="d-flex align-items-center">
+                                <div className="avatar">
+                                  {/* <img className="avatar-img rounded-circle" src="https://eduport.webestica.com/docs/assets/images/avatar/01.jpg" alt="avatar" /> */}
+                                </div>
+                                <p className="mb-0 ms-2"><a href="#" className="text-dark">Larry Lawson</a></p>
+                              </div>
+                              {/* <!-- Price --> */}
+                              <div className="mt-3 mt-sm-0">
+                                <a href="#" className="btn btn-dark">View more</a>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
                   {/*  Start */}
                   {this.state.sessions.length > 0 ? (
                     this.state.sessions.map((session, i) => (
@@ -83,7 +132,7 @@ class SessionTable extends Component {
                             </picture>
                           </div>
                           {/* <!-- Card body --> */}
-                          <div className="col-md-8">
+                          <div className="info col-md-8">
                             <div className="card-body">
                               {/* <!-- Title --> */}
                               <div className="d-flex justify-content-between mb-2 mb-sm-3">
