@@ -3,6 +3,7 @@ function handleChange(e) {
   const temporary = { ...this.state.temporary };
   temporary[e.currentTarget.name] = e.currentTarget.value;
   this.setState({ temporary });
+  this.d = d.bind(this);
 }
 // ===============  store value in this.state.temporary
 function setTemporary(element) {
