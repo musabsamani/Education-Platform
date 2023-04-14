@@ -124,4 +124,14 @@ async function sendMail(e) {
     this.catchErr(err);
   }
 }
-export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, updateState, sendMail };
+// =======  sessionNotify  ========
+async function sessionNotify(session) {
+  try {
+    const uri = `${baseAPI}/sessionNotify`;
+    const res = await axios.post(uri, session);
+    this.setState({ message: res.data.message });
+  } catch (err) {
+    this.catchErr(err);
+  }
+}
+export { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, updateState, sendMail, sessionNotify };

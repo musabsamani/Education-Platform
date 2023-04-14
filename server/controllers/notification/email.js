@@ -1,3 +1,4 @@
+const { getDayOfWeek, getMonths, getTimeWithAMPM } = require("../../helpers/helpersFunction");
 const nodemailer = require("nodemailer");
 const Mailgen = require("mailgen");
 const dotenv = require("dotenv");
@@ -57,17 +58,33 @@ exports.send = (req, res) => {
     }
     main().catch(console.log);
   } catch (err) {
-    send(message("error", "email", err.message));
     console.error(err.message);
+    return res.status(500).send(message("error", "email", err.message));
   }
 };
-exports.sessionEmailBroadcast = (req, res) => {
+exports.sessionNotify = (req, res) => {
   try {
-    const recipients = [
-      { name: "musab 1", email: "musab0124887085@gmail.com" },
-      { name: "musab 2", email: "musab19990124@gmail.com" },
-      // { name: "Som3a", email: "messi2010508@gmail.com" },
-    ];
+    const subjectCode = req.body["lesson[subject][code]"];
+    const lesson = req.body["lesson[name]"];
+    const volunteer = req.body["volunteer[name]"];
+    const volunteerEmail = req.body["volunteer[email]"];
+    const room = req.body["room[name]"];
+    const start = new Date(req.body["start"]);
+    const end = new Date(req.body["end"]);
+    const startDay = getDayOfWeek(start);
+    const startMonth = getMonths(start);
+    const startTime = getTimeWithAMPM(start);
+    const endDay = getDayOfWeek(end);
+    const endMonth = getMonths(end);
+    const endTime = getTimeWithAMPM(end);
+    const emailText = `Hi ${volunteer} 😃\
+    \nYou have a session starting on ${startDay}, ${startMonth} at ${startTime} ⏰\
+    \nAnd it will end at ${endTime}.\
+    \nIt will be in ${room} lecture room. 📚\
+    \nIt's in subject: ${subjectCode}, about lesson: ${lesson}. 📝\
+    \nPrepare well ${volunteer} 👍 see you there! 🚀\
+    \n🔥🔥🔥 Don't miss it! 🎉🎉🎉`;
+    let email = Array.isArray(volunteerEmail) ? volunteerEmail : [volunteerEmail];
     async function main() {
       let config = {
         service: "gmail",
@@ -77,38 +94,48 @@ exports.sessionEmailBroadcast = (req, res) => {
         },
       };
       let transporter = nodemailer.createTransport(config);
-      const sendEmail = (recipient) => {
-        return new Promise((resolve, reject) => {
-          const email = {
-            from: EMAIL,
-            to: recipient.email,
-            subject: "dynamic email",
-            text: `Hi ${recipient.name}`,
-          };
-          transporter.sendMail(email, (err, info) => {
-            if (err) {
-              console.error(`Error sending email to ${recipient.email}:`, err);
-              reject(err);
-            } else {
-              console.log(`Email sent to ${recipient.email}:`, info.response);
-              resolve(info);
-            }
-          });
-        });
+      const email = {
+        from: EMAIL,
+        to: volunteerEmail,
+        subject: "Session notification",
+        text: emailText,
       };
+      let info = await transporter.sendMail(email);
+      console.log(info);
+      return res.status(201).send(message("success", "email", info));
 
-      Promise.all(recipients.map(sendEmail))
-        .then((infoArray) => {
-          return res.status(201).send(message("success", "email", infoArray));
-        })
-        .catch((err) => {
-          console.error(err);
-          return res.status(500).send(message("error", "email", err.message));
-        });
+      // let email = Array.isArray(volunteerEmail) ? volunteerEmail : [volunteerEmail];
+      // const sendEmail = (recipient) => {
+      //   return new Promise((resolve, reject) => {
+      //     const email = {
+      //       from: EMAIL,
+      //       to: email,
+      //       subject: "Session notification",
+      //       text: emailText,
+      //     };
+      //     transporter.sendMail(email, (err, info) => {
+      //       if (err) {
+      //         console.error(`Error sending email to ${recipient.email}:`, err);
+      //         reject(err);
+      //       } else {
+      //         console.log(`Email sent to ${recipient.email}:`, info.response);
+      //         resolve(info);
+      //       }
+      //     });
+      //   });
+      // };
+      // Promise.all(recipients.map(sendEmail))
+      //   .then((infoArray) => {
+      //     return res.status(201).send(message("success", "email", infoArray));
+      //   })
+      //   .catch((err) => {
+      //     console.error(err);
+      //     return res.status(500).send(message("error", "email", err.message));
+      //   });
     }
     main().catch(console.log);
   } catch (err) {
     console.error(err.message);
-    send(message("error", "email", err.message));
+    return res.status(500).send(message("error", "email", err.message));
   }
 };

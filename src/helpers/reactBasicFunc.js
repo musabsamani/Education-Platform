@@ -3,7 +3,7 @@ import axios from "axios";
 import { studentAPI, volunteerAPI, lessonAPI, subjectAPI, roomAPI, sessionAPI } from "./apiEndpoints";
 import { handleChange, setTemporary, setTemporaryEmpty } from "./helpersFunctions";
 import { messageShow } from "./messages";
-import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, updateState } from "./crudFunctions";
+import { createElement, updateElement, deleteElement, multiPartCreateElement, multiPartUpdateElement, updateState, sessionNotify } from "./crudFunctions";
 
 function bindMethods(thisKeyword) {
   thisKeyword.handleChange = handleChange.bind(thisKeyword);
@@ -17,6 +17,7 @@ function bindMethods(thisKeyword) {
   thisKeyword.updateState = updateState.bind(thisKeyword);
   thisKeyword.messageShow = messageShow.bind(thisKeyword);
   thisKeyword.catchErr = catchErr.bind(thisKeyword);
+  thisKeyword.sessionNotify = sessionNotify.bind(thisKeyword);
   thisKeyword.componentDidMount = componentDidMount.bind(thisKeyword);
   thisKeyword.componentDidUpdate = componentDidUpdate.bind(thisKeyword);
 }
@@ -54,6 +55,7 @@ function componentDidUpdate(prevProps, prevState) {
   let message = { ...this.state.message };
   if (Object.keys(message).length > 0) {
     if (message.content) {
+      toast(message.content);
       let operation = message.operation;
       let resource = message.resource;
       console.log(message.content);

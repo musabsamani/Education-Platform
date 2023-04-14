@@ -8,6 +8,7 @@ import "../../scss/dashboard.scss";
 import Propabilities from './propabities';
 import Chart from './chart';
 import Block1 from './block1';
+import Notify from './notify';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -35,6 +36,7 @@ class Dashboard extends Component {
                             <Block1 />
 
                         </div>
+                        <Notify />
                         <div className="emailContainer me-5 mb-5">
                             <Email
                                 sendMail={this.sendMail}
