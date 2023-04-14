@@ -22,13 +22,15 @@ function bindMethods(thisKeyword) {
   thisKeyword.componentDidUpdate = componentDidUpdate.bind(thisKeyword);
 }
 function catchErr(err) {
-  if (err.response.data.message) {
-    const { content, details } = err.response.data.message;
-    console.error(content);
-    console.error(details);
-    this.setState({ message: err.response.data.message });
+  if (err.response) {
+    if (err.response.data.message) {
+      const { content, details } = err.response.data.message;
+      console.error(content);
+      console.error(details);
+      this.setState({ message: err.response.data.message });
+    }
   } else {
-    this.setState({ message: err.message });
+    this.setState({ message: { content: err.message } });
   }
 }
 async function componentDidMount() {
@@ -46,9 +48,8 @@ async function componentDidMount() {
     const { data: sessions } = await axios.get(sessionAPI);
     this.setState({ sessions });
   } catch (err) {
-    console.log(err.message);
     console.log("Error fetching data from the server on componentDidMount");
-    this.setState({ message: err.message });
+    this.setState({ message: { content: err.message } });
   }
 }
 function componentDidUpdate(prevProps, prevState) {

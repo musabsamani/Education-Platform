@@ -71,14 +71,24 @@ exports.sessionNotify = (req, res) => {
     const room = req.body["room[name]"];
     const start = new Date(req.body["start"]);
     const end = new Date(req.body["end"]);
-    const startDay = getDayOfWeek(start);
+    const weektDay = getDayOfWeek(start);
+    let monthDay = start.getDate();
     const startMonth = getMonths(start);
     const startTime = getTimeWithAMPM(start);
     const endDay = getDayOfWeek(end);
     const endMonth = getMonths(end);
     const endTime = getTimeWithAMPM(end);
+    if (monthDay === "1") {
+      monthDay += "st";
+    } else if (monthDay === "2") {
+      monthDay += "nd";
+    } else if (monthDay === "3") {
+      monthDay += "rd";
+    } else {
+      monthDay += "th";
+    }
     const emailText = `Hi ${volunteer} 😃\
-    \nYou have a session starting on ${startDay}, ${startMonth} at ${startTime} ⏰\
+    \nYou have a session starting on ${weektDay}, ${monthDay} ${startMonth} at ${startTime} ⏰\
     \nAnd it will end at ${endTime}.\
     \nIt will be in ${room} lecture room. 📚\
     \nIt's in subject: ${subjectCode}, about lesson: ${lesson}. 📝\

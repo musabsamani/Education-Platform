@@ -49,7 +49,12 @@ const lessonSchema = new mongoose.Schema({
   },
   name: String,
   content: String,
-  file: String,
+  file: [
+    {
+      fileType: String,
+      filePath: String,
+    },
+  ],
 });
 const sessionSchema = new mongoose.Schema({
   _id: String,
