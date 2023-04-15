@@ -77,7 +77,7 @@ class RoomTable extends Component {
                             <td>{i + 1}</td>
                             <td>{room.name}</td>
                             <td>
-                              <Link to={`/updateRoom?id=${room._id}`}>
+                              <Link to={`/updateRoom`}>
                                 <button className="btn btn-info btn-sm m-1" onClick={() => this.props.setTemporary(room)}>
                                   Update
                                 </button>
@@ -91,7 +91,7 @@ class RoomTable extends Component {
                         ))
                       ) : (
                         <tr>
-                          <td>Databse is Empty</td>
+                          <td colSpan="6">Databse is Empty</td>
                         </tr>
                       )}
                     </tbody>

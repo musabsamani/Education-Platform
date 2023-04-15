@@ -80,7 +80,7 @@ class StudentTable extends Component {
                             <td>{student.address}</td>
                             <td>{student.phone}</td>
                             <td>
-                              <Link to={`/updateStudent?id=${student._id}`}>
+                              <Link to={`/updateStudent`}>
                                 <button className="btn btn-info btn-sm m-1" onClick={() => this.props.setTemporary(student)}>
                                   Update
                                 </button>
@@ -94,7 +94,7 @@ class StudentTable extends Component {
                         ))
                       ) : (
                         <tr>
-                          <td>Databse is Empty</td>
+                          <td colSpan="6">Databse is Empty</td>
                         </tr>
                       )}
                     </tbody>

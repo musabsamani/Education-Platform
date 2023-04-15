@@ -9,7 +9,6 @@ exports.create = async (req, res) => {
       return;
     }
     const volunteer = new Volunteerdb({
-      _id: req.body._id,
       name: req.body.name,
       age: req.body.age,
       email: req.body.email,
@@ -111,7 +110,10 @@ exports.delete = async (req, res) => {
       res.send(messageCRUD("success", "delete", "volunteer", data));
     }
   } catch (err) {
-    console.error(err.message);
-    res.status(500).send(messageCRUD("error", "delete", "volunteer", err.message));
+    if (err.message === "cannot delete this document it has refrencing") {
+      res.status(500).send(messageCRUD("warning", "delete", "volunteer", err.message));
+    } else {
+      res.status(500).send(messageCRUD("error", "delete", "volunteer", err.message));
+    }
   }
 };

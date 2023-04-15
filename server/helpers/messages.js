@@ -1,39 +1,39 @@
-function messageCRUD(type, operation, resource, data = "") {
+function messageCRUD(status, operation, resource, data = "") {
   let content;
-  if (type === "success") {
-    let details = "";
+  if (status === "success") {
     content = `${resource} ${operation}d successfully`;
     if (operation === "read") {
       return data;
     }
     return {
       message: {
-        type,
+        status,
         content,
         operation,
-        details,
         resource,
       },
       data,
     };
   }
-  if (type === "error" || type === "warning") {
+  if (status === "error" || status === "warning") {
     content = `error ${operation.slice(0, -1)}ing ${resource}`;
     if (operation === "read") {
       content = `error ${operation}ing ${resource}`;
     }
-    if (data == "empty-body") {
+    if (data === "empty-body") {
       data = "request body can't be empty";
     } else if (data.split(" ")[0].length == 24) {
       content = `${resource} with id ${data} not found`;
       data = "404 error";
+    } else if (data === "cannot delete this document it has refrencing") {
+      content = data;
     } else {
       content = `error occured while performing ${operation} operation`;
     }
     return {
       message: {
-        type: type,
-        details: data,
+        status,
+        data,
         content,
         operation,
         resource,
@@ -41,28 +41,28 @@ function messageCRUD(type, operation, resource, data = "") {
     };
   }
 }
-function message(type, operation, data = "") {
+function message(status, operation, data = "") {
   let content;
-  if (type == "success") {
+  if (status == "success") {
     if (operation == "email") {
       content = "email sent successfully";
     }
     return {
       message: {
-        type: type,
+        status,
         content,
         operation,
         data,
       },
     };
   }
-  if (type == "error") {
+  if (status == "error") {
     if (operation == "email") {
       content = "error sending email";
     }
     return {
       message: {
-        type: type,
+        status,
         content,
         operation,
         data,

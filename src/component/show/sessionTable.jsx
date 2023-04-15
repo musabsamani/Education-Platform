@@ -140,7 +140,7 @@ class SessionTable extends Component {
                                 {/* <!-- Wishlist icon --> */}
                                 <a href="#"><i className="far fa-heart text-dark"></i></a>
                                 <div>
-                                  <Link to={`/updateSession?id=${session._id}`}>
+                                  <Link to={`/updateSession`}>
                                     <button className="btn btn-info btn-sm m-1" onClick={() => this.props.setTemporary(session)}>
                                       Update
                                     </button>

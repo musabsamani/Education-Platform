@@ -8,7 +8,6 @@ exports.create = async (req, res) => {
       return;
     }
     const student = new Studentdb({
-      _id: req.body._id,
       name: req.body.name,
       age: req.body.age,
       address: req.body.address,

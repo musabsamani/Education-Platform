@@ -3,7 +3,6 @@ function handleChange(e) {
   const temporary = { ...this.state.temporary };
   temporary[e.currentTarget.name] = e.currentTarget.value;
   this.setState({ temporary });
-  this.d = d.bind(this);
 }
 // ===============  store value in this.state.temporary
 function setTemporary(element) {
@@ -98,10 +97,10 @@ function handleOrder(e, resource, order, ascending = "ascending") {
     let valueA = a;
     let valueB = b;
     for (let i = 0; i < propsArray.length; i++) {
-      valueB = valueB[propsArray[i]] ? valueB[propsArray[i]] : valueB;
+      valueB = typeof valueB[propsArray[i]] === "undefined" ? valueB : valueB[propsArray[i]];
     }
     for (let i = 0; i < propsArray.length; i++) {
-      valueA = valueA[propsArray[i]] ? valueA[propsArray[i]] : valueA;
+      valueA = typeof valueA[propsArray[i]] === "undefined" ? valueA : valueA[propsArray[i]];
     }
     if (ascending === "descending") {
       return valueB.localeCompare(valueA);
@@ -132,7 +131,7 @@ function handleSearch(e, resource, propertyArray) {
       let nesedPropsArray = nesedProps.split(".");
       let property = { ...element };
       for (let i = 0; i < nesedPropsArray.length; i++) {
-        property = property[nesedPropsArray[i]] ? property[nesedPropsArray[i]] : property;
+        property = typeof property[nesedPropsArray[i]] === "undefined" ? property : property[nesedPropsArray[i]];
       }
       const propertyValue = property.toLowerCase();
       return propertyValue.includes(searchValue);

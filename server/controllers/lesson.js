@@ -9,7 +9,6 @@ exports.create = async (req, res) => {
       return;
     }
     const lesson = new Lessondb({
-      _id: req.body._id,
       subject: req.body.subject,
       name: req.body.name,
       content: req.body.content,
@@ -105,7 +104,10 @@ exports.delete = async (req, res) => {
       res.send(messageCRUD("success", "delete", "lesson", data));
     }
   } catch (err) {
-    console.log(err.message);
-    res.status(500).send(messageCRUD("error", "delete", "lesson", err.message));
+    if (err.message === "cannot delete this document it has refrencing") {
+      res.status(500).send(messageCRUD("warning", "delete", "lesson", err.message));
+    } else {
+      res.status(500).send(messageCRUD("error", "delete", "lesson", err.message));
+    }
   }
 };

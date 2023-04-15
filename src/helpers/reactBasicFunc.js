@@ -22,15 +22,13 @@ function bindMethods(thisKeyword) {
   thisKeyword.componentDidMount = componentDidMount.bind(thisKeyword);
   thisKeyword.componentDidUpdate = componentDidUpdate.bind(thisKeyword);
 }
-function catchErr(err) {
-  if (err.response) {
-    if (err.response.data.message) {
-      const { content, details } = err.response.data.message;
-      console.error(content);
-      console.error(details);
-      this.setState({ message: err.response.data.message });
-    }
+function catchErr(err, message) {
+  console.log(err);
+  console.log(message);
+  if (err.response && err.response.data.message) {
+    this.setState({ message: err.response.data.message });
   } else {
+    alert(err);
     this.setState({ message: { content: err.message } });
   }
 }
@@ -49,8 +47,7 @@ async function componentDidMount() {
     const { data: sessions } = await axios.get(sessionAPI);
     this.setState({ sessions });
   } catch (err) {
-    console.log("Error fetching data from the server on componentDidMount");
-    this.setState({ message: { content: err.message } });
+    this.catchErr(err, "Error fetching data from the server on componentDidMount");
   }
 }
 function componentDidUpdate(prevProps, prevState) {
@@ -59,34 +56,31 @@ function componentDidUpdate(prevProps, prevState) {
     if (message.content) {
       let operation = message.operation;
       let resource = message.resource;
-      console.log(message.content);
-      if (operation === "update" || operation === "delete") {
-        if (resource === "subject") {
-          this.updateState(["lessons", "sessions", "volunteers"]);
-        } else if (resource === "room" || resource === "volunteer" || resource === "lessons") {
-          this.updateState(["sessions"]);
+      let status = message.status;
+      let content = message.content;
+      if (status === "success") {
+        if (operation === "update" || operation === "delete") {
+          if (resource === "subject") {
+            this.updateState(["lessons", "sessions", "volunteers"]);
+          } else if (resource === "room" || resource === "volunteer" || resource === "lessons") {
+            this.updateState(["sessions"]);
+          }
         }
-      }
-      console.log(message.type);
-      console.log(message.type);
-      if (message.type === "success") {
-        toast.success(message.content);
-        console.info(message.content);
+        toast.success(content);
         this.setState({ message: {} });
-      } else if (message.type === "error") {
-        toast.error(message);
-        console.error(message);
+      } else if (status === "error") {
+        toast.error(content);
         this.setState({ message: {} });
-      } else if (message.type === "warning") {
-        toast.warn(message);
-        console.warn(message);
+      } else if (status === "warning") {
+        toast.warn(content);
         this.setState({ message: {} });
       } else {
-        toast(message.content);
-        console.log(message.content);
+        toast(content);
+        console.log(message);
         this.setState({ message: {} });
       }
     } else {
+      alert(message);
       toast(message);
       console.log(message);
       this.setState({ message: {} });

@@ -8,7 +8,6 @@ exports.create = async (req, res) => {
       return;
     }
     const subject = new Subjectdb({
-      _id: req.body._id,
       code: req.body.code,
       name: req.body.name,
       description: req.body.description,
@@ -83,10 +82,6 @@ exports.delete = async (req, res) => {
     }
   } catch (err) {
     if (err.message === "cannot delete this document it has refrencing") {
-      console.log(err.message);
-      console.log(err.message);
-      console.log(err.message);
-      console.log(err.message);
       res.status(500).send(messageCRUD("warning", "delete", "subject", err.message));
     } else {
       res.status(500).send(messageCRUD("error", "delete", "subject", err.message));

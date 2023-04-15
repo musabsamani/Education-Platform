@@ -45,7 +45,7 @@ class VolunteerTable extends Component {
               </div>
               <div className="table_section">
                 <div className="tablebar">
-                  <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "volunteers", ["name", "age", "subject", "address", "phone", "email"])} />
+                  <input className="searchbar" type="search" placeholder="Search..." onChange={e => this.handleSearch(e, "volunteers", ["name", "age", "subject.code", "address", "phone", "email"])} />
                   <div className="dropdownSelect">
                     <select className="form-select" aria-label="Default select example" onChange={e => this.handleOrderChange(e, "volunteers")}>
                       <option label="Sort By" value="" />
@@ -93,7 +93,7 @@ class VolunteerTable extends Component {
                             <td>{volunteer.phone}</td>
                             <td>{volunteer.email}</td>
                             <td>
-                              <Link to={`/updateVolunteer?id=${volunteer._id}`}>
+                              <Link to={`/updateVolunteer`}>
                                 <button className="btn btn-info btn-sm m-1" onClick={() => this.props.setTemporary(volunteer)}>
                                   Update
                                 </button>
@@ -106,7 +106,7 @@ class VolunteerTable extends Component {
                         ))
                       ) : (
                         <tr>
-                          <td>Databse is Empty</td>
+                          <td colSpan="8">Databse is Empty</td>
                         </tr>
                       )}
                     </tbody>

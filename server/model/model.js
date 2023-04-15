@@ -1,7 +1,6 @@
 const mongoose = require("mongoose");
 const { preFindOneAndDeleteMiddleware, subjectPreFindOneAndDeleteMiddleware } = require("../middleware/mongoose/delete");
 const studentSchema = new mongoose.Schema({
-  _id: String,
   name: String,
   age: String,
   address: String,
@@ -13,7 +12,6 @@ const studentSchema = new mongoose.Schema({
   },
 });
 const volunteerSchema = new mongoose.Schema({
-  _id: String,
   name: String,
   age: String,
   email: String,
@@ -31,18 +29,15 @@ const volunteerSchema = new mongoose.Schema({
   },
 });
 const roomSchema = new mongoose.Schema({
-  _id: String,
-  name: Number,
+  name: String,
 });
 
 const subjectSchema = new mongoose.Schema({
-  _id: String,
   code: String,
   name: String,
   description: String,
 });
 const lessonSchema = new mongoose.Schema({
-  _id: String,
   subject: {
     type: mongoose.SchemaTypes.ObjectId,
     ref: "subjectdb",
@@ -57,7 +52,6 @@ const lessonSchema = new mongoose.Schema({
   ],
 });
 const sessionSchema = new mongoose.Schema({
-  _id: String,
   name: String,
   lesson: {
     type: mongoose.SchemaTypes.ObjectId,

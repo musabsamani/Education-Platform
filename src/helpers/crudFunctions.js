@@ -1,14 +1,11 @@
-import { generateId } from "./helpersFunctions";
-// export { baseAPI, studentAPI, volunteerAPI, lessonAPI, subjectAPI, roomAPI, sessionAPI };
-import { baseAPI } from "./apiEndpoints";
 import axios from "axios";
+import { baseAPI } from "./apiEndpoints";
 
 // =======  CREAT  ========
 async function createElement(event, resource) {
   try {
     event.preventDefault();
     const data = new FormData(event.target);
-    data.append("_id", generateId());
     let element = {};
     for (const [key, value] of data) {
       element[key] = value;
@@ -18,6 +15,7 @@ async function createElement(event, resource) {
     const res = await axios.post(`${uri}`, element);
     if (res.statusText === "OK") {
       const state = [...this.state[resource], res.data.data];
+      this.setTemporaryEmpty();
       this.setState({ [resource]: state });
       this.setState({ message: res.data.message });
     }
@@ -41,6 +39,7 @@ async function updateElement(event, resource) {
       state.forEach((round) => {
         round._id === res.data.data._id ? Object.assign(round, res.data.data) : round;
       });
+      this.setTemporaryEmpty();
       this.setState({ [resource]: state });
       this.setState({ message: res.data.message });
     }
@@ -67,10 +66,10 @@ async function multiPartCreateElement(event, resource) {
   try {
     const uri = `${baseAPI}/${resource}`;
     const data = new FormData(event.target);
-    data.append("_id", generateId());
     const res = await axios.post(`${uri}`, data);
     if (res.statusText === "OK") {
       const element = [...this.state[resource], res.data.data];
+      this.setTemporaryEmpty();
       this.setState({ [resource]: element });
       this.setState({ message: res.data.message });
     }
@@ -89,6 +88,7 @@ async function multiPartUpdateElement(event, resource) {
       element.forEach((round) => {
         round._id === res.data.data._id ? Object.assign(round, res.data.data) : round;
       });
+      this.setTemporaryEmpty();
       this.setState({ [resource]: element });
       this.setState({ message: res.data.message });
     }

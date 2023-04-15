@@ -18,14 +18,25 @@ const Select = ({ name = "", onChange, resourceArray, resourceProperty, value = 
                     {name.split(" ")[0] === "hidden" ? name = "" : ""}
                     {
                         resourceArray.length > 0 ? (
-                            <select onChange={onChange} value={value} name={name} className=" ml-3 mt-3 form-select form-select-md mb-3" aria-label=".form-select-lg example">
+                            <select value={value} onChange={onChange} name={name} className=" ml-3 mt-3 form-select form-select-md mb-3" aria-label=".form-select-lg example">
                                 {resourceArray.map((element) => (
-                                    < option key={Math.random()} value={element._id} label={element[resourceProperty]} />
+                                    element[resourceProperty] === value
+                                        ?
+                                        < option key={Math.random()} value={element._id} label={element[resourceProperty]} />
+                                        :
+                                        ""
+                                ))}
+                                {resourceArray.map((element) => (
+                                    element[resourceProperty] === value
+                                        ?
+                                        ""
+                                        :
+                                        < option key={Math.random()} value={element._id} label={element[resourceProperty]} />
                                 ))}
                             </select>
                         ) : (
                             <select disabled className=" ml-3 mt-3 form-select form-select-md mb-3" aria-label=".form-select-lg example">
-                                <option>{name.charAt(0).toUpperCase() + name.slice(1)}s Database is Empty</option>
+                                <option label={`${name.charAt(0).toUpperCase()}${name.slice(1)}s Database is Empty`} />
                             </select>
                         )
                     }

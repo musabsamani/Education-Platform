@@ -22,6 +22,7 @@ class Lesson extends Component {
     }
   }
   render() {
+    const { subjects, onChange, temporary, name } = this.props
     return (
       <>
         <div className="create_lesson_page">
@@ -38,17 +39,18 @@ class Lesson extends Component {
             <div className="create_formfield">
               <div className="create_formarea">
                 <div className="bs-stepper-header">
-                  <h2>{this.props.name === "add" ? "New Lesson" : "Edit Lesson"}</h2>
+                  <h2>{name === "add" ? "New Lesson" : "Edit Lesson"}</h2>
 
                 </div>
                 {/* ############# */}
                 <div className="container mt-5 ">
                   <form className="col g-3 d-flex-column justify-content-center" onSubmit={e => this.submit(e)}>
                     <div className="col-md-5">
-                      <Select name="subject" onChange={this.props.onChange} value={this.props.temporary.subject} resourceArray={this.props.subjects} resoure="subject" resourceProperty="code" />
+                      <Select name="subject" onChange={onChange} value={temporary.subject && temporary.subject.code ? temporary.subject.code : temporary.subject}
+                        resourceArray={subjects} resoure="subject" resourceProperty="code" />
                     </div>
                     <div className="col-md-5 m-1">
-                      <Input type="text" name="name" label="Lesson Name" onChange={this.props.onChange} value={this.props.temporary.name} />
+                      <Input type="text" name="name" label="Lesson Name" onChange={onChange} value={temporary.name} />
                     </div>
                     <div className="col-md-5 m-1 d-flex align-items-end">
                       <Input type="file" name="file" label="Files" args={{ multiple: true }} />
@@ -58,19 +60,13 @@ class Lesson extends Component {
                         </button>
                       </span>
                     </div>
-                    {/* <div className="col-md-5 m-1">
-                      <Input type="file" name="filevid" label="Video Url" />
-                    </div>
                     <div className="col-md-5 m-1">
-                      <Input type="file" name="fileaud" label="Audio Url" />
-                    </div> */}
-                    <div className="col-md-5 m-1">
-                      <Textarea name="content" label="Content" onChange={this.props.onChange} value={this.props.temporary.content} />
+                      <Textarea name="content" label="Content" onChange={onChange} value={temporary.content} />
                     </div>
-                    {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={this.props.temporary._id} />}
+                    {name === "add" ? "" : <Input type="hidden" name="_id" value={temporary._id} />}
                     <div className="col-md-2 mt-2">
                       <button className="btn btn-primary m-1" type="submit">
-                        {this.props.name == "add" ? "Submit" : "Save"}
+                        {name == "add" ? "Submit" : "Save"}
                       </button>
                     </div>
                   </form>

@@ -88,7 +88,7 @@ class LessonTable extends Component {
                             {(lesson.file && lesson.file.includes("mp4")) ? console.log("mp4") : ""} */}
                             <td>{lesson && <PopupComponent lesson={lesson} />}</td>
                             <td>
-                              <Link to={`/updateLesson?id=${lesson._id}`}>
+                              <Link to={`/updateLesson`}>
                                 <button className="btn btn-info btn-sm" onClick={() => this.props.setTemporary(lesson)}>
                                   Update
                                 </button>
@@ -102,7 +102,7 @@ class LessonTable extends Component {
                         ))
                       ) : (
                         <tr>
-                          <td>Databse is Empty</td>
+                          <td colSpan="6">Databse is Empty</td>
                         </tr>
                       )}
                     </tbody>

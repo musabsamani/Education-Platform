@@ -85,7 +85,7 @@ class SubjectTable extends Component {
                             <td>{subject.name}</td>
                             <td>{subject.description}</td>
                             <td>
-                              <Link to={`/updateSubject?id=${subject._id}`}>
+                              <Link to={`/updateSubject`}>
                                 <button className="btn btn-info btn-sm m-1" onClick={() => this.props.setTemporary(subject)}>
                                   Update
                                 </button>
@@ -99,7 +99,7 @@ class SubjectTable extends Component {
                         ))
                       ) : (
                         <tr>
-                          <td>Databse is Empty</td>
+                          <td colSpan="5">Databse is Empty</td>
                         </tr>
                       )}
                     </tbody>
