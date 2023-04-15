@@ -1,9 +1,9 @@
-function messageShow(type, content, data = "") {
+function messageShow(status, content, data = "") {
   let message;
   message = {
-    type,
+    status,
     content,
-    details: data,
+    data,
   };
   this.setState({ message });
   return message;

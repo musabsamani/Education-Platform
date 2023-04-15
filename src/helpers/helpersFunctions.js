@@ -62,13 +62,13 @@ const validator = (array, temporary) => {
   const isStartBeforeEnd = temporary.start <= temporary.end;
   const equal = temporary.start === temporary.end;
   if (!notEmpty) {
-    return ["error", "both start and end dates must be filled"];
+    return ["warning", "both start and end dates must be filled"];
   }
   if (equal) {
-    return ["error", "start and end dates must not be equal"];
+    return ["warning", "start and end dates must not be equal"];
   }
   if (!isStartBeforeEnd) {
-    return ["error", "end date is before start date"];
+    return ["warning", "end date is before start date"];
   }
   // note that if events are empty because state didnot load from cloud and still awaiting
   // there may be a collision. so we have two opttion to avoid this
@@ -80,7 +80,7 @@ const validator = (array, temporary) => {
     }
     if (temporary.room === element.room._id) {
       if (!isValidDate(temporary, element)) {
-        return ["error", "session not valid, session overlap with other session"];
+        return ["warning", "session not valid, session overlap with other session"];
       }
     }
   }

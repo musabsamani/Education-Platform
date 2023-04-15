@@ -56,7 +56,6 @@ class sessionForm extends Component {
       }
     } else {
       this.props.messageShow(isValid[0], isValid[1])
-      console.log(isValid[0], isValid[1])
     }
   }
   render() {
