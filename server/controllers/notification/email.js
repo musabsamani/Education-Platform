@@ -143,7 +143,10 @@ exports.sessionNotify = (req, res) => {
       //     return res.status(500).send(message("error", "email", err.message));
       //   });
     }
-    main().catch(console.log);
+    main().catch((err) => {
+      console.log(err);
+      return res.status(500).send(message("error", "email", err.message));
+    });
   } catch (err) {
     console.error(err.message);
     return res.status(500).send(message("error", "email", err.message));

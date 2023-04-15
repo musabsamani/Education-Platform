@@ -84,10 +84,10 @@ class sessionForm extends Component {
                 <div className="container mt-5 ">
                   <form className="col g-3 d-flex-column justify-content-center" onSubmit={e => this.handleSubmit(e, this.props.sessions)}>
                     <Input onChange={this.props.onChange} type="text" name="name" label="Name" value={temporary.name} />
-                    <Select onChange={this.handleSubjectChange} name="hidden subject" resourceArray={this.props.subjects} resourceProperty="code" value={temporary.subject} />
-                    <Select onChange={this.props.onChange} name="lesson" resourceArray={this.state.lessons} resourceProperty="name" value={temporary.lesson} />
-                    <Select onChange={this.props.onChange} name="room" resourceArray={this.props.rooms} resourceProperty="name" value={temporary.room} />
-                    <Select onChange={this.props.onChange} name="volunteer" resourceArray={this.props.volunteers} resourceProperty="name" value={temporary.volunteer} />
+                    <Select onChange={this.handleSubjectChange} name="hidden subject" resourceArray={this.props.subjects} resourceProperty="code" value={temporary.lesson && temporary.lesson.subject && temporary.lesson.subject.code ? temporary.lesson.subject.code : temporary.subject} />
+                    <Select onChange={this.props.onChange} name="lesson" resourceArray={this.state.lessons} resourceProperty="name" value={temporary.lesson && temporary.lesson.name ? temporary.lesson.name : temporary.lesson} />
+                    <Select onChange={this.props.onChange} name="room" resourceArray={this.props.rooms} resourceProperty="name" value={temporary.room && temporary.room.name ? temporary.room.name : temporary.room} />
+                    <Select onChange={this.props.onChange} name="volunteer" resourceArray={this.props.volunteers} resourceProperty="name" value={temporary.volunteer && temporary.volunteer.name ? temporary.volunteer.name : temporary.volunteer} />
                     <Input onChange={this.props.onChange} type="datetime-local" name="start" label="Start" value={temporary.start} />
                     <Input onChange={this.props.onChange} type="datetime-local" name="end" label="End" value={temporary.end} />
                     {this.props.name === "add" ? "" : <Input type="hidden" name="_id" value={temporary._id} />}

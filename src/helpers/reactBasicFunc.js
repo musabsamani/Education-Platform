@@ -23,13 +23,14 @@ function bindMethods(thisKeyword) {
   thisKeyword.componentDidUpdate = componentDidUpdate.bind(thisKeyword);
 }
 function catchErr(err, message) {
-  console.log(err);
-  console.log(message);
   if (err.response && err.response.data.message) {
     this.setState({ message: err.response.data.message });
   } else {
-    alert(err);
-    this.setState({ message: { content: err.message } });
+    let status = "error";
+    let resource = "catchError";
+    let content = err.message;
+    let operation = message ? "on ComponentDidMount" : "";
+    this.setState({ message: { operation, content, status, resource } });
   }
 }
 async function componentDidMount() {
