@@ -31,6 +31,7 @@
     "gridfs-stream": "^1.1.1",
     "jquery": "^3.6.3",
     "jsdom": "^21.0.0",
+    "lines-of-code": "^2.0.8",
     "mailgen": "^2.0.27",
     "mongoose": "^7.0.0",
     "morgan": "^1.10.0",
