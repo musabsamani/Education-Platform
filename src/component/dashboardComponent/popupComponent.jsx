@@ -63,9 +63,9 @@ class PopupComponent extends Component {
                             // lesson exapmle line 13 in this same file
                             // code implemented in line 85 here
                         }
-                        <div className='d-flex flex-column justify-content-around' width='100%'>
+                        <>
+                            {/* <div className='d-flex flex-column justify-content-around' width='100%'>
                             {lesson.file && lesson.file.forEach((file => {
-                                <>
                                     {
                                         file.fileType === "video"
                                             ?
@@ -84,18 +84,36 @@ class PopupComponent extends Component {
                                             :
                                             ""
                                     }
-                                    {/* {file.filePath==="audio"?:""} */}
-                                    {/* {file.filePath==="image"?:""} */}
-
 
 
                                     <div className="col g-4 mb-4">
-                                        {/* {lesson && <Videohandler file={lesson.file} />} */}
+                                        {/* {lesson && <Videohandler file={lesson.file} />} 
                                     </div>
-                                </>
-                            }))}
-                            <hr />
-                        </div>
+                                }))}
+                            */}
+
+                            <div className='d-flex flex-column justify-content-around' width='100%'>
+                                {
+                                    lesson.file[0] && lesson.file[0].fileType === "video"
+                                        ?
+                                        <div className="col g-4 mb-4">
+                                            {lesson.file[0] && <Videohandler file={lesson.file[0].filePath} />}
+                                        </div>
+                                        :
+                                        ""
+                                }
+                                {
+                                    lesson.file[0] && lesson.file[0].fileType === "pdf"
+                                        ?
+                                        <div className="col g-4 mb-4">
+                                            {lesson.file[0] && <PDFUploader file={lesson.file[0].filePath} />}
+                                        </div>
+                                        :
+                                        ""
+                                }
+                                <hr />
+                            </div>
+                        </>
                     </Modal.Body>
                 </Modal>
             </>

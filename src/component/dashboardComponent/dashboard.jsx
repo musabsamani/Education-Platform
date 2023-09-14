@@ -33,7 +33,7 @@ class Dashboard extends Component {
                                 volunteers={this.props.volunteers}
                                 students={this.props.students}
                                 sessions={this.props.sessions} />
-                            <Block1 />
+                            {/* <Block1 /> */}
 
                         </div>
                         <Notify />

@@ -6,7 +6,7 @@ class SessionChart extends Component {
         options: {
             chart: {
                 type: 'bar',
-                height: 150
+                height: 50
             },
             plotOptions: {
                 bar: {
@@ -28,7 +28,7 @@ class SessionChart extends Component {
             },
             yaxis: {
                 title: {
-                    text: 'Members Signup'
+                    text: 'Sessions'
                 }
             },
             fill: {
@@ -45,18 +45,18 @@ class SessionChart extends Component {
     }
 
     calc = () => {
-        let janCount = 60
-        let febCount = 45
+        let janCount = 0
+        let febCount = 0
         var marCount = 0
         var aprCount = 0
-        var mayCount = 7
+        var mayCount = 0
         let junCount = 0
         let julCount = 0
         let ogtCount = 0
-        let sepCount = 2
-        let octCount = 90
-        let novCount = 100
-        let decCount = 5
+        let sepCount = 0
+        let octCount = 0
+        let novCount = 0
+        let decCount = 0
 
         this.props.sessions.forEach(element => {
             const month = new Date(element.time).getMonth();
