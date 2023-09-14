@@ -1,5 +1,5 @@
 const { Volunteerdb } = require("../model/model");
-const { removeFile } = require("../helpers/helpersFunction");
+const { removeCover } = require("../helpers/helpersFunction");
 const { messageCRUD } = require("../helpers/messages");
 // create and save new volunteer
 exports.create = async (req, res) => {
@@ -22,7 +22,7 @@ exports.create = async (req, res) => {
     res.send(messageCRUD("success", "create", "volunteer", data));
   } catch (err) {
     if (req.fileName) {
-      removeFile(req.fileName);
+      removeCover(req.fileName);
     }
     console.error(err.message);
     res.status(500).send(messageCRUD("error", "create", "volunteer", err.message));
@@ -57,7 +57,7 @@ exports.find = async (req, res) => {
       res.send(messageCRUD("success", "read", "volunteer", data));
     } catch (err) {
       if (req.fileName) {
-        removeFile(req.fileName);
+        removeCover(req.fileName);
       }
       console.error(err.message);
       res.status(500).send(messageCRUD("error", "read", "volunteer", err.message));
@@ -70,7 +70,7 @@ exports.update = async (req, res) => {
   try {
     if (Object.keys(req.body).length === 0) {
       if (req.fileName) {
-        removeFile(req.fileName);
+        removeCover(req.fileName);
       }
       return res.status(400).send(messageCRUD("error", "update", "volunteer", "empty-body"));
     }
@@ -79,18 +79,18 @@ exports.update = async (req, res) => {
     const data = await Volunteerdb.findByIdAndUpdate(id, req.body, { new: true, useFindAndModify: false }).populate("subject");
     if (!data) {
       if (req.fileName) {
-        removeFile(req.fileName);
+        removeCover(req.fileName);
       }
       res.status(404).send(messageCRUD("error", "update", "volunteer", id));
     } else {
       if (req.fileName) {
-        removeFile(old.profileCover);
+        removeCover(old.profileCover);
       }
       res.send(messageCRUD("success", "update", "volunteer", data));
     }
   } catch (err) {
     if (req.fileName) {
-      removeFile(req.fileName);
+      removeCover(req.fileName);
     }
     console.error(err.message);
     res.status(500).send(messageCRUD("error", "update", "volunteer", err.message));
@@ -105,7 +105,7 @@ exports.delete = async (req, res) => {
       res.status(404).send(messageCRUD("error", "delete", "volunteer", id));
     } else {
       if (data.profileCover) {
-        removeFile(data.profileCover);
+        removeCover(data.profileCover);
       }
       res.send(messageCRUD("success", "delete", "volunteer", data));
     }

@@ -12,6 +12,15 @@ function removeFile(array) {
     });
   });
 }
+function removeCover(path) {
+  fs.unlink(path, (err) => {
+    if (err) {
+      console.error(err.message);
+    } else {
+      console.log(`File on path "${path}" deleted successfully`);
+    }
+  });
+}
 function getDayOfWeek(date) {
   const daysOfWeek = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
   const dayIndex = date.getDay(); // Get the day index (0-6)
@@ -29,4 +38,4 @@ function getTimeWithAMPM(date) {
   const timeWithAMPM = date.toLocaleString("en-US", options);
   return timeWithAMPM;
 }
-module.exports = { removeFile, getDayOfWeek, getMonths, getTimeWithAMPM };
+module.exports = { removeFile, removeCover, getDayOfWeek, getMonths, getTimeWithAMPM };
